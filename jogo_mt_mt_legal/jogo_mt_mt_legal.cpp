@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
-
+//oi bebe isso é um teste do github
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
