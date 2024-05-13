@@ -3,26 +3,27 @@
 
 #include <iostream>
 
-#include <SFML/Graphics.hpp>
+#include "graphics.h"
 //oi bebe isso é um teste do github
 int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+{   
+    Graphics gerenciadorGrafico;
+    sf::RenderWindow* window = gerenciadorGrafico.getWindow();
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
-    while (window.isOpen())
+    while (gerenciadorGrafico.isWindowOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
+        while (window->pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                window.close();
+                window->close();
         }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+        window->clear();
+        window->draw(shape);
+        window->display();
     }
 
     return 0;
