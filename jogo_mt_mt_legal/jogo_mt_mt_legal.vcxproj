@@ -138,9 +138,9 @@
     <ClCompile Include="jogo_mt_mt_legal.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Coord.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="math\Coord.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
