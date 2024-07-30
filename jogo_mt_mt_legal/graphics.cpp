@@ -1,7 +1,7 @@
 #include "graphics.h"
 
 Graphics::Graphics() {
-	window = new sf::RenderWindow (sf::VideoMode(200, 200), "jogo");
+	window = new sf::RenderWindow (sf::VideoMode(1000, 1000), "jogo");
 }
 
 Graphics::~Graphics() {
