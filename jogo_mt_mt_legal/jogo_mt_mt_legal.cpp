@@ -1,8 +1,9 @@
 #include <iostream>
 
 #include "graphics.h"
+#include "MyDrawable.h"
 
-void update(sf::RectangleShape* player, sf::Keyboard* bosta) {
+void update(MyDrawable* player, sf::Keyboard* bosta) {
     if (bosta->isKeyPressed(sf::Keyboard::D)) {
         player->move(sf::Vector2f(1, 0));
     }
@@ -22,7 +23,7 @@ void update(sf::RectangleShape* player, sf::Keyboard* bosta) {
 
 
 }
-void draw(sf::RectangleShape* player, sf::RenderWindow* window) {
+void draw(MyDrawable* player, sf::RenderWindow* window) {
     window->draw(*player);
 }
 
@@ -30,16 +31,17 @@ int main()
 {   
     Graphics gerenciadorGrafico;
     sf::RenderWindow* window = gerenciadorGrafico.getWindow();
-    sf::RectangleShape* player;
+    MyDrawable* player;
     sf::Keyboard* bosta;
 
     bosta = new sf::Keyboard;
 
-    player = new sf::RectangleShape;
+
+    player = new MyDrawable("kirby.png", sf::Vector2f(1,1), sf::Vector2f(500, 500));
 
     player->setSize(sf::Vector2f(100,100));
 
-    player->setFillColor(sf::Color::Cyan);
+    
 
     while (gerenciadorGrafico.isWindowOpen())
     {
