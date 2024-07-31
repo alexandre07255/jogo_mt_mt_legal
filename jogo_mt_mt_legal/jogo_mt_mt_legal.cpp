@@ -16,6 +16,11 @@ void update(sf::RectangleShape* player, sf::Keyboard* bosta) {
         player->move(sf::Vector2f(0, -1));
     }
 
+
+
+
+
+
 }
 void draw(sf::RectangleShape* player, sf::RenderWindow* window) {
     window->draw(*player);
