@@ -37,7 +37,7 @@ int main()
     bosta = new sf::Keyboard;
 
 
-    player = new MyDrawable("kirby.png", sf::Vector2f(1,1), sf::Vector2f(500, 500));
+    player = new MyDrawable("kirby.png", sf::Vector2f(1,1), sf::Vector2f(0, 0));
 
     player->setSize(sf::Vector2f(100,100));
 
