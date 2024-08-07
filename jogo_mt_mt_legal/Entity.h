@@ -3,9 +3,9 @@
 
 class Entity: public MyDrawable
 {
-private:
-	int horizontalSpeed;
-	int verticalSpeed;
+protected:
+	float horizontalSpeed;
+	float verticalSpeed;
 	sf::Vector2f deslocamento;
 public:
 	Entity();

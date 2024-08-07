@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(): MyDrawable(), horizontalSpeed(1), verticalSpeed(1) { deslocamento.x = 0; deslocamento.y = 0; }
+Entity::Entity(): MyDrawable(), horizontalSpeed(0), verticalSpeed(0) { deslocamento.x = 0; deslocamento.y = 0; }
 
 Entity::~Entity() { }
 

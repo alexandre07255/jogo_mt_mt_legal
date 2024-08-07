@@ -3,20 +3,10 @@
 #include "graphics.h"
 #include "MyDrawable.h"
 #include "Player.h"
+#include "inputManager.h"
 
-void update(MyDrawable* player, sf::Keyboard* bosta) {
-    if (bosta->isKeyPressed(sf::Keyboard::D)) {
-        player->move(sf::Vector2f(1, 0));
-    }
-    if (bosta->isKeyPressed(sf::Keyboard::A)) {
-        player->move(sf::Vector2f(-1, 0));
-    }
-    if (bosta->isKeyPressed(sf::Keyboard::S)) {
-        player->move(sf::Vector2f(0, 1));
-    }
-    if (bosta->isKeyPressed(sf::Keyboard::W)) {
-        player->move(sf::Vector2f(0, -1));
-    }
+void update(Player* player, sf::Keyboard* bosta) {
+    player->movement();
 }
 void draw(MyDrawable* player, sf::RenderWindow* window) {
     window->draw(*player);
@@ -26,7 +16,7 @@ int main()
 {   
     Graphics gerenciadorGrafico;
     sf::RenderWindow* window = gerenciadorGrafico.getWindow();
-    Entity* player;
+    Player* player;
     sf::Keyboard* bosta;
 
     bosta = new sf::Keyboard;
