@@ -9,6 +9,7 @@ class MyDrawable : public sf::RectangleShape
 public:
 	MyDrawable(string path, sf::Vector2f size, sf::Vector2f pos);
 	MyDrawable(){}
+	virtual ~MyDrawable();
 	void setTextura(string path);
 };
 

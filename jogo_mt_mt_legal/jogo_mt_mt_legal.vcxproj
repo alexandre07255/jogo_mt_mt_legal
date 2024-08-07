@@ -133,18 +133,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Alive.cpp" />
     <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="inputManager.cpp" />
     <ClCompile Include="jogo_mt_mt_legal.cpp" />
-    <ClCompile Include="movel.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="MyDrawable.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Alive.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="inputManager.h" />
     <ClInclude Include="math\Coord.h" />
-    <ClInclude Include="movel.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="MyDrawable.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
