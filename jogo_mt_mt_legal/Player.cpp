@@ -2,7 +2,7 @@
 #include "inputManager.h"
 
 void Player::movement() {
-	float friccao = 0.5;
+	float friccao = 0.1;
 	sf::Vector2f vetorDesloc(1,0);
 	inputManager* inputInstace = inputManager::getInstance();
 	

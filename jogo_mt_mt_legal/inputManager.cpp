@@ -1,5 +1,6 @@
 #include "inputManager.h"
 
+inputManager* inputManager::instance(NULL);
 
 inputManager::inputManager():
 	keyboard(new sf::Keyboard),
