@@ -2,6 +2,7 @@
 
 #include "graphics.h"
 #include "MyDrawable.h"
+#include "movel.h"
 
 void update(MyDrawable* player, sf::Keyboard* bosta) {
     if (bosta->isKeyPressed(sf::Keyboard::D)) {
@@ -17,11 +18,6 @@ void update(MyDrawable* player, sf::Keyboard* bosta) {
         player->move(sf::Vector2f(0, -1));
     }
 
-
-
-
-
-
 }
 void draw(MyDrawable* player, sf::RenderWindow* window) {
     window->draw(*player);
@@ -31,13 +27,16 @@ int main()
 {   
     Graphics gerenciadorGrafico;
     sf::RenderWindow* window = gerenciadorGrafico.getWindow();
-    MyDrawable* player;
+    movel* player;
     sf::Keyboard* bosta;
 
     bosta = new sf::Keyboard;
 
 
-    player = new MyDrawable("kirby.png", sf::Vector2f(1,1), sf::Vector2f(0, 0));
+    player = new movel();
+    player->setTextura("kirby.png");
+    player->setSize(sf::Vector2f(1, 1));
+    player->setOrigin(sf::Vector2f(0, 0));
 
     player->setSize(sf::Vector2f(100,100));
 

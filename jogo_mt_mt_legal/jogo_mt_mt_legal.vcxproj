@@ -136,12 +136,14 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="jogo_mt_mt_legal.cpp" />
+    <ClCompile Include="movel.cpp" />
     <ClCompile Include="MyDrawable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="math\Coord.h" />
+    <ClInclude Include="movel.h" />
     <ClInclude Include="MyDrawable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

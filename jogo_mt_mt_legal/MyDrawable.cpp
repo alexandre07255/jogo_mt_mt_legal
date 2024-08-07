@@ -8,3 +8,11 @@ MyDrawable::MyDrawable(string path, sf::Vector2f size, sf::Vector2f pos) :
 	setTexture(texture);
 	setOrigin(pos);
 }
+
+void MyDrawable::setTextura(string path) {
+	sf::Texture* textura;
+	textura = new sf::Texture;
+	textura->loadFromFile(path);
+
+	setTexture(textura);
+}
