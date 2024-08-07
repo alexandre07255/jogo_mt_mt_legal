@@ -29,7 +29,7 @@ int main()
 
     player->setSize(sf::Vector2f(100,100));
 
-    
+    window->setFramerateLimit(60);
 
     while (gerenciadorGrafico.isWindowOpen())
     {

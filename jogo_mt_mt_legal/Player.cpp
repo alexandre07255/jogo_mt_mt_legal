@@ -4,9 +4,9 @@
 void Player::movement() {
 	float friccao = 0.1;
 	sf::Vector2f vetorDesloc(1,0);
-	inputManager* inputInstace = inputManager::getInstance();
+	inputManager* inputInstance = inputManager::getInstance();
 	
-	if (inputInstace->isRightPressed(player2)) {
+	if (inputInstance->isRightPressed(player2)) {
 		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
 			horizontalSpeed += ACCELARATION;
 		}
@@ -14,7 +14,7 @@ void Player::movement() {
 			horizontalSpeed = MAX_HORIZONTAL_SPEED;
 		}
 	}
-	else if (inputInstace->isLeftPressed(player2)) {
+	else if (inputInstance->isLeftPressed(player2)) {
 		if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
 			horizontalSpeed -= ACCELARATION;
 		}
@@ -31,9 +31,19 @@ void Player::movement() {
 
 	vetorDesloc.x *= horizontalSpeed;
 
+	vetorDesloc.y += 3;
+
+	if (getPosition().y > 250)
+		vetorDesloc.y = 0;
+
+	if (inputInstance->isUpPressed(player2))
+	{
+		vetorDesloc.y -= 10;
+	}
+
 	move(vetorDesloc);
 }
 
-float Player::MAX_HORIZONTAL_SPEED(1);
-float Player::MAX_VERTICAL_SPEED(1);
+float Player::MAX_HORIZONTAL_SPEED(10);
+float Player::MAX_VERTICAL_SPEED(10);
 float Player::ACCELARATION(0.2);
