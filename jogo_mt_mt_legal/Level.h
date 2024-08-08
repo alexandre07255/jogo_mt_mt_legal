@@ -8,6 +8,10 @@ private:
 	EntityList* updatables;
 public:
 	Level();
-	void setDrawables(EntityList* )
+	~Level();
+	void setDrawables(EntityList* drawlist);
+	void setUpdatables(EntityList* updatelist);
+	void draw(sf::RenderWindow* window);
+	void update ();
 };
 
