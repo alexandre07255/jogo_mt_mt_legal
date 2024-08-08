@@ -7,6 +7,7 @@ protected:
 	float horizontalSpeed;
 	float verticalSpeed;
 	sf::Vector2f deslocamento;
+	bool onAir;
 public:
 	Entity();
 	virtual ~Entity();
@@ -19,5 +20,9 @@ public:
 	void setHorizontalVelocity(float vel);
 
 	void setVerticalVelocity(float vel);
+
+	const bool getOnAir() const;
+
+	void setOnAir(const bool value);
 };
 

@@ -39,6 +39,8 @@ void CollisionManager::testCollison(Entity* pE)
 	Entity* current = NULL;
 	targetBounds = pE->getGlobalBounds();
 
+	bool collided = 0;
+	bool collidedDown = 0;
 	for (int i = 0; i < size; i++)
 	{
 		//cu
@@ -46,6 +48,7 @@ void CollisionManager::testCollison(Entity* pE)
 		collidableBounds = current->getGlobalBounds();
 
 		if (isColliding(collidableBounds,targetBounds)) {
+			collided = 1;
 			//temos colisao
 			if (targetBounds.getPosition().x + targetBounds.width < collidableBounds.getPosition().x + collidableBounds.width) {
 				//se player colidiu pela direita
@@ -62,6 +65,7 @@ void CollisionManager::testCollison(Entity* pE)
 				//se player coldiu por baixo
 				y = targetBounds.getPosition().y + targetBounds.height - collidableBounds.getPosition().y;
 				directionY = -1;
+				collidedDown = 1;
 			}
 			else {
 				//se player colidiu por cima
@@ -72,6 +76,8 @@ void CollisionManager::testCollison(Entity* pE)
 			if (y < x) {
 				pE->move(sf::Vector2f(0, (y*directionY)));
 				pE->setVerticalVelocity(0);
+				if (directionY == -1)
+					pE->setOnAir(0);
 			}
 			else {
 				pE->move(sf::Vector2f((x*directionX), 0));
@@ -82,6 +88,8 @@ void CollisionManager::testCollison(Entity* pE)
 		}
 		collidables->next();
 	}
+	if (!collided || !collidedDown)
+		pE->setOnAir(1);
 }
 
 void CollisionManager::setCollidables(EntityList* pC)

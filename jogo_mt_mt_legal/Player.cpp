@@ -2,9 +2,16 @@
 #include "InputManager.h"
 #include "CollisionManager.h"
 
+Player::Player(const bool isPlayer2) :
+	jumpBuffer(0),
+	player2(isPlayer2)
+{
+
+}
+
 void Player::movement() {
-	float friccao = 1;
-	sf::Vector2f vetorDesloc(1,0);
+	int friccao = 1;
+	sf::Vector2f vetorDesloc(1,1);
 	InputManager* inputInstance = InputManager::getInstance();
 	CollisionManager* collisionInstance = CollisionManager::getInstance();
 	
@@ -31,20 +38,35 @@ void Player::movement() {
 	else
 		horizontalSpeed = 0;
 
-	vetorDesloc.x *= horizontalSpeed;
-
-	vetorDesloc.y += 3;
-
 	if (inputInstance->isUpPressed(player2))
 	{
-		vetorDesloc.y -= 10;
+		jumpBuffer = MAX_JUMP_BUFFER;
 	}
+
+	if (!onAir && jumpBuffer)
+	{
+		verticalSpeed = -JUMP_STREGTH;
+		jumpBuffer = 0;
+		onAir = 1;
+	}
+	else if (jumpBuffer > 0)
+		jumpBuffer--;
+
+	verticalSpeed += 1;
+
+	vetorDesloc.x *= horizontalSpeed;
+
+	vetorDesloc.y *= verticalSpeed;
+
 
 	move(vetorDesloc);
 
 	collisionInstance->testCollison(this);
 }
 
-float Player::MAX_HORIZONTAL_SPEED(10);
-float Player::MAX_VERTICAL_SPEED(10);
-float Player::ACCELARATION(2);
+const int Player::MAX_JUMP_BUFFER(8);
+const int Player::JUMP_STREGTH(20);
+
+const int Player::MAX_HORIZONTAL_SPEED(10);
+const int Player::MAX_VERTICAL_SPEED(15);
+const int Player::ACCELARATION(2);
