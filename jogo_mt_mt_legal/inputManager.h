@@ -1,16 +1,16 @@
 #pragma once
 #include <SFML/Window.hpp>
 
-class inputManager //Classe Singleton e Observed :3 berunyan
+class InputManager //Classe Singleton e Observed :3 berunyan
 {
 private:
-	static inputManager* instance;
+	static InputManager* instance;
 	sf::Keyboard* keyboard;
 	sf::Mouse* mouse;
-	inputManager();
+	InputManager();
 public:
-	~inputManager();
-	static inputManager* getInstance();
+	~InputManager();
+	static InputManager* getInstance();
 	const bool isKeyPressed(sf::Keyboard::Key key);
 	const bool isUpPressed(bool player2);
 	const bool isDownPressed(bool player2);

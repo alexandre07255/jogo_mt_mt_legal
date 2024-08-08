@@ -1,31 +1,31 @@
-#include "inputManager.h"
+#include "InputManager.h"
 
-inputManager* inputManager::instance(NULL);
+InputManager* InputManager::instance(NULL);
 
-inputManager::inputManager():
+InputManager::InputManager():
 	keyboard(new sf::Keyboard),
 	mouse(new sf::Mouse)
 {
 
 }
 
-inputManager::~inputManager()
+InputManager::~InputManager()
 {
 	delete keyboard;
 	delete mouse;
 	instance = NULL;
 }
 
-inputManager* inputManager::getInstance()
+InputManager* InputManager::getInstance()
 {
 	if (instance == NULL)
-		instance = new inputManager();
+		instance = new InputManager();
 	return instance;
 }
 
-const bool inputManager::isKeyPressed(sf::Keyboard::Key key) { return keyboard->isKeyPressed(key); }
+const bool InputManager::isKeyPressed(sf::Keyboard::Key key) { return keyboard->isKeyPressed(key); }
 
-const bool inputManager::isUpPressed(bool player2)
+const bool InputManager::isUpPressed(bool player2)
 {
 	if (player2)
 		return keyboard->isKeyPressed(sf::Keyboard::Key::Up);
@@ -33,7 +33,7 @@ const bool inputManager::isUpPressed(bool player2)
 	return keyboard->isKeyPressed(sf::Keyboard::Key::W);
 }
 
-const bool inputManager::isDownPressed(bool player2)
+const bool InputManager::isDownPressed(bool player2)
 {
 	if (player2)
 		return keyboard->isKeyPressed(sf::Keyboard::Key::Down);
@@ -41,7 +41,7 @@ const bool inputManager::isDownPressed(bool player2)
 	return keyboard->isKeyPressed(sf::Keyboard::Key::S);
 }
 
-const bool inputManager::isRightPressed(bool player2) 
+const bool InputManager::isRightPressed(bool player2) 
 {
 	if (player2)
 		return keyboard->isKeyPressed(sf::Keyboard::Key::Right);
@@ -49,7 +49,7 @@ const bool inputManager::isRightPressed(bool player2)
 	return keyboard->isKeyPressed(sf::Keyboard::Key::D);
 }
 
-const bool inputManager::isLeftPressed(bool player2)
+const bool InputManager::isLeftPressed(bool player2)
 {
 	if (player2)
 		return keyboard->isKeyPressed(sf::Keyboard::Key::Left);
@@ -57,7 +57,7 @@ const bool inputManager::isLeftPressed(bool player2)
 	return keyboard->isKeyPressed(sf::Keyboard::Key::A);
 }
 
-const bool inputManager::isAttackPressed(bool player2)
+const bool InputManager::isAttackPressed(bool player2)
 {
 	if (player2)
 		return keyboard->isKeyPressed(sf::Keyboard::Key::LControl);
@@ -65,6 +65,6 @@ const bool inputManager::isAttackPressed(bool player2)
 	return mouse->isButtonPressed(sf::Mouse::Left);
 }
 
-const bool inputManager::isPausePressed() {
+const bool InputManager::isPausePressed() {
 	return keyboard->isKeyPressed(sf::Keyboard::Escape);
 }
