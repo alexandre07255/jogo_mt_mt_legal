@@ -18,5 +18,24 @@ void Level::setUpdatables(EntityList* updatelist) {
 }
 
 void Level::draw(sf::RenderWindow* window) {
-	
+	drawables->start();
+	int size = drawables->getSize();
+	for (int i = 0; i < size; i++)
+	{
+		window->draw(*(drawables->getCurrent()));
+		drawables->next();
+	}
+}
+
+void Level::update()
+{
+	updatables->start();
+	Entity* current;
+	int size = updatables->getSize();
+	for (int i = 0; i < size; i++)
+	{
+		current = updatables->getCurrent();
+		current->movement();
+		updatables->next();
+	}
 }

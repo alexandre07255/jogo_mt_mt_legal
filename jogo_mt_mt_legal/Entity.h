@@ -24,5 +24,7 @@ public:
 	const bool getOnAir() const;
 
 	void setOnAir(const bool value);
+
+	virtual void movement() = 0;
 };
 
