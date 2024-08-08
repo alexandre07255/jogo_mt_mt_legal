@@ -6,7 +6,8 @@
 #include "Collidable.h"
 #include "CollisionManager.h"
 
-Level::Level() {
+Level::Level(): drawables(), updatables()
+{
 }
 
 void Level::setDrawables(EntityList* drawlist) {
