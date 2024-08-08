@@ -3,7 +3,7 @@
 #include "CollisionManager.h"
 
 void Player::movement() {
-	float friccao = 0.1;
+	float friccao = 1;
 	sf::Vector2f vetorDesloc(1,0);
 	InputManager* inputInstance = InputManager::getInstance();
 	CollisionManager* collisionInstance = CollisionManager::getInstance();
@@ -47,4 +47,4 @@ void Player::movement() {
 
 float Player::MAX_HORIZONTAL_SPEED(10);
 float Player::MAX_VERTICAL_SPEED(10);
-float Player::ACCELARATION(0.2);
+float Player::ACCELARATION(2);

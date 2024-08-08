@@ -25,7 +25,7 @@ void CollisionManager::testCollison(Entity* pE)
 	if (collidables == NULL)
 		return;
 
-	sf::FloatRect playerBounds;
+	sf::FloatRect targetBounds;
 	sf::FloatRect collidableBounds;
 
 	int x, y;
@@ -33,8 +33,11 @@ void CollisionManager::testCollison(Entity* pE)
 	int size = collidables->getSize();
 	collidables->start();
 
+	int directionX = 0;
+	int directionY = 0;
+
 	Entity* current = NULL;
-	playerBounds = pE->getGlobalBounds();
+	targetBounds = pE->getGlobalBounds();
 
 	for (int i = 0; i < size; i++)
 	{
@@ -42,35 +45,39 @@ void CollisionManager::testCollison(Entity* pE)
 		current = collidables->getCurrent();
 		collidableBounds = current->getGlobalBounds();
 
-		if (isColliding(collidableBounds,playerBounds)) {
+		if (isColliding(collidableBounds,targetBounds)) {
 			//temos colisao
-			if (playerBounds.getPosition().x + playerBounds.width < collidableBounds.getPosition().x + collidableBounds.width) {
+			if (targetBounds.getPosition().x + targetBounds.width < collidableBounds.getPosition().x + collidableBounds.width) {
 				//se player colidiu pela direita
-				x = playerBounds.getPosition().x + playerBounds.width - collidableBounds.getPosition().x;
+				x = targetBounds.getPosition().x + targetBounds.width - collidableBounds.getPosition().x;
+				directionX = -1;
 			}
 			else {
 				//se player colidiu pela esquerda
-				x = collidableBounds.getPosition().x + collidableBounds.width - playerBounds.getPosition().x;
+				x = collidableBounds.getPosition().x + collidableBounds.width - targetBounds.getPosition().x;
+				directionX = 1;
 			}
 
-			if (playerBounds.getPosition().y + playerBounds.height < collidableBounds.getPosition().y + collidableBounds.height) {
-				//se player coldiu por cima
-				y = playerBounds.getPosition().y + playerBounds.height - collidableBounds.getPosition().y;
+			if (targetBounds.getPosition().y + targetBounds.height < collidableBounds.getPosition().y + collidableBounds.height) {
+				//se player coldiu por baixo
+				y = targetBounds.getPosition().y + targetBounds.height - collidableBounds.getPosition().y;
+				directionY = -1;
 			}
 			else {
-				//se player colidiu por baixo
-				y = collidableBounds.getPosition().y + collidableBounds.height - playerBounds.getPosition().y;
+				//se player colidiu por cima
+				y = collidableBounds.getPosition().y + collidableBounds.height - targetBounds.getPosition().y;
+				directionY = 1;
 			}
 
 			if (y < x) {
-				pE->move(sf::Vector2f(0, -y));
+				pE->move(sf::Vector2f(0, (y*directionY)));
 				pE->setVerticalVelocity(0);
 			}
 			else {
-				pE->move(sf::Vector2f(-x, 0));
+				pE->move(sf::Vector2f((x*directionX), 0));
 				pE->setHorizontalVelocity(0);
 			}
-
+			targetBounds = pE->getGlobalBounds();
 
 		}
 		collidables->next();

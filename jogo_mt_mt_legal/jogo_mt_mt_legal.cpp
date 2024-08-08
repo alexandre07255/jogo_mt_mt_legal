@@ -37,11 +37,11 @@ int main()
     colisionaveis->pushBack(plataforma);
     colisionaveis->pushBack(parede);
 
-    plataforma->setOrigin(sf::Vector2f(900, 900));
+    plataforma->setPosition(sf::Vector2f(200, 300));
     plataforma->setFillColor(sf::Color::Red);
     plataforma->setSize(sf::Vector2f(1000, 100));
 
-    parede->setOrigin(sf::Vector2f(900,900));
+    parede->setPosition(sf::Vector2f(200,0));
     parede->setFillColor(sf::Color::Green);
     parede->setSize(sf::Vector2f(100, 1000));
 
@@ -51,7 +51,8 @@ int main()
 
 
     player = new Player();
-    player->setTextura("kirby.png");
+    //player->setTextura("kirby.png");
+    player->setFillColor(sf::Color::Cyan);
     player->setSize(sf::Vector2f(1, 1));
     player->setOrigin(sf::Vector2f(0, 0));
 
@@ -73,7 +74,7 @@ int main()
         draw(parede,plataforma,player,window);
         window->display();
 
-        cout << mouse->getPosition(*window).x << " : " << mouse->getPosition().y << endl;
+        cout << player->getPosition().x << " : " << player->getPosition().y << endl;
     }
 
     return 0;
