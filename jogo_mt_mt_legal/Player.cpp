@@ -1,10 +1,12 @@
 #include "Player.h"
-#include "inputManager.h"
+#include "InputManager.h"
+#include "CollisionManager.h"
 
 void Player::movement() {
 	float friccao = 0.1;
 	sf::Vector2f vetorDesloc(1,0);
-	inputManager* inputInstance = inputManager::getInstance();
+	InputManager* inputInstance = InputManager::getInstance();
+	CollisionManager* collisionInstance = CollisionManager::getInstance();
 	
 	if (inputInstance->isRightPressed(player2)) {
 		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
@@ -33,15 +35,14 @@ void Player::movement() {
 
 	vetorDesloc.y += 3;
 
-	if (getPosition().y > 250)
-		vetorDesloc.y = 0;
-
 	if (inputInstance->isUpPressed(player2))
 	{
 		vetorDesloc.y -= 10;
 	}
 
 	move(vetorDesloc);
+
+	collisionInstance->testCollison(this);
 }
 
 float Player::MAX_HORIZONTAL_SPEED(10);

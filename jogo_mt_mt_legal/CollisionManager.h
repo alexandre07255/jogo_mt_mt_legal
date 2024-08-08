@@ -12,5 +12,6 @@ public:
 	~CollisionManager();
 	void testCollison(Entity* pE);
 	void setCollidables(EntityList* pC);
+	const bool isColliding(sf::FloatRect one, sf::FloatRect other);
 };
 

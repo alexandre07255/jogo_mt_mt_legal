@@ -12,3 +12,7 @@ int Entity::getNormaDeslocamento()
 sf::Vector2f Entity::getDeslocamento() { return deslocamento; }
 
 void Entity::setDeslocamento(sf::Vector2f vetor) { deslocamento = vetor; }
+
+void Entity::setHorizontalVelocity(float vel) { horizontalSpeed = vel; }
+
+void Entity::setVerticalVelocity(float vel) { verticalSpeed = vel; }
