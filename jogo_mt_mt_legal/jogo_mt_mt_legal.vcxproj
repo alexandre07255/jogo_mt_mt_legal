@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Alive.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collidable.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="EntityList.cpp" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alive.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Collidable.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="EntityList.h" />
