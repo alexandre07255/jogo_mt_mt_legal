@@ -1,6 +1,8 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "CollisionManager.h"
+#include "Hitbox.h"
+#include "Level.h"
 
 Player::Player(const bool isPlayer2) :
 	jumpBuffer(0),
@@ -57,6 +59,18 @@ void Player::movement() {
 	vetorDesloc.x *= horizontalSpeed;
 
 	vetorDesloc.y *= verticalSpeed;
+
+
+	if (inputInstance->isDownPressed(player2))
+	{
+		Hitbox* hitbox = new Hitbox(1, this, 0);
+		hitbox->setFillColor(sf::Color::Yellow);
+		hitbox->setPosition(getPosition());
+		hitbox->setSize(sf::Vector2f(100, 100));
+		Level* level = Level::getActive();
+		EntityList* drawables = level->getDrawables();
+		drawables->pushBack(hitbox);
+	}
 
 
 	move(vetorDesloc);

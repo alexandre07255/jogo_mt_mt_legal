@@ -141,6 +141,7 @@
     <ClCompile Include="EnemyMelee.cpp" />
     <ClCompile Include="EntityList.cpp" />
     <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="jogo_mt_mt_legal.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="EnemyMelee.h" />
     <ClInclude Include="EntityList.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="Hitbox.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="math\Coord.h" />

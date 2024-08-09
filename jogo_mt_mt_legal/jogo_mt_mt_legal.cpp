@@ -11,9 +11,9 @@
 void InicializarCoisas(Level* level) {
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
 
-    EntityList* updatables;
+    list<Updatable*>* updatables;
     EntityList* drawables;
-    updatables = new EntityList;
+    updatables = new list<Updatable*>;
     drawables = new EntityList;
 
     Player* player;
@@ -50,8 +50,8 @@ void InicializarCoisas(Level* level) {
     player2->setOrigin(sf::Vector2f(0, 0));
     player2->setSize(sf::Vector2f(100, 100));
 
-    updatables->pushBack(player);
-    updatables->pushBack(player2);
+    updatables->push_back(player);
+    updatables->push_back(player2);
 
     drawables->pushBack(player);
     drawables->pushBack(player2);
@@ -60,6 +60,8 @@ void InicializarCoisas(Level* level) {
 
     level->setUpdatables(updatables);
     level->setDrawables(drawables);
+
+    Level::setActive(level);
 }
 
 int main()

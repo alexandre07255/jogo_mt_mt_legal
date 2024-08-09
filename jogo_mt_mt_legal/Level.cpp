@@ -6,16 +6,33 @@
 #include "Collidable.h"
 #include "CollisionManager.h"
 
+Level* Level::active(NULL);
+
 Level::Level(): drawables(), updatables()
 {
+}
+
+Level::~Level() //TODO
+{
+
 }
 
 void Level::setDrawables(EntityList* drawlist) {
 	drawables = drawlist;
 }
 
+EntityList* Level::getDrawables() const
+{
+	return drawables;
+}
+
 void Level::setUpdatables(list<Updatable*>* updatelist) {
 	updatables = updatelist;
+}
+
+list<Updatable*>* Level::getUpdatables() const
+{
+	return updatables;
 }
 
 void Level::draw(sf::RenderWindow* window) {
@@ -37,4 +54,14 @@ void Level::update()
 		(*it)->movement();
 		it++;
 	}
+}
+
+Level* Level::getActive()
+{
+	return active;
+}
+
+void Level::setActive(Level* pL) //Usar em algum outro lugar (tipo gerenciador/pilha de states)
+{
+	active = pL;
 }
