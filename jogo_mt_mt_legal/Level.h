@@ -5,12 +5,12 @@ class Level
 {
 private:
 	EntityList* drawables;
-	EntityList* updatables;
+	list<Updatable*>* updatables;
 public:
 	Level();
 	~Level();
 	void setDrawables(EntityList* drawlist);
-	void setUpdatables(EntityList* updatelist);
+	void setUpdatables(list<Updatable*>* updatelist);
 	void draw(sf::RenderWindow* window);
 	void update ();
 };
