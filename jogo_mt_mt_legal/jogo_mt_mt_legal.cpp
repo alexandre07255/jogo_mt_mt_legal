@@ -13,6 +13,8 @@ void InicializarCoisas(Level* level) {
 
     EntityList* updatables;
     EntityList* drawables;
+    updatables = new EntityList;
+    drawables = new EntityList;
 
     Player* player;
     Player* player2;
@@ -60,26 +62,17 @@ void InicializarCoisas(Level* level) {
     level->setDrawables(drawables);
 }
 
-void update(Player* player, Player* player2, sf::Keyboard* bosta) {
-    player->movement();
-    player2->movement();
-}
-void draw(MyDrawable* parede, MyDrawable* chao, MyDrawable* player, MyDrawable* player2, sf::RenderWindow* window) {
-    window->draw(*player);
-    window->draw(*player2);
-    window->draw(*parede);
-    window->draw(*chao);
-}
-
 int main()
 {   
     Graphics gerenciadorGrafico;
     sf::RenderWindow* window = gerenciadorGrafico.getWindow();   
-    
+    Level* level;
+
+    level = new Level;
+
+    InicializarCoisas(level);
 
     window->setFramerateLimit(60);
-
-
 
     while (gerenciadorGrafico.isWindowOpen())
     {
@@ -89,13 +82,12 @@ int main()
             if (event.type == sf::Event::Closed)
                 window->close();
         }
-        update(player, player2, bosta);
+        level->update();
 
         window->clear(sf::Color::Black);
-        draw(parede,plataforma,player, player2, window);
+        level->draw(window);
         window->display();
 
-        cout << player->getPosition().x << " : " << player->getPosition().y << endl;
     }
 
     return 0;
