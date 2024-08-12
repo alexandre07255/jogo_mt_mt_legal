@@ -5,6 +5,7 @@ class Player : public Alive
 {
 private:
 	bool player2;
+	static const int MAX_HP;
 	static const int MAX_HORIZONTAL_SPEED;
 	static const int MAX_VERTICAL_SPEED;
 	static const int ACCELARATION;
@@ -12,7 +13,7 @@ private:
 	static const int JUMP_STREGTH;
 	int jumpBuffer;
 public:
-	Player(const bool isPlayer2);
+	Player(const bool isPlayer2, const bool ally, const int health);
 	void movement();
 };
 

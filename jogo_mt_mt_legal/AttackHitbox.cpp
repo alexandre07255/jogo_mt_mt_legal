@@ -25,7 +25,23 @@ void AttackHitbox::setDamage(const int dmg)
 	damage = dmg;
 }
 
+const bool AttackHitbox::hasAlreadyHit(Alive* pA)
+{
+	list<Alive*>::iterator it = hitList.begin();
+	int size = hitList.size();
+	for (int i = 0; i < size; i++)
+	{
+		if ((*it) == pA)
+			return 1;
+		it++;
+	}
+	return 0;
+}
+
+
 void AttackHitbox::hitSolution(Alive* hit)
 {
+	if (hasAlreadyHit(hit)) { return; }
 
+	//TODO
 }

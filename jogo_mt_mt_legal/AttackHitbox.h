@@ -1,6 +1,6 @@
 #pragma once
 #include "Hitbox.h"
-#include <set>
+#include <list>
 
 class AttackHitbox : public Hitbox
 {
@@ -8,7 +8,8 @@ private:
 	int knockback;
 	sf::Vector2f launchDirection;
 	int damage;
-	set<Alive*> hitList;
+	list<Alive*> hitList;
+	const bool hasAlreadyHit(Alive* pA);
 public:
 	AttackHitbox(const bool tar, Alive* own, Entity* boundTo,
 		         sf::Vector2f rel, const int dur, sf::Vector2f _size);
