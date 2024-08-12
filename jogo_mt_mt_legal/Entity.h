@@ -1,7 +1,8 @@
 #pragma once
 #include "MyDrawable.h"
+#include "Updatable.h"
 
-class Entity : public MyDrawable
+class Entity : public MyDrawable, public Updatable
 {
 protected:
 	float horizontalSpeed;
@@ -24,7 +25,5 @@ public:
 	const bool getOnAir() const;
 
 	void setOnAir(const bool value);
-
-	virtual void movement() = 0;
 };
 
