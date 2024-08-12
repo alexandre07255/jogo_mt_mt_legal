@@ -61,7 +61,7 @@ void Player::movement() {
 	vetorDesloc.y *= verticalSpeed;
 
 
-	if (inputInstance->isDownPressed(player2))
+	/*if (inputInstance->isDownPressed(player2))
 	{
 		Hitbox* hitbox = new Hitbox(1, this, 0);
 		hitbox->setFillColor(sf::Color::Yellow);
@@ -70,7 +70,7 @@ void Player::movement() {
 		Level* level = Level::getActive();
 		EntityList* drawables = level->getDrawables();
 		drawables->pushBack(hitbox);
-	}
+	} */
 
 
 	move(vetorDesloc);

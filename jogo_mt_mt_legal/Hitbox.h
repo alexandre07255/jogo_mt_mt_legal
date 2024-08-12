@@ -3,14 +3,14 @@
 
 class Hitbox : public Entity
 {
-private:
+protected:
 	bool target;
-	Entity* owner;
-	bool isBounded;
-	//sf::Vector2f relativePosition;
+	Alive* owner;
+	Entity* boundedTo;
+	sf::Vector2f relativePosition;
+	int duration;
 public:
-	Hitbox(const bool tar, Entity* own, const bool isBo);
-	virtual void hitSolution(Alive* hit);
-	virtual void movement();
+	Hitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, const int dur, sf::Vector2f _size);
+	virtual void hitSolution(Alive* hit) = 0;
 };
 
