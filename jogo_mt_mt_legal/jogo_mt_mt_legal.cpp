@@ -7,8 +7,9 @@
 #include "Collidable.h"
 #include "CollisionManager.h"
 #include "Level.h"
+#include "Camera.h"
 
-void InicializarCoisas(Level* level) {
+void InicializarCoisas(Level* level, Camera* view) {
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
 
     list<Updatable*>* updatables;
@@ -62,6 +63,9 @@ void InicializarCoisas(Level* level) {
     level->setDrawables(drawables);
 
     Level::setActive(level);
+
+    view->setPlayer1(player);
+    view->setPlayer2(player2);
 }
 
 int main()
@@ -69,10 +73,13 @@ int main()
     Graphics gerenciadorGrafico;
     sf::RenderWindow* window = gerenciadorGrafico.getWindow();   
     Level* level;
+    Camera* view;
+
+    view = new Camera(window);
 
     level = new Level;
 
-    InicializarCoisas(level);
+    InicializarCoisas(level,view);
 
     window->setFramerateLimit(60);
 
@@ -85,7 +92,7 @@ int main()
                 window->close();
         }
         level->update();
-
+        view->movement();
         window->clear(sf::Color::Black);
         level->draw(window);
         window->display();

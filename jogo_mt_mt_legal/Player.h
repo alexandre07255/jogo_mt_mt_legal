@@ -1,5 +1,6 @@
 #pragma once
 #include "Alive.h"
+
 class Player : public Alive
 {
 private:
