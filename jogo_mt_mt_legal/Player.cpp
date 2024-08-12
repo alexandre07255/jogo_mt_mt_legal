@@ -6,7 +6,7 @@ Player::Player(const bool isPlayer2) :
 	jumpBuffer(0),
 	player2(isPlayer2)
 {
-
+	
 }
 
 void Player::movement() {
@@ -70,3 +70,4 @@ const int Player::JUMP_STREGTH(20);
 const int Player::MAX_HORIZONTAL_SPEED(10);
 const int Player::MAX_VERTICAL_SPEED(15);
 const int Player::ACCELARATION(2);
+

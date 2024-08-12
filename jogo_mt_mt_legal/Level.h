@@ -1,5 +1,6 @@
 #pragma once
 #include "EntityList.h"
+#include "Camera.h"
 
 class Level
 {
