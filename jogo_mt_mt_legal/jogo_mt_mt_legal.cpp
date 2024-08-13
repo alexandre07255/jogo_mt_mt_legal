@@ -8,6 +8,7 @@
 #include "CollisionManager.h"
 #include "Level.h"
 #include "Camera.h"
+#include "Enemy.h"
 
 void InicializarCoisas(Level* level) {
     Graphics* instance = Graphics::getInstance();
@@ -25,6 +26,7 @@ void InicializarCoisas(Level* level) {
     Player* player2;
     Collidable* plataforma, * parede;
     EntityList* colisionaveis;
+    Enemy* inimigo;
 
     colisionaveis = new EntityList;
     plataforma = new Collidable;
@@ -43,26 +45,31 @@ void InicializarCoisas(Level* level) {
 
     gerenciadorColisao->setCollidables(colisionaveis);
 
-    player = new Player(0);
+    player = new Player(0,1,10);
     player->setFillColor(sf::Color::Cyan);
     player->setSize(sf::Vector2f(1, 1));
     player->setOrigin(sf::Vector2f(0, 0));
     player->setSize(sf::Vector2f(100, 100));
 
-    player2 = new Player(1);
+    player2 = new Player(1,1,10);
     player2->setFillColor(sf::Color::Magenta);
     player2->setSize(sf::Vector2f(1, 1));
     player2->setOrigin(sf::Vector2f(0, 0));
     player2->setSize(sf::Vector2f(100, 100));
 
+    inimigo = new Enemy;
+
     updatables->push_back(player);
     updatables->push_back(player2);
     updatables->push_back(view);
+    updatables->push_back(inimigo);
 
     drawables->pushBack(player);
     drawables->pushBack(player2);
     drawables->pushBack(parede);
     drawables->pushBack(plataforma);
+    drawables->pushBack(inimigo);
+
 
     level->setUpdatables(updatables);
     level->setDrawables(drawables);
@@ -83,7 +90,8 @@ int main()
 
     InicializarCoisas(level);
 
-    window->setFramerateLimit(60);
+    //window->setFramerateLimit(60);
+    window->setVerticalSyncEnabled(true);
 
     while (gerenciadorGrafico->isWindowOpen())
     {

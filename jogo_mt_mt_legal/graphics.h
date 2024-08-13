@@ -4,7 +4,7 @@
 class Graphics {
 private:
 	sf::RenderWindow* window;
-	Graphics* instance;
+	static Graphics* instance;
 public:
 	Graphics();
 	~Graphics();
