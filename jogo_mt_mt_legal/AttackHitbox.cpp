@@ -2,8 +2,8 @@
 
 AttackHitbox::AttackHitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, const int dur, sf::Vector2f _size) :
 	Hitbox(tar, own, boundTo, rel, dur, _size),
-	knockback(-1),
-	launchDirection(),
+	horKnockback(-1),
+	verKnockback(-1),
 	damage(-1),
 	hitList(),
 	hasHit(0)
@@ -11,14 +11,14 @@ AttackHitbox::AttackHitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vect
 	hitList.clear();
 }
 
-void AttackHitbox::setKnockback(const int knock)
+void AttackHitbox::setHorKnockback(const int horKnock)
 {
-	knockback = knock;
+	horKnockback = horKnock;
 }
 
-void AttackHitbox::setLaunchDirection(sf::Vector2f launch)
+void AttackHitbox::setVerKnockback(const int verKnock)
 {
-	launchDirection = launch;
+	verKnockback = verKnock;
 }
 
 void AttackHitbox::setDamage(const int dmg)
@@ -46,7 +46,7 @@ const bool AttackHitbox::hasAlreadyHit(Alive* pA)
 
 void AttackHitbox::movement()
 {
-	if ( (duration <= 0 && !hasHit) || (hitstun <= 0 && hasHit) )
+	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || owner->getState() != Alive::ATKCANCEL ) ) )
 	{
 		Level* activeLevel = Level::getActive();
 		list<Updatable*>* upList = activeLevel->getUpdatables();
@@ -64,6 +64,7 @@ void AttackHitbox::movement()
 	CollisionManager* collisionInstance = CollisionManager::getInstance();
 	collisionInstance->testHit(target, this);
 	
+	if (hasHit) { hitstun--; }
 	duration--;
 }
 
@@ -73,5 +74,13 @@ void AttackHitbox::hitSolution(Alive* hit)
 
 	hitList.push_back(hit);
 
-	
+	if (!hasHit)
+	{
+		hasHit = 1;
+		owner->setState(Alive::ATKCANCEL);
+		owner->setStun(hitstun);
+	}
+
+	hit->setState(Alive::HITSTUN);
+	hit->setStun(hitstun);
 }

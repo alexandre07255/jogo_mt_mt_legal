@@ -7,14 +7,14 @@
 Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	Alive(1, MAX_HP),
 	jumpBuffer(0),
-	player2(isPlayer2)
+	player2(isPlayer2),
+	attackBuffer(0)
 {
 	
 }
 
 void Player::movement() {
 	
-	if (state == FREE)
 	int friccao = 1;
 	sf::Vector2f vetorDesloc(1,1);
 	InputManager* inputInstance = InputManager::getInstance();
@@ -89,3 +89,5 @@ const int Player::MAX_VERTICAL_SPEED(15);
 const int Player::ACCELARATION(2);
 
 const int Player::MAX_HP(20);
+
+const int Player::MAX_ATTACK_BUFFER(3);
