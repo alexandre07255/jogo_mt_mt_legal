@@ -5,7 +5,8 @@ AttackHitbox::AttackHitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vect
 	knockback(-1),
 	launchDirection(),
 	damage(-1),
-	hitList()
+	hitList(),
+	hasHit(0)
 {
 	hitList.clear();
 }
@@ -25,6 +26,11 @@ void AttackHitbox::setDamage(const int dmg)
 	damage = dmg;
 }
 
+void AttackHitbox::setHitstun(const int stun)
+{
+	hitstun = stun;
+}
+
 const bool AttackHitbox::hasAlreadyHit(Alive* pA)
 {
 	list<Alive*>::iterator it = hitList.begin();
@@ -40,6 +46,16 @@ const bool AttackHitbox::hasAlreadyHit(Alive* pA)
 
 void AttackHitbox::movement()
 {
+	if ( (duration <= 0 && !hasHit) || (hitstun <= 0 && hasHit) )
+	{
+		Level* activeLevel = Level::getActive();
+		list<Updatable*>* upList = activeLevel->getUpdatables();
+		upList->remove(this);
+		owner->setState(Alive::FREE);
+		delete this;
+		return;
+	}
+
 	if (boundedTo != NULL)
 	{
 		setPosition(boundedTo->getPosition());
@@ -47,11 +63,15 @@ void AttackHitbox::movement()
 	}
 	CollisionManager* collisionInstance = CollisionManager::getInstance();
 	collisionInstance->testHit(target, this);
+	
+	duration--;
 }
 
 void AttackHitbox::hitSolution(Alive* hit)
 {
 	if (hasAlreadyHit(hit)) { return; }
+
+	hitList.push_back(hit);
 
 	
 }

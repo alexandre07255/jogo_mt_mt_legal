@@ -13,6 +13,8 @@ Player::Player(const bool isPlayer2, const bool ally, const int health) :
 }
 
 void Player::movement() {
+	
+	if (state == FREE)
 	int friccao = 1;
 	sf::Vector2f vetorDesloc(1,1);
 	InputManager* inputInstance = InputManager::getInstance();
