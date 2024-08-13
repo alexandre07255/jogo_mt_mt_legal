@@ -32,3 +32,8 @@ const int Alive::getState() const
 {
 	return state;
 }
+
+void Alive::dealDamage(const int dmg)
+{
+	hp -= dmg;
+}

@@ -1,12 +1,16 @@
 #include "AttackHitbox.h"
 
+#include <iostream>
+using namespace std;
+
 AttackHitbox::AttackHitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, const int dur, sf::Vector2f _size) :
 	Hitbox(tar, own, boundTo, rel, dur, _size),
 	horKnockback(-1),
 	verKnockback(-1),
 	damage(-1),
 	hitList(),
-	hasHit(0)
+	hasHit(0),
+	hitstun(0)
 {
 	hitList.clear();
 }
@@ -51,7 +55,8 @@ void AttackHitbox::movement()
 		Level* activeLevel = Level::getActive();
 		list<Updatable*>* upList = activeLevel->getUpdatables();
 		upList->remove(this);
-		owner->setState(Alive::FREE);
+		if (duration <= 0 || hitstun <= 0)
+			owner->setState(Alive::FREE);
 		delete this;
 		return;
 	}
@@ -83,4 +88,7 @@ void AttackHitbox::hitSolution(Alive* hit)
 
 	hit->setState(Alive::HITSTUN);
 	hit->setStun(hitstun);
+	hit->dealDamage(damage);
+	hit->setHorizontalVelocity(horKnockback);
+	hit->setVerticalVelocity(verKnockback);
 }

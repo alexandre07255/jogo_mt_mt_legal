@@ -19,8 +19,10 @@ void InicializarCoisas(Level* level) {
 
     list<Updatable*>* updatables;
     EntityList* drawables;
+    list<Alive*>* alives;
     updatables = new list<Updatable*>;
     drawables = new EntityList;
+    alives = new list<Alive*>;
 
     Player* player;
     Player* player2;
@@ -58,6 +60,12 @@ void InicializarCoisas(Level* level) {
     player2->setSize(sf::Vector2f(100, 100));
 
     inimigo = new Enemy;
+
+    alives->push_back(player);
+    alives->push_back(player2);
+    alives->push_back(inimigo);
+
+    gerenciadorColisao->setAliveList(alives);
 
     updatables->push_back(player);
     updatables->push_back(player2);

@@ -1,4 +1,5 @@
 #include "Hitbox.h"
+#include "Level.h"
 
 Hitbox::Hitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, const int dur, sf::Vector2f _size):
 	target(tar),
@@ -10,9 +11,10 @@ Hitbox::Hitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, co
 	setSize(_size);
 	if (own != NULL)
 	{
-		int _x = own->getPosition().x + rel.x;
-		int _y = own->getPosition().y + rel.y;
-		setPosition(sf::Vector2f(_x, _y));
+		setPosition(boundTo->getPosition());
+		move(rel);
 	}
-}
 
+	Level* activeInstance = Level::getActive();
+	activeInstance->addUpdatable(this);
+}

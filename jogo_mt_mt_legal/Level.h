@@ -7,7 +7,7 @@ class Level
 private:
 	static Level* active; //So that other objects can call methods and modify the updatables and drawables lists
 	EntityList* drawables;
-	list<Updatable*>* updatables;
+	list<Updatable*>* updatables; //Colocar aliveList e collidables aqui também
 public:
 	Level();
 	~Level();
@@ -17,6 +17,7 @@ public:
 	EntityList* getDrawables() const;
 	void setUpdatables(list<Updatable*>* updatelist);
 	list<Updatable*>* getUpdatables() const;
+	void addUpdatable(Updatable* pU);
 	void draw(sf::RenderWindow* window);
 	void update ();
 };

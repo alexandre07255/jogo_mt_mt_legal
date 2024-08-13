@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "CollisionManager.h"
-#include "Hitbox.h"
+#include "AttackHitbox.h"
 #include "Level.h"
 
 Player::Player(const bool isPlayer2, const bool ally, const int health) :
@@ -64,16 +64,15 @@ void Player::movement() {
 	vetorDesloc.y *= verticalSpeed;
 
 
-	/*if (inputInstance->isDownPressed(player2))
+	if (inputInstance->isDownPressed(player2))
 	{
-		Hitbox* hitbox = new Hitbox(1, this, 0);
-		hitbox->setFillColor(sf::Color::Yellow);
-		hitbox->setPosition(getPosition());
-		hitbox->setSize(sf::Vector2f(100, 100));
-		Level* level = Level::getActive();
-		EntityList* drawables = level->getDrawables();
-		drawables->pushBack(hitbox);
-	} */
+		AttackHitbox* hitbox = new AttackHitbox(0, this, this,
+												sf::Vector2f(0, 0), 10, sf::Vector2f(100, 100));
+		hitbox->setHorKnockback(20);
+		hitbox->setVerKnockback(10);
+		hitbox->setDamage(1);
+		hitbox->setHitstun(1);
+	}
 
 
 	move(vetorDesloc);

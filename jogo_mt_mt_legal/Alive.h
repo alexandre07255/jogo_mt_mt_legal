@@ -21,5 +21,6 @@ public:
 	const int getStun() const;
 	const int getState() const;
 	const bool getIsAlly() const;
+	void dealDamage(const int dmg);
 };
 
