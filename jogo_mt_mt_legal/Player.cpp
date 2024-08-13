@@ -86,4 +86,4 @@ const int Player::MAX_HORIZONTAL_SPEED(10);
 const int Player::MAX_VERTICAL_SPEED(15);
 const int Player::ACCELARATION(2);
 
-const int MAX_HP(20);
+const int Player::MAX_HP(20);

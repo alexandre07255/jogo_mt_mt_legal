@@ -26,5 +26,7 @@ Graphics* Graphics::getInstance()
 {
 	if (instance == NULL)
 		instance = new Graphics;
-	return instance;
+	return instance;	
 }
+
+Graphics* Graphics::instance(NULL);
