@@ -1,5 +1,6 @@
 #pragma once
 #include "Hitbox.h"
+#include "CollisionManager.h"
 #include <list>
 
 class AttackHitbox : public Hitbox
@@ -16,6 +17,7 @@ public:
 	void setKnockback(const int knock);
 	void setLaunchDirection(sf::Vector2f launch);
 	void setDamage(const int dmg);
+	void movement();
 	void hitSolution(Alive* hit);
 };
 

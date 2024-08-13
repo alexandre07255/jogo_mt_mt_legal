@@ -38,10 +38,20 @@ const bool AttackHitbox::hasAlreadyHit(Alive* pA)
 	return 0;
 }
 
+void AttackHitbox::movement()
+{
+	if (boundedTo != NULL)
+	{
+		setPosition(boundedTo->getPosition());
+		move(relativePosition);
+	}
+	CollisionManager* collisionInstance = CollisionManager::getInstance();
+	collisionInstance->testHit(target, this);
+}
 
 void AttackHitbox::hitSolution(Alive* hit)
 {
 	if (hasAlreadyHit(hit)) { return; }
 
-	//TODO
+	
 }
