@@ -100,3 +100,32 @@ void CollisionManager::setCollidables(EntityList* pC)
 const bool CollisionManager::isColliding(sf::FloatRect one, sf::FloatRect other){
 	return (one.intersects(other));
 }
+
+void CollisionManager::setAliveList(list<Alive*>* Alist)
+{
+	aliveList = Alist;
+}
+
+void CollisionManager::testHit(const bool target, Hitbox* hitbox)
+{
+	if (hitbox == NULL) { return; }
+
+	list<Alive*>::iterator it = aliveList->begin();
+	int size = aliveList->size();
+
+	sf::FloatRect hitboxBounds = hitbox->getGlobalBounds();
+	sf::FloatRect aliveBounds;
+
+	for (int i = 0; i < size; i++)
+	{
+		if (target == (*it)->getIsAlly())
+		{
+			aliveBounds = (*it)->getGlobalBounds();
+			if (isColliding(hitboxBounds, aliveBounds))
+			{
+				hitbox->hitSolution((*it));
+			}
+		}
+		it++;
+	}
+}

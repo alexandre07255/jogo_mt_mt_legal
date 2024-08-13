@@ -4,7 +4,8 @@
 #include "Hitbox.h"
 #include "Level.h"
 
-Player::Player(const bool isPlayer2) :
+Player::Player(const bool isPlayer2, const bool ally, const int health) :
+	Alive(1, MAX_HP),
 	jumpBuffer(0),
 	player2(isPlayer2)
 {
@@ -61,7 +62,7 @@ void Player::movement() {
 	vetorDesloc.y *= verticalSpeed;
 
 
-	if (inputInstance->isDownPressed(player2))
+	/*if (inputInstance->isDownPressed(player2))
 	{
 		Hitbox* hitbox = new Hitbox(1, this, 0);
 		hitbox->setFillColor(sf::Color::Yellow);
@@ -70,7 +71,7 @@ void Player::movement() {
 		Level* level = Level::getActive();
 		EntityList* drawables = level->getDrawables();
 		drawables->pushBack(hitbox);
-	}
+	} */
 
 
 	move(vetorDesloc);
@@ -85,3 +86,4 @@ const int Player::MAX_HORIZONTAL_SPEED(10);
 const int Player::MAX_VERTICAL_SPEED(15);
 const int Player::ACCELARATION(2);
 
+const int MAX_HP(20);
