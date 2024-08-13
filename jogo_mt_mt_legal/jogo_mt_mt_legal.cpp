@@ -9,7 +9,11 @@
 #include "Level.h"
 #include "Camera.h"
 
-void InicializarCoisas(Level* level, Camera* view) {
+void InicializarCoisas(Level* level) {
+    Graphics* instance = Graphics::getInstance();
+    sf::RenderWindow* window = instance->getWindow();
+    Camera* view;
+    view = new Camera(window);
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
 
     list<Updatable*>* updatables;
@@ -53,6 +57,7 @@ void InicializarCoisas(Level* level, Camera* view) {
 
     updatables->push_back(player);
     updatables->push_back(player2);
+    updatables->push_back(view);
 
     drawables->pushBack(player);
     drawables->pushBack(player2);
@@ -70,20 +75,17 @@ void InicializarCoisas(Level* level, Camera* view) {
 
 int main()
 {   
-    Graphics gerenciadorGrafico;
-    sf::RenderWindow* window = gerenciadorGrafico.getWindow();   
+    Graphics* gerenciadorGrafico = Graphics::getInstance();
+    sf::RenderWindow* window = gerenciadorGrafico->getWindow();   
     Level* level;
-    Camera* view;
-
-    view = new Camera(window);
 
     level = new Level;
 
-    InicializarCoisas(level,view);
+    InicializarCoisas(level);
 
     window->setFramerateLimit(60);
 
-    while (gerenciadorGrafico.isWindowOpen())
+    while (gerenciadorGrafico->isWindowOpen())
     {
         sf::Event event;
         while (window->pollEvent(event))
@@ -92,7 +94,6 @@ int main()
                 window->close();
         }
         level->update();
-        view->movement();
         window->clear(sf::Color::Black);
         level->draw(window);
         window->display();

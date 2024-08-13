@@ -21,3 +21,10 @@ const bool Graphics::isWindowOpen(){
 sf::RenderWindow* Graphics::getWindow() {
 	return window;
 }
+
+Graphics* Graphics::getInstance()
+{
+	if (instance == NULL)
+		instance = new Graphics;
+	return instance;
+}

@@ -1,7 +1,8 @@
 #pragma once
 #include "Player.h"
+#include "Updatable.h"
 
-class Camera : public sf::View
+class Camera : public sf::View, public Updatable
 {
 private:
 	Player* player1;
