@@ -108,7 +108,7 @@ void Player::movementFREE()
 
 	if (!onAir && jumpBuffer)
 	{
-		verticalSpeed = -JUMP_STREGTH;
+		verticalSpeed = -JUMP_STRENGTH;
 		jumpBuffer = 0;
 		onAir = 1;
 	}
@@ -179,7 +179,7 @@ void Player::attack()
 }
 
 const int Player::MAX_JUMP_BUFFER(8);
-const int Player::JUMP_STREGTH(20);
+const int Player::JUMP_STRENGTH(20);
 
 const int Player::MAX_HORIZONTAL_SPEED(10);
 const int Player::MAX_VERTICAL_SPEED(15);

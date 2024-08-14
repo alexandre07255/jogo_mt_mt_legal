@@ -33,7 +33,7 @@ void Enemy::movement() {
 
 	instance->testCollison(this);
 
-	std::cout << state << endl;
+	//std::cout << state << endl;
 }
 
 void Enemy::movementPATROLLING()
@@ -160,11 +160,11 @@ Player* Enemy::searchPlayer() {
 			collidables->start();
 		}
 
-		Collidable* vertice = new Collidable();
-		vertice->setSize(sf::Vector2f(5, 5));
-		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
+		//Collidable* vertice = new Collidable();
+		//->setSize(sf::Vector2f(5, 5));
+		//vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
-		nivel->addDrawable(vertice);
+		//nivel->addDrawable(vertice);
 	}
 	return NULL;
 }
