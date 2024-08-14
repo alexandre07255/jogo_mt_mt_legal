@@ -1,7 +1,7 @@
 #include "Hitbox.h"
 #include "Level.h"
 
-Hitbox::Hitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, const int dur, sf::Vector2f _size):
+Hitbox::Hitbox():
 	target(0),
 	owner(NULL),
 	boundedTo(NULL),

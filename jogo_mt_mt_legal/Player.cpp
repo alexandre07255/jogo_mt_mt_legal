@@ -122,7 +122,7 @@ void Player::movementFREE()
 		hitbox->setOwner(this);
 		hitbox->setBoundedTo(this);
 		hitbox->setDuration(10);
-		hitbox->setVerKnockback(10);
+		hitbox->setVerKnockback(-10);
 		hitbox->setDamage(1);
 		hitbox->setHitstun(10);
 		int horKnock = 5;
