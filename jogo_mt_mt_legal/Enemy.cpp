@@ -33,7 +33,7 @@ void Enemy::movement() {
 
 	instance->testCollison(this);
 
-	std::cout << state << endl;
+	//std::cout << state << endl;
 }
 
 void Enemy::movementPATROLLING()
