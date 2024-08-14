@@ -65,3 +65,7 @@ void Level::setActive(Level* pL) //Usar em algum outro lugar (tipo gerenciador/p
 {
 	active = pL;
 }
+
+void Level::addDrawable(Entity* pD) {
+	drawables->pushBack(pD);
+}

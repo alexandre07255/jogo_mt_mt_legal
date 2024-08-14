@@ -19,5 +19,6 @@ public:
 	list<Updatable*>* getUpdatables() const;
 	void draw(sf::RenderWindow* window);
 	void update ();
+	void addDrawable(Entity* pD);
 };
 

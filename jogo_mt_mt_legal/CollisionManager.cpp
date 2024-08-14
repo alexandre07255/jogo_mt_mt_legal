@@ -129,3 +129,7 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 		it++;
 	}
 }
+
+EntityList* CollisionManager::getCollidables() {
+	return collidables;
+}

@@ -17,5 +17,6 @@ public:
 	const bool isColliding(sf::FloatRect one, sf::FloatRect other);
 	void setAliveList(list<Alive*>* Alist);
 	void testHit(const bool target, Hitbox* hitbox);
+	EntityList* getCollidables();
 };
 
