@@ -75,7 +75,6 @@ void Enemy::movementFREE()
 	if (followingPlayer) {
 		state = FOLLOWING;
 	}
-	else state = PATROLLING;
 }
 
 Player* Enemy::searchPlayer() {
