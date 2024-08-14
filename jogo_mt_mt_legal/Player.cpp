@@ -113,7 +113,7 @@ void Player::movementFREE()
 	if (attackBuffer)
 	{
 		attackCounter = 0;
-
+		state = ATTACK;
 		
 		AttackHitbox* hitbox = new AttackHitbox();
 
@@ -125,7 +125,7 @@ void Player::movementFREE()
 		hitbox->setVerKnockback(-10);
 		hitbox->setDamage(1);
 		hitbox->setHitstun(10);
-		int horKnock = 5;
+		int horKnock = 30;
 		if (facingRight)
 		{
 			hitbox->setRelativePosition(sf::Vector2f(getSize().x, 0));
@@ -137,7 +137,6 @@ void Player::movementFREE()
 			hitbox->setRelativePosition(sf::Vector2f(-relX, 0));
 			hitbox->setHorKnockback(-horKnock);
 		}
-		
 	}
 
 	verticalSpeed += 1;

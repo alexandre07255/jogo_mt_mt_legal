@@ -121,11 +121,11 @@ Player* Enemy::searchPlayer() {
 			collidables->start();
 		}
 
-		Collidable* vertice = new Collidable();
+		/*Collidable* vertice = new Collidable();
 		vertice->setSize(sf::Vector2f(1, 1));
 		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
-		nivel->addDrawable(vertice);
+		nivel->addDrawable(vertice);*/
 	}
 	return NULL;
 }
