@@ -9,14 +9,15 @@ Enemy::Enemy() :Alive(false, 10) {
 	isWorth = 0;
 	setPosition(sf::Vector2f(10, 10));
 	setSize(sf::Vector2f(100, 100));
-	sightSize = 750;
+	sightSize = 500;
 	followingPlayer = NULL;
 	state = PATROLLING;
+	timer = 0;
 }
 
 void Enemy::movement() {
 	CollisionManager* instance = CollisionManager::getInstance();
-	
+
 	switch (state)
 	{
 	case PATROLLING:
@@ -27,9 +28,12 @@ void Enemy::movement() {
 		break;
 	case FOLLOWING:
 		movementFOLLOWING();
+		break;
 	}
 
 	instance->testCollison(this);
+
+	std::cout << state << endl;
 }
 
 void Enemy::movementFREE()
@@ -38,13 +42,18 @@ void Enemy::movementFREE()
 
 	sf::Vector2f vetorDesloc(1, 1);
 
-	if (getPosition().x >= 100) {
+	if (50 < timer < 100) {
 		horizontalSpeed -= 1;
 		facingRight = 0;
+		timer++;
 	}
-	else {
+	else if (timer>0) {
+		timer--;
 		horizontalSpeed += 1;
 		facingRight = 1;
+	}
+	else {
+		timer = 0;
 	}
 
 	//friccao
@@ -87,7 +96,21 @@ Player* Enemy::searchPlayer() {
 	double yFinal;
 	double xFinal;
 
-	for (double i = 3*PI/2;i <  2*PI ;i += 0.1) {
+	double upperLimit;
+	double lesserLimit;
+	//int sign;
+
+	if (facingRight) {
+		//sign = 1;
+		upperLimit = 2 * PI;
+		lesserLimit = 3 * PI / 2;
+	}
+	else {
+		upperLimit = 3 * PI / 2;;
+		lesserLimit = PI;
+	}
+
+	for (double i = lesserLimit;i <  upperLimit ;i += 0.1) {
 		//fazer 360 graus
 		flag = 1;
 		for (double j = rayStep;j <= sightSize && flag;j += rayStep) {
@@ -105,7 +128,7 @@ Player* Enemy::searchPlayer() {
 
 			for (list<Alive*>::iterator it = alive->begin();it != alive->end();it++) {
 				if (ret.intersects((*it)->getGlobalBounds()) && (*it)->getIsAlly()) {
-					std::cout << "player achado" << endl;
+					//std::cout << "player achado" << endl;
 					return (Player*)*it;
 				}
 			}
@@ -121,8 +144,8 @@ Player* Enemy::searchPlayer() {
 			collidables->start();
 		}
 
-		/*Collidable* vertice = new Collidable();
-		vertice->setSize(sf::Vector2f(1, 1));
+		Collidable* vertice = new Collidable();
+		vertice->setSize(sf::Vector2f(5, 5));
 		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
 		nivel->addDrawable(vertice);*/
@@ -179,6 +202,12 @@ void Enemy::movementFOLLOWING() {
 	vetorDesloc.y *= verticalSpeed;
 
 	move(vetorDesloc);
+
+	followingPlayer = searchPlayer();
+
+	if (!followingPlayer) {
+		state = PATROLLING;
+	}
 }
 
 const int Enemy::MAX_HORIZONTAL_SPEED(8);
