@@ -147,7 +147,7 @@ Player* Enemy::searchPlayer() {
 		vertice->setSize(sf::Vector2f(5, 5));
 		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
-		nivel->addDrawable(vertice);
+		nivel->addDrawable(vertice);*/
 	}
 	return NULL;
 }
