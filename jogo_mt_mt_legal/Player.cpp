@@ -1,18 +1,23 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "CollisionManager.h"
-#include "Hitbox.h"
+#include "AttackHitbox.h"
 #include "Level.h"
+
+#include <iostream>
+using namespace std;
 
 Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	Alive(1, MAX_HP),
 	jumpBuffer(0),
-	player2(isPlayer2)
+	player2(isPlayer2),
+	attackBuffer(0)
 {
 	
 }
 
 void Player::movement() {
+	
 	int friccao = 1;
 	sf::Vector2f vetorDesloc(1,1);
 	InputManager* inputInstance = InputManager::getInstance();
@@ -62,18 +67,17 @@ void Player::movement() {
 	vetorDesloc.y *= verticalSpeed;
 
 
-	/*if (inputInstance->isDownPressed(player2))
+	if (inputInstance->isDownPressed(player2))
 	{
-		Hitbox* hitbox = new Hitbox(1, this, 0);
-		hitbox->setFillColor(sf::Color::Yellow);
-		hitbox->setPosition(getPosition());
-		hitbox->setSize(sf::Vector2f(100, 100));
-		Level* level = Level::getActive();
-		EntityList* drawables = level->getDrawables();
-		drawables->pushBack(hitbox);
-	} */
+		AttackHitbox* hitbox = new AttackHitbox(0, this, this,
+												sf::Vector2f(0, 0), 10, sf::Vector2f(100, 100));
+		hitbox->setHorKnockback(20);
+		hitbox->setVerKnockback(10);
+		hitbox->setDamage(1);
+		hitbox->setHitstun(10);
+	}
 
-
+	
 	move(vetorDesloc);
 
 	collisionInstance->testCollison(this);
@@ -87,3 +91,5 @@ const int Player::MAX_VERTICAL_SPEED(15);
 const int Player::ACCELARATION(2);
 
 const int Player::MAX_HP(20);
+
+const int Player::MAX_ATTACK_BUFFER(3);

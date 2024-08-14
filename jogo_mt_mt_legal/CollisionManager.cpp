@@ -1,4 +1,6 @@
 #include "CollisionManager.h"
+#include <iostream>
+using namespace std;
 
 CollisionManager* CollisionManager::instance(NULL);
 
@@ -109,7 +111,7 @@ void CollisionManager::setAliveList(list<Alive*>* Alist)
 void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 {
 	if (hitbox == NULL) { return; }
-
+	if (aliveList == NULL) { cout << "No one is alive" << endl; return; }
 	list<Alive*>::iterator it = aliveList->begin();
 	int size = aliveList->size();
 

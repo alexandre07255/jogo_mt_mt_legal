@@ -13,6 +13,21 @@ Enemy::Enemy() :Alive(false, 10) {
 
 void Enemy::movement() {
 	CollisionManager* instance = CollisionManager::getInstance();
+	
+	switch (state)
+	{
+	case Alive::FREE:
+		movementFREE();
+	case Alive::HITSTUN:
+		movementHITSTUN();
+	}
+
+	instance->testCollison(this);
+}
+
+void Enemy::movementFREE()
+{
+	int friccao = 1;
 
 	sf::Vector2f vetorDesloc(1, 1);
 
@@ -23,12 +38,20 @@ void Enemy::movement() {
 		horizontalSpeed += 1;
 	}
 
+	//friccao
+	if (abs(horizontalSpeed) > friccao) {
+		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
+	}
+	else
+		horizontalSpeed = 0;
+
 	verticalSpeed += 1;
 
 	vetorDesloc.x *= horizontalSpeed;
 	vetorDesloc.y *= verticalSpeed;
 
 	move(vetorDesloc);
+}
 	raycasting();
 	instance->testCollison(this);
 }
@@ -83,4 +106,17 @@ void Enemy::raycasting() {
 		nivel->addDrawable(vertice);
 	}
 	
+}
+void Enemy::movementHITSTUN()
+{
+	if (stun <= 0)
+	{
+		state = Alive::FREE;
+		setFillColor(sf::Color::White);
+	}
+	else
+	{
+		stun--;
+		setFillColor(sf::Color::Red);
+	}
 }

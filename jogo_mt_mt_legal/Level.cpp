@@ -47,13 +47,21 @@ void Level::draw(sf::RenderWindow* window) {
 
 void Level::update()
 {
-	list<Updatable*>::iterator it = updatables->begin();
-	int size = updatables->size();
-	for (int i = 0; i < size; i++)
+	list<Updatable*>::iterator itCurrent = updatables->begin();
+	if (updatables->size() > 1)
 	{
-		(*it)->movement();
-		it++;
+		list<Updatable*>::iterator itNext = itCurrent;
+		itNext++;
+		while (itNext != updatables->end())
+		{
+			(*itCurrent)->movement();
+			itCurrent = itNext;
+			itNext++;
+		}
+		(*itCurrent)->movement();
 	}
+	else if (updatables->size() == 1)
+		(*itCurrent)->movement();
 }
 
 Level* Level::getActive()
@@ -64,6 +72,11 @@ Level* Level::getActive()
 void Level::setActive(Level* pL) //Usar em algum outro lugar (tipo gerenciador/pilha de states)
 {
 	active = pL;
+}
+
+void Level::addUpdatable(Updatable* pU)
+{
+	updatables->push_back(pU);
 }
 
 void Level::addDrawable(Entity* pD) {
