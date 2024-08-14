@@ -14,7 +14,7 @@ private:
 public:
 	Enemy();
 	void movement();
-	void movementFREE();
+	void movementPATROLLING();
 	void movementHITSTUN();
 	void movementFOLLOWING();
 	Player* searchPlayer();

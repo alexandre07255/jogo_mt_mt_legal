@@ -28,5 +28,6 @@ public:
 	void movement();
 	void movementFREE();
 	void movementATKCANCEL();
+	void attack();
 };
 

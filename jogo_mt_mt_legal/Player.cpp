@@ -14,7 +14,10 @@ Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	attackBuffer(0),
 	wasAttackPressed(0),
 	friction(1),
-	attackCounter(0)
+	attackCounter(0),
+	ATTACK1_STARTUP(6),
+	ATTACK2_STARTUP(2),
+	ATTACK3_STARTUP(3)
 {
 	
 }
@@ -154,15 +157,7 @@ void Player::movementATKCANCEL()
 	{
 		if (attackBuffer)
 		{
-			switch (attackCounter)
-			{
-			case 1:
-
-				break;
-			case 2:
-
-				break;
-			}
+			
 		}
 		stun--;
 	}
@@ -170,6 +165,18 @@ void Player::movementATKCANCEL()
 		state = FREE;
 }
 
+void Player::attack()
+{
+	switch (attackCounter)
+	{
+	case 1:
+
+		break;
+	case 2:
+
+		break;
+	}
+}
 
 const int Player::MAX_JUMP_BUFFER(8);
 const int Player::JUMP_STREGTH(20);

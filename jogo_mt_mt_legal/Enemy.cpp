@@ -21,7 +21,7 @@ void Enemy::movement() {
 	switch (state)
 	{
 	case PATROLLING:
-		movementFREE();
+		movementPATROLLING();
 		break;
 	case HITSTUN:
 		movementHITSTUN();
@@ -36,23 +36,40 @@ void Enemy::movement() {
 	std::cout << state << endl;
 }
 
-void Enemy::movementFREE()
+void Enemy::movementPATROLLING()
 {
 	int friccao = 1;
+	int timeCycle = 60;
 
 	sf::Vector2f vetorDesloc(1, 1);
 
-	if (50 < timer < 100) {
-		horizontalSpeed -= 1;
+	if (timer < timeCycle/2) {
+		if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
+			horizontalSpeed -= ACCELARATION;
+		}
+		else {
+			horizontalSpeed = -MAX_HORIZONTAL_SPEED;
+		}
 		facingRight = 0;
 		timer++;
 	}
-	else if (timer>0) {
-		timer--;
-		horizontalSpeed += 1;
+	else if (timer == timeCycle/2)
+	{
+		horizontalSpeed = 0;
+		timer++;
+	}
+	else if (timer < timeCycle) {
+		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
+			horizontalSpeed += ACCELARATION;
+		}
+		else {
+			horizontalSpeed = MAX_HORIZONTAL_SPEED;
+		}
 		facingRight = 1;
+		timer++;
 	}
 	else {
+		horizontalSpeed = 0;
 		timer = 0;
 	}
 
@@ -75,7 +92,6 @@ void Enemy::movementFREE()
 	if (followingPlayer) {
 		state = FOLLOWING;
 	}
-	else state = PATROLLING;
 }
 
 Player* Enemy::searchPlayer() {
@@ -148,7 +164,7 @@ Player* Enemy::searchPlayer() {
 		vertice->setSize(sf::Vector2f(5, 5));
 		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
-		nivel->addDrawable(vertice);*/
+		nivel->addDrawable(vertice);
 	}
 	return NULL;
 }
@@ -210,5 +226,5 @@ void Enemy::movementFOLLOWING() {
 	}
 }
 
-const int Enemy::MAX_HORIZONTAL_SPEED(8);
+const int Enemy::MAX_HORIZONTAL_SPEED(6);
 const int Enemy::ACCELARATION(2);
