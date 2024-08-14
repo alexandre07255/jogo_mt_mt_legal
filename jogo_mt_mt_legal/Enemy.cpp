@@ -10,6 +10,7 @@ Enemy::Enemy() :Alive(false, 10) {
 	setPosition(sf::Vector2f(10, 10));
 	setSize(sf::Vector2f(100, 100));
 	sightSize = 750;
+	followingPlayer = NULL;
 }
 
 void Enemy::movement() {
@@ -17,7 +18,7 @@ void Enemy::movement() {
 	
 	switch (state)
 	{
-	case FREE:
+	case PATROLLING:
 		movementFREE();
 	case HITSTUN:
 		movementHITSTUN();
@@ -53,12 +54,15 @@ void Enemy::movementFREE()
 
 	move(vetorDesloc);
 
-	if (searchPlayer()) {
-		std::cout << "achei o player conforme instruido" << endl;
+	followingPlayer = searchPlayer();
+
+	if (followingPlayer) {
+		state = FOLLOWING;
 	}
+	else state = PATROLLING;
 }
 
-const bool Enemy::searchPlayer() {
+Player* Enemy::searchPlayer() {
 	CollisionManager* instance = CollisionManager::getInstance();
 	Level* nivel = Level::getActive();
 
@@ -95,7 +99,7 @@ const bool Enemy::searchPlayer() {
 			for (list<Alive*>::iterator it = alive->begin();it != alive->end();it++) {
 				if (ret.intersects((*it)->getGlobalBounds()) && (*it)->getIsAlly()) {
 					std::cout << "player achado" << endl;
-					return true;
+					return (Player*)*it;
 				}
 			}
 
@@ -116,7 +120,7 @@ const bool Enemy::searchPlayer() {
 
 		//nivel->addDrawable(vertice);
 	}
-	return false;
+	return NULL;
 }
 void Enemy::movementHITSTUN()
 {
