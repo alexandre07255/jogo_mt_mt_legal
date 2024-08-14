@@ -13,9 +13,9 @@ private:
 	static const int JUMP_STRENGTH;
 	static const int MAX_ATTACK_BUFFER;
 
-	const int ATTACK1_STARTUP;
-	const int ATTACK2_STARTUP;
-	const int ATTACK3_STARTUP;
+	const int attackStartup[3];
+	const int attackHitboxDuration[3];
+	const int attackEndLag[3];
 
 	bool player2;
 	int jumpBuffer;
@@ -28,6 +28,7 @@ public:
 	void movement();
 	void movementFREE();
 	void movementATKCANCEL();
+	void movementATTACK();
 	void attack();
 };
 
