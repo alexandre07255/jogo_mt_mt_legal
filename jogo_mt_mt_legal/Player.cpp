@@ -4,6 +4,9 @@
 #include "AttackHitbox.h"
 #include "Level.h"
 
+#include <iostream>
+using namespace std;
+
 Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	Alive(1, MAX_HP),
 	jumpBuffer(0),
@@ -71,10 +74,10 @@ void Player::movement() {
 		hitbox->setHorKnockback(20);
 		hitbox->setVerKnockback(10);
 		hitbox->setDamage(1);
-		hitbox->setHitstun(1);
+		hitbox->setHitstun(10);
 	}
 
-
+	
 	move(vetorDesloc);
 
 	collisionInstance->testCollison(this);

@@ -7,6 +7,8 @@ private:
 public:
 	Enemy();
 	void movement();
+	void movementFREE();
+	void movementHITSTUN();
 	void raycasting();
 };
 

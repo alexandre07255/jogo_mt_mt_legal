@@ -50,7 +50,8 @@ void Level::update()
 	list<Updatable*>::iterator itCurrent = updatables->begin();
 	if (updatables->size() > 1)
 	{
-		list<Updatable*>::iterator itNext = itCurrent++;
+		list<Updatable*>::iterator itNext = itCurrent;
+		itNext++;
 		while (itNext != updatables->end())
 		{
 			(*itCurrent)->movement();
@@ -59,7 +60,7 @@ void Level::update()
 		}
 		(*itCurrent)->movement();
 	}
-	else
+	else if (updatables->size() == 1)
 		(*itCurrent)->movement();
 }
 

@@ -9,6 +9,20 @@ Enemy::Enemy() :Alive(false, 10) {
 
 void Enemy::movement() {
 	CollisionManager* instance = CollisionManager::getInstance();
+	
+	switch (state)
+	{
+	case Alive::FREE:
+		movementFREE();
+	case Alive::HITSTUN:
+		movementHITSTUN();
+	}
+
+	instance->testCollison(this);
+}
+
+void Enemy::movementFREE()
+{
 	int friccao = 1;
 
 	sf::Vector2f vetorDesloc(1, 1);
@@ -33,6 +47,18 @@ void Enemy::movement() {
 	vetorDesloc.y *= verticalSpeed;
 
 	move(vetorDesloc);
+}
 
-	instance->testCollison(this);
+void Enemy::movementHITSTUN()
+{
+	if (stun <= 0)
+	{
+		state = Alive::FREE;
+		setFillColor(sf::Color::White);
+	}
+	else
+	{
+		stun--;
+		setFillColor(sf::Color::Red);
+	}
 }
