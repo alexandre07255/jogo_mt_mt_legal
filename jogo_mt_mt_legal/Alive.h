@@ -15,7 +15,9 @@ public:
 		FREE,
 		ATTACK,
 		HITSTUN,
-		ATKCANCEL
+		ATKCANCEL,
+		PATROLLING, //usar apenas com inimigo
+		FOLLOWING //usar apenas com inimigo
 	};
 	void setState(const int st);
 	void setStun(const int st);
