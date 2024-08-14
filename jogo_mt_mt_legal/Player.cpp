@@ -11,61 +11,53 @@ Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	Alive(1, MAX_HP),
 	jumpBuffer(0),
 	player2(isPlayer2),
-	attackBuffer(0)
+	attackBuffer(0),
+	wasAttackPressed(0)
 {
 	
 }
 
 void Player::movement() {
-	
-	int friccao = 1;
-	sf::Vector2f vetorDesloc(1,1);
+
 	InputManager* inputInstance = InputManager::getInstance();
 	CollisionManager* collisionInstance = CollisionManager::getInstance();
 	
-	if (inputInstance->isRightPressed(player2)) {
-		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
-			horizontalSpeed += ACCELARATION;
-		}
-		else {
-			horizontalSpeed = MAX_HORIZONTAL_SPEED;
-		}
-	}
-	else if (inputInstance->isLeftPressed(player2)) {
-		if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
-			horizontalSpeed -= ACCELARATION;
-		}
-		else {
-			horizontalSpeed = -MAX_HORIZONTAL_SPEED;
-		}
-	}
-	//friccao
-	if (abs(horizontalSpeed) > friccao) {
-		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
+	//Attack input
+	if (inputInstance->isAttackPressed(player2))
+	{
+		if (!wasAttackPressed)
+			attackBuffer = MAX_ATTACK_BUFFER;
+		else if (attackBuffer > 0)
+			attackBuffer--;
+
+		wasAttackPressed = 1;
 	}
 	else
-		horizontalSpeed = 0;
+	{
+		if (attackBuffer > 0)
+			attackBuffer--;
 
+		wasAttackPressed = 0;
+	}
+
+	//Jump input
 	if (inputInstance->isUpPressed(player2))
 	{
 		jumpBuffer = MAX_JUMP_BUFFER;
 	}
-
-	if (!onAir && jumpBuffer)
-	{
-		verticalSpeed = -JUMP_STREGTH;
-		jumpBuffer = 0;
-		onAir = 1;
-	}
 	else if (jumpBuffer > 0)
 		jumpBuffer--;
 
-	verticalSpeed += 1;
+	switch (state)
+	{
+	case FREE:
+		movementFREE();
+	case ATKCANCEL:
+		movementATKCANCEL();
+	}
+	
 
-	vetorDesloc.x *= horizontalSpeed;
-
-	vetorDesloc.y *= verticalSpeed;
-
+	
 
 	if (inputInstance->isDownPressed(player2))
 	{
@@ -77,11 +69,65 @@ void Player::movement() {
 		hitbox->setHitstun(10);
 	}
 
-	
-	move(vetorDesloc);
-
 	collisionInstance->testCollison(this);
 }
+
+void Player::movementFREE()
+{
+	int friccao = 1;
+	sf::Vector2f vetorDesloc(1, 1);
+
+	InputManager* inputInstance = InputManager::getInstance();
+	//Movement input
+	if (inputInstance->isRightPressed(player2)) {
+		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
+			horizontalSpeed += ACCELARATION;
+		}
+		else {
+			horizontalSpeed = MAX_HORIZONTAL_SPEED;
+		}
+		facingRight = 1;
+	}
+	else if (inputInstance->isLeftPressed(player2)) {
+		if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
+			horizontalSpeed -= ACCELARATION;
+		}
+		else {
+			horizontalSpeed = -MAX_HORIZONTAL_SPEED;
+		}
+		facingRight = 0;
+	}
+
+	//friccao
+	if (abs(horizontalSpeed) > friccao) {
+		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
+	}
+	else
+		horizontalSpeed = 0;
+
+
+
+	if (!onAir && jumpBuffer)
+	{
+		verticalSpeed = -JUMP_STREGTH;
+		jumpBuffer = 0;
+		onAir = 1;
+	}
+
+	verticalSpeed += 1;
+
+	vetorDesloc.x *= horizontalSpeed;
+
+	vetorDesloc.y *= verticalSpeed;
+
+	move(vetorDesloc);
+}
+
+void Player::movementATKCANCEL()
+{
+
+}
+
 
 const int Player::MAX_JUMP_BUFFER(8);
 const int Player::JUMP_STREGTH(20);
