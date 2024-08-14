@@ -8,11 +8,14 @@ private:
 	int isWorth;
 	int sightSize;
 	Player* followingPlayer;
+	static const int MAX_HORIZONTAL_SPEED;
+	static const int ACCELARATION;
 public:
 	Enemy();
 	void movement();
 	void movementFREE();
 	void movementHITSTUN();
+	void movementFOLLOWING();
 	Player* searchPlayer();
 };
 

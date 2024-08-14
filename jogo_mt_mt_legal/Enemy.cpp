@@ -11,6 +11,7 @@ Enemy::Enemy() :Alive(false, 10) {
 	setSize(sf::Vector2f(100, 100));
 	sightSize = 750;
 	followingPlayer = NULL;
+	state = PATROLLING;
 }
 
 void Enemy::movement() {
@@ -24,6 +25,8 @@ void Enemy::movement() {
 	case HITSTUN:
 		movementHITSTUN();
 		break;
+	case FOLLOWING:
+		movementFOLLOWING();
 	}
 
 	instance->testCollison(this);
@@ -37,9 +40,11 @@ void Enemy::movementFREE()
 
 	if (getPosition().x >= 100) {
 		horizontalSpeed -= 1;
+		facingRight = 0;
 	}
 	else {
 		horizontalSpeed += 1;
+		facingRight = 1;
 	}
 
 	//friccao
@@ -116,11 +121,11 @@ Player* Enemy::searchPlayer() {
 			collidables->start();
 		}
 
-		//Collidable* vertice = new Collidable();
-		//vertice->setSize(sf::Vector2f(1, 1));
-		//vertice->setPosition(sf::Vector2f(xFinal, yFinal));
+		Collidable* vertice = new Collidable();
+		vertice->setSize(sf::Vector2f(1, 1));
+		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
-		//nivel->addDrawable(vertice);
+		nivel->addDrawable(vertice);
 	}
 	return NULL;
 }
@@ -128,7 +133,7 @@ void Enemy::movementHITSTUN()
 {
 	if (stun <= 0)
 	{
-		state = Alive::FREE;
+		state = Alive::PATROLLING;
 		setFillColor(sf::Color::White);
 	}
 	else
@@ -137,3 +142,44 @@ void Enemy::movementHITSTUN()
 		setFillColor(sf::Color::Red);
 	}
 }
+
+void Enemy::movementFOLLOWING() {
+	int friccao = 1;
+
+	sf::Vector2f vetorDesloc(1, 1);
+
+	if (followingPlayer->getPosition().x > getPosition().x) {
+		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
+			horizontalSpeed += ACCELARATION;
+		}
+		else {
+			horizontalSpeed = MAX_HORIZONTAL_SPEED;
+		}
+		facingRight = 1;
+	}
+	else {
+		if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
+			horizontalSpeed -= ACCELARATION;
+		}
+		else {
+			horizontalSpeed = -MAX_HORIZONTAL_SPEED;
+		}
+		facingRight = 0;
+	}
+
+	if (abs(horizontalSpeed) > friccao) {
+		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
+	}
+	else
+		horizontalSpeed = 0;
+
+	verticalSpeed += 1;
+
+	vetorDesloc.x *= horizontalSpeed;
+	vetorDesloc.y *= verticalSpeed;
+
+	move(vetorDesloc);
+}
+
+const int Enemy::MAX_HORIZONTAL_SPEED(8);
+const int Enemy::ACCELARATION(2);

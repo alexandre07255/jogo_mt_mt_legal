@@ -66,7 +66,7 @@ void InicializarCoisas(Level* level) {
     player2->setSize(sf::Vector2f(100, 100));
 
     inimigo = new Enemy;
-    inimigo->setPosition(0, 900);
+    inimigo->setPosition(200, 900);
 
     alives->push_back(player);
     alives->push_back(player2);
