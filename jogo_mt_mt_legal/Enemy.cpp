@@ -8,7 +8,7 @@ Enemy::Enemy() :Alive(false, 10) {
 	isWorth = 0;
 	setPosition(sf::Vector2f(10, 10));
 	setSize(sf::Vector2f(100, 100));
-	sightSize = 10;
+	sightSize = 750;
 }
 
 void Enemy::movement() {
@@ -51,9 +51,8 @@ void Enemy::movementFREE()
 	vetorDesloc.y *= verticalSpeed;
 
 	move(vetorDesloc);
-}
+
 	raycasting();
-	instance->testCollison(this);
 }
 
 void Enemy::raycasting() {
@@ -61,19 +60,20 @@ void Enemy::raycasting() {
 	Level* nivel = Level::getActive();
 
 	const double PI = 3.1415;
-	const double rayStep = 0.1;
+	const double rayStep = 50;
 	EntityList* collidables = instance->getCollidables();
+	list<Alive*>* alive = instance->getAliveList();
 	int flag = 1;
 
 	sf::Vector2f rayPos;
 
 	double xCenter = getPosition().x + getSize().x / 2;
-	double yCenter = getPosition().y + getSize().y / 2;
+	double yCenter = getPosition().y + getSize().y;
 	
 	double yFinal;
 	double xFinal;
 
-	for (double i = 0;i < 2 * PI;i += 0.01) {
+	for (double i = 3*PI/2;i <  2*PI ;i += 0.1) {
 		//fazer 360 graus
 		flag = 1;
 		for (double j = rayStep;j <= sightSize && flag;j += rayStep) {
@@ -83,12 +83,13 @@ void Enemy::raycasting() {
 
 			//cria um rect infinitesimal e testa pra ver se colide com algo
 			sf::FloatRect ret;
-			ret.height = 0.01;
-			ret.width = 0.01;
+			ret.height = 1;
+			ret.width = 1;
 
 			ret.left = xFinal;
 			ret.top = yFinal;
 
+			collidables->start();
 			for (int k = 0;k < collidables->getSize();k++) {
 				Entity* current = collidables->getCurrent();
 				if (ret.intersects(current->getGlobalBounds())) {
@@ -100,8 +101,8 @@ void Enemy::raycasting() {
 		}
 
 		Collidable* vertice = new Collidable();
-		vertice->setSize(sf::Vector2f(1, 1));
-		vertice->setPosition(sf::Vector2f(xCenter, yCenter));
+		vertice->setSize(sf::Vector2f(5, 5));
+		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
 		nivel->addDrawable(vertice);
 	}

@@ -26,24 +26,30 @@ void InicializarCoisas(Level* level) {
 
     Player* player;
     Player* player2;
-    Collidable* plataforma, * parede;
+    Collidable* plataforma, * parede, * teto;
     EntityList* colisionaveis;
     Enemy* inimigo;
 
     colisionaveis = new EntityList;
     plataforma = new Collidable;
     parede = new Collidable;
+    teto = new Collidable;
 
     colisionaveis->pushBack(plataforma);
     colisionaveis->pushBack(parede);
+    colisionaveis->pushBack(teto);
 
-    plataforma->setPosition(sf::Vector2f(0, 500));
+    plataforma->setPosition(sf::Vector2f(0, 1000));
     plataforma->setFillColor(sf::Color::Red);
     plataforma->setSize(sf::Vector2f(3000, 100));
 
-    parede->setPosition(sf::Vector2f(1000, 0));
+    parede->setPosition(sf::Vector2f(300, 500));
     parede->setFillColor(sf::Color::Green);
-    parede->setSize(sf::Vector2f(100, 1000));
+    parede->setSize(sf::Vector2f(100, 300));
+
+    teto->setPosition(sf::Vector2f(0,400));
+    teto->setFillColor(sf::Color::Blue);
+    teto->setSize(sf::Vector2f(1000, 100));
 
     gerenciadorColisao->setCollidables(colisionaveis);
 
@@ -60,6 +66,7 @@ void InicializarCoisas(Level* level) {
     player2->setSize(sf::Vector2f(100, 100));
 
     inimigo = new Enemy;
+    inimigo->setPosition(0, 900);
 
     alives->push_back(player);
     alives->push_back(player2);
@@ -77,6 +84,7 @@ void InicializarCoisas(Level* level) {
     drawables->pushBack(parede);
     drawables->pushBack(plataforma);
     drawables->pushBack(inimigo);
+    drawables->pushBack(teto);
 
 
     level->setUpdatables(updatables);

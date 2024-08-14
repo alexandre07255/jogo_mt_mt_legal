@@ -135,3 +135,7 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 EntityList* CollisionManager::getCollidables() {
 	return collidables;
 }
+
+list<Alive*>* CollisionManager::getAliveList() {
+	return aliveList;
+}

@@ -18,5 +18,6 @@ public:
 	void setAliveList(list<Alive*>* Alist);
 	void testHit(const bool target, Hitbox* hitbox);
 	EntityList* getCollidables();
+	list<Alive*>* getAliveList();
 };
 
