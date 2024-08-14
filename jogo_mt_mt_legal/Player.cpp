@@ -12,7 +12,9 @@ Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	jumpBuffer(0),
 	player2(isPlayer2),
 	attackBuffer(0),
-	wasAttackPressed(0)
+	wasAttackPressed(0),
+	friction(1),
+	attackCounter(0)
 {
 	
 }
@@ -52,21 +54,16 @@ void Player::movement() {
 	{
 	case FREE:
 		movementFREE();
+		break;
 	case ATKCANCEL:
 		movementATKCANCEL();
+		break;
 	}
-	
-
 	
 
 	if (inputInstance->isDownPressed(player2))
 	{
-		AttackHitbox* hitbox = new AttackHitbox(0, this, this,
-												sf::Vector2f(0, 0), 10, sf::Vector2f(100, 100));
-		hitbox->setHorKnockback(20);
-		hitbox->setVerKnockback(10);
-		hitbox->setDamage(1);
-		hitbox->setHitstun(10);
+		
 	}
 
 	collisionInstance->testCollison(this);
@@ -74,9 +71,8 @@ void Player::movement() {
 
 void Player::movementFREE()
 {
-	int friccao = 1;
 	sf::Vector2f vetorDesloc(1, 1);
-
+	
 	InputManager* inputInstance = InputManager::getInstance();
 	//Movement input
 	if (inputInstance->isRightPressed(player2)) {
@@ -98,9 +94,9 @@ void Player::movementFREE()
 		facingRight = 0;
 	}
 
-	//friccao
-	if (abs(horizontalSpeed) > friccao) {
-		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
+	//friction
+	if (abs(horizontalSpeed) > friction) {
+		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friction;
 	}
 	else
 		horizontalSpeed = 0;
@@ -114,6 +110,21 @@ void Player::movementFREE()
 		onAir = 1;
 	}
 
+	if (attackBuffer)
+	{
+		attackCounter = 0;
+
+		if (facingRight)
+		{
+			AttackHitbox* hitbox = new AttackHitbox(0, this, this,
+				sf::Vector2f(0, 0), 10, sf::Vector2f(100, 100));
+			hitbox->setHorKnockback(20);
+			hitbox->setVerKnockback(10);
+			hitbox->setDamage(1);
+			hitbox->setHitstun(10);
+		}
+	}
+
 	verticalSpeed += 1;
 
 	vetorDesloc.x *= horizontalSpeed;
@@ -125,7 +136,24 @@ void Player::movementFREE()
 
 void Player::movementATKCANCEL()
 {
+	if (attackBuffer)
+	{
+		switch (attackCounter)
+		{
+		case 1:
 
+			break;
+		case 2:
+
+			break;
+		}
+		AttackHitbox* hitbox = new AttackHitbox(0, this, this,
+			sf::Vector2f(0, 0), 10, sf::Vector2f(100, 100));
+		hitbox->setHorKnockback(20);
+		hitbox->setVerKnockback(10);
+		hitbox->setDamage(1);
+		hitbox->setHitstun(10);
+	}
 }
 
 

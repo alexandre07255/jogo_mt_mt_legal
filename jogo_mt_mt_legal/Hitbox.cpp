@@ -2,13 +2,12 @@
 #include "Level.h"
 
 Hitbox::Hitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, const int dur, sf::Vector2f _size):
-	target(tar),
-	owner(own),
-	boundedTo(boundTo),
-	relativePosition(rel),
-	duration(dur)
+	target(0),
+	owner(NULL),
+	boundedTo(NULL),
+	relativePosition(),
+	duration(0)
 {
-	setSize(_size);
 	if (own != NULL)
 	{
 		setPosition(boundTo->getPosition());
@@ -18,3 +17,5 @@ Hitbox::Hitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, co
 	Level* activeInstance = Level::getActive();
 	activeInstance->addUpdatable(this);
 }
+
+setSize(_size);

@@ -20,8 +20,10 @@ void Enemy::movement() {
 	{
 	case PATROLLING:
 		movementFREE();
+		break;
 	case HITSTUN:
 		movementHITSTUN();
+		break;
 	}
 
 	instance->testCollison(this);
