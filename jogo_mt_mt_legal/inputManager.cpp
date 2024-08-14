@@ -60,9 +60,9 @@ const bool InputManager::isLeftPressed(bool player2)
 const bool InputManager::isAttackPressed(bool player2)
 {
 	if (player2)
-		return keyboard->isKeyPressed(sf::Keyboard::Key::LControl);
+		return keyboard->isKeyPressed(sf::Keyboard::Key::L);
 
-	return mouse->isButtonPressed(sf::Mouse::Left);
+	return keyboard->isKeyPressed(sf::Keyboard::Key::LShift);
 }
 
 const bool InputManager::isPausePressed() {

@@ -10,7 +10,12 @@ protected:
 	sf::Vector2f relativePosition;
 	int duration;
 public:
-	Hitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, const int dur, sf::Vector2f _size);
+	Hitbox();
+	void setTarget(const bool tar);
+	void setOwner(Alive* own);
+	void setBoundedTo(Entity* boundTo);
+	void setRelativePosition(sf::Vector2f rel);
+	void setDuration(const int dur);
 	virtual void hitSolution(Alive* hit) = 0;
 };
 

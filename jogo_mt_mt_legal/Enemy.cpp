@@ -19,8 +19,10 @@ void Enemy::movement() {
 	{
 	case FREE:
 		movementFREE();
+		break;
 	case HITSTUN:
 		movementHITSTUN();
+		break;
 	}
 
 	instance->testCollison(this);
