@@ -3,8 +3,8 @@
 #include <iostream>
 using namespace std;
 
-AttackHitbox::AttackHitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, const int dur, sf::Vector2f _size) :
-	Hitbox(tar, own, boundTo, rel, dur, _size),
+AttackHitbox::AttackHitbox() :
+	Hitbox(),
 	horKnockback(-1),
 	verKnockback(-1),
 	damage(-1),

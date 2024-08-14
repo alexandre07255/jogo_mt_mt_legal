@@ -15,8 +15,7 @@ private:
 	bool hasHit;
 	const bool hasAlreadyHit(Alive* pA);
 public:
-	AttackHitbox(const bool tar, Alive* own, Entity* boundTo,
-		         sf::Vector2f rel, const int dur, sf::Vector2f _size);
+	AttackHitbox();
 	void setHorKnockback(const int horKnock);
 	void setVerKnockback(const int verKnock);
 	void setDamage(const int dmg);

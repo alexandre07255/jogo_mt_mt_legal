@@ -8,14 +8,31 @@ Hitbox::Hitbox(const bool tar, Alive* own, Entity* boundTo, sf::Vector2f rel, co
 	relativePosition(),
 	duration(0)
 {
-	if (own != NULL)
-	{
-		setPosition(boundTo->getPosition());
-		move(rel);
-	}
-
 	Level* activeInstance = Level::getActive();
 	activeInstance->addUpdatable(this);
 }
 
-setSize(_size);
+void Hitbox::setTarget(const bool tar)
+{
+	target = tar;
+}
+
+void Hitbox::setOwner(Alive* own)
+{
+	owner = own;
+}
+
+void Hitbox::setBoundedTo(Entity* boundTo)
+{
+	boundedTo = boundTo;
+}
+
+void Hitbox::setRelativePosition(sf::Vector2f rel)
+{
+	relativePosition = rel;
+}
+
+void Hitbox::setDuration(const int dur)
+{
+	duration = dur;
+}

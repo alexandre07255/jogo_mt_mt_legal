@@ -114,15 +114,30 @@ void Player::movementFREE()
 	{
 		attackCounter = 0;
 
+		
+		AttackHitbox* hitbox = new AttackHitbox();
+
+		hitbox->setSize(sf::Vector2f(50, 100));
+		hitbox->setTarget(0);
+		hitbox->setOwner(this);
+		hitbox->setBoundedTo(this);
+		hitbox->setDuration(10);
+		hitbox->setVerKnockback(10);
+		hitbox->setDamage(1);
+		hitbox->setHitstun(10);
+		int horKnock = 5;
 		if (facingRight)
 		{
-			AttackHitbox* hitbox = new AttackHitbox(0, this, this,
-				sf::Vector2f(0, 0), 10, sf::Vector2f(100, 100));
-			hitbox->setHorKnockback(20);
-			hitbox->setVerKnockback(10);
-			hitbox->setDamage(1);
-			hitbox->setHitstun(10);
+			hitbox->setRelativePosition(sf::Vector2f(getSize().x, 0));
+			hitbox->setHorKnockback(horKnock);
 		}
+		else
+		{
+			int relX = hitbox->getSize().x;
+			hitbox->setRelativePosition(sf::Vector2f(-relX, 0));
+			hitbox->setHorKnockback(-horKnock);
+		}
+		
 	}
 
 	verticalSpeed += 1;
@@ -136,24 +151,24 @@ void Player::movementFREE()
 
 void Player::movementATKCANCEL()
 {
-	if (attackBuffer)
+	if (stun > 0)
 	{
-		switch (attackCounter)
+		if (attackBuffer)
 		{
-		case 1:
+			switch (attackCounter)
+			{
+			case 1:
 
-			break;
-		case 2:
+				break;
+			case 2:
 
-			break;
+				break;
+			}
 		}
-		AttackHitbox* hitbox = new AttackHitbox(0, this, this,
-			sf::Vector2f(0, 0), 10, sf::Vector2f(100, 100));
-		hitbox->setHorKnockback(20);
-		hitbox->setVerKnockback(10);
-		hitbox->setDamage(1);
-		hitbox->setHitstun(10);
+		stun--;
 	}
+	else
+		state = FREE;
 }
 
 
