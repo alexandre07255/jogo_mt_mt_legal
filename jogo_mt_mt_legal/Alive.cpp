@@ -4,7 +4,8 @@ Alive::Alive(const bool ally, const int health):
 	isAlly(ally),
 	hp(health),
 	stun(0),
-	state(FREE)
+	state(FREE),
+	facingRight(1)
 {
 
 }

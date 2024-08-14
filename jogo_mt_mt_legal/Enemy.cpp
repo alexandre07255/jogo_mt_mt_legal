@@ -17,9 +17,9 @@ void Enemy::movement() {
 	
 	switch (state)
 	{
-	case Alive::FREE:
+	case FREE:
 		movementFREE();
-	case Alive::HITSTUN:
+	case HITSTUN:
 		movementHITSTUN();
 	}
 

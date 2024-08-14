@@ -7,6 +7,7 @@ protected:
 	bool isAlly;
 	int state;
 	int stun;
+	bool facingRight;
 public:
 	Alive(const bool ally, const int health);
 	enum States

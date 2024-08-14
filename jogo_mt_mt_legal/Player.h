@@ -16,8 +16,11 @@ private:
 	bool player2;
 	int jumpBuffer;
 	int attackBuffer;
+	bool wasAttackPressed;
 public:
 	Player(const bool isPlayer2, const bool ally, const int health);
 	void movement();
+	void movementFREE();
+	void movementATKCANCEL();
 };
 
