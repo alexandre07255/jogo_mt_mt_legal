@@ -3,6 +3,7 @@
 #include <math.h>
 #include "Level.h"
 #include "Collidable.h"
+#include <iostream>
 
 Enemy::Enemy() :Alive(false, 10) {
 	isWorth = 0;
@@ -52,10 +53,12 @@ void Enemy::movementFREE()
 
 	move(vetorDesloc);
 
-	raycasting();
+	if (searchPlayer()) {
+		std::cout << "achei o player conforme instruido" << endl;
+	}
 }
 
-void Enemy::raycasting() {
+const bool Enemy::searchPlayer() {
 	CollisionManager* instance = CollisionManager::getInstance();
 	Level* nivel = Level::getActive();
 
@@ -89,6 +92,13 @@ void Enemy::raycasting() {
 			ret.left = xFinal;
 			ret.top = yFinal;
 
+			for (list<Alive*>::iterator it = alive->begin();it != alive->end();it++) {
+				if (ret.intersects((*it)->getGlobalBounds()) && (*it)->getIsAlly()) {
+					std::cout << "player achado" << endl;
+					return true;
+				}
+			}
+
 			collidables->start();
 			for (int k = 0;k < collidables->getSize();k++) {
 				Entity* current = collidables->getCurrent();
@@ -100,13 +110,13 @@ void Enemy::raycasting() {
 			collidables->start();
 		}
 
-		Collidable* vertice = new Collidable();
-		vertice->setSize(sf::Vector2f(5, 5));
-		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
+		//Collidable* vertice = new Collidable();
+		//vertice->setSize(sf::Vector2f(1, 1));
+		//vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
-		nivel->addDrawable(vertice);
+		//nivel->addDrawable(vertice);
 	}
-	
+	return false;
 }
 void Enemy::movementHITSTUN()
 {

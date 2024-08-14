@@ -10,6 +10,6 @@ public:
 	void movement();
 	void movementFREE();
 	void movementHITSTUN();
-	void raycasting();
+	const bool searchPlayer();
 };
 
