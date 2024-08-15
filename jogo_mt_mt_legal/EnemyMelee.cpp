@@ -59,6 +59,10 @@ void EnemyMelee::movementPATROLLING() {
 
     verticalSpeed += 1;
 
+    if (checkOnLedge()) {
+        horizontalSpeed = 0;
+    }
+
     vetorDesloc.x *= horizontalSpeed;
     vetorDesloc.y *= verticalSpeed;
 
@@ -147,3 +151,35 @@ void EnemyMelee::movementFOLLOWING() {
 }
 
 const int EnemyMelee::JUMP_STRENGTH(15);
+
+const bool EnemyMelee::checkOnLedge() {
+    CollisionManager* instance = CollisionManager::getInstance();
+    EntityList* collidables = instance->getCollidables();
+
+    sf::FloatRect ret;
+
+    ret.width = 1;
+    ret.height = 1;
+
+    ret.top = getPosition().y + getSize().y + 1;
+
+    if (facingRight){
+        ret.left = getPosition().x + getSize().x;
+    }
+    else {
+        ret.left = getPosition().x;
+    }
+
+    collidables->start();
+    for (int k = 0;k < collidables->getSize();k++) {
+        Entity* current = collidables->getCurrent();
+        if (ret.intersects(current->getGlobalBounds())) {
+            return false;
+        }
+        collidables->next();
+    }
+    collidables->start();
+
+    return true;
+
+}

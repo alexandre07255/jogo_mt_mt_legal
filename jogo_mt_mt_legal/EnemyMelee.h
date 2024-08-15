@@ -14,5 +14,6 @@ public:
 	void movement();
 	void movementFOLLOWING();
 	void movementPATROLLING();
+	const bool checkOnLedge();
 };
 
