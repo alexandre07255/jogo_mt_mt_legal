@@ -10,7 +10,7 @@ private:
 	static const int MAX_VERTICAL_SPEED;
 	static const int ACCELARATION;
 	static const int MAX_JUMP_BUFFER;
-	static const int JUMP_STREGTH;
+	static const int JUMP_STRENGTH;
 	static const int MAX_ATTACK_BUFFER;
 
 	const int attackStartup[3];

@@ -4,7 +4,7 @@
 
 class Enemy : public Alive
 {
-private:
+protected:
 	int isWorth;
 	int sightSize;
 	int timer;
@@ -13,10 +13,10 @@ private:
 	static const int ACCELARATION;
 public:
 	Enemy();
-	void movement();
-	void movementPATROLLING();
+	virtual void movement();
+	virtual void movementPATROLLING();
 	void movementHITSTUN();
-	void movementFOLLOWING();
+	virtual void movementFOLLOWING();
 	Player* searchPlayer();
 };
 
