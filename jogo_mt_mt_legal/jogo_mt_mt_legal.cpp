@@ -103,9 +103,9 @@ int main()
     sf::RenderWindow* window = gerenciadorGrafico->getWindow();   
     Level* level;
 
-    level = new Level;
+    level = new Level(false,Level::LEVEL_1);
 
-    InicializarCoisas(level);
+    //InicializarCoisas(level);
 
     window->setFramerateLimit(60);
     //window->setVerticalSyncEnabled(true);

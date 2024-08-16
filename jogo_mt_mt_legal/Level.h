@@ -8,8 +8,10 @@ private:
 	static Level* active; //So that other objects can call methods and modify the updatables and drawables lists
 	EntityList* drawables;
 	list<Updatable*>* updatables; //Colocar aliveList e collidables aqui também
+	list<Collidable*>* collidables;
+	list<Alive*>* aliveList;
 public:
-	Level();
+	Level(bool isPlayer2, int activeCase);
 	~Level();
 	static Level* getActive();
 	static void setActive(Level* pL);
@@ -21,5 +23,15 @@ public:
 	void draw(sf::RenderWindow* window);
 	void update ();
 	void addDrawable(Entity* pD);
+
+	void loadLevel1(bool isPlayer2);
+	void loadLevel2(bool isPlayer2);
+	void loadMenu();
+
+	enum active {
+		LEVEL_1,
+		LEVEL_2,
+		MENU
+	};
 };
 
