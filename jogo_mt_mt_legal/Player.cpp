@@ -142,6 +142,7 @@ void Player::movementATKCANCEL()
 {
 	if (stun > 0)
 	{
+		horizontalSpeed = 0;
 		setFillColor(sf::Color::Green);
 		if (attackBuffer)
 		{
@@ -174,6 +175,7 @@ void Player::movementATTACK()
 	}
 	else
 		state = FREE;
+	move(sf::Vector2f(horizontalSpeed*0.15, (++verticalSpeed)*0.85));
 }
 
 void Player::attack()

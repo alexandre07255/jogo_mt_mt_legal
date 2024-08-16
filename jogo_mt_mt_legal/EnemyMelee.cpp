@@ -59,7 +59,7 @@ void EnemyMelee::movementPATROLLING() {
 
     verticalSpeed += 1;
 
-    if (checkOnLedge()) {
+    if (!onAir && checkOnLedge()) {
         horizontalSpeed = 0;
     }
 
@@ -119,7 +119,7 @@ void EnemyMelee::movementFOLLOWING() {
         facingRight = 0;
     }
 
-    if (followingPlayer->getPosition().y > getPosition().y) {
+    if (followingPlayer->getPosition().y < getPosition().y) {
         if (!onAir)
         {
             verticalSpeed = -JUMP_STRENGTH;
