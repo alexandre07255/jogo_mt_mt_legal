@@ -6,8 +6,13 @@
 
 Level* Level::active(NULL);
 
-Level::Level(bool isPlayer2, int activeCase): drawables(), updatables()
+Level::Level(bool isPlayer2, int activeCase): drawables(NULL), updatables(NULL),aliveList(NULL),collidables(NULL)
 {
+    drawables = new list<MyDrawable*>;
+    updatables = new list<Updatable*>;
+    aliveList = new list<Alive*>;
+    collidables = new list<Collidable*>;
+
     switch (activeCase) {
     case LEVEL_1:
         loadLevel1(isPlayer2);
@@ -98,7 +103,7 @@ void Level::addUpdatable(Updatable* pU)
 }
 
 void Level::addDrawable(Entity* pD) {
-	drawables->pushBack(pD);
+	drawables->push_back(pD);
 }
 
 void Level::loadLevel1(bool isPlayer2) {
@@ -110,27 +115,14 @@ void Level::loadLevel1(bool isPlayer2) {
     view = new Camera(window);
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
 
-    //list<Updatable*>* updatables;
-    //EntityList* drawables;
-    //list<Alive*>* alives;
-    //updatables = new list<Updatable*>;
-    //drawables = new EntityList;
-    //alives = new list<Alive*>;
-
     Player* player;
-    Player* player2;
+    Player* player2 = NULL;
     Collidable* plataforma, * parede, * teto;
-    //EntityList* colisionaveis;
     EnemyMelee* inimigo;
 
-    //colisionaveis = new EntityList;
     plataforma = new Collidable;
     parede = new Collidable;
     teto = new Collidable;
-
-    collidables->push_back(plataforma);
-    collidables->push_back(parede);
-    collidables->push_back(teto);
 
     plataforma->setPosition(sf::Vector2f(0, 1000));
     plataforma->setFillColor(sf::Color::Red);
@@ -143,6 +135,10 @@ void Level::loadLevel1(bool isPlayer2) {
     teto->setPosition(sf::Vector2f(0, 400));
     teto->setFillColor(sf::Color::Blue);
     teto->setSize(sf::Vector2f(1000, 100));
+
+    collidables->push_back(plataforma);
+    collidables->push_back(parede);
+    collidables->push_back(teto);
 
     gerenciadorColisao->setCollidables(collidables);
 
@@ -177,17 +173,25 @@ void Level::loadLevel1(bool isPlayer2) {
     updatables->push_back(view);
     updatables->push_back(inimigo);
 
-    drawables->pushBack(player);
+    drawables->push_back(player);
     if (isPlayer2)
-        drawables->pushBack(player2);
-    drawables->pushBack(parede);
-    drawables->pushBack(plataforma);
-    drawables->pushBack(inimigo);
-    drawables->pushBack(teto);
+        drawables->push_back(player2);
+    drawables->push_back(parede);
+    drawables->push_back(plataforma);
+    drawables->push_back(inimigo);
+    drawables->push_back(teto);
 
     Level::setActive(this);
 
     view->setPlayer1(player);
     if (isPlayer2)
         view->setPlayer2(player2);
+}
+
+void Level::loadLevel2(bool isPlayer2) {
+
+}
+
+void Level::loadMenu() {
+
 }

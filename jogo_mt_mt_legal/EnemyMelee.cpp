@@ -154,7 +154,7 @@ const int EnemyMelee::JUMP_STRENGTH(15);
 
 const bool EnemyMelee::checkOnLedge() {
     CollisionManager* instance = CollisionManager::getInstance();
-    EntityList* collidables = instance->getCollidables();
+    list<Collidable*>* collidables = instance->getCollidables();
 
     sf::FloatRect ret;
 
@@ -170,15 +170,10 @@ const bool EnemyMelee::checkOnLedge() {
         ret.left = getPosition().x;
     }
 
-    collidables->start();
-    for (int k = 0;k < collidables->getSize();k++) {
-        Entity* current = collidables->getCurrent();
-        if (ret.intersects(current->getGlobalBounds())) {
+    for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()); it++) {
+        if (ret.intersects((*it)->getGlobalBounds()))
             return false;
-        }
-        collidables->next();
     }
-    collidables->start();
 
     return true;
 

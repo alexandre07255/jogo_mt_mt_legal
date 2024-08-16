@@ -11,92 +11,6 @@
 #include "Enemy.h"
 #include "EnemyMelee.h"
 
-void InicializarCoisas(Level* level) {
-    Graphics* instance = Graphics::getInstance();
-    sf::RenderWindow* window = instance->getWindow();
-    Camera* view;
-    view = new Camera(window);
-    CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
-
-    list<Updatable*>* updatables;
-    list<MyDrawable*>* drawables;
-    list<Alive*>* alives;
-    updatables = new list<Updatable*>;
-    drawables = new list<MyDrawable*>;
-    alives = new list<Alive*>;
-
-    Player* player;
-    //Player* player2;
-    Collidable* plataforma, * parede, * teto;
-    list<Collidable*>* colisionaveis;
-    Enemy* inimigo;
-
-    colisionaveis = new list<Collidable*>;
-    plataforma = new Collidable;
-    parede = new Collidable;
-    teto = new Collidable;
-
-    colisionaveis->push_back(plataforma);
-    colisionaveis->push_back(parede);
-    colisionaveis->push_back(teto);
-
-    plataforma->setPosition(sf::Vector2f(0, 1000));
-    plataforma->setFillColor(sf::Color::Red);
-    plataforma->setSize(sf::Vector2f(3000, 100));
-
-    parede->setPosition(sf::Vector2f(300, 500));
-    parede->setFillColor(sf::Color::Green);
-    parede->setSize(sf::Vector2f(100, 300));
-
-    teto->setPosition(sf::Vector2f(0,400));
-    teto->setFillColor(sf::Color::Blue);
-    teto->setSize(sf::Vector2f(1000, 100));
-
-    gerenciadorColisao->setCollidables(colisionaveis);
-
-    player = new Player(0,1,10);
-    player->setFillColor(sf::Color::Cyan);
-    player->setSize(sf::Vector2f(1, 1));
-    player->setOrigin(sf::Vector2f(0, 0));
-    player->setSize(sf::Vector2f(100, 100));
-
-    //player2 = new Player(1,1,10);
-    //player2->setFillColor(sf::Color::Magenta);
-    //player2->setSize(sf::Vector2f(1, 1));
-    //player2->setOrigin(sf::Vector2f(0, 0));
-    //player2->setSize(sf::Vector2f(100, 100));
-
-    inimigo = new EnemyMelee;
-    inimigo->setPosition(1000, 900);
-
-    alives->push_back(player);
-    //alives->push_back(player2);
-    alives->push_back(inimigo);
-
-    gerenciadorColisao->setAliveList(alives);
-
-    updatables->push_back(player);
-    //updatables->push_back(player2);
-    updatables->push_back(view);
-    updatables->push_back(inimigo);
-
-    drawables->push_back(player);
-    drawables->push_back(player2);
-    drawables->push_back(parede);
-    drawables->push_back(plataforma);
-    drawables->push_back(inimigo);
-    drawables->push_back(teto);
-
-
-    level->setUpdatables(updatables);
-    level->setDrawables(drawables);
-
-    Level::setActive(level);
-
-    view->setPlayer1(player);
-    //view->setPlayer2(player2);
-}
-
 int main()
 {   
     Graphics* gerenciadorGrafico = Graphics::getInstance();
@@ -104,8 +18,6 @@ int main()
     Level* level;
 
     level = new Level(false,Level::LEVEL_1);
-
-    //InicializarCoisas(level);
 
     window->setFramerateLimit(60);
     //window->setVerticalSyncEnabled(true);
