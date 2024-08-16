@@ -5,7 +5,8 @@ using namespace std;
 CollisionManager* CollisionManager::instance(NULL);
 
 CollisionManager::CollisionManager():
-	collidables(NULL)
+	collidables(NULL),
+	aliveList(NULL)
 {
 
 }
@@ -32,13 +33,12 @@ void CollisionManager::testCollison(Entity* pE)
 
 	int x, y;
 
-	int size = collidables->getSize();
-	collidables->start();
+	int size = collidables->size();
+	list<Collidable*>::iterator it = collidables->begin();
 
 	int directionX = 0;
 	int directionY = 0;
 
-	Entity* current = NULL;
 	targetBounds = pE->getGlobalBounds();
 
 	bool collided = 0;
@@ -46,8 +46,7 @@ void CollisionManager::testCollison(Entity* pE)
 	for (int i = 0; i < size; i++)
 	{
 		//cu
-		current = collidables->getCurrent();
-		collidableBounds = current->getGlobalBounds();
+		collidableBounds = (*it)->getGlobalBounds();
 
 		if (isColliding(collidableBounds,targetBounds)) {
 			collided = 1;
@@ -88,13 +87,13 @@ void CollisionManager::testCollison(Entity* pE)
 			targetBounds = pE->getGlobalBounds();
 
 		}
-		collidables->next();
+		it++;
 	}
 	if (!collided || !collidedDown)
 		pE->setOnAir(1);
 }
 
-void CollisionManager::setCollidables(EntityList* pC)
+void CollisionManager::setCollidables(list<Collidable*>* pC)
 {
 	collidables = pC;
 }
@@ -132,7 +131,7 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 	}
 }
 
-EntityList* CollisionManager::getCollidables() {
+list<Collidable*>* CollisionManager::getCollidables() {
 	return collidables;
 }
 

@@ -19,8 +19,10 @@ private:
 
 	bool player2;
 	int jumpBuffer;
+	bool isStillJumping;
 	int attackBuffer;
 	int attackCounter;
+	bool hasAttacked;
 	bool wasAttackPressed;
 	int friction;
 public:

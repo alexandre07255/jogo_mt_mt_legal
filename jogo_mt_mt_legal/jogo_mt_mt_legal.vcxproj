@@ -140,7 +140,6 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMelee.cpp" />
-    <ClCompile Include="EntityList.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -159,7 +158,6 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMelee.h" />
-    <ClInclude Include="EntityList.h" />
     <ClInclude Include="graphics.h" />
     <ClInclude Include="Hitbox.h" />
     <ClInclude Include="InputManager.h" />
