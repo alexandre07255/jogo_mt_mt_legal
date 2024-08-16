@@ -100,7 +100,7 @@ Player* Enemy::searchPlayer() {
 
 	const double PI = 3.1415;
 	const double rayStep = 50;
-	EntityList* collidables = instance->getCollidables();
+	list<Collidable*>* collidables = instance->getCollidables();
 	list<Alive*>* alive = instance->getAliveList();
 	int flag = 1;
 
@@ -149,22 +149,17 @@ Player* Enemy::searchPlayer() {
 				}
 			}
 
-			collidables->start();
-			for (int k = 0;k < collidables->getSize();k++) {
-				Entity* current = collidables->getCurrent();
-				if (ret.intersects(current->getGlobalBounds())) {
+			for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()) && flag; it++) {
+				if (ret.intersects((*it)->getGlobalBounds()))
 					flag = 0;
-				}
-				collidables->next();
 			}
-			collidables->start();
 		}
 
-		Collidable* vertice = new Collidable();
+		/*Collidable* vertice = new Collidable();
 		vertice->setSize(sf::Vector2f(5, 5));
 		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
-		nivel->addDrawable(vertice);
+		nivel->addDrawable(vertice);*/
 	}
 	return NULL;
 }

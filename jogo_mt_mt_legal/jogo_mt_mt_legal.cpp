@@ -18,26 +18,26 @@ void InicializarCoisas(Level* level) {
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
 
     list<Updatable*>* updatables;
-    EntityList* drawables;
+    list<MyDrawable*>* drawables;
     list<Alive*>* alives;
     updatables = new list<Updatable*>;
-    drawables = new EntityList;
+    drawables = new list<MyDrawable*>;
     alives = new list<Alive*>;
 
     Player* player;
     Player* player2;
     Collidable* plataforma, * parede, * teto;
-    EntityList* colisionaveis;
+    list<Collidable*>* colisionaveis;
     Enemy* inimigo;
 
-    colisionaveis = new EntityList;
+    colisionaveis = new list<Collidable*>;
     plataforma = new Collidable;
     parede = new Collidable;
     teto = new Collidable;
 
-    colisionaveis->pushBack(plataforma);
-    colisionaveis->pushBack(parede);
-    colisionaveis->pushBack(teto);
+    colisionaveis->push_back(plataforma);
+    colisionaveis->push_back(parede);
+    colisionaveis->push_back(teto);
 
     plataforma->setPosition(sf::Vector2f(0, 1000));
     plataforma->setFillColor(sf::Color::Red);
@@ -79,12 +79,12 @@ void InicializarCoisas(Level* level) {
     updatables->push_back(view);
     updatables->push_back(inimigo);
 
-    drawables->pushBack(player);
-    drawables->pushBack(player2);
-    drawables->pushBack(parede);
-    drawables->pushBack(plataforma);
-    drawables->pushBack(inimigo);
-    drawables->pushBack(teto);
+    drawables->push_back(player);
+    drawables->push_back(player2);
+    drawables->push_back(parede);
+    drawables->push_back(plataforma);
+    drawables->push_back(inimigo);
+    drawables->push_back(teto);
 
 
     level->setUpdatables(updatables);

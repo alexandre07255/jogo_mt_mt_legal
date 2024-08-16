@@ -1,14 +1,11 @@
 #include "Level.h"
 #include "graphics.h"
-#include "MyDrawable.h"
 #include "Player.h"
-#include "inputManager.h"
-#include "Collidable.h"
 #include "CollisionManager.h"
 
 Level* Level::active(NULL);
 
-Level::Level(): drawables(), updatables()
+Level::Level(): drawables(NULL), updatables(NULL)
 {
 }
 
@@ -17,11 +14,11 @@ Level::~Level() //TODO
 
 }
 
-void Level::setDrawables(EntityList* drawlist) {
+void Level::setDrawables(list<MyDrawable*>* drawlist) {
 	drawables = drawlist;
 }
 
-EntityList* Level::getDrawables() const
+list<MyDrawable*>* Level::getDrawables() const
 {
 	return drawables;
 }
@@ -36,13 +33,21 @@ list<Updatable*>* Level::getUpdatables() const
 }
 
 void Level::draw(sf::RenderWindow* window) {
-	drawables->start();
-	int size = drawables->getSize();
-	for (int i = 0; i < size; i++)
+	list<MyDrawable*>::iterator itCurrent = drawables->begin();
+	if (drawables->size() > 1)
 	{
-		window->draw(*(drawables->getCurrent()));
-		drawables->next();
+		list<MyDrawable*>::iterator itNext = itCurrent;
+		itNext++;
+		while (itNext != drawables->end())
+		{
+			window->draw(*(*itCurrent));
+			itCurrent = itNext;
+			itNext++;
+		}
+		window->draw(*(*itCurrent));
 	}
+	else if (drawables->size() == 1)
+		window->draw(*(*itCurrent));
 }
 
 void Level::update()
@@ -80,5 +85,5 @@ void Level::addUpdatable(Updatable* pU)
 }
 
 void Level::addDrawable(Entity* pD) {
-	drawables->pushBack(pD);
+	drawables->push_back(pD);
 }

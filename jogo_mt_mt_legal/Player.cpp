@@ -10,14 +10,16 @@ using namespace std;
 Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	Alive(1, MAX_HP),
 	jumpBuffer(0),
+	isStillJumping(0),
 	player2(isPlayer2),
 	attackBuffer(0),
 	wasAttackPressed(0),
 	friction(1),
 	attackCounter(0),
-	attackStartup{6, 2, 3},
-	attackHitboxDuration{10, 3, 3},
-	attackEndLag{6, 8, 12}
+	hasAttacked(0),
+	attackStartup{20, 15, 15},
+	attackHitboxDuration{5, 5, 5},
+	attackEndLag{20, 15, 15}
 {
 	
 }
@@ -53,7 +55,6 @@ void Player::movement() {
 	else if (jumpBuffer > 0)
 		jumpBuffer--;
 
-	cout << state << endl;
 
 	switch (state)
 	{
@@ -73,6 +74,13 @@ void Player::movement() {
 
 void Player::movementFREE()
 {
+	//Só para mostrar os states
+	if (player2)
+		setFillColor(sf::Color::Magenta);
+	else
+		setFillColor(sf::Color::Cyan);
+
+
 	sf::Vector2f vetorDesloc(1, 1);
 	
 	InputManager* inputInstance = InputManager::getInstance();
@@ -114,7 +122,9 @@ void Player::movementFREE()
 
 	if (attackBuffer)
 	{
+		hasAttacked = 0;
 		attackCounter = 0;
+		attackBuffer = 0;
 		state = ATTACK;
 		stun = attackStartup[attackCounter] + attackHitboxDuration[attackCounter] + attackEndLag[attackCounter];
 	}
@@ -132,6 +142,7 @@ void Player::movementATKCANCEL()
 {
 	if (stun > 0)
 	{
+		setFillColor(sf::Color::Green);
 		if (attackBuffer)
 		{
 			if (attackCounter < 3)
@@ -139,6 +150,7 @@ void Player::movementATKCANCEL()
 				state = ATTACK;
 				stun = attackStartup[attackCounter] + attackHitboxDuration[attackCounter] + attackEndLag[attackCounter] + 1;
 				attackBuffer = 0;
+				hasAttacked = 0;
 			}
 		}
 		stun--;
@@ -151,8 +163,13 @@ void Player::movementATTACK()
 {
 	if (stun > 0)
 	{
-		if ( (attackCounter < 3) && (stun == (attackHitboxDuration[attackCounter] + attackEndLag[attackCounter])) )
+		setFillColor(sf::Color::Blue);
+
+		if (!hasAttacked && (attackCounter < 3) && (stun == (attackHitboxDuration[attackCounter] + attackEndLag[attackCounter])))
+		{
 			attack();
+			hasAttacked = 1;
+		}
 		stun--;
 	}
 	else
@@ -175,17 +192,17 @@ void Player::attack()
 		hitbox->setSize(sf::Vector2f(50, 100));
 		hitbox->setVerKnockback(-10);
 		hitbox->setDamage(1);
-		hitbox->setHitstun(30);
+		hitbox->setHitstun(15);
 		horKnock = 30;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getSize().x, 0));
+			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, 0));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
 			int relX = hitbox->getSize().x;
-			hitbox->setRelativePosition(sf::Vector2f(-relX, 0));
+			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 0));
 			hitbox->setHorKnockback(-horKnock);
 		}
 		break;
@@ -193,35 +210,35 @@ void Player::attack()
 		hitbox->setSize(sf::Vector2f(100, 50));
 		hitbox->setVerKnockback(-10);
 		hitbox->setDamage(1);
-		hitbox->setHitstun(10);
-		horKnock = 30;
+		hitbox->setHitstun(35);
+		horKnock = 60;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getSize().x, 25));
+			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, 25));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
 			int relX = hitbox->getSize().x;
-			hitbox->setRelativePosition(sf::Vector2f(-relX, 25));
+			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 25));
 			hitbox->setHorKnockback(-horKnock);
 		}
 		break;
 	case 2:
-		hitbox->setSize(sf::Vector2f(100, 50));
-		hitbox->setVerKnockback(-10);
+		hitbox->setSize(sf::Vector2f(100, 100));
+		hitbox->setVerKnockback(-30);
 		hitbox->setDamage(1);
-		hitbox->setHitstun(10);
-		horKnock = 30;
+		hitbox->setHitstun(50);
+		horKnock = 40;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getSize().x, 0));
+			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, -50));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
 			int relX = hitbox->getSize().x;
-			hitbox->setRelativePosition(sf::Vector2f(-relX, 0));
+			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, -50));
 			hitbox->setHorKnockback(-horKnock);
 		}
 		break;

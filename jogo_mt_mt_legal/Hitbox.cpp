@@ -10,6 +10,9 @@ Hitbox::Hitbox():
 {
 	Level* activeInstance = Level::getActive();
 	activeInstance->addUpdatable(this);
+
+	setFillColor(sf::Color::Yellow);
+	activeInstance->addDrawable(this);
 }
 
 void Hitbox::setTarget(const bool tar)
