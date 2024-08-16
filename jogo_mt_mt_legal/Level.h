@@ -5,15 +5,15 @@
 
 class Level
 {
-private:
+protected:
 	static Level* active; //So that other objects can call methods and modify the updatables and drawables lists
 	list<MyDrawable*>* drawables;
 	list<Updatable*>* updatables; //Colocar aliveList e collidables aqui também
 	list<Collidable*>* collidables;
 	list<Alive*>* aliveList;
 public:
-	Level(bool isPlayer2, int activeCase);
-	~Level();
+	Level();
+	virtual ~Level();
 	static Level* getActive();
 	static void setActive(Level* pL);
 	void setDrawables(list<MyDrawable*>* drawlist);

@@ -146,6 +146,11 @@ void EnemyMelee::movementFOLLOWING() {
     followingPlayer = searchPlayer();
 
     if (!followingPlayer) {
+        if (facingRight) {
+            facingRight = 0;
+        }
+        else
+            facingRight = 1;
         state = PATROLLING;
     }
 }

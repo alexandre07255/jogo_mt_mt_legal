@@ -16,8 +16,10 @@ int main()
     Graphics* gerenciadorGrafico = Graphics::getInstance();
     sf::RenderWindow* window = gerenciadorGrafico->getWindow();   
     Level* level;
-
+    Level* levelActive;
     level = new Level(false,Level::LEVEL_1);
+
+    levelActive = Level::getActive();
 
     window->setFramerateLimit(60);
     //window->setVerticalSyncEnabled(true);
@@ -30,9 +32,9 @@ int main()
             if (event.type == sf::Event::Closed)
                 window->close();
         }
-        level->update();
+        levelActive->update();
         window->clear(sf::Color::Black);
-        level->draw(window);
+        levelActive->draw(window);
         window->display();
 
     }
