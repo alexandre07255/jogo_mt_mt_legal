@@ -57,8 +57,6 @@ void AttackHitbox::movement()
 		upList->remove(this);
 		list<MyDrawable*>* drawList = activeLevel->getDrawables();
 		drawList->remove(this);
-		if (duration <= 0 || hitstun <= 0)
-			owner->setState(Alive::FREE);
 		delete this;
 		return;
 	}
