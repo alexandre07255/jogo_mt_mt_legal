@@ -7,14 +7,13 @@
 class Level: public Scene
 {
 protected:
-	static Level* active; //So that other objects can call methods and modify the updatables and drawables lists //Colocar aliveList e collidables aqui também
+	 //So that other objects can call methods and modify the updatables and drawables lists //Colocar aliveList e collidables aqui também
 	list<Collidable*>* collidables;
 	list<Alive*>* aliveList;
 public:
 	Level();
 	virtual ~Level();
-	static Level* getActive();
-	static void setActive(Level* pL);
+	
 
 	//void loadLevel1(bool isPlayer2);
 	//void loadLevel2(bool isPlayer2);

@@ -96,7 +96,7 @@ void Enemy::movementPATROLLING()
 
 Player* Enemy::searchPlayer() {
 	CollisionManager* instance = CollisionManager::getInstance();
-	Level* nivel = Level::getActive();
+	Level* nivel = static_cast<Level*>(Scene::getActive());
 
 	const double PI = 3.1415;
 	const double rayStep = 50;

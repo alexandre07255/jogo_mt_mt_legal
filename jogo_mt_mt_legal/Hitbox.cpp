@@ -8,7 +8,7 @@ Hitbox::Hitbox():
 	relativePosition(),
 	duration(0)
 {
-	Level* activeInstance = Level::getActive();
+	Level* activeInstance = static_cast<Level*>(Scene::getActive());
 	activeInstance->addUpdatable(this);
 
 	setFillColor(sf::Color::Yellow);
