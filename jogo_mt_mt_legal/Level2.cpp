@@ -1,10 +1,9 @@
-#include "Level1.h"
+#include "Level2.h"
 #include"graphics.h"
 #include "EnemyMelee.h"
 #include "CollisionManager.h"
-#include "Level2.h"
 
-Level1::Level1(bool isPlayer2):Level() {
+Level2::Level2(bool isPlayer2): Level() {
     Graphics* instance = Graphics::getInstance();
     sf::RenderWindow* window = instance->getWindow();
 
@@ -21,9 +20,9 @@ Level1::Level1(bool isPlayer2):Level() {
     parede = new Collidable;
     teto = new Collidable;
 
-    plataforma->setPosition(sf::Vector2f(0, 1000));
+    plataforma->setPosition(sf::Vector2f(200, 1000));
     plataforma->setFillColor(sf::Color::Red);
-    plataforma->setSize(sf::Vector2f(3000, 100));
+    plataforma->setSize(sf::Vector2f(3000, 900));
 
     parede->setPosition(sf::Vector2f(300, 500));
     parede->setFillColor(sf::Color::Green);
@@ -87,15 +86,14 @@ Level1::Level1(bool isPlayer2):Level() {
         view->setPlayer2(player2);
 
     endingOnRight = 1;
-    endX = 2000;
+    endX = 1000;
 }
 
-Level1::~Level1() {
+Level2::~Level2() {
 
 }
 
-void Level1::levelCompleteHandler()
+void Level2::levelCompleteHandler()
 {
-    Level2* level2 = new Level2(pPlayer2 != NULL);
-    Level::setActive(level2);
+    
 }

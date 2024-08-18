@@ -1,12 +1,11 @@
 #pragma once
 #include "Level.h"
-
-class Level1 : public Level
+class Level2 : public Level
 {
 private:
 	void levelCompleteHandler();
 public:
-	Level1(bool isPlayer2);
-	~Level1();
+	Level2(bool isPlayer2);
+	~Level2();
 };
 

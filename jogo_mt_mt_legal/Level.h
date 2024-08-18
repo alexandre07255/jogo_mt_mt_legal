@@ -10,6 +10,11 @@ protected:
 	 //So that other objects can call methods and modify the updatables and drawables lists //Colocar aliveList e collidables aqui também
 	list<Collidable*>* collidables;
 	list<Alive*>* aliveList;
+	Player* pPlayer1;
+	Player* pPlayer2;
+	bool endingOnRight;
+	float endX;
+	virtual void levelCompleteHandler() = 0;
 public:
 	Level();
 	virtual ~Level();
