@@ -25,9 +25,9 @@ public:
 	void update ();
 	void addDrawable(Entity* pD);
 
-	void loadLevel1(bool isPlayer2);
-	void loadLevel2(bool isPlayer2);
-	void loadMenu();
+	//void loadLevel1(bool isPlayer2);
+	//void loadLevel2(bool isPlayer2);
+	//void loadMenu();
 
 	enum active {
 		LEVEL_1,

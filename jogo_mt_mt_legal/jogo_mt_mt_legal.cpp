@@ -10,14 +10,15 @@
 #include "Camera.h"
 #include "Enemy.h"
 #include "EnemyMelee.h"
+#include "Level1.h"
 
 int main()
 {   
     Graphics* gerenciadorGrafico = Graphics::getInstance();
     sf::RenderWindow* window = gerenciadorGrafico->getWindow();   
-    Level* level;
+    Level1* level;
     Level* levelActive;
-    level = new Level(false,Level::LEVEL_1);
+    level = new Level1(false);
 
     levelActive = Level::getActive();
 
