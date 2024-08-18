@@ -52,7 +52,7 @@ void AttackHitbox::movement()
 {
 	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || owner->getState() != Alive::ATKCANCEL ) ) )
 	{
-		Level* activeLevel = Level::getActive();
+		Level* activeLevel = static_cast<Level*>(Scene::getActive());
 		list<Updatable*>* upList = activeLevel->getUpdatables();
 		upList->remove(this);
 		list<MyDrawable*>* drawList = activeLevel->getDrawables();

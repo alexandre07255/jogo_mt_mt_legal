@@ -10,7 +10,6 @@ private:
 	sf::Vector2f size;
 public:
 	Menu();
-	void draw();
 	void setSize(sf::Vector2f _size);
 
 };

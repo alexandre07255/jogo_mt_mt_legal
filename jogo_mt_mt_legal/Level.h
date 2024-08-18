@@ -7,7 +7,7 @@
 class Level: public Scene
 {
 protected:
-	static Level* active; //So that other objects can call methods and modify the updatables and drawables lists
+	 //So that other objects can call methods and modify the updatables and drawables lists //Colocar aliveList e collidables aqui também
 	list<Collidable*>* collidables;
 	list<Alive*>* aliveList;
 	Player* pPlayer1;

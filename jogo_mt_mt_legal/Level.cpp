@@ -4,9 +4,7 @@
 #include "CollisionManager.h"
 #include "EnemyMelee.h"
 
-Level* Level::active(NULL);
-
-Level::Level(): aliveList(NULL), collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), endingOnRight(1), endX(0)
+Level::Level(): aliveList(NULL),collidables(NULL)
 {
     aliveList = new list<Alive*>;
     collidables = new list<Collidable*>;
@@ -52,13 +50,5 @@ void Level::update()
 	}
 }
 
-Level* Level::getActive()
-{
-	return active;
-}
 
-void Level::setActive(Level* pL) //Usar em algum outro lugar (tipo gerenciador/pilha de states)
-{
-	active = pL;
-}
 
