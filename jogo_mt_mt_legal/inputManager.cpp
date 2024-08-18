@@ -68,3 +68,8 @@ const bool InputManager::isAttackPressed(bool player2)
 const bool InputManager::isPausePressed() {
 	return keyboard->isKeyPressed(sf::Keyboard::Escape);
 }
+
+sf::Mouse* InputManager::getMouse() const
+{
+	return mouse;
+}

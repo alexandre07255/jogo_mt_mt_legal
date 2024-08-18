@@ -18,5 +18,6 @@ public:
 	const bool isLeftPressed(bool player2);
 	const bool isAttackPressed(bool player2);
 	const bool isPausePressed();
+	sf::Mouse* getMouse() const;
 };
 
