@@ -6,7 +6,7 @@
 
 Level* Level::active(NULL);
 
-Level::Level(): drawables(NULL), updatables(NULL), aliveList(NULL), collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), endingOnRight(1), endX(0)
+Level::Level(): aliveList(NULL), collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), endingOnRight(1), endX(0)
 {
     aliveList = new list<Alive*>;
     collidables = new list<Collidable*>;
@@ -14,6 +14,7 @@ Level::Level(): drawables(NULL), updatables(NULL), aliveList(NULL), collidables(
 
 Level::~Level() //TODO
 {
+}
 
 void Level::update()
 {
