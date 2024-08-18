@@ -65,6 +65,6 @@ void Scene::addUpdatable(Updatable* pU)
 	updatables->push_back(pU);
 }
 
-void Scene::addDrawable(Entity* pD) {
+void Scene::addDrawable(MyDrawable* pD) {
 	drawables->push_back(pD);
 }

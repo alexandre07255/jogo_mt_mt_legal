@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
-#include "Entity.h"
+#include "MyDrawable.h"
+#include "Updatable.h"
 
 class Scene
 {
@@ -16,6 +17,6 @@ public:
 	void setUpdatables(list<Updatable*>* updatelist);
 	list<Updatable*>* getUpdatables() const;
 	void addUpdatable(Updatable* pU);
-	void addDrawable(Entity* pD);
+	void addDrawable(MyDrawable* pD);
 };
 
