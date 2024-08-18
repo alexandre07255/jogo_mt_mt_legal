@@ -2,13 +2,12 @@
 #include "Camera.h"
 #include <list>
 #include "Collidable.h"
+#include "Scene.h"
 
-class Level
+class Level: public Scene
 {
 protected:
-	static Level* active; //So that other objects can call methods and modify the updatables and drawables lists
-	list<MyDrawable*>* drawables;
-	list<Updatable*>* updatables; //Colocar aliveList e collidables aqui também
+	static Level* active; //So that other objects can call methods and modify the updatables and drawables lists //Colocar aliveList e collidables aqui também
 	list<Collidable*>* collidables;
 	list<Alive*>* aliveList;
 	Player* pPlayer1;
@@ -21,14 +20,6 @@ public:
 	virtual ~Level();
 	static Level* getActive();
 	static void setActive(Level* pL);
-	void setDrawables(list<MyDrawable*>* drawlist);
-	list<MyDrawable*>* getDrawables() const;
-	void setUpdatables(list<Updatable*>* updatelist);
-	list<Updatable*>* getUpdatables() const;
-	void addUpdatable(Updatable* pU);
-	void draw(sf::RenderWindow* window);
-	void update ();
-	void addDrawable(Entity* pD);
 
 	//void loadLevel1(bool isPlayer2);
 	//void loadLevel2(bool isPlayer2);
