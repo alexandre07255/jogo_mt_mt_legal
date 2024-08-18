@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="Alive.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collidable.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
@@ -147,13 +148,16 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyDrawable.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Updatable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alive.h" />
     <ClInclude Include="AttackHitbox.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collidable.h" />
     <ClInclude Include="CollisionManager.h" />
@@ -166,8 +170,10 @@
     <ClInclude Include="Level1.h" />
     <ClInclude Include="math\Coord.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="MyDrawable.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Updatable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
