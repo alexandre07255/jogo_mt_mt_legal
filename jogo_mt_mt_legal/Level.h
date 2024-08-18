@@ -18,8 +18,6 @@ protected:
 public:
 	Level();
 	virtual ~Level();
-	static Level* getActive();
-	static void setActive(Level* pL);
 	void update();
 
 	//void loadLevel1(bool isPlayer2);
