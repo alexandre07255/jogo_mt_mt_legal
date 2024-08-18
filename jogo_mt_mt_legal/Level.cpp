@@ -4,7 +4,7 @@
 #include "CollisionManager.h"
 #include "EnemyMelee.h"
 
-Level::Level(): aliveList(NULL),collidables(NULL)
+Level::Level(): aliveList(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL)
 {
     aliveList = new list<Alive*>;
     collidables = new list<Collidable*>;

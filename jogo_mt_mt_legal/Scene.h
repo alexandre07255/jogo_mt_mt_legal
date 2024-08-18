@@ -6,7 +6,6 @@
 class Scene
 {
 protected:
-	static Scene* active;
 	list<MyDrawable*>* drawables;
 	list<Updatable*>* updatables;
 public:
@@ -19,7 +18,5 @@ public:
 	list<Updatable*>* getUpdatables() const;
 	void addUpdatable(Updatable* pU);
 	void addDrawable(MyDrawable* pD);
-	static Scene* getActive();
-	static void setActive(Scene* pL);
 };
 

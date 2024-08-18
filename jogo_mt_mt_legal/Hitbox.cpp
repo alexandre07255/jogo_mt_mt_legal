@@ -1,5 +1,6 @@
 #include "Hitbox.h"
-#include "Level.h"
+//#include "Level.h"
+#include "SceneManager.h"
 
 Hitbox::Hitbox():
 	target(0),
@@ -8,11 +9,11 @@ Hitbox::Hitbox():
 	relativePosition(),
 	duration(0)
 {
-	Level* activeInstance = static_cast<Level*>(Scene::getActive());
-	activeInstance->addUpdatable(this);
+	Scene* activeScene = SceneManager::getInstance()->top();
+	activeScene->addUpdatable(this);
 
 	setFillColor(sf::Color::Yellow);
-	activeInstance->addDrawable(this);
+	activeScene->addDrawable(this);
 }
 
 void Hitbox::setTarget(const bool tar)

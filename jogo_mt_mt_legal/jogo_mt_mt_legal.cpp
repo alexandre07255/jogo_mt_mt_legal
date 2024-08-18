@@ -11,18 +11,22 @@
 #include "Enemy.h"
 #include "EnemyMelee.h"
 #include "Level1.h"
+#include "SceneManager.h"
 
 int main()
 {   
     Graphics* gerenciadorGrafico = Graphics::getInstance();
     sf::RenderWindow* window = gerenciadorGrafico->getWindow();   
     Level1* level;
-    Scene* sceneActive;
+    SceneManager* sceneManInstance = SceneManager::getInstance();
     level = new Level1(false);
+
+    sceneManInstance->push(level);
 
     window->setFramerateLimit(60);
     //window->setVerticalSyncEnabled(true);
 
+    sceneManInstance->setWindow(window);
     while (gerenciadorGrafico->isWindowOpen())
     {
         sf::Event event;
@@ -31,12 +35,7 @@ int main()
             if (event.type == sf::Event::Closed)
                 window->close();
         }
-        sceneActive = Scene::getActive();
-        sceneActive->update();
-        window->clear(sf::Color::Black);
-        sceneActive->draw(window);
-        window->display();
-
+        sceneManInstance->step();
     }
 
     return 0;

@@ -11,6 +11,7 @@ Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	Alive(1, MAX_HP),
 	jumpBuffer(0),
 	isStillJumping(0),
+	jumpLength(0),
 	player2(isPlayer2),
 	attackBuffer(0),
 	wasAttackPressed(0),
@@ -52,9 +53,12 @@ void Player::movement() {
 	{
 		jumpBuffer = MAX_JUMP_BUFFER;
 	}
-	else if (jumpBuffer > 0)
-		jumpBuffer--;
-
+	else
+	{
+		isStillJumping = 0;
+		if (jumpBuffer > 0)
+			jumpBuffer--;
+	}
 
 	switch (state)
 	{
@@ -111,13 +115,22 @@ void Player::movementFREE()
 	else
 		horizontalSpeed = 0;
 
-
+	if (isStillJumping)
+	{
+		if (jumpLength < MAX_JUMP_PERIOD)
+		{
+			verticalSpeed -= JUMP_STRENGTH;
+			jumpLength++;
+		}
+	}
 
 	if (!onAir && jumpBuffer)
 	{
 		verticalSpeed = -JUMP_STRENGTH;
 		jumpBuffer = 0;
 		onAir = 1;
+		isStillJumping = 1;
+		jumpLength = 0;
 	}
 
 	if (attackBuffer)
@@ -249,7 +262,8 @@ void Player::attack()
 }
 
 const int Player::MAX_JUMP_BUFFER(8);
-const int Player::JUMP_STRENGTH(20);
+const int Player::JUMP_STRENGTH(2.75);
+const int Player::MAX_JUMP_PERIOD(15);
 
 const int Player::MAX_HORIZONTAL_SPEED(10);
 const int Player::MAX_VERTICAL_SPEED(15);

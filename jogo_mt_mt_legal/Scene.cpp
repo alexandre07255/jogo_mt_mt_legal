@@ -68,15 +68,3 @@ void Scene::addUpdatable(Updatable* pU)
 void Scene::addDrawable(MyDrawable* pD) {
 	drawables->push_back(pD);
 }
-
-Scene* Scene::getActive()
-{
-	return active;
-}
-
-void Scene::setActive(Scene* pL) //Usar em algum outro lugar (tipo gerenciador/pilha de states)
-{
-	active = pL;
-}
-
-Scene* Scene::active(NULL);

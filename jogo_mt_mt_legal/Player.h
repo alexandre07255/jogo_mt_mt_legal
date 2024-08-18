@@ -11,6 +11,7 @@ private:
 	static const int ACCELARATION;
 	static const int MAX_JUMP_BUFFER;
 	static const int JUMP_STRENGTH;
+	static const int MAX_JUMP_PERIOD;
 	static const int MAX_ATTACK_BUFFER;
 
 	const int attackStartup[3];
@@ -20,6 +21,7 @@ private:
 	bool player2;
 	int jumpBuffer;
 	bool isStillJumping;
+	int jumpLength;
 	int attackBuffer;
 	int attackCounter;
 	bool hasAttacked;

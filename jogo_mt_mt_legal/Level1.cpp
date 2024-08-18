@@ -3,6 +3,7 @@
 #include "EnemyMelee.h"
 #include "CollisionManager.h"
 #include "Level2.h"
+#include "SceneManager.h"
 
 Level1::Level1(bool isPlayer2):Level() {
     Graphics* instance = Graphics::getInstance();
@@ -44,6 +45,7 @@ Level1::Level1(bool isPlayer2):Level() {
     player->setSize(sf::Vector2f(1, 1));
     player->setOrigin(sf::Vector2f(0, 0));
     player->setSize(sf::Vector2f(100, 100));
+    player->setPosition(0, 900);
     pPlayer1 = player;
 
 
@@ -80,7 +82,7 @@ Level1::Level1(bool isPlayer2):Level() {
     drawables->push_back(inimigo);
     drawables->push_back(teto);
 
-    Level::setActive(this);
+    SceneManager::getInstance()->push(this);
 
     view->setPlayer1(player);
     if (isPlayer2)
@@ -97,5 +99,6 @@ Level1::~Level1() {
 void Level1::levelCompleteHandler()
 {
     Level2* level2 = new Level2(pPlayer2 != NULL);
-    Level::setActive(level2);
+    SceneManager* sceneManInstance = SceneManager::getInstance();
+    sceneManInstance->push(level2);
 }

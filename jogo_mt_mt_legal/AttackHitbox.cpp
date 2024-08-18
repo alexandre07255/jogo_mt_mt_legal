@@ -1,5 +1,5 @@
 #include "AttackHitbox.h"
-
+#include "SceneManager.h"
 #include <iostream>
 using namespace std;
 
@@ -52,10 +52,10 @@ void AttackHitbox::movement()
 {
 	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || owner->getState() != Alive::ATKCANCEL ) ) )
 	{
-		Level* activeLevel = static_cast<Level*>(Scene::getActive());
-		list<Updatable*>* upList = activeLevel->getUpdatables();
+		Scene* activeScene = SceneManager::getInstance()->top();
+		list<Updatable*>* upList = activeScene->getUpdatables();
 		upList->remove(this);
-		list<MyDrawable*>* drawList = activeLevel->getDrawables();
+		list<MyDrawable*>* drawList = activeScene->getDrawables();
 		drawList->remove(this);
 		delete this;
 		return;

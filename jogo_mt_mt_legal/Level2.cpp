@@ -2,6 +2,7 @@
 #include"graphics.h"
 #include "EnemyMelee.h"
 #include "CollisionManager.h"
+#include "SceneManager.h"
 
 Level2::Level2(bool isPlayer2): Level() {
     Graphics* instance = Graphics::getInstance();
@@ -79,7 +80,7 @@ Level2::Level2(bool isPlayer2): Level() {
     drawables->push_back(inimigo);
     drawables->push_back(teto);
 
-    Level::setActive(this);
+    SceneManager::getInstance()->push(this);
 
     view->setPlayer1(player);
     if (isPlayer2)

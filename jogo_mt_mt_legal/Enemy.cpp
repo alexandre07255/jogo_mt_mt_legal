@@ -4,6 +4,7 @@
 #include "Level.h"
 #include "Collidable.h"
 #include <iostream>
+#include "SceneManager.h"
 
 Enemy::Enemy() :Alive(false, 10) {
 	isWorth = 0;
@@ -96,7 +97,7 @@ void Enemy::movementPATROLLING()
 
 Player* Enemy::searchPlayer() {
 	CollisionManager* instance = CollisionManager::getInstance();
-	Level* nivel = static_cast<Level*>(Scene::getActive());
+	Level* nivel = static_cast<Level*>(SceneManager::getInstance()->top());
 
 	const double PI = 3.1415;
 	const double rayStep = 50;
