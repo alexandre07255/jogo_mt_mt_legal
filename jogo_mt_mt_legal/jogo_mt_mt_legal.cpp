@@ -20,7 +20,6 @@ int main()
     Level* levelActive;
     level = new Level1(false);
 
-    levelActive = Level::getActive();
 
     window->setFramerateLimit(60);
     //window->setVerticalSyncEnabled(true);
@@ -33,6 +32,7 @@ int main()
             if (event.type == sf::Event::Closed)
                 window->close();
         }
+        levelActive = Level::getActive();
         levelActive->update();
         window->clear(sf::Color::Black);
         levelActive->draw(window);

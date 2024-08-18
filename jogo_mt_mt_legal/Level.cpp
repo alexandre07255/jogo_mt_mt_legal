@@ -6,7 +6,7 @@
 
 Level* Level::active(NULL);
 
-Level::Level(): drawables(NULL), updatables(NULL),aliveList(NULL),collidables(NULL)
+Level::Level(): drawables(NULL), updatables(NULL), aliveList(NULL), collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), endingOnRight(1), endX(0)
 {
     drawables = new list<MyDrawable*>;
     updatables = new list<Updatable*>;
@@ -72,6 +72,23 @@ void Level::update()
 	}
 	else if (updatables->size() == 1)
 		(*itCurrent)->movement();
+
+	if (endingOnRight)
+	{
+		if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 > endX)
+			levelCompleteHandler();
+		else if (pPlayer2 != NULL)
+			if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 > endX)
+				levelCompleteHandler();
+	}
+	else
+	{
+		if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 < endX)
+			levelCompleteHandler();
+		else if (pPlayer2 != NULL)
+			if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 < endX)
+				levelCompleteHandler();
+	}
 }
 
 Level* Level::getActive()

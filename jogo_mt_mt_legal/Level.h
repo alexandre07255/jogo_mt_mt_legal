@@ -11,6 +11,11 @@ protected:
 	list<Updatable*>* updatables; //Colocar aliveList e collidables aqui também
 	list<Collidable*>* collidables;
 	list<Alive*>* aliveList;
+	Player* pPlayer1;
+	Player* pPlayer2;
+	bool endingOnRight;
+	float endX;
+	virtual void levelCompleteHandler() = 0;
 public:
 	Level();
 	virtual ~Level();
