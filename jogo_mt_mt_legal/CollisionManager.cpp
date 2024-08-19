@@ -1,12 +1,12 @@
 #include "CollisionManager.h"
 #include <iostream>
+#include "SceneManager.h"
+#include "Level.h"
 using namespace std;
 
 CollisionManager* CollisionManager::instance(NULL);
 
-CollisionManager::CollisionManager():
-	collidables(NULL),
-	aliveList(NULL)
+CollisionManager::CollisionManager()
 {
 
 }
@@ -25,6 +25,10 @@ CollisionManager* CollisionManager::getInstance()
 
 void CollisionManager::testCollison(Entity* pE)
 {
+	SceneManager* instance = SceneManager::getInstance();
+	Level* level = static_cast<Level*>(instance->top());
+	list<Collidable*>* collidables = level->getCollidable();
+
 	if (collidables == NULL)
 		return;
 
@@ -93,22 +97,16 @@ void CollisionManager::testCollison(Entity* pE)
 		pE->setOnAir(1);
 }
 
-void CollisionManager::setCollidables(list<Collidable*>* pC)
-{
-	collidables = pC;
-}
-
 const bool CollisionManager::isColliding(sf::FloatRect one, sf::FloatRect other){
 	return (one.intersects(other));
 }
 
-void CollisionManager::setAliveList(list<Alive*>* Alist)
-{
-	aliveList = Alist;
-}
-
 void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 {
+	SceneManager* instance = SceneManager::getInstance();
+	Level* level = static_cast<Level*>(instance->top());
+	list<Alive*>* aliveList = level->getAliveList();
+
 	if (hitbox == NULL) { return; }
 	if (aliveList == NULL) { cout << "No one is alive" << endl; return; }
 	list<Alive*>::iterator it = aliveList->begin();
@@ -129,12 +127,4 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 		}
 		it++;
 	}
-}
-
-list<Collidable*>* CollisionManager::getCollidables() {
-	return collidables;
-}
-
-list<Alive*>* CollisionManager::getAliveList() {
-	return aliveList;
 }

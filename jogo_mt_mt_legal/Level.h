@@ -19,6 +19,8 @@ public:
 	Level();
 	virtual ~Level();
 	void update();
+	list<Collidable*>* getCollidable();
+	list<Alive*>* getAliveList();
 
 	//void loadLevel1(bool isPlayer2);
 	//void loadLevel2(bool isPlayer2);

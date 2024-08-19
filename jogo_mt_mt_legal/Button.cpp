@@ -1,10 +1,11 @@
 #include "Button.h"
 #include "inputManager.h"
 
-Button::Button() :MyDrawable() {
+Button::Button() :Entity() {
 	InputManager* instance = InputManager::getInstance();
 	mouse = instance->getMouse();
 	setSize(sf::Vector2f(200,100));
+	setFillColor(sf::Color::Blue);
 }
 
 const bool Button::isMouseOn() {
@@ -17,4 +18,19 @@ const bool Button::isMouseOn() {
 	}
 
 	return false;
+}
+
+const bool Button::isMouseClicked() {
+	if (isMouseOn() && mouse->isButtonPressed(sf::Mouse::Left))
+		return true;
+	return false;
+}
+
+void Button::movement() {
+	if (isMouseOn()) {
+		setFillColor(sf::Color::Green);
+	}
+	else {
+		setFillColor(sf::Color::Blue);
+	}
 }

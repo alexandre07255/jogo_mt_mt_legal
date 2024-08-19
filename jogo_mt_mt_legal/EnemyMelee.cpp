@@ -1,7 +1,9 @@
 #include "EnemyMelee.h"
 #include <stdlib.h>
 #include "CollisionManager.h"
+#include "SceneManager.h"
 #include <time.h>
+#include "Level.h"
 
 EnemyMelee::EnemyMelee():Enemy(),walkingBuffer(0),waitBuffer(0),direction(0){}
 
@@ -159,7 +161,10 @@ const int EnemyMelee::JUMP_STRENGTH(15);
 
 const bool EnemyMelee::checkOnLedge() {
     CollisionManager* instance = CollisionManager::getInstance();
-    list<Collidable*>* collidables = instance->getCollidables();
+
+    SceneManager* LevelInstance = SceneManager::getInstance();
+    Level* level = static_cast<Level*>(LevelInstance->top());
+    list<Collidable*>* collidables = level->getCollidable();
 
     sf::FloatRect ret;
 

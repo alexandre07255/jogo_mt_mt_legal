@@ -37,8 +37,6 @@ Level2::Level2(bool isPlayer2): Level() {
     collidables->push_back(parede);
     collidables->push_back(teto);
 
-    gerenciadorColisao->setCollidables(collidables);
-
     player = new Player(0, 1, 10);
     player->setFillColor(sf::Color::Cyan);
     //player->setSize(sf::Vector2f(1, 1));
@@ -65,8 +63,6 @@ Level2::Level2(bool isPlayer2): Level() {
     if (isPlayer2)
         aliveList->push_back(player2);
     aliveList->push_back(inimigo);
-
-    gerenciadorColisao->setAliveList(aliveList);
 
     updatables->push_back(player);
     if (isPlayer2)

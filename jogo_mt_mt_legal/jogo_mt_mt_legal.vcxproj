@@ -149,6 +149,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyDrawable.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="math\Coord.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Menu.h" />
