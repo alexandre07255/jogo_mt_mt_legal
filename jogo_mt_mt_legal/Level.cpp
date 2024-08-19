@@ -50,5 +50,11 @@ void Level::update()
 	}
 }
 
+list<Collidable*>* Level::getCollidable() {
+	return collidables;
+}
 
+list<Alive*>* Level::getAliveList() {
+	return aliveList;
+}
 

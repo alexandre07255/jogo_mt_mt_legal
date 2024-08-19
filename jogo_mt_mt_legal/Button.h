@@ -1,11 +1,13 @@
 #pragma once
-#include "MyDrawable.h"
-class Button : public MyDrawable
+#include "Entity.h"
+class Button : public Entity
 {
 private:
 	sf::Mouse* mouse;
 public:
 	Button();
 	const bool isMouseOn();
+	void movement();
+	const bool isMouseClicked();
 };
 

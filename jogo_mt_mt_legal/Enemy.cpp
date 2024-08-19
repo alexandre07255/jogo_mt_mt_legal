@@ -96,8 +96,13 @@ Player* Enemy::searchPlayer() {
 
 	const double PI = 3.1415;
 	const double rayStep = 50;
-	list<Collidable*>* collidables = instance->getCollidables();
-	list<Alive*>* alive = instance->getAliveList();
+
+	SceneManager* LevelInstance = SceneManager::getInstance();
+	Level* level = static_cast<Level*>(LevelInstance->top());
+
+	list<Collidable*>* collidables = level->getCollidable();
+	list<Alive*>* alive = level->getAliveList();
+
 	int flag = 1;
 
 	sf::Vector2f rayPos;

@@ -12,16 +12,19 @@
 #include "EnemyMelee.h"
 #include "Level1.h"
 #include "SceneManager.h"
+#include "MainMenu.h"
 
 int main()
 {   
     Graphics* gerenciadorGrafico = Graphics::getInstance();
     sf::RenderWindow* window = gerenciadorGrafico->getWindow();   
-    Level1* level;
+    //Level1* level;
+    MainMenu* menu = new MainMenu;
     SceneManager* sceneManInstance = SceneManager::getInstance();
-    level = new Level1(false);
+    //level = new Level1(false);
 
-    sceneManInstance->push(level);
+    //sceneManInstance->push(level);
+    sceneManInstance->push(menu);
 
     window->setFramerateLimit(60);
     //window->setVerticalSyncEnabled(true);
