@@ -1,5 +1,6 @@
 #include "CollisionManager.h"
 #include "SceneManager.h"
+#include "Level.h"
 #include <iostream>
 using namespace std;
 
@@ -26,6 +27,7 @@ CollisionManager* CollisionManager::getInstance()
 
 void CollisionManager::testCollison(Entity* pE)
 {
+	list<Collidable*>* collidables = (static_cast<Level*>(SceneManager::getInstance()))
 	if (collidables == NULL)
 		return;
 
