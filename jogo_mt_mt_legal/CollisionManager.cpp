@@ -1,4 +1,5 @@
 #include "CollisionManager.h"
+#include "SceneManager.h"
 #include <iostream>
 using namespace std;
 
