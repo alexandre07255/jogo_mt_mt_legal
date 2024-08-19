@@ -18,12 +18,9 @@ int main()
 {   
     Graphics* gerenciadorGrafico = Graphics::getInstance();
     sf::RenderWindow* window = gerenciadorGrafico->getWindow();   
-    //Level1* level;
     MainMenu* menu = new MainMenu;
     SceneManager* sceneManInstance = SceneManager::getInstance();
-    //level = new Level1(false);
-
-    //sceneManInstance->push(level);
+ 
     sceneManInstance->push(menu);
 
     window->setFramerateLimit(60);

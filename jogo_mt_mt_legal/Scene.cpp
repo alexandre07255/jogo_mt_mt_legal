@@ -25,7 +25,7 @@ list<Updatable*>* Scene::getUpdatables() const
 
 void Scene::draw(sf::RenderWindow* window) {
 	list<MyDrawable*>::iterator itCurrent = drawables->begin();
-	if (drawables->size() > 1)
+	if (drawables->size() > 0)
 	{
 		list<MyDrawable*>::iterator itNext = itCurrent;
 		itNext++;
@@ -37,8 +37,6 @@ void Scene::draw(sf::RenderWindow* window) {
 		}
 		window->draw(*(*itCurrent));
 	}
-	else if (drawables->size() == 1)
-		window->draw(*(*itCurrent));
 }
 
 void Scene::update()

@@ -97,6 +97,7 @@ void Level1::levelCompleteHandler()
 {
     Level2* level2 = new Level2(pPlayer2 != NULL);
     SceneManager* sceneManInstance = SceneManager::getInstance();
-    sceneManInstance->pop(); //Deletar level1
+    sceneManInstance->pop();
+    //Deletar level1
     sceneManInstance->push(level2);
 }

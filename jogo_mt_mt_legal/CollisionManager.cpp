@@ -110,6 +110,8 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 	list<Alive*>* aliveList = level->getAliveList();
 
 	if (hitbox == NULL) { return; }
+	bool neutral = 0;
+	//Fazer neutral
 	if (aliveList == NULL) { cout << "No one is alive" << endl; return; }
 	list<Alive*>::iterator it = aliveList->begin();
 	int size = aliveList->size();
