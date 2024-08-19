@@ -17,7 +17,7 @@ Level::~Level() //TODO
 void Level::update()
 {
 	list<Updatable*>::iterator itCurrent = updatables->begin();
-	if (updatables->size() > 1)
+	if (updatables->size() > 0)
 	{
 		list<Updatable*>::iterator itNext = itCurrent;
 		itNext++;
@@ -29,8 +29,6 @@ void Level::update()
 		}
 		(*itCurrent)->movement();
 	}
-	else if (updatables->size() == 1)
-		(*itCurrent)->movement();
 
 	if (endingOnRight)
 	{

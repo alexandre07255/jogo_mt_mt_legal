@@ -4,8 +4,15 @@ class Button : public Entity
 {
 private:
 	sf::Mouse* mouse;
+	int action;
 public:
-	Button();
+	enum Actions
+	{
+		startLevel1,
+		startLevel2
+	};
+	Button(const int act);
+	const int getAction() const;
 	const bool isMouseOn();
 	void movement();
 	const bool isMouseClicked();

@@ -5,7 +5,7 @@
 
 class Menu: public Scene
 {
-private:
+protected:
 	list<Button*>* buttonList;
 	sf::Vector2f size;
 public:
