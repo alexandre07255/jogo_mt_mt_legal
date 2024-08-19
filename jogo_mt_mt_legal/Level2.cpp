@@ -21,15 +21,15 @@ Level2::Level2(bool isPlayer2): Level() {
     parede = new Collidable;
     teto = new Collidable;
 
-    plataforma->setPosition(sf::Vector2f(200, 1000));
+    plataforma->setPosition(0, 1000);
     plataforma->setFillColor(sf::Color::Red);
     plataforma->setSize(sf::Vector2f(3000, 900));
 
-    parede->setPosition(sf::Vector2f(300, 500));
+    parede->setPosition(300, 700);
     parede->setFillColor(sf::Color::Green);
     parede->setSize(sf::Vector2f(100, 300));
 
-    teto->setPosition(sf::Vector2f(0, 400));
+    teto->setPosition(0, 500);
     teto->setFillColor(sf::Color::Blue);
     teto->setSize(sf::Vector2f(1000, 100));
 
@@ -41,9 +41,10 @@ Level2::Level2(bool isPlayer2): Level() {
 
     player = new Player(0, 1, 10);
     player->setFillColor(sf::Color::Cyan);
-    player->setSize(sf::Vector2f(1, 1));
-    player->setOrigin(sf::Vector2f(0, 0));
+    //player->setSize(sf::Vector2f(1, 1));
+    player->setOrigin(0, 0);
     player->setSize(sf::Vector2f(100, 100));
+    player->setPosition(0, 900);
     pPlayer1 = player;
 
 
@@ -53,6 +54,7 @@ Level2::Level2(bool isPlayer2): Level() {
         player2->setSize(sf::Vector2f(1, 1));
         player2->setOrigin(sf::Vector2f(0, 0));
         player2->setSize(sf::Vector2f(100, 100));
+        player2->setPosition(100, 900);
         pPlayer2 = player2;
     }
 

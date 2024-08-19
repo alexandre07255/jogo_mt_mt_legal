@@ -22,15 +22,15 @@ Level1::Level1(bool isPlayer2):Level() {
     parede = new Collidable;
     teto = new Collidable;
 
-    plataforma->setPosition(sf::Vector2f(0, 1000));
+    plataforma->setPosition(0, 1000);
     plataforma->setFillColor(sf::Color::Red);
-    plataforma->setSize(sf::Vector2f(3000, 100));
+    plataforma->setSize(sf::Vector2f(2050, 100));
 
-    parede->setPosition(sf::Vector2f(300, 500));
+    parede->setPosition(300, 500);
     parede->setFillColor(sf::Color::Green);
     parede->setSize(sf::Vector2f(100, 300));
 
-    teto->setPosition(sf::Vector2f(0, 400));
+    teto->setPosition(0, 400);
     teto->setFillColor(sf::Color::Blue);
     teto->setSize(sf::Vector2f(1000, 100));
 
@@ -42,8 +42,8 @@ Level1::Level1(bool isPlayer2):Level() {
 
     player = new Player(0, 1, 10);
     player->setFillColor(sf::Color::Cyan);
-    player->setSize(sf::Vector2f(1, 1));
-    player->setOrigin(sf::Vector2f(0, 0));
+    //player->setSize(sf::Vector2f(1, 1));
+    player->setOrigin(0, 0);
     player->setSize(sf::Vector2f(100, 100));
     player->setPosition(0, 900);
     pPlayer1 = player;
@@ -52,9 +52,10 @@ Level1::Level1(bool isPlayer2):Level() {
     if (isPlayer2) {
         player2 = new Player(1, 1, 10);
         player2->setFillColor(sf::Color::Magenta);
-        player2->setSize(sf::Vector2f(1, 1));
-        player2->setOrigin(sf::Vector2f(0, 0));
+        //player2->setSize(sf::Vector2f(1, 1));
+        player2->setOrigin(0, 0);
         player2->setSize(sf::Vector2f(100, 100));
+        player2->setPosition(100, 900);
         pPlayer2 = player2;
     }
 
@@ -100,5 +101,6 @@ void Level1::levelCompleteHandler()
 {
     Level2* level2 = new Level2(pPlayer2 != NULL);
     SceneManager* sceneManInstance = SceneManager::getInstance();
+    sceneManInstance->pop(); //Deletar level1
     sceneManInstance->push(level2);
 }

@@ -84,8 +84,6 @@ void Player::movementFREE()
 	else
 		setFillColor(sf::Color::Cyan);
 
-
-	sf::Vector2f vetorDesloc(1, 1);
 	
 	InputManager* inputInstance = InputManager::getInstance();
 	//Movement input
@@ -144,11 +142,7 @@ void Player::movementFREE()
 
 	verticalSpeed += 1;
 
-	vetorDesloc.x *= horizontalSpeed;
-
-	vetorDesloc.y *= verticalSpeed;
-
-	move(vetorDesloc);
+	move(horizontalSpeed, verticalSpeed);
 }
 
 void Player::movementATKCANCEL()
@@ -188,7 +182,8 @@ void Player::movementATTACK()
 	}
 	else
 		state = FREE;
-	move(sf::Vector2f(horizontalSpeed*0.15, (++verticalSpeed)*0.85));
+	move(horizontalSpeed * 0.15, (++verticalSpeed) * 0.85);
+	//move(sf::Vector2f(horizontalSpeed*0.15, (++verticalSpeed)*0.85));
 }
 
 void Player::attack()
@@ -199,7 +194,7 @@ void Player::attack()
 	hitbox->setOwner(this);
 	hitbox->setBoundedTo(this);
 	hitbox->setDuration(attackHitboxDuration[attackCounter]);
-	int horKnock = 0;
+	float horKnock = 0;
 
 	switch (attackCounter)
 	{
@@ -216,7 +211,7 @@ void Player::attack()
 		}
 		else
 		{
-			int relX = hitbox->getSize().x;
+			float relX = hitbox->getSize().x;
 			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 0));
 			hitbox->setHorKnockback(-horKnock);
 		}
@@ -234,7 +229,7 @@ void Player::attack()
 		}
 		else
 		{
-			int relX = hitbox->getSize().x;
+			float relX = hitbox->getSize().x;
 			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 25));
 			hitbox->setHorKnockback(-horKnock);
 		}
@@ -252,7 +247,7 @@ void Player::attack()
 		}
 		else
 		{
-			int relX = hitbox->getSize().x;
+			float relX = hitbox->getSize().x;
 			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, -50));
 			hitbox->setHorKnockback(-horKnock);
 		}
@@ -262,12 +257,12 @@ void Player::attack()
 }
 
 const int Player::MAX_JUMP_BUFFER(8);
-const int Player::JUMP_STRENGTH(2.75);
+const float Player::JUMP_STRENGTH(2.2);
 const int Player::MAX_JUMP_PERIOD(15);
 
-const int Player::MAX_HORIZONTAL_SPEED(10);
-const int Player::MAX_VERTICAL_SPEED(15);
-const int Player::ACCELARATION(2);
+const float Player::MAX_HORIZONTAL_SPEED(10);
+const float Player::MAX_VERTICAL_SPEED(15);
+const float Player::ACCELARATION(2);
 
 const int Player::MAX_HP(20);
 

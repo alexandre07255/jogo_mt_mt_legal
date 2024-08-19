@@ -31,7 +31,7 @@ void CollisionManager::testCollison(Entity* pE)
 	sf::FloatRect targetBounds;
 	sf::FloatRect collidableBounds;
 
-	int x, y;
+	float x, y;
 
 	int size = collidables->size();
 	list<Collidable*>::iterator it = collidables->begin();
@@ -75,7 +75,7 @@ void CollisionManager::testCollison(Entity* pE)
 			}
 
 			if (y < x) {
-				pE->move(sf::Vector2f(0, (y*directionY)));
+				pE->move(0, (y*directionY));
 				pE->setVerticalVelocity(0);
 				if (directionY == -1)
 					pE->setOnAir(0);

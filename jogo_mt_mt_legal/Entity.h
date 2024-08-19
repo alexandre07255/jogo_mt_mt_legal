@@ -12,7 +12,7 @@ protected:
 public:
 	Entity();
 	virtual ~Entity();
-	int getNormaDeslocamento();
+	float getNormaDeslocamento();
 
 	sf::Vector2f getDeslocamento();
 

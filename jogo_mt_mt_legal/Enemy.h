@@ -9,8 +9,8 @@ protected:
 	int sightSize;
 	int timer;
 	Player* followingPlayer;
-	static const int MAX_HORIZONTAL_SPEED;
-	static const int ACCELARATION;
+	static const float MAX_HORIZONTAL_SPEED;
+	static const float ACCELARATION;
 public:
 	Enemy();
 	virtual void movement();

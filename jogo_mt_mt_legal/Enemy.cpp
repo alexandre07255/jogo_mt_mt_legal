@@ -39,10 +39,8 @@ void Enemy::movement() {
 
 void Enemy::movementPATROLLING()
 {
-	int friccao = 1;
+	float friccao = 1;
 	int timeCycle = 60;
-
-	sf::Vector2f vetorDesloc(1, 1);
 
 	if (timer < timeCycle/2) {
 		if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
@@ -83,10 +81,7 @@ void Enemy::movementPATROLLING()
 
 	verticalSpeed += 1;
 
-	vetorDesloc.x *= horizontalSpeed;
-	vetorDesloc.y *= verticalSpeed;
-
-	move(vetorDesloc);
+	move(horizontalSpeed, verticalSpeed);
 
 	followingPlayer = searchPlayer();
 
@@ -179,9 +174,7 @@ void Enemy::movementHITSTUN()
 }
 
 void Enemy::movementFOLLOWING() {
-	int friccao = 1;
-
-	sf::Vector2f vetorDesloc(1, 1);
+	float friccao = 1;
 
 	if (followingPlayer->getPosition().x > getPosition().x) {
 		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
@@ -210,10 +203,7 @@ void Enemy::movementFOLLOWING() {
 
 	verticalSpeed += 1;
 
-	vetorDesloc.x *= horizontalSpeed;
-	vetorDesloc.y *= verticalSpeed;
-
-	move(vetorDesloc);
+	move(horizontalSpeed, verticalSpeed);
 
 	followingPlayer = searchPlayer();
 
@@ -222,5 +212,5 @@ void Enemy::movementFOLLOWING() {
 	}
 }
 
-const int Enemy::MAX_HORIZONTAL_SPEED(6);
-const int Enemy::ACCELARATION(2);
+const float Enemy::MAX_HORIZONTAL_SPEED(6);
+const float Enemy::ACCELARATION(2);

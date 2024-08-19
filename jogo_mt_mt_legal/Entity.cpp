@@ -1,10 +1,11 @@
 #include "Entity.h"
 
-Entity::Entity(): MyDrawable(), horizontalSpeed(0), verticalSpeed(0) { deslocamento.x = 0; deslocamento.y = 0; }
+Entity::Entity(): MyDrawable(), Updatable(), horizontalSpeed(0), verticalSpeed(0), onAir(1)
+{ deslocamento.x = 0; deslocamento.y = 0; }
 
 Entity::~Entity() { }
 
-int Entity::getNormaDeslocamento()
+float Entity::getNormaDeslocamento()
 {
 	return sqrt(deslocamento.x * deslocamento.x + deslocamento.y * deslocamento.y);
 }
