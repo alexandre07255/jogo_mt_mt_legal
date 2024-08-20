@@ -1,7 +1,7 @@
 #pragma once
 #include "Alive.h"
 
-class Hitbox : public Entity
+class Hitbox : public Being
 {
 protected:
 	bool target;

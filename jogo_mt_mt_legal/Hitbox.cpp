@@ -3,6 +3,7 @@
 #include "SceneManager.h"
 
 Hitbox::Hitbox():
+	Being(),
 	target(0),
 	owner(NULL),
 	boundedTo(NULL),

@@ -3,7 +3,6 @@
 #include "Level.h"
 #include <iostream>
 #include "SceneManager.h"
-#include "Level.h"
 using namespace std;
 
 CollisionManager* CollisionManager::instance(NULL);

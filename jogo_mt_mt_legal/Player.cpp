@@ -194,52 +194,52 @@ void Player::attack()
 	hitbox->setOwner(this);
 	hitbox->setBoundedTo(this);
 	hitbox->setDuration(attackHitboxDuration[attackCounter]);
-	float horKnock = 0;
+	float horKnock = 0.0;
 
 	switch (attackCounter)
 	{
 	case 0:
-		hitbox->setSize(sf::Vector2f(50, 100));
-		hitbox->setVerKnockback(-10);
-		hitbox->setDamage(1);
-		hitbox->setHitstun(15);
-		horKnock = 30;
+		hitbox->setSize(sf::Vector2f(50.0, 100.0));
+		hitbox->setVerKnockback(-10.0);
+		hitbox->setDamage(1.0);
+		hitbox->setHitstun(15.0);
+		horKnock = 30.0;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, 0));
+			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, 0.0));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
 			float relX = hitbox->getSize().x;
-			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 0));
+			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 0.0));
 			hitbox->setHorKnockback(-horKnock);
 		}
 		break;
 	case 1:
-		hitbox->setSize(sf::Vector2f(100, 50));
-		hitbox->setVerKnockback(-10);
-		hitbox->setDamage(1);
-		hitbox->setHitstun(35);
-		horKnock = 60;
+		hitbox->setSize(sf::Vector2f(100.0, 50.0));
+		hitbox->setVerKnockback(-10.0);
+		hitbox->setDamage(1.0);
+		hitbox->setHitstun(35.0);
+		horKnock = 60.0;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, 25));
+			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, 25.0));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
 			float relX = hitbox->getSize().x;
-			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 25));
+			hitbox->setRelativePosition(sf::Vector2f(-relX + 10.0, 25.0));
 			hitbox->setHorKnockback(-horKnock);
 		}
 		break;
 	case 2:
-		hitbox->setSize(sf::Vector2f(100, 100));
-		hitbox->setVerKnockback(-30);
-		hitbox->setDamage(1);
-		hitbox->setHitstun(50);
-		horKnock = 40;
+		hitbox->setSize(sf::Vector2f(100.0, 100.0));
+		hitbox->setVerKnockback(-30.0);
+		hitbox->setDamage(1.0);
+		hitbox->setHitstun(50.0);
+		horKnock = 40.0;
 		if (facingRight)
 		{
 			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, -50));
@@ -260,9 +260,9 @@ const int Player::MAX_JUMP_BUFFER(8);
 const float Player::JUMP_STRENGTH(2.2);
 const int Player::MAX_JUMP_PERIOD(15);
 
-const float Player::MAX_HORIZONTAL_SPEED(10);
-const float Player::MAX_VERTICAL_SPEED(15);
-const float Player::ACCELARATION(2);
+const float Player::MAX_HORIZONTAL_SPEED(10.0);
+const float Player::MAX_VERTICAL_SPEED(15.0);
+const float Player::ACCELARATION(2.0);
 
 const int Player::MAX_HP(20);
 

@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="Alive.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
+    <ClCompile Include="Being.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collidable.cpp" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Alive.h" />
     <ClInclude Include="AttackHitbox.h" />
+    <ClInclude Include="Being.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collidable.h" />
