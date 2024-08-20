@@ -154,9 +154,11 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyDrawable.cpp" />
     <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Updatable.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -181,9 +183,11 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MyDrawable.h" />
     <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="Updatable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

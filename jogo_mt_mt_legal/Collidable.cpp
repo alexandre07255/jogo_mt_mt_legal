@@ -1,5 +1,4 @@
 #include "Collidable.h"
 
-void Collidable::movement() {
-	return;
-}
+Collidable::Collidable():friction(0){}
+

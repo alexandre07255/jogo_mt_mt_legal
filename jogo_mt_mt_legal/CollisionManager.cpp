@@ -50,8 +50,7 @@ void CollisionManager::testCollison(Entity* pE)
 	bool collidedDown = 0;
 	for (int i = 0; i < size; i++)
 	{
-		//cu
-		collidableBounds = (*it)->getGlobalBounds();
+		collidableBounds = (*it)->getBounds();
 
 		if (isColliding(collidableBounds,targetBounds)) {
 			collided = 1;

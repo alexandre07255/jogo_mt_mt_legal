@@ -181,7 +181,7 @@ const bool EnemyMelee::checkOnLedge() {
     }
 
     for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()); it++) {
-        if (ret.intersects((*it)->getGlobalBounds()))
+        if (ret.intersects((*it)->getBounds()))
             return false;
     }
 

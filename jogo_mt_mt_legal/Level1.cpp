@@ -1,6 +1,7 @@
 #include "Level1.h"
 #include"graphics.h"
 #include "EnemyMelee.h"
+#include "Terrain.h"
 #include "CollisionManager.h"
 #include "Level2.h"
 #include "SceneManager.h"
@@ -15,12 +16,12 @@ Level1::Level1(bool isPlayer2):Level() {
 
     Player* player;
     Player* player2 = NULL;
-    Collidable* plataforma, * parede, * teto;
+    Terrain* plataforma, * parede, * teto;
     EnemyMelee* inimigo;
 
-    plataforma = new Collidable;
-    parede = new Collidable;
-    teto = new Collidable;
+    plataforma = new Terrain;
+    parede = new Terrain;
+    teto = new Terrain;
 
     plataforma->setPosition(0, 1000);
     plataforma->setFillColor(sf::Color::Red);

@@ -3,6 +3,7 @@
 #include "EnemyMelee.h"
 #include "CollisionManager.h"
 #include "SceneManager.h"
+#include "Terrain.h"
 
 Level2::Level2(bool isPlayer2): Level() {
     Graphics* instance = Graphics::getInstance();
@@ -14,12 +15,12 @@ Level2::Level2(bool isPlayer2): Level() {
 
     Player* player;
     Player* player2 = NULL;
-    Collidable* plataforma, * parede, * teto;
+    Terrain* plataforma, * parede, * teto;
     EnemyMelee* inimigo;
 
-    plataforma = new Collidable;
-    parede = new Collidable;
-    teto = new Collidable;
+    plataforma = new Terrain;
+    parede = new Terrain;
+    teto = new Terrain;
 
     plataforma->setPosition(0, 1000);
     plataforma->setFillColor(sf::Color::Red);
