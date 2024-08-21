@@ -106,24 +106,24 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 {
 	SceneManager* instance = SceneManager::getInstance();
 	Level* level = static_cast<Level*>(instance->top());
-	list<Alive*>* aliveList = level->getAliveList();
+	list<Hittable*>* hittableList = level->getHittableList();
 
 	if (hitbox == NULL) { return; }
 	bool neutral = 0;
 	//Fazer neutral
-	if (aliveList == NULL) { cout << "No one is alive" << endl; return; }
-	list<Alive*>::iterator it = aliveList->begin();
-	int size = aliveList->size();
+	if (hittableList == NULL) { cout << "No one is hittable" << endl; return; }
+	list<Hittable*>::iterator it = hittableList->begin();
+	int size = hittableList->size();
 
 	sf::FloatRect hitboxBounds = hitbox->getGlobalBounds();
-	sf::FloatRect aliveBounds;
+	sf::FloatRect hittableBounds;
 
 	for (int i = 0; i < size; i++)
 	{
 		if (target == (*it)->getIsAlly())
 		{
-			aliveBounds = (*it)->getGlobalBounds();
-			if (isColliding(hitboxBounds, aliveBounds))
+			hittableBounds = (*it)->getGlobalBounds();
+			if (isColliding(hitboxBounds, hittableBounds))
 			{
 				hitbox->hitSolution((*it));
 			}

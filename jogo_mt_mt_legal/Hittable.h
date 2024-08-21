@@ -1,6 +1,6 @@
 #pragma once
 #include "Entity.h"
-class Alive : public Entity
+class Hittable : public Entity
 {	
 protected:
 	int hp;
@@ -9,7 +9,7 @@ protected:
 	int stun;
 	bool facingRight;
 public:
-	Alive(const bool ally, const int health);
+	Hittable(const bool ally, const int health);
 	enum States
 	{
 		FREE,

@@ -6,7 +6,7 @@
 #include <iostream>
 #include "SceneManager.h"
 
-Enemy::Enemy() :Alive(false, 10) {
+Enemy::Enemy() :Hittable(false, 10) {
 	isWorth = 0;
 	setPosition(sf::Vector2f(10, 10));
 	setSize(sf::Vector2f(100, 100));
@@ -90,7 +90,7 @@ void Enemy::movementPATROLLING()
 	}
 }
 
-Player* Enemy::searchPlayer() {
+Player* Enemy::searchPlayer() const{
 	CollisionManager* instance = CollisionManager::getInstance();
 	Level* nivel = static_cast<Level*>(SceneManager::getInstance()->top());
 
@@ -101,7 +101,7 @@ Player* Enemy::searchPlayer() {
 	Level* level = static_cast<Level*>(LevelInstance->top());
 
 	list<Collidable*>* collidables = level->getCollidable();
-	list<Alive*>* alive = level->getAliveList();
+	list<Hittable*>* hittable = level->getHittableList();
 
 	int flag = 1;
 
@@ -143,7 +143,7 @@ Player* Enemy::searchPlayer() {
 			ret.left = xFinal;
 			ret.top = yFinal;
 
-			for (list<Alive*>::iterator it = alive->begin();it != alive->end();it++) {
+			for (list<Hittable*>::iterator it = hittable->begin();it != hittable->end();it++) {
 				if (ret.intersects((*it)->getGlobalBounds()) && (*it)->getIsAlly()) {
 					//std::cout << "player achado" << endl;
 					return (Player*)*it;
@@ -168,7 +168,7 @@ void Enemy::movementHITSTUN()
 {
 	if (stun <= 0)
 	{
-		state = Alive::PATROLLING;
+		state = Hittable::PATROLLING;
 		setFillColor(sf::Color::White);
 	}
 	else

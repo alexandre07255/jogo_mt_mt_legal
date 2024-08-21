@@ -7,13 +7,13 @@
 class AttackHitbox : public Hitbox
 {
 private:
-	int verKnockback;
-	int horKnockback;
+	float verKnockback;
+	float horKnockback;
 	int damage;
 	int hitstun;
-	list<Alive*> hitList;
+	list<Hittable*> hitList;
 	bool hasHit;
-	const bool hasAlreadyHit(Alive* pA);
+	const bool hasAlreadyHit(Hittable* pA);
 public:
 	AttackHitbox();
 	void setHorKnockback(const int horKnock);
@@ -21,6 +21,6 @@ public:
 	void setDamage(const int dmg);
 	void setHitstun(const int stun);
 	void movement();
-	void hitSolution(Alive* hit);
+	void hitSolution(Hittable* hit);
 };
 

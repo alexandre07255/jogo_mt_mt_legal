@@ -35,9 +35,9 @@ void AttackHitbox::setHitstun(const int stun)
 	hitstun = stun;
 }
 
-const bool AttackHitbox::hasAlreadyHit(Alive* pA)
+const bool AttackHitbox::hasAlreadyHit(Hittable* pA)
 {
-	list<Alive*>::iterator it = hitList.begin();
+	list<Hittable*>::iterator it = hitList.begin();
 	int size = hitList.size();
 	for (int i = 0; i < size; i++)
 	{
@@ -50,7 +50,7 @@ const bool AttackHitbox::hasAlreadyHit(Alive* pA)
 
 void AttackHitbox::movement()
 {
-	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || owner->getState() != Alive::ATKCANCEL ) ) )
+	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || owner->getState() != Hittable::ATKCANCEL ) ) )
 	{
 		Scene* activeScene = SceneManager::getInstance()->top();
 		list<Updatable*>* upList = activeScene->getUpdatables();
@@ -73,7 +73,7 @@ void AttackHitbox::movement()
 	duration--;
 }
 
-void AttackHitbox::hitSolution(Alive* hit)
+void AttackHitbox::hitSolution(Hittable* hit)
 {
 	if (hasAlreadyHit(hit)) { return; }
 
@@ -82,11 +82,11 @@ void AttackHitbox::hitSolution(Alive* hit)
 	if (!hasHit)
 	{
 		hasHit = 1;
-		owner->setState(Alive::ATKCANCEL);
+		owner->setState(Hittable::ATKCANCEL);
 		owner->setStun(hitstun);
 	}
 
-	hit->setState(Alive::HITSTUN);
+	hit->setState(Hittable::HITSTUN);
 	hit->setStun(hitstun);
 	hit->dealDamage(damage);
 	hit->setHorizontalVelocity(horKnockback);

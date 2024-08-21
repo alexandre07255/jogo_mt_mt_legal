@@ -159,7 +159,7 @@ void EnemyMelee::movementFOLLOWING() {
 
 const int EnemyMelee::JUMP_STRENGTH(15);
 
-const bool EnemyMelee::checkOnLedge() {
+const bool EnemyMelee::checkOnLedge() const{
     CollisionManager* instance = CollisionManager::getInstance();
 
     SceneManager* LevelInstance = SceneManager::getInstance();

@@ -60,10 +60,10 @@ Level1::Level1(bool isPlayer2):Level() {
     inimigo = new EnemyMelee;
     inimigo->setPosition(1000, 900);
 
-    aliveList->push_back(player);
+    hittableList->push_back(player);
     if (isPlayer2)
-        aliveList->push_back(player2);
-    aliveList->push_back(inimigo);
+        hittableList->push_back(player2);
+    hittableList->push_back(inimigo);
 
     updatables->push_back(player);
     if (isPlayer2)

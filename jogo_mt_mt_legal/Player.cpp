@@ -8,7 +8,7 @@
 using namespace std;
 
 Player::Player(const bool isPlayer2, const bool ally, const int health) :
-	Alive(1, MAX_HP),
+	Hittable(1, MAX_HP),
 	jumpBuffer(0),
 	isStillJumping(0),
 	jumpLength(0),
@@ -201,8 +201,8 @@ void Player::attack()
 	case 0:
 		hitbox->setSize(sf::Vector2f(50.0, 100.0));
 		hitbox->setVerKnockback(-10.0);
-		hitbox->setDamage(1.0);
-		hitbox->setHitstun(15.0);
+		hitbox->setDamage(1);
+		hitbox->setHitstun(15);
 		horKnock = 30.0;
 		if (facingRight)
 		{
@@ -219,8 +219,8 @@ void Player::attack()
 	case 1:
 		hitbox->setSize(sf::Vector2f(100.0, 50.0));
 		hitbox->setVerKnockback(-10.0);
-		hitbox->setDamage(1.0);
-		hitbox->setHitstun(35.0);
+		hitbox->setDamage(1);
+		hitbox->setHitstun(35);
 		horKnock = 60.0;
 		if (facingRight)
 		{
@@ -237,9 +237,9 @@ void Player::attack()
 	case 2:
 		hitbox->setSize(sf::Vector2f(100.0, 100.0));
 		hitbox->setVerKnockback(-30.0);
-		hitbox->setDamage(1.0);
-		hitbox->setHitstun(50.0);
-		horKnock = 40.0;
+		hitbox->setDamage(1);
+		hitbox->setHitstun(50);
+		horKnock = 10.0;
 		if (facingRight)
 		{
 			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, -50));

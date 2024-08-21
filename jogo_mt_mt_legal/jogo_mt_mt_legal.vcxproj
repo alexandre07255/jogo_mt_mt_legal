@@ -133,7 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Alive.cpp" />
+    <ClCompile Include="Hittable.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
     <ClCompile Include="Being.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -154,13 +154,14 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyDrawable.cpp" />
     <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="ObstacleHitbox.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Updatable.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Alive.h" />
+    <ClInclude Include="Hittable.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="Being.h" />
     <ClInclude Include="Button.h" />
@@ -176,11 +177,11 @@
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />
     <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="math\Coord.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MyDrawable.h" />
     <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="ObstacleHitbox.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />

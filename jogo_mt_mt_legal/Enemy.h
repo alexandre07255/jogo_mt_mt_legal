@@ -1,8 +1,8 @@
 #pragma once
-#include "Alive.h"
+#include "Hittable.h"
 #include "Player.h"
 
-class Enemy : public Alive
+class Enemy : public Hittable
 {
 protected:
 	int isWorth;
@@ -17,6 +17,6 @@ public:
 	virtual void movementPATROLLING();
 	void movementHITSTUN();
 	virtual void movementFOLLOWING();
-	Player* searchPlayer();
+	Player* searchPlayer() const;
 };
 

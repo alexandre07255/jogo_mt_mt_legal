@@ -22,7 +22,7 @@ void Hitbox::setTarget(const bool tar)
 	target = tar;
 }
 
-void Hitbox::setOwner(Alive* own)
+void Hitbox::setOwner(Hittable* own)
 {
 	owner = own;
 }

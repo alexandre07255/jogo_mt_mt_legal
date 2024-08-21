@@ -7,9 +7,9 @@
 class Level: public Scene
 {
 protected:
-	 //So that other objects can call methods and modify the updatables and drawables lists //Colocar aliveList e collidables aqui também
+	 //So that other objects can call methods and modify the updatables and drawables lists //Colocar HittableList e collidables aqui também
 	list<Collidable*>* collidables;
-	list<Alive*>* aliveList;
+	list<Hittable*>* hittableList;
 	Player* pPlayer1;
 	Player* pPlayer2;
 	bool endingOnRight;
@@ -20,7 +20,7 @@ public:
 	virtual ~Level();
 	void update();
 	list<Collidable*>* getCollidable();
-	list<Alive*>* getAliveList();
+	list<Hittable*>* getHittableList();
 
 	//void loadLevel1(bool isPlayer2);
 	//void loadLevel2(bool isPlayer2);

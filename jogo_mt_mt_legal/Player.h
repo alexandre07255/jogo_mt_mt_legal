@@ -1,7 +1,7 @@
 #pragma once
-#include "Alive.h"
+#include "Hittable.h"
 
-class Player : public Alive
+class Player : public Hittable
 {
 private:
 
