@@ -151,7 +151,7 @@ Player* Enemy::searchPlayer() const{
 			}
 
 			for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()) && flag; it++) {
-				if (ret.intersects((*it)->getGlobalBounds()))
+				if (ret.intersects((*it)->getBounds()))
 					flag = 0;
 			}
 		}
