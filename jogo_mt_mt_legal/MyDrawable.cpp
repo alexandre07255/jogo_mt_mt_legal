@@ -1,13 +1,18 @@
 #include "MyDrawable.h"
 
 MyDrawable::MyDrawable(string path, sf::Vector2f size, sf::Vector2f pos) :
-	sf::RectangleShape(size)
+	sf::RectangleShape(size),id(idCont++)
 {
 	sf::Texture* texture = new sf::Texture();
 	texture->loadFromFile(path);
 	setTexture(texture);
 	setOrigin(pos);
 }
+
+MyDrawable::MyDrawable() :id(idCont++) {
+
+}
+
 MyDrawable::~MyDrawable() { }
 
 void MyDrawable::setTextura(string path) {
@@ -16,4 +21,10 @@ void MyDrawable::setTextura(string path) {
 	textura->loadFromFile(path);
 
 	setTexture(textura);
+}
+
+int MyDrawable::idCont(0);
+
+int MyDrawable::getId() {
+	return id;
 }
