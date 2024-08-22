@@ -182,7 +182,7 @@ void Player::movementATTACK()
 	}
 	else
 		state = FREE;
-	move(horizontalSpeed * 0.15, (++verticalSpeed) * 0.85);
+	move((float) horizontalSpeed * 0.15, (float) (++verticalSpeed) * 0.85);
 	//move(sf::Vector2f(horizontalSpeed*0.15, (++verticalSpeed)*0.85));
 }
 
@@ -201,7 +201,7 @@ void Player::attack()
 	case 0:
 		hitbox->setSize(sf::Vector2f(50.0, 100.0));
 		hitbox->setVerKnockback(-10.0);
-		hitbox->setDamage(1);
+		hitbox->setDamage(3);
 		hitbox->setHitstun(15);
 		horKnock = 30.0;
 		if (facingRight)
@@ -219,7 +219,7 @@ void Player::attack()
 	case 1:
 		hitbox->setSize(sf::Vector2f(100.0, 50.0));
 		hitbox->setVerKnockback(-10.0);
-		hitbox->setDamage(1);
+		hitbox->setDamage(3);
 		hitbox->setHitstun(35);
 		horKnock = 60.0;
 		if (facingRight)
@@ -237,7 +237,7 @@ void Player::attack()
 	case 2:
 		hitbox->setSize(sf::Vector2f(100.0, 100.0));
 		hitbox->setVerKnockback(-30.0);
-		hitbox->setDamage(1);
+		hitbox->setDamage(3);
 		hitbox->setHitstun(50);
 		horKnock = 10.0;
 		if (facingRight)

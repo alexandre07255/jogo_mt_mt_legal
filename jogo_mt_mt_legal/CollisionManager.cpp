@@ -110,7 +110,7 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 	List<Hittable>* hittableList = level->getHittableList();
 
 	if (hitbox == NULL) { return; }
-	bool neutral = 0;
+	bool neutral = (hitbox->getOwner() == NULL);
 	//Fazer neutral
 	if (hittableList == NULL) { cout << "No one is hittable" << endl; return; }
 	ListIterator<Hittable> it = hittableList->begin();
@@ -121,7 +121,7 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 
 	for (int i = 0; i < size; i++)
 	{
-		if (target == (*it)->getIsAlly())
+		if ((target == (*it)->getIsAlly()) || neutral)
 		{
 			hittableBounds = (*it)->getGlobalBounds();
 			if (isColliding(hitboxBounds, hittableBounds))

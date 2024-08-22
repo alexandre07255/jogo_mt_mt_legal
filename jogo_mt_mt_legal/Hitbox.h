@@ -13,6 +13,7 @@ public:
 	Hitbox();
 	void setTarget(const bool tar);
 	void setOwner(Hittable* own);
+	Hittable* getOwner();
 	void setBoundedTo(Entity* boundTo);
 	void setRelativePosition(sf::Vector2f rel);
 	void setDuration(const int dur);

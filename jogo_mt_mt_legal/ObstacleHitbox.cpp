@@ -12,9 +12,7 @@ ObstacleHitbox::ObstacleHitbox(Obstacle* obs):
 	horLaunchStrength(-1),
 	damage(0),
 	hitList(),
-	cooldown(0),
-	isPermanent(0),
-	onCooldown(0)
+	cooldown(0)
 {
 
 }
@@ -43,11 +41,6 @@ void ObstacleHitbox::setCooldown(const int cd)
 	cooldown = cd;
 }
 
-void ObstacleHitbox::setIsPermanent(const bool perm)
-{
-	isPermanent = perm;
-}
-
 const bool ObstacleHitbox::hasAlreadyHit(Hittable* pA)
 {
 	ListIterator<Hittable> it = hitList.begin();
@@ -70,6 +63,7 @@ void ObstacleHitbox::movement()
 		upList->remove(this);
 		List<MyDrawable>* drawList = activeScene->getDrawables();
 		drawList->remove(this);
+		obstacle->setSpawnedHitbox(0);
 		delete this;
 		return;
 	}
@@ -81,26 +75,16 @@ void ObstacleHitbox::movement()
 	}
 
 	CollisionManager* collisionInstance = CollisionManager::getInstance();
+	collisionInstance->testHit(target, this);
 
-	if (!onCooldown)
-	{
-		if (cont < duration)
-			collisionInstance->testHit(target, this);
-		else
-		{
-			onCooldown = 1;
-			cont = -1;
-		}
-	}
+
+	if (cont < cooldown)
+		cont++;
 	else
 	{
-		if (cont >= cooldown)
-		{
-			onCooldown = 0;
-			cont = -1;
-		}
+		cont = 0;
+		hitList.clear();
 	}
-	cont++;
 }
 
 void ObstacleHitbox::hitSolution(Hittable* hit)
@@ -109,6 +93,7 @@ void ObstacleHitbox::hitSolution(Hittable* hit)
 
 	hitList.push_back(hit);
 
+	cont = 0;
 	hit->dealDamage(damage);
 	hit->setHorizontalVelocity(horLaunchStrength);
 	hit->setVerticalVelocity(verLaunchStrength);

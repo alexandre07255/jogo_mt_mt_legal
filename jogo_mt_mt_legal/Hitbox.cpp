@@ -27,6 +27,11 @@ void Hitbox::setOwner(Hittable* own)
 	owner = own;
 }
 
+Hittable* Hitbox::getOwner()
+{
+	return owner;
+}
+
 void Hitbox::setBoundedTo(Entity* boundTo)
 {
 	boundedTo = boundTo;

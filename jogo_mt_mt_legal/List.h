@@ -70,6 +70,10 @@ void List<TYPE>::clear()
 		}
 		Element<TYPE>* removed = it.getPContent();
 		delete removed;
+
+		pFirstElement = pLastElement;
+		pLastElement->setPrevious(NULL);
+		pLastElement->setNext(NULL);
 		listSize = 0;
 	}
 }
