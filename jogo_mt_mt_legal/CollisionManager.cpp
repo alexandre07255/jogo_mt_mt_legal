@@ -28,7 +28,7 @@ void CollisionManager::testCollison(Entity* pE)
 {
 	SceneManager* instance = SceneManager::getInstance();
 	Level* level = static_cast<Level*>(instance->top());
-	list<Collidable*>* collidables = level->getCollidable();
+	List<Collidable>* collidables = level->getCollidable();
 
 	if (collidables == NULL)
 		return;
@@ -39,7 +39,7 @@ void CollisionManager::testCollison(Entity* pE)
 	float x, y;
 
 	int size = collidables->size();
-	list<Collidable*>::iterator it = collidables->begin();
+	ListIterator<Collidable> it = collidables->begin();
 
 	int directionX = 0;
 	int directionY = 0;
@@ -105,13 +105,13 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 {
 	SceneManager* instance = SceneManager::getInstance();
 	Level* level = static_cast<Level*>(instance->top());
-	list<Hittable*>* hittableList = level->getHittableList();
+	List<Hittable>* hittableList = level->getHittableList();
 
 	if (hitbox == NULL) { return; }
 	bool neutral = 0;
 	//Fazer neutral
 	if (hittableList == NULL) { cout << "No one is hittable" << endl; return; }
-	list<Hittable*>::iterator it = hittableList->begin();
+	ListIterator<Hittable> it = hittableList->begin();
 	int size = hittableList->size();
 
 	sf::FloatRect hitboxBounds = hitbox->getGlobalBounds();

@@ -16,10 +16,10 @@ MainMenu::MainMenu() {
 void MainMenu::update() {
 	//chama o movement pra cada botão, e depois chama as coisas pra cada botão específico, como level é uma scene, ele precisa de updatables,
 	//ai a minha solução de movement pra botão foi de enfiar o negocio da cor mesmo
-	list<Updatable*>::iterator itCurrent = updatables->begin();
+	ListIterator<Updatable> itCurrent = updatables->begin();
 	if (updatables->size() > 0)
 	{
-		list<Updatable*>::iterator itNext = itCurrent;
+		ListIterator<Updatable> itNext = itCurrent;
 		itNext++;
 		while (itNext != updatables->end())
 		{
@@ -30,10 +30,11 @@ void MainMenu::update() {
 		(*itCurrent)->movement();
 	}
 
-	list<Button*>::iterator itButton = buttonList->begin();
+	ListIterator<Button> itButton = buttonList->begin();
 	if (buttonList->size() > 0)
 	{
-		list<Button*>::iterator itButtonNext = itButton;
+		ListIterator<Button> itButtonNext;
+		itButtonNext = itButton;
 		itButtonNext++;
 		while (itButtonNext != buttonList->end())
 		{

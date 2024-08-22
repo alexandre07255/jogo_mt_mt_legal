@@ -164,7 +164,7 @@ const bool EnemyMelee::checkOnLedge() const{
 
     SceneManager* LevelInstance = SceneManager::getInstance();
     Level* level = static_cast<Level*>(LevelInstance->top());
-    list<Collidable*>* collidables = level->getCollidable();
+    List<Collidable>* collidables = level->getCollidable();
 
     sf::FloatRect ret;
 
@@ -180,7 +180,7 @@ const bool EnemyMelee::checkOnLedge() const{
         ret.left = getPosition().x;
     }
 
-    for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()); it++) {
+    for (ListIterator<Collidable> it = collidables->begin(); (it != collidables->end()); it++) {
         if (ret.intersects((*it)->getBounds()))
             return false;
     }

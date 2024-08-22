@@ -1,13 +1,15 @@
 #pragma once
 #include "Hitbox.h"
 #include "Obstacle.h"
+#include "List.h"
 
 class ObstacleHitbox : public Hitbox
 {
 private:
-	int launchStrength;
-	int verKnockback;
-	int horKnockback;
+	float verLaunchStrength;
+	float horLaunchStrength;
 	int damage;
+	List<Hittable> hitList;
+
 };
 

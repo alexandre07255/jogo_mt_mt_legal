@@ -1,33 +1,33 @@
 #include "Scene.h"
 
 Scene::Scene(): drawables(NULL), updatables(NULL) {
-	drawables = new list<MyDrawable*>;
-	updatables = new list<Updatable*>;
+	drawables = new List<MyDrawable>;
+	updatables = new List<Updatable>;
 }
 
-void Scene::setDrawables(list<MyDrawable*>* drawlist) {
+void Scene::setDrawables(List<MyDrawable>* drawlist) {
 	drawables = drawlist;
 }
 
-list<MyDrawable*>* Scene::getDrawables() const
+List<MyDrawable>* Scene::getDrawables() const
 {
 	return drawables;
 }
 
-void Scene::setUpdatables(list<Updatable*>* updatelist) {
+void Scene::setUpdatables(List<Updatable>* updatelist) {
 	updatables = updatelist;
 }
 
-list<Updatable*>* Scene::getUpdatables() const
+List<Updatable>* Scene::getUpdatables() const
 {
 	return updatables;
 }
 
 void Scene::draw(sf::RenderWindow* window) {
-	list<MyDrawable*>::iterator itCurrent = drawables->begin();
+	ListIterator<MyDrawable> itCurrent = drawables->begin();
 	if (drawables->size() > 0)
 	{
-		list<MyDrawable*>::iterator itNext = itCurrent;
+		ListIterator<MyDrawable> itNext = itCurrent;
 		itNext++;
 		while (itNext != drawables->end())
 		{
@@ -41,10 +41,10 @@ void Scene::draw(sf::RenderWindow* window) {
 
 void Scene::update()
 {
-	list<Updatable*>::iterator itCurrent = updatables->begin();
+	ListIterator<Updatable> itCurrent = updatables->begin();
 	if (updatables->size() > 1)
 	{
-		list<Updatable*>::iterator itNext = itCurrent;
+		ListIterator<Updatable> itNext = itCurrent;
 		itNext++;
 		while (itNext != updatables->end())
 		{

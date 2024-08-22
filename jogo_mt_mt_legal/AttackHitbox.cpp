@@ -5,8 +5,8 @@ using namespace std;
 
 AttackHitbox::AttackHitbox() :
 	Hitbox(),
-	horKnockback(-1),
-	verKnockback(-1),
+	horKnockback(-1.0),
+	verKnockback(-1.0),
 	damage(-1),
 	hitList(),
 	hasHit(0),
@@ -15,12 +15,12 @@ AttackHitbox::AttackHitbox() :
 	hitList.clear();
 }
 
-void AttackHitbox::setHorKnockback(const int horKnock)
+void AttackHitbox::setHorKnockback(const float horKnock)
 {
 	horKnockback = horKnock;
 }
 
-void AttackHitbox::setVerKnockback(const int verKnock)
+void AttackHitbox::setVerKnockback(const float verKnock)
 {
 	verKnockback = verKnock;
 }
@@ -37,7 +37,7 @@ void AttackHitbox::setHitstun(const int stun)
 
 const bool AttackHitbox::hasAlreadyHit(Hittable* pA)
 {
-	list<Hittable*>::iterator it = hitList.begin();
+	ListIterator<Hittable> it = hitList.begin();
 	int size = hitList.size();
 	for (int i = 0; i < size; i++)
 	{
@@ -53,9 +53,9 @@ void AttackHitbox::movement()
 	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || owner->getState() != Hittable::ATKCANCEL ) ) )
 	{
 		Scene* activeScene = SceneManager::getInstance()->top();
-		list<Updatable*>* upList = activeScene->getUpdatables();
+		List<Updatable>* upList = activeScene->getUpdatables();
 		upList->remove(this);
-		list<MyDrawable*>* drawList = activeScene->getDrawables();
+		List<MyDrawable>* drawList = activeScene->getDrawables();
 		drawList->remove(this);
 		delete this;
 		return;

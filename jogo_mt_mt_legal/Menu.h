@@ -1,12 +1,13 @@
 #pragma once
 #include "Button.h"
 #include "Scene.h"
-#include <list>
+#include "List.h"
+#include "List.h"
 
 class Menu: public Scene
 {
 protected:
-	list<Button*>* buttonList;
+	List<Button>* buttonList;
 	sf::Vector2f size;
 public:
 	Menu();

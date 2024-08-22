@@ -6,8 +6,8 @@
 
 Level::Level(): hittableList(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL)
 {
-    hittableList = new list<Hittable*>;
-    collidables = new list<Collidable*>;
+    hittableList = new List<Hittable>;
+    collidables = new List<Collidable>;
 }
 
 Level::~Level() //TODO
@@ -16,10 +16,10 @@ Level::~Level() //TODO
 
 void Level::update()
 {
-	list<Updatable*>::iterator itCurrent = updatables->begin();
+	ListIterator<Updatable> itCurrent = updatables->begin();
 	if (updatables->size() > 0)
 	{
-		list<Updatable*>::iterator itNext = itCurrent;
+		ListIterator<Updatable> itNext = itCurrent;
 		itNext++;
 		while (itNext != updatables->end())
 		{
@@ -48,11 +48,11 @@ void Level::update()
 	}
 }
 
-list<Collidable*>* Level::getCollidable() {
+List<Collidable>* Level::getCollidable() {
 	return collidables;
 }
 
-list<Hittable*>* Level::getHittableList() {
+List<Hittable>* Level::getHittableList() {
 	return hittableList;
 }
 

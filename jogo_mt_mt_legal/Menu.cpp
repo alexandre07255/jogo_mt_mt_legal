@@ -1,7 +1,7 @@
 #include "Menu.h"
 
 Menu::Menu() {
-	buttonList = new list<Button*>;
+	buttonList = new List<Button>;
 	size = sf::Vector2f(0, 0);
 }
 

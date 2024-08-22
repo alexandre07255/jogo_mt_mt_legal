@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Element.cpp" />
     <ClCompile Include="Hittable.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
     <ClCompile Include="Being.cpp" />
@@ -150,6 +151,8 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="List.cpp" />
+    <ClCompile Include="ListIterator.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyDrawable.cpp" />
@@ -163,6 +166,7 @@
     <ClCompile Include="Updatable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Element.h" />
     <ClInclude Include="Hittable.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="Being.h" />
@@ -178,6 +182,8 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="ListIterator.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Menu.h" />

@@ -100,8 +100,8 @@ Player* Enemy::searchPlayer() const{
 	SceneManager* LevelInstance = SceneManager::getInstance();
 	Level* level = static_cast<Level*>(LevelInstance->top());
 
-	list<Collidable*>* collidables = level->getCollidable();
-	list<Hittable*>* hittable = level->getHittableList();
+	List<Collidable>* collidables = level->getCollidable();
+	List<Hittable>* hittable = level->getHittableList();
 
 	int flag = 1;
 
@@ -143,14 +143,14 @@ Player* Enemy::searchPlayer() const{
 			ret.left = xFinal;
 			ret.top = yFinal;
 
-			for (list<Hittable*>::iterator it = hittable->begin();it != hittable->end();it++) {
+			for (ListIterator<Hittable> it = hittable->begin();it != hittable->end();it++) {
 				if (ret.intersects((*it)->getGlobalBounds()) && (*it)->getIsAlly()) {
 					//std::cout << "player achado" << endl;
 					return (Player*)*it;
 				}
 			}
 
-			for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()) && flag; it++) {
+			for (ListIterator<Collidable> it = collidables->begin(); (it != collidables->end()) && flag; it++) {
 				if (ret.intersects((*it)->getBounds()))
 					flag = 0;
 			}

@@ -1,7 +1,7 @@
 #pragma once
 #include "Hitbox.h"
 #include "Collidable.h"
-#include <list>
+#include "List.h"
 
 
 class CollisionManager
