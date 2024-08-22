@@ -11,7 +11,7 @@ Support::Support(Platform* plat):Hittable(false,MAXHEALTH),boundedTo(NULL) {
 		SceneManager* instance = SceneManager::getInstance();
 		
 		Level* active = static_cast<Level*>(instance->top());
-		list<Collidable*>* collidables = active->getCollidable();
+		List<Collidable>* collidables = active->getCollidable();
 
 		float positionY = boundedTo->getPosition().y + boundedTo->getSize().y;
 		float positionX = boundedTo->getPosition().x + boundedTo->getSize().x / 2;
@@ -32,7 +32,7 @@ Support::Support(Platform* plat):Hittable(false,MAXHEALTH),boundedTo(NULL) {
 			ret.left = positionX;
 			ret.top = yFinal;
 
-			for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()) && flag; it++) {
+			for (ListIterator<Collidable> it = collidables->begin(); (it != collidables->end()) && flag; it++) {
 				if (ret.intersects((*it)->getBounds()))
 					flag = 0;
 			}

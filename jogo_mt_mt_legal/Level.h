@@ -20,6 +20,7 @@ public:
 	virtual ~Level();
 	void update();
 	List<Collidable>* getCollidable();
+	void addHittable(Hittable* pH);
 	List<Hittable>* getHittableList();
 
 	//void loadLevel1(bool isPlayer2);
