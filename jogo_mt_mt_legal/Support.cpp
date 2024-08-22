@@ -50,6 +50,14 @@ void Support::movement() {
 	if (hp <= 0) {
 		//remover coisas hehehe
 		boundedTo->setOnAir(true);
+		SceneManager* sinstance = SceneManager::getInstance();
+		Level* level = static_cast<Level*>(sinstance->top());
+
+		level->removeDrawable(this);
+		level->removeHittable(this);
+		level->removeUpdatable(this);
+
+		delete this;
 	}
 	std::cout << hp << endl;
 }

@@ -5,7 +5,8 @@ Hittable::Hittable(const bool ally, const int health):
 	hp(health),
 	stun(0),
 	state(FREE),
-	facingRight(1)
+	facingRight(1),
+	points(0)
 {
 
 }
@@ -38,4 +39,16 @@ const int Hittable::getState() const
 void Hittable::dealDamage(const int dmg)
 {
 	hp -= dmg;
+}
+
+int Hittable::getHp() {
+	return hp;
+}
+
+int Hittable::getPoints() {
+	return points;
+}
+
+void Hittable::setPoints(int p) {
+	points = p;
 }

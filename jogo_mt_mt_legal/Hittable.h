@@ -8,6 +8,7 @@ protected:
 	int state;
 	int stun;
 	bool facingRight;
+	int points;
 public:
 	Hittable(const bool ally, const int health);
 	enum States
@@ -25,5 +26,8 @@ public:
 	const int getState() const;
 	const bool getIsAlly() const;
 	void dealDamage(const int dmg);
+	int getHp();
+	int getPoints();
+	void setPoints(int p);
 };
 

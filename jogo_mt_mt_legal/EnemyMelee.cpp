@@ -5,7 +5,9 @@
 #include <time.h>
 #include "Level.h"
 
-EnemyMelee::EnemyMelee():Enemy(),walkingBuffer(0),waitBuffer(0),direction(0){}
+EnemyMelee::EnemyMelee():Enemy(),walkingBuffer(0),waitBuffer(0),direction(0){
+    setPoints(10);
+}
 
 void EnemyMelee::movementPATROLLING() {
     srand(time(NULL));
@@ -94,7 +96,17 @@ void EnemyMelee::movement() {
     }
 
     instance->testCollison(this);
-    //std::cout << state << endl;
+    
+    if (hp <= 0) {
+        SceneManager* sinstance = SceneManager::getInstance();
+        Level* level = static_cast<Level*>(sinstance->top());
+
+        level->removeDrawable(this);
+        level->removeHittable(this);
+        level->removeUpdatable(this);
+
+        delete this;
+    }
 }
 
 void EnemyMelee::movementFOLLOWING() {

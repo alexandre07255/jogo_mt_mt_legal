@@ -67,3 +67,11 @@ void Scene::addUpdatable(Updatable* pU)
 void Scene::addDrawable(MyDrawable* pD) {
 	drawables->push_back(pD);
 }
+
+void Scene::removeDrawable(MyDrawable* pD) {
+	drawables->remove(pD);
+}
+
+void Scene::removeUpdatable(Updatable* pU) {
+	updatables->remove(pU);
+}

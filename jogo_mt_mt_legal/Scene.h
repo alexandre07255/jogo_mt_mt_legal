@@ -18,5 +18,7 @@ public:
 	List<Updatable>* getUpdatables() const;
 	void addUpdatable(Updatable* pU);
 	void addDrawable(MyDrawable* pD);
+	void removeDrawable(MyDrawable* pD);
+	void removeUpdatable(Updatable* pU);
 };
 
