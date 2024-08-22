@@ -159,6 +159,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Support.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Updatable.cpp" />
   </ItemGroup>
@@ -188,6 +189,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Support.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Updatable.h" />
   </ItemGroup>

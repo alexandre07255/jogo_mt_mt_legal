@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include <iostream>
 
 Scene::Scene(): drawables(NULL), updatables(NULL) {
 	drawables = new list<MyDrawable*>;

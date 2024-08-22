@@ -5,6 +5,8 @@
 #include "CollisionManager.h"
 #include "Level2.h"
 #include "SceneManager.h"
+#include "Support.h"
+#include <iostream>
 
 Level1::Level1(bool isPlayer2):Level() {
     Graphics* instance = Graphics::getInstance();
@@ -18,6 +20,7 @@ Level1::Level1(bool isPlayer2):Level() {
     Player* player2 = NULL;
     Terrain* plataforma, * parede, * teto;
     EnemyMelee* inimigo;
+    Platform* fallPlatform;
 
     plataforma = new Terrain;
     parede = new Terrain;
@@ -38,6 +41,9 @@ Level1::Level1(bool isPlayer2):Level() {
     collidables->push_back(plataforma);
     collidables->push_back(parede);
     collidables->push_back(teto);
+    
+    fallPlatform = new Platform(500, 800, 100, 50);
+    collidables->push_back(fallPlatform);
 
     player = new Player(0, 1, 10);
     player->setFillColor(sf::Color::Cyan);
@@ -71,6 +77,7 @@ Level1::Level1(bool isPlayer2):Level() {
         updatables->push_back(player2);
     updatables->push_back(view);
     updatables->push_back(inimigo);
+    updatables->push_back(fallPlatform);
 
     drawables->push_back(player);
     if (isPlayer2)
@@ -79,8 +86,9 @@ Level1::Level1(bool isPlayer2):Level() {
     drawables->push_back(plataforma);
     drawables->push_back(inimigo);
     drawables->push_back(teto);
+    drawables->push_back(fallPlatform);
 
-    SceneManager::getInstance()->push(this);
+    //SceneManager::getInstance()->push(this);
 
     view->setPlayer1(player);
     if (isPlayer2)

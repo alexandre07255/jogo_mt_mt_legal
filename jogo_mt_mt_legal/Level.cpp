@@ -56,3 +56,6 @@ list<Hittable*>* Level::getHittableList() {
 	return hittableList;
 }
 
+void Level::addHittable(Hittable* pH) {
+	hittableList->push_back(pH);
+}

@@ -21,6 +21,7 @@ public:
 	void update();
 	list<Collidable*>* getCollidable();
 	list<Hittable*>* getHittableList();
+	void addHittable(Hittable* pH);
 
 	//void loadLevel1(bool isPlayer2);
 	//void loadLevel2(bool isPlayer2);
