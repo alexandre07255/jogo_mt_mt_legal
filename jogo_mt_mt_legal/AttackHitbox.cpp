@@ -89,6 +89,9 @@ void AttackHitbox::hitSolution(Hittable* hit)
 	hit->setState(Hittable::HITSTUN);
 	hit->setStun(hitstun);
 	hit->dealDamage(damage);
+	if (hit->getHp() <= 0) {
+		owner->setPoints(owner->getPoints() + hit->getPoints());
+	}
 	hit->setHorizontalVelocity(horKnockback);
 	hit->setVerticalVelocity(verKnockback);
 }

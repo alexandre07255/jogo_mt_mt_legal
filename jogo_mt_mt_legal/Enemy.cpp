@@ -7,7 +7,6 @@
 #include "SceneManager.h"
 
 Enemy::Enemy() :Hittable(false, 10) {
-	isWorth = 0;
 	setPosition(sf::Vector2f(10, 10));
 	setSize(sf::Vector2f(100, 100));
 	sightSize = 500;

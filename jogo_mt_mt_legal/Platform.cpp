@@ -34,6 +34,7 @@ void Platform::movement() {
 		firstStep = false;
 	}
 	else if (onAir) {
+		support = NULL;
 		move(0, 1);
 		instance->testCollison(this);
 	}

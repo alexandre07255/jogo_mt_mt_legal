@@ -22,6 +22,8 @@ public:
 	List<Collidable>* getCollidable();
 	void addHittable(Hittable* pH);
 	List<Hittable>* getHittableList();
+	void removeHittable(Hittable* pH);
+	void removeCollidable(Collidable* pC);
 
 	//void loadLevel1(bool isPlayer2);
 	//void loadLevel2(bool isPlayer2);

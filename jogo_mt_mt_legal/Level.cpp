@@ -59,3 +59,11 @@ List<Hittable>* Level::getHittableList() {
 void Level::addHittable(Hittable* pH) {
 	hittableList->push_back(pH);
 }
+
+void Level::removeHittable(Hittable* pH) {
+	hittableList->remove(pH);
+}
+
+void Level::removeCollidable(Collidable* pC) {
+	collidables->remove(pC);
+}
