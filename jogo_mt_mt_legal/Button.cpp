@@ -1,6 +1,6 @@
 #include "Button.h"
 #include "inputManager.h"
-#include "graphics.h"
+#include "GraphicManager.h"
 
 Button::Button(const int act) :Entity(), action(act) {
 	InputManager* instance = InputManager::getInstance();
@@ -15,7 +15,7 @@ const int Button::getAction() const
 }
 
 const bool Button::isMouseOn() {
-	Graphics* instance = Graphics::getInstance();
+	GraphicManager* instance = GraphicManager::getInstance();
 	sf::RenderWindow* window = instance->getWindow();
 
 	int mouseX = mouse->getPosition(*window).x;

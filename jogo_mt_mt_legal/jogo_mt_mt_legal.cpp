@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "graphics.h"
+#include "GraphicManager.h"
 #include "MyDrawable.h"
 #include "Player.h"
 #include "inputManager.h"
@@ -16,7 +16,7 @@
 
 int main()
 {   
-    Graphics* gerenciadorGrafico = Graphics::getInstance();
+    GraphicManager* gerenciadorGrafico = GraphicManager::getInstance();
     sf::RenderWindow* window = gerenciadorGrafico->getWindow();   
     MainMenu* menu = new MainMenu;
     SceneManager* sceneManInstance = SceneManager::getInstance();

@@ -15,6 +15,7 @@ protected:
 	double lesserLimitMultL;
 public:
 	Enemy();
+protected:
 	void movementHITSTUN();
 	Player* searchPlayer() const;
 };

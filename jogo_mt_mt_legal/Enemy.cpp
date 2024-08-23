@@ -2,7 +2,7 @@
 #include"CollisionManager.h"
 #include <math.h>
 #include "Level.h"
-#include "Collidable.h"
+#include "Terrain.h"
 #include <iostream>
 #include "SceneManager.h"
 
@@ -82,7 +82,7 @@ Player* Enemy::searchPlayer() const{
 			}
 		}
 
-		/*Collidable* vertice = new Collidable();
+		/*Terrain* vertice = new Terrain();
 		vertice->setSize(sf::Vector2f(5, 5));
 		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 

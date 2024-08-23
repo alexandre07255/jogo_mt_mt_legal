@@ -1,32 +1,32 @@
-#include "graphics.h"
+#include "GraphicManager.h"
 #include <vector>
 #include <iostream>
 
-Graphics::Graphics() {
+GraphicManager::GraphicManager() {
 	sf::VideoMode video;
 	std::vector< sf::VideoMode > modos = video.getFullscreenModes();
 	window = new sf::RenderWindow (sf::VideoMode(modos[0].width, modos[0].height,modos[0].bitsPerPixel), "jogo");
 }
 
-Graphics::~Graphics() {
+GraphicManager::~GraphicManager() {
 	delete window;
 }
 
-const bool Graphics::isWindowOpen(){
+const bool GraphicManager::isWindowOpen(){
 	if (window->isOpen())
 		return true;
 	return false;
 }
 
-sf::RenderWindow* Graphics::getWindow() {
+sf::RenderWindow* GraphicManager::getWindow() {
 	return window;
 }
 
-Graphics* Graphics::getInstance()
+GraphicManager* GraphicManager::getInstance()
 {
 	if (instance == NULL)
-		instance = new Graphics;
+		instance = new GraphicManager;
 	return instance;	
 }
 
-Graphics* Graphics::instance(NULL);
+GraphicManager* GraphicManager::instance(NULL);

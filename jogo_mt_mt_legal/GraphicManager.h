@@ -1,14 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class Graphics {
+class GraphicManager {
 private:
 	sf::RenderWindow* window;
-	static Graphics* instance;
+	static GraphicManager* instance;
 public:
-	Graphics();
-	~Graphics();
+	GraphicManager();
+	~GraphicManager();
 	const bool isWindowOpen();
 	sf::RenderWindow* getWindow();
-	static Graphics* getInstance();
+	static GraphicManager* getInstance();
 };

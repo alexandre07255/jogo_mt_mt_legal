@@ -24,6 +24,7 @@ private:
 public:
 	EnemyMelee();
 	void movement();
+private:
 	void movementFOLLOWING();
 	void movementPATROLLING();
 	void movementATKCANCEL();

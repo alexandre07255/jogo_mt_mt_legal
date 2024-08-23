@@ -1,12 +1,12 @@
 #include "Level2.h"
-#include"graphics.h"
+#include"GraphicManager.h"
 #include "EnemyMelee.h"
 #include "CollisionManager.h"
 #include "SceneManager.h"
 #include "Terrain.h"
 
 Level2::Level2(bool isPlayer2): Level() {
-    Graphics* instance = Graphics::getInstance();
+    GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
 
     Camera* view;
