@@ -59,7 +59,7 @@ void Support::movement() {
 
 		delete this;
 	}
-	std::cout << hp << endl;
+	//std::cout << hp << endl;
 }
 
 int Support::MAXHEALTH(10);

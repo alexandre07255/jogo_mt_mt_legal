@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Element.cpp" />
+    <ClCompile Include="EnemyRanged.cpp" />
     <ClCompile Include="Hittable.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
     <ClCompile Include="Being.cpp" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Element.h" />
+    <ClInclude Include="EnemyRanged.h" />
     <ClInclude Include="Hittable.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="Being.h" />

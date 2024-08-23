@@ -4,8 +4,10 @@
 #include "SceneManager.h"
 #include <time.h>
 #include "Level.h"
+#include "AttackHitbox.h"
 
-EnemyMelee::EnemyMelee():Enemy(),walkingBuffer(0),waitBuffer(0),direction(0){
+EnemyMelee::EnemyMelee():Enemy(),walkingBuffer(0),waitBuffer(0),direction(0), attacking(0),
+attackStartup(72), attackHitboxDuration(5), attackEndLag(20), attackTriggerRange(10.0f), attackTriggerYRange(10.0f){
     setPoints(10);
 }
 
@@ -34,21 +36,21 @@ void EnemyMelee::movementPATROLLING() {
     else {
         if (direction) {
             //decidiu andar para direita
-            if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
-                horizontalSpeed += ACCELARATION;
+            if (horizontalSpeed < WALK_MAX_HORIZONTAL_SPEED) {
+                horizontalSpeed += WALK_ACCELARATION;
             }
             else {
-                horizontalSpeed = MAX_HORIZONTAL_SPEED;
+                horizontalSpeed = WALK_MAX_HORIZONTAL_SPEED;
             }
             facingRight = 1;
         }
         else {
             //decidiu andar para a esquerda
-            if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
-                horizontalSpeed -= ACCELARATION;
+            if (horizontalSpeed > -WALK_MAX_HORIZONTAL_SPEED) {
+                horizontalSpeed -= WALK_ACCELARATION;
             }
             else {
-                horizontalSpeed = -MAX_HORIZONTAL_SPEED;
+                horizontalSpeed = -WALK_MAX_HORIZONTAL_SPEED;
             }
             facingRight = 0;
         }
@@ -85,13 +87,19 @@ void EnemyMelee::movement() {
     switch (state)
     {
     case PATROLLING:
+        setFillColor(sf::Color::White);
         movementPATROLLING();
         break;
     case HITSTUN:
         movementHITSTUN();
         break;
     case FOLLOWING:
+        setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
         movementFOLLOWING();
+        break;
+    case ATKCANCEL:
+        setFillColor(sf::Color::Green);
+        movementATKCANCEL();
         break;
     }
 
@@ -114,26 +122,26 @@ void EnemyMelee::movementFOLLOWING() {
 
     sf::Vector2f vetorDesloc(1, 1);
 
-    if (followingPlayer->getPosition().x + followingPlayer->getSize().x > getPosition().x) {
-        if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
-            horizontalSpeed += ACCELARATION;
+    if (followingPlayer->getPosition().x > getPosition().x + getSize().x) {
+        if (horizontalSpeed < FOLLOW_MAX_HORIZONTAL_SPEED) {
+            horizontalSpeed += FOLLOW_ACCELARATION;
         }
         else {
-            horizontalSpeed = MAX_HORIZONTAL_SPEED;
+            horizontalSpeed = FOLLOW_MAX_HORIZONTAL_SPEED;
         }
         facingRight = 1;
     }
-    else {
-        if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
-            horizontalSpeed -= ACCELARATION;
+    else if (followingPlayer->getPosition().x + followingPlayer->getSize().x < getPosition().x){
+        if (horizontalSpeed > -FOLLOW_MAX_HORIZONTAL_SPEED) {
+            horizontalSpeed -= FOLLOW_ACCELARATION;
         }
         else {
-            horizontalSpeed = -MAX_HORIZONTAL_SPEED;
+            horizontalSpeed = -FOLLOW_MAX_HORIZONTAL_SPEED;
         }
         facingRight = 0;
     }
 
-    if (followingPlayer->getPosition().y < getPosition().y) {
+    if (!attacking && (followingPlayer->getPosition().y + followingPlayer->getSize().y) < (getPosition().y + getSize().y)) {
         if (!onAir)
         {
             verticalSpeed = -JUMP_STRENGTH;
@@ -152,24 +160,103 @@ void EnemyMelee::movementFOLLOWING() {
 
     verticalSpeed += 1;
 
-    vetorDesloc.x *= horizontalSpeed;
-    vetorDesloc.y *= verticalSpeed;
+    if (attacking && stun < attackEndLag)
+        horizontalSpeed = 0;
 
-    move(vetorDesloc);
+    move(horizontalSpeed - (attacking * 0.85f) * horizontalSpeed, verticalSpeed);
 
-    followingPlayer = searchPlayer();
+    if (attacking && stun <= 0)
+        attacking = 0;
 
-    if (!followingPlayer) {
-        if (facingRight) {
-            facingRight = 0;
+    if (!attacking)
+    {
+        followingPlayer = searchPlayer();
+        if (!followingPlayer) {
+            if (facingRight) {
+                facingRight = 0;
+            }
+            else
+                facingRight = 1;
+            state = PATROLLING;
         }
-        else
-            facingRight = 1;
-        state = PATROLLING;
+        else if (abs((followingPlayer->getPosition().y + followingPlayer->getSize().y) - (getPosition().y + getSize().y)) < attackTriggerYRange)
+        {
+            if (facingRight)
+            {
+                if (abs(followingPlayer->getPosition().x - (getPosition().x + getSize().x)) < attackTriggerRange)
+                {
+                    attacking = 1;
+                    stun = attackStartup + attackHitboxDuration + attackEndLag;
+                }
+            }
+            else
+            {
+                if (abs(followingPlayer->getPosition().x + followingPlayer->getSize().x - getPosition().x) < attackTriggerRange)
+                {
+                    attacking = 1;
+                    stun = attackStartup + attackHitboxDuration + attackEndLag;
+                }
+            }
+        }
+            
+    }
+    else
+    {
+        setFillColor(sf::Color::Blue);
+
+        if ((stun == (attackHitboxDuration + attackEndLag)))
+        {
+            AttackHitbox* hitbox = new AttackHitbox();
+
+            hitbox->setTarget(1);
+            hitbox->setOwner(this);
+            hitbox->setBoundedTo(this);
+            hitbox->setDuration(attackHitboxDuration);
+            float horKnock = 0.0;
+            hitbox->setSize(sf::Vector2f(110.0, 100.0));
+            hitbox->setVerKnockback(-10.0);
+            hitbox->setDamage(3);
+            hitbox->setHitstun(25);
+            horKnock = 30.0;
+            if (facingRight)
+            {
+                hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, 0.0));
+                hitbox->setHorKnockback(horKnock);
+            }
+            else
+            {
+                float relX = hitbox->getSize().x;
+                hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 0.0));
+                hitbox->setHorKnockback(-horKnock);
+            }
+        }
+        stun--;
     }
 }
 
-const int EnemyMelee::JUMP_STRENGTH(15);
+void EnemyMelee::movementATKCANCEL()
+{
+    if (stun > 0)
+    {
+        stun--;
+    }
+    else
+    {
+        followingPlayer = searchPlayer();
+        if (!followingPlayer) {
+            if (facingRight) {
+                facingRight = 0;
+            }
+            else
+                facingRight = 1;
+            state = PATROLLING;
+        }
+        else
+        {
+            state = FOLLOWING;
+        }
+    }
+}
 
 const bool EnemyMelee::checkOnLedge() const{
     CollisionManager* instance = CollisionManager::getInstance();
@@ -200,3 +287,11 @@ const bool EnemyMelee::checkOnLedge() const{
     return true;
 
 }
+
+const float EnemyMelee::FOLLOW_MAX_HORIZONTAL_SPEED(10.0f);
+const float EnemyMelee::FOLLOW_ACCELARATION(2.0f);
+
+const float EnemyMelee::WALK_ACCELARATION(1.5f);
+const float EnemyMelee::WALK_MAX_HORIZONTAL_SPEED(6.0f);
+
+const int EnemyMelee::JUMP_STRENGTH(20.0f);

@@ -33,6 +33,7 @@ public:
 	void movementFREE();
 	void movementATKCANCEL();
 	void movementATTACK();
+	void movementHITSTUN();
 	void attack();
 };
 
