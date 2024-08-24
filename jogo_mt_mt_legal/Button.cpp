@@ -2,17 +2,13 @@
 #include "inputManager.h"
 #include "GraphicManager.h"
 
-Button::Button(const int act,sf::Color col) : Entity(), action(act),defaultColor(col) {
+Button::Button(sf::Color col, Command* _com,bool repeat) : Entity(), defaultColor(col),repeatable(repeat) {
 	InputManager* instance = InputManager::getInstance();
 	mouse = instance->getMouse();
 	setSize(sf::Vector2f(200,100));
 	setFillColor(defaultColor);
 	clickable = true;
-}
-
-const int Button::getAction() const
-{
-	return action;
+	com = _com;
 }
 
 const bool Button::isMouseOn() {
@@ -39,7 +35,13 @@ const bool Button::isMouseClicked() {
 void Button::movement() {
 	if (isMouseOn() && clickable) {
 		setFillColor(sf::Color::Yellow);
+		if (mouse->isButtonPressed(sf::Mouse::Left)) {
+			com->execute();
+			if (!repeatable)
+				clickable = false;
+		}
 	}
+	
 	else {
 		setFillColor(defaultColor);
 	}

@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "CollisionManager.h"
 #include "EnemyMelee.h"
+#include "SceneManager.h"
+#include "PauseMenu.h"
 
 Level::Level(): hittableList(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL)
 {
@@ -66,4 +68,13 @@ void Level::removeHittable(Hittable* pH) {
 
 void Level::removeCollidable(Collidable* pC) {
 	collidables->remove(pC);
+}
+
+void Level::stackPauseMenu() {
+	SceneManager* instance = SceneManager::getInstance();
+
+	PauseMenu* pMenu;
+	pMenu = new PauseMenu;
+
+	instance->push(pMenu);
 }

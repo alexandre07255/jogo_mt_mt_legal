@@ -25,6 +25,8 @@ public:
 	void removeHittable(Hittable* pH);
 	void removeCollidable(Collidable* pC);
 
+	void stackPauseMenu();
+
 	//void loadLevel1(bool isPlayer2);
 	//void loadLevel2(bool isPlayer2);
 	//void loadMenu();

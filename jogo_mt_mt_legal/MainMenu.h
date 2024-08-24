@@ -10,6 +10,5 @@ public:
 	MainMenu();
 	void update();
 	void stackLevel1(bool player2);
-	void moreButtons();
 };
 

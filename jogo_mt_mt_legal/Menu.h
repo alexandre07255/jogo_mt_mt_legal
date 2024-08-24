@@ -2,7 +2,6 @@
 #include "Button.h"
 #include "Scene.h"
 #include "List.h"
-#include "List.h"
 
 class Menu: public Scene
 {
@@ -12,6 +11,7 @@ protected:
 public:
 	Menu();
 	void setSize(sf::Vector2f _size);
+	void addButton(Button* but);
 
 };
 
