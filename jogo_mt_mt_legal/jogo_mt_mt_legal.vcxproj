@@ -163,6 +163,7 @@
     <ClCompile Include="MyDrawable.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleHitbox.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="MyDrawable.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleHitbox.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />

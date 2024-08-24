@@ -2,7 +2,6 @@
 #include "Button.h"
 #include "Scene.h"
 #include "List.h"
-#include "List.h"
 
 class Menu: public Scene
 {

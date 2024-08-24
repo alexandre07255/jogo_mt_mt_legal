@@ -7,7 +7,7 @@ using namespace std;
 
 MainMenu::MainMenu() {
 	CommandStack1* com = new CommandStack1(this);
-	level1Button = new Button(sf::Color::Blue,com);
+	level1Button = new Button(sf::Color::Blue,com,false);
 	level1Button->setPosition(500, 500);
 
 	buttonList->push_back(level1Button);

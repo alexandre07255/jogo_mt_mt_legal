@@ -8,9 +8,10 @@ private:
 	sf::Mouse* mouse;
 	sf::Color defaultColor;
 	Command* com;
+	bool repeatable;
 public:
 	bool clickable;
-	Button(sf::Color col,Command* _com);
+	Button(sf::Color col,Command* _com,bool repeat);
 	const bool isMouseOn();
 	void movement();
 	const bool isMouseClicked();
