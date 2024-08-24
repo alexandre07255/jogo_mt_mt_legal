@@ -129,7 +129,7 @@ void EnemyMelee::movementFOLLOWING() {
         else {
             horizontalSpeed = FOLLOW_MAX_HORIZONTAL_SPEED;
         }
-        facingRight = 1;
+        //facingRight = 1;
     }
     else if (followingPlayer->getPosition().x + followingPlayer->getSize().x < getPosition().x){
         if (horizontalSpeed > -FOLLOW_MAX_HORIZONTAL_SPEED) {
@@ -138,8 +138,10 @@ void EnemyMelee::movementFOLLOWING() {
         else {
             horizontalSpeed = -FOLLOW_MAX_HORIZONTAL_SPEED;
         }
-        facingRight = 0;
+        //facingRight = 0;
     }
+    facingRight = (followingPlayer->getPosition().x + followingPlayer->getSize().x / 2 > getPosition().x + getSize().x / 2);
+
 
     if (!attacking && (followingPlayer->getPosition().y + followingPlayer->getSize().y) < (getPosition().y + getSize().y)) {
         if (!onAir)
@@ -183,7 +185,7 @@ void EnemyMelee::movementFOLLOWING() {
         {
             if (facingRight)
             {
-                if (abs(followingPlayer->getPosition().x - (getPosition().x + getSize().x)) < attackTriggerRange)
+                if (followingPlayer->getPosition().x - (getPosition().x + getSize().x) < attackTriggerRange)
                 {
                     attacking = 1;
                     stun = attackStartup + attackHitboxDuration + attackEndLag;
@@ -191,7 +193,7 @@ void EnemyMelee::movementFOLLOWING() {
             }
             else
             {
-                if (abs(followingPlayer->getPosition().x + followingPlayer->getSize().x - getPosition().x) < attackTriggerRange)
+                if (followingPlayer->getPosition().x + followingPlayer->getSize().x - getPosition().x > -attackTriggerRange)
                 {
                     attacking = 1;
                     stun = attackStartup + attackHitboxDuration + attackEndLag;
