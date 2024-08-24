@@ -1,11 +1,16 @@
 #include "Camera.h"
+#include <iostream>
 
 Camera::Camera(sf::RenderWindow* renderer) :
 	player1(NULL),
 	player2(NULL)
 {
-	setSize(sf::Vector2f(1000.f, 1000.f));
 	setWindow(renderer);
+	xDefault = renderer->getSize().x/2;
+	yDefault = renderer->getSize().y / 2;
+	setSize((sf::Vector2f)window->getSize());
+	//setSize(sf::Vector2f(xDefault, yDefault));
+	//setViewport(sf::FloatRect(0, 0, 0.5f, 0.5f));
 }
 
 Camera::~Camera()
@@ -31,11 +36,19 @@ void Camera::movement()
 		int x = (player1->getPosition().x + player2->getPosition().x)/2;
 		int y = (player1->getPosition().y + player2->getPosition().y) / 2;
 		setCenter(sf::Vector2f(x,y));
+		//por enquanto so da account ao player 1 sair de vista, ajustar melhor ainda esta tremelique
+		if (player1->getPosition().x + player1->getSize().x > getCenter().x + getSize().x / 2 || player1->getPosition().x < getCenter().x - getSize().x / 2) {
+			zoom(1.001f);
+		}
+		else if (getSize().x > window->getSize().x && !(player1->getPosition().x + player1->getSize().x + 10 > getCenter().x + getSize().x / 2 || player1->getPosition().x - 10 < getCenter().x - getSize().x / 2)) {
+			zoom(0.999f);
+		}
 	}
 
 	else if (player1) {
 		setCenter(player1->getPosition());
 	}
-	setSize((sf::Vector2f)window->getSize());
+
+	//setSize((sf::Vector2f)window->getSize());
 	window->setView(*this);
 }

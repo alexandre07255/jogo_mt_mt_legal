@@ -8,6 +8,8 @@ private:
 	Player* player1;
 	Player* player2;
 	sf::RenderWindow* window;
+	float xDefault;
+	float yDefault;
 public:
 	Camera(sf::RenderWindow* renderer);
 	~Camera();
