@@ -37,11 +37,11 @@ void Camera::movement()
 		int y = (player1->getPosition().y + player2->getPosition().y) / 2;
 		setCenter(sf::Vector2f(x,y));
 		//por enquanto so da account ao player 1 sair de vista, ajustar melhor ainda esta tremelique
-		if (player1->getPosition().x + player1->getSize().x > getCenter().x + getSize().x / 2 || player1->getPosition().x < getCenter().x - getSize().x / 2) {
-			zoom(1.001f);
+		if ((player1->getPosition().x + player1->getSize().x + 200 > getCenter().x + getSize().x / 2 || player1->getPosition().x - 200 < getCenter().x - getSize().x / 2) != (player2->getPosition().x + player2->getSize().x + 200 > getCenter().x + getSize().x / 2 || player2->getPosition().x - 200 < getCenter().x - getSize().x / 2)) {
+			zoom(1.01f);
 		}
-		else if (getSize().x > window->getSize().x && !(player1->getPosition().x + player1->getSize().x + 10 > getCenter().x + getSize().x / 2 || player1->getPosition().x - 10 < getCenter().x - getSize().x / 2)) {
-			zoom(0.999f);
+		else if (getSize().x > window->getSize().x && !(player1->getPosition().x + player1->getSize().x + 250 > getCenter().x + getSize().x / 2 || player1->getPosition().x - 250 < getCenter().x - getSize().x / 2) != (player2->getPosition().x + player2->getSize().x + 200 > getCenter().x + getSize().x / 2 || player2->getPosition().x - 200 < getCenter().x - getSize().x / 2)) {
+			zoom(0.99f);
 		}
 	}
 
