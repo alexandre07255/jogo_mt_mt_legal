@@ -5,7 +5,7 @@
 using namespace std;
 
 MainMenu::MainMenu() {
-	level1Button = new Button(Button::Actions::startLevel1);
+	level1Button = new Button(Button::Actions::startLevel1,sf::Color::Blue);
 	level1Button->setPosition(500, 500);
 
 	buttonList->push_back(level1Button);
@@ -38,39 +38,68 @@ void MainMenu::update() {
 		itButtonNext++;
 		while (itButtonNext != buttonList->end())
 		{
-			if ((*itButton)->isMouseClicked()) {
+			if ((*itButton)->isMouseClicked() && (*itButton)->clickable) {
 				switch ((*itButton)->getAction())
 				{
 				case Button::Actions::startLevel1:
-					stackLevel1();
+					moreButtons();
 					break;
 				case Button::Actions::startLevel2:
+					break;
+				case Button::Actions::player2False:
+					stackLevel1(false);
+					break;
+				case Button::Actions::player2True:
+					stackLevel1(true);
 					break;
 				}
 			}
 			itButton = itButtonNext;
 			itButtonNext++;
 		}
-		if ((*itButton)->isMouseClicked()) {
+		if ((*itButton)->isMouseClicked() && (*itButton)->clickable) {
 			switch ((*itButton)->getAction())
 			{
 			case Button::Actions::startLevel1:
-				stackLevel1();
+				moreButtons();
+				(*itButton)->clickable = false;
 				break;
 			case Button::Actions::startLevel2:
+				break;
+			case Button::Actions::player2False:
+				stackLevel1(false);
+				break;
+			case Button::Actions::player2True:
+				stackLevel1(true);
 				break;
 			}
 		}
 	}
 }
 
-void MainMenu::stackLevel1() {
+void MainMenu::stackLevel1(bool player2) {
 
 	SceneManager* instance = SceneManager::getInstance();
 	//cria level1 aqui? mainmenu teria um ponteiro para level1? de fato, são muitas perguntas, e poucas respostas
 	Level1* level;
-	level = new Level1(1);
+	level = new Level1(player2);
 
 	instance->push(level);
 
+}
+
+void MainMenu::moreButtons() {
+	player2True = new Button(Button::Actions::player2True, sf::Color::Green);
+	player2True->setPosition(800, 500);
+
+	buttonList->push_back(player2True);
+	drawables->push_back(player2True);
+	updatables->push_back(player2True);
+
+	player2False = new Button(Button::Actions::player2False, sf::Color::Red);
+	player2False->setPosition(200, 500);
+
+	buttonList->push_back(player2False);
+	drawables->push_back(player2False);
+	updatables->push_back(player2False);
 }

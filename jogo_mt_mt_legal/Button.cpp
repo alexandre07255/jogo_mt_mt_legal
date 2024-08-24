@@ -2,11 +2,12 @@
 #include "inputManager.h"
 #include "GraphicManager.h"
 
-Button::Button(const int act) :Entity(), action(act) {
+Button::Button(const int act,sf::Color col) : Entity(), action(act),defaultColor(col) {
 	InputManager* instance = InputManager::getInstance();
 	mouse = instance->getMouse();
 	setSize(sf::Vector2f(200,100));
-	setFillColor(sf::Color::Blue);
+	setFillColor(defaultColor);
+	clickable = true;
 }
 
 const int Button::getAction() const
@@ -36,10 +37,10 @@ const bool Button::isMouseClicked() {
 }
 
 void Button::movement() {
-	if (isMouseOn()) {
-		setFillColor(sf::Color::Green);
+	if (isMouseOn() && clickable) {
+		setFillColor(sf::Color::Yellow);
 	}
 	else {
-		setFillColor(sf::Color::Blue);
+		setFillColor(defaultColor);
 	}
 }
