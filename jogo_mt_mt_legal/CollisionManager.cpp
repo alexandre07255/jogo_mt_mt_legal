@@ -132,3 +132,50 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 		it++;
 	}
 }
+
+float CollisionManager::nearestCollidable(MyDrawable* relativeTo, float maxHeight) const
+//Returns maxHeight + relativeTo->bottom() if it doesn't find a collidable
+{
+	SceneManager* LevelInstance = SceneManager::getInstance();
+	Level* level = static_cast<Level*>(LevelInstance->top());
+
+	const double PI = 3.1415;
+	const double rayStep = 50;
+
+	List<Collidable>* collidables = level->getCollidable();
+
+	double xCenter = relativeTo->xMid();
+	double yCenter = relativeTo->bottom();
+
+	double yFinal;
+	double xFinal;
+
+	//Ray para baixo
+	for (double j = rayStep; j <= maxHeight; j += rayStep) {
+		//vai caminhandinho com o raio 
+		xFinal = xCenter + j * cos(PI / 2);
+		yFinal = yCenter + j * sin(PI / 2);
+
+		//cria um rect infinitesimal e testa pra ver se colide com algo
+		sf::FloatRect ret;
+		ret.height = 1;
+		ret.width = 1;
+
+		ret.left = xFinal;
+		ret.top = yFinal;
+
+		for (ListIterator<Collidable> it = collidables->begin(); (it != collidables->end()); it++) {
+			sf::FloatRect colli = (*it)->getBounds();
+			if (ret.intersects(colli))
+				return colli.getPosition().y;
+		}
+	}
+
+	/*Terrain* vertice = new Terrain();
+	vertice->setSize(sf::Vector2f(5, 5));
+	vertice->setPosition(sf::Vector2f(xFinal, yFinal));
+
+	nivel->addDrawable(vertice);*/
+
+	return maxHeight + relativeTo->bottom();
+}

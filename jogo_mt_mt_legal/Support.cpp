@@ -4,7 +4,7 @@
 #include "SceneManager.h"
 #include <iostream>
 
-Support::Support(Platform* plat):Hittable(false,MAXHEALTH),boundedTo(NULL) {
+Support::Support(Platform* plat, const float height):Hittable(false,MAXHEALTH),boundedTo(NULL) {
 	boundedTo = plat;
 
 	if (boundedTo) {
@@ -14,31 +14,11 @@ Support::Support(Platform* plat):Hittable(false,MAXHEALTH),boundedTo(NULL) {
 		List<Collidable>* collidables = active->getCollidable();
 
 		float positionY = boundedTo->getPosition().y + boundedTo->getSize().y;
-		float positionX = boundedTo->getPosition().x + boundedTo->getSize().x / 2;
+		float positionX = boundedTo->getPosition().x + boundedTo->getSize().x / 2 - 5.f;
 		setPosition(positionX, positionY);
 
-		int flag = 1;
-		float yFinal;
-
-		for (int j = 0;flag;j += 1) {
-			//vai caminhandinho com o raio 
-			yFinal = positionY + j;
-
-			//cria um rect infinitesimal e testa pra ver se colide com algo
-			sf::FloatRect ret;
-			ret.height = 1;
-			ret.width = 1;
-
-			ret.left = positionX;
-			ret.top = yFinal;
-
-			for (ListIterator<Collidable> it = collidables->begin(); (it != collidables->end()) && flag; it++) {
-				if (ret.intersects((*it)->getBounds()))
-					flag = 0;
-			}
-		}
-
-		setSize(sf::Vector2f(10.0, yFinal));
+		
+		setSize(sf::Vector2f(10.0, height));
 	}
 }
 

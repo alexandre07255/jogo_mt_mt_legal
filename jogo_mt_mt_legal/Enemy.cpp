@@ -18,13 +18,13 @@ lesserLimitMultR(3.0/2), upperLimitMultL(3.0/2), lesserLimitMultL(3.0/4){
 
 Player* Enemy::searchPlayer() const{
 	CollisionManager* instance = CollisionManager::getInstance();
-	Level* nivel = static_cast<Level*>(SceneManager::getInstance()->top());
+	SceneManager* LevelInstance = SceneManager::getInstance();
+	Level* level = static_cast<Level*>(LevelInstance->top());
 
 	const double PI = 3.1415;
 	const double rayStep = 50;
 
-	SceneManager* LevelInstance = SceneManager::getInstance();
-	Level* level = static_cast<Level*>(LevelInstance->top());
+
 
 	List<Collidable>* collidables = level->getCollidable();
 	List<Hittable>* hittable = level->getHittableList();

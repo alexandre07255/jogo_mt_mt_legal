@@ -15,5 +15,6 @@ public:
 	void testCollison(Entity* pE);
 	const bool isColliding(sf::FloatRect one, sf::FloatRect other);
 	void testHit(const bool target, Hitbox* hitbox);
+	float nearestCollidable(MyDrawable* relativeTo, float maxHeight) const;
 };
 

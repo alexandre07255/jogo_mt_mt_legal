@@ -5,7 +5,8 @@
 #include "Level.h"
 #include "ObstacleHitbox.h"
 
-Platform::Platform(float xPosition, float yPosition, float xSize, float ySize):Obstacle(),Collidable(),support(NULL),firstStep(true) {
+Platform::Platform(float xPosition, float yPosition, float xSize, float ySize) :Obstacle(), Collidable(), support(NULL),
+firstStep(true), minimalHeight(50.f) {
 	setPosition(xPosition, yPosition);
 	setSize(sf::Vector2f(xSize, ySize));
 
@@ -20,21 +21,26 @@ void Platform::movement() {
 	CollisionManager* instance = CollisionManager::getInstance();
 	
 	if (firstStep) {
-		SceneManager* sinstance = SceneManager::getInstance();
-		Level* level = static_cast<Level*>(sinstance->top());
+		CollisionManager* cinstance = CollisionManager::getInstance();
+		Level* level = static_cast<Level*>(SceneManager::getInstance()->top());
 
-		move(0, 1);
 		instance->testCollison(this);
-		if (onAir) {
-			support = new Support(this);
+
+		float height = cinstance->nearestCollidable(this, 600.f);
+		if (height - bottom() > minimalHeight)
+		{
+			support = new Support(this, height - bottom());
 			level->addHittable(support);
 			level->addDrawable(support);
 			level->addUpdatable(support);
-			setOnAir(false);
+			onAir = 0;
 		}
+		else
+			onAir = 1;
+
 		firstStep = false;
 	}
-	else if (onAir) {
+	if (onAir) {
 		support = NULL;
 		move(0, 1);
 		instance->testCollison(this);
@@ -56,7 +62,7 @@ void Platform::movement() {
 			ObstacleHitbox* hitboxRight = new ObstacleHitbox(this);
 			hitboxRight->setTarget(1);
 			hitboxRight->setBoundedTo(this);
-			hitboxRight->setCooldown(20);
+			hitboxRight->setCooldown(40);
 			hitboxRight->setSize(sf::Vector2f(getSize().x / 2, getSize().y / 2));
 			hitboxRight->setHorLaunchStrength(25.0);
 			hitboxRight->setVerLaunchStrength(0.0);

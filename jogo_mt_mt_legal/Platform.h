@@ -9,6 +9,7 @@ class Platform:public Obstacle, public Collidable
 private:
 	Support* support;
 	bool firstStep;
+	const float minimalHeight;
 public:
 	Platform(float xPosition, float yPosition, float xSize, float ySize);
 	sf::FloatRect getBounds();

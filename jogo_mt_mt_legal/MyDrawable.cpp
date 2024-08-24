@@ -15,6 +15,19 @@ MyDrawable::MyDrawable() :id(idCont++) {
 
 MyDrawable::~MyDrawable() { }
 
+const float MyDrawable::bottom() const { return (getPosition().y + getSize().y); }
+
+const float MyDrawable::top() const { return getPosition().y; }
+
+const float MyDrawable::left() const { return getPosition().x; }
+
+const float MyDrawable::right() const { return (getPosition().x + getSize().x); }
+
+const float MyDrawable::xMid() const { return (getPosition().x + getSize().x /2); }
+
+const float MyDrawable::yMid() const { return (getPosition().y + getSize().y / 2); }
+
+
 void MyDrawable::setTextura(string path) {
 	sf::Texture* textura;
 	textura = new sf::Texture;

@@ -8,7 +8,7 @@ private:
 	Platform* boundedTo;
 	static int MAXHEALTH;
 public:
-	Support(Platform* plat);
+	Support(Platform* plat, const float height);
 	void setPlatform(Platform* plat);
 	void movement();
 };

@@ -22,7 +22,7 @@ void EnemyMelee::movementPATROLLING() {
         if (waitBuffer <= 0) {
             if (rand()%2) {
                 //50% de chance de andar uma certa quantia, determindada pelo walking buffer
-                walkingBuffer = rand() % 10;
+                walkingBuffer = 10 + rand() % 10;
                 direction = rand() % 2;
             }
             else {
@@ -296,4 +296,4 @@ const float EnemyMelee::FOLLOW_ACCELARATION(2.0f);
 const float EnemyMelee::WALK_ACCELARATION(1.5f);
 const float EnemyMelee::WALK_MAX_HORIZONTAL_SPEED(6.0f);
 
-const int EnemyMelee::JUMP_STRENGTH(20.0f);
+const float EnemyMelee::JUMP_STRENGTH(20.0f);

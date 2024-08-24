@@ -8,7 +8,7 @@ private:
 	int walkingBuffer;
 	int waitBuffer;
 	bool direction;
-	static const int JUMP_STRENGTH;
+	static const float JUMP_STRENGTH;
 
 	bool attacking;
 	const int attackStartup;
