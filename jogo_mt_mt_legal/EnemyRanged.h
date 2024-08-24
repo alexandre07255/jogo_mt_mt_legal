@@ -1,8 +1,6 @@
 #pragma once
 #include "Enemy.h"
-#include "Player.h"
-
-class EnemyMelee : public Enemy
+class EnemyRanged : public Enemy
 {
 private:
 	int walkingBuffer;
@@ -10,7 +8,6 @@ private:
 	bool direction;
 	static const int JUMP_STRENGTH;
 
-	bool attacking;
 	const int attackStartup;
 	const int attackHitboxDuration;
 	const int attackEndLag;
@@ -21,13 +18,5 @@ private:
 	static const float FOLLOW_ACCELARATION;
 	static const float WALK_ACCELARATION;
 	static const float WALK_MAX_HORIZONTAL_SPEED;
-public:
-	EnemyMelee();
-	void movement();
-private:
-	void movementFOLLOWING();
-	void movementPATROLLING();
-	void movementATKCANCEL();
-	const bool checkOnLedge() const;
 };
 

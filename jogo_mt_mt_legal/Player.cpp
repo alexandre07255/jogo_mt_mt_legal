@@ -71,6 +71,9 @@ void Player::movement() {
 	case ATTACK:
 		movementATTACK();
 		break;
+	case HITSTUN:
+		movementHITSTUN();
+		break;
 	}
 	
 	collisionInstance->testCollison(this);
@@ -184,6 +187,19 @@ void Player::movementATTACK()
 		state = FREE;
 	move((float) horizontalSpeed * 0.15, (float) (++verticalSpeed) * 0.85);
 	//move(sf::Vector2f(horizontalSpeed*0.15, (++verticalSpeed)*0.85));
+}
+
+void Player::movementHITSTUN()
+{
+	if (stun <= 0)
+	{
+		state = FREE;
+	}
+	else
+	{
+		stun--;
+		setFillColor(sf::Color::Red);
+	}
 }
 
 void Player::attack()

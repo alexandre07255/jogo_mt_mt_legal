@@ -8,14 +8,15 @@ protected:
 	int sightSize;
 	int timer;
 	Player* followingPlayer;
-	static const float MAX_HORIZONTAL_SPEED;
-	static const float ACCELARATION;
+
+	double upperLimitMultR;
+	double lesserLimitMultR;
+	double upperLimitMultL;
+	double lesserLimitMultL;
 public:
 	Enemy();
-	virtual void movement();
-	virtual void movementPATROLLING();
+protected:
 	void movementHITSTUN();
-	virtual void movementFOLLOWING();
 	Player* searchPlayer() const;
 };
 

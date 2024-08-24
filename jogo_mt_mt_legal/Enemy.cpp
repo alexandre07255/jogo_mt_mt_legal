@@ -2,91 +2,18 @@
 #include"CollisionManager.h"
 #include <math.h>
 #include "Level.h"
-#include "Collidable.h"
+#include "Terrain.h"
 #include <iostream>
 #include "SceneManager.h"
 
-Enemy::Enemy() :Hittable(false, 10) {
+Enemy::Enemy() :Hittable(false, 10), upperLimitMultR(2.0),
+lesserLimitMultR(3.0/2), upperLimitMultL(3.0/2), lesserLimitMultL(1.0){
 	setPosition(sf::Vector2f(10, 10));
 	setSize(sf::Vector2f(100, 100));
 	sightSize = 500;
 	followingPlayer = NULL;
 	state = PATROLLING;
 	timer = 0;
-}
-
-void Enemy::movement() {
-	CollisionManager* instance = CollisionManager::getInstance();
-
-	switch (state)
-	{
-	case PATROLLING:
-		movementPATROLLING();
-		break;
-	case HITSTUN:
-		movementHITSTUN();
-		break;
-	case FOLLOWING:
-		movementFOLLOWING();
-		break;
-	}
-
-	instance->testCollison(this);
-
-	//std::cout << state << endl;
-}
-
-void Enemy::movementPATROLLING()
-{
-	float friccao = 1;
-	int timeCycle = 60;
-
-	if (timer < timeCycle/2) {
-		if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
-			horizontalSpeed -= ACCELARATION;
-		}
-		else {
-			horizontalSpeed = -MAX_HORIZONTAL_SPEED;
-		}
-		facingRight = 0;
-		timer++;
-	}
-	else if (timer == timeCycle/2)
-	{
-		horizontalSpeed = 0;
-		timer++;
-	}
-	else if (timer < timeCycle) {
-		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
-			horizontalSpeed += ACCELARATION;
-		}
-		else {
-			horizontalSpeed = MAX_HORIZONTAL_SPEED;
-		}
-		facingRight = 1;
-		timer++;
-	}
-	else {
-		horizontalSpeed = 0;
-		timer = 0;
-	}
-
-	//friccao
-	if (abs(horizontalSpeed) > friccao) {
-		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
-	}
-	else
-		horizontalSpeed = 0;
-
-	verticalSpeed += 1;
-
-	move(horizontalSpeed, verticalSpeed);
-
-	followingPlayer = searchPlayer();
-
-	if (followingPlayer) {
-		state = FOLLOWING;
-	}
 }
 
 Player* Enemy::searchPlayer() const{
@@ -118,12 +45,12 @@ Player* Enemy::searchPlayer() const{
 
 	if (facingRight) {
 		//sign = 1;
-		upperLimit = 2 * PI;
-		lesserLimit = 3 * PI / 2;
+		upperLimit = upperLimitMultR * PI;
+		lesserLimit = lesserLimitMultR * PI;
 	}
 	else {
-		upperLimit = 3 * PI / 2;;
-		lesserLimit = PI;
+		upperLimit = upperLimitMultL * PI;;
+		lesserLimit = lesserLimitMultL * PI;
 	}
 
 	for (double i = lesserLimit;i <  upperLimit ;i += 0.1) {
@@ -155,7 +82,7 @@ Player* Enemy::searchPlayer() const{
 			}
 		}
 
-		/*Collidable* vertice = new Collidable();
+		/*Terrain* vertice = new Terrain();
 		vertice->setSize(sf::Vector2f(5, 5));
 		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
 
@@ -163,6 +90,7 @@ Player* Enemy::searchPlayer() const{
 	}
 	return NULL;
 }
+
 void Enemy::movementHITSTUN()
 {
 	if (stun <= 0)
@@ -176,45 +104,3 @@ void Enemy::movementHITSTUN()
 		setFillColor(sf::Color::Red);
 	}
 }
-
-void Enemy::movementFOLLOWING() {
-	float friccao = 1;
-
-	if (followingPlayer->getPosition().x > getPosition().x) {
-		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
-			horizontalSpeed += ACCELARATION;
-		}
-		else {
-			horizontalSpeed = MAX_HORIZONTAL_SPEED;
-		}
-		facingRight = 1;
-	}
-	else {
-		if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
-			horizontalSpeed -= ACCELARATION;
-		}
-		else {
-			horizontalSpeed = -MAX_HORIZONTAL_SPEED;
-		}
-		facingRight = 0;
-	}
-
-	if (abs(horizontalSpeed) > friccao) {
-		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
-	}
-	else
-		horizontalSpeed = 0;
-
-	verticalSpeed += 1;
-
-	move(horizontalSpeed, verticalSpeed);
-
-	followingPlayer = searchPlayer();
-
-	if (!followingPlayer) {
-		state = PATROLLING;
-	}
-}
-
-const float Enemy::MAX_HORIZONTAL_SPEED(6);
-const float Enemy::ACCELARATION(2);

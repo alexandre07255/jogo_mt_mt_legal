@@ -1,5 +1,5 @@
 #include "Level1.h"
-#include"graphics.h"
+#include"GraphicManager.h"
 #include "EnemyMelee.h"
 #include "Terrain.h"
 #include "CollisionManager.h"
@@ -9,7 +9,7 @@
 #include <iostream>
 
 Level1::Level1(bool isPlayer2):Level() {
-    Graphics* instance = Graphics::getInstance();
+    GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
 
     Camera* view;

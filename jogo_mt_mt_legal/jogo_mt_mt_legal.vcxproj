@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Element.cpp" />
+    <ClCompile Include="EnemyRanged.cpp" />
     <ClCompile Include="Hittable.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
     <ClCompile Include="Being.cpp" />
@@ -143,7 +144,7 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMelee.cpp" />
-    <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="GraphicManager.cpp" />
     <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="jogo_mt_mt_legal.cpp" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Element.h" />
+    <ClInclude Include="EnemyRanged.h" />
     <ClInclude Include="Hittable.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="Being.h" />
@@ -177,7 +179,7 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMelee.h" />
-    <ClInclude Include="graphics.h" />
+    <ClInclude Include="GraphicManager.h" />
     <ClInclude Include="Hitbox.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Level.h" />
