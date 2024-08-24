@@ -8,3 +8,7 @@ Menu::Menu() {
 void Menu::setSize(sf::Vector2f _size) {
 	size = _size;
 }
+
+void Menu::addButton(Button* but) {
+	buttonList->push_back(but);
+}

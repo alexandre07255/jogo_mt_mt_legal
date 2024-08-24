@@ -133,6 +133,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandLevel1p2False.cpp" />
+    <ClCompile Include="CommandLevel1p2True.cpp" />
+    <ClCompile Include="CommandStack1.cpp" />
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="EnemyRanged.cpp" />
     <ClCompile Include="Hittable.cpp" />
@@ -168,6 +172,10 @@
     <ClCompile Include="Updatable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandLevel1p2False.h" />
+    <ClInclude Include="CommandLevel1p2True.h" />
+    <ClInclude Include="CommandStack1.h" />
     <ClInclude Include="Element.h" />
     <ClInclude Include="EnemyRanged.h" />
     <ClInclude Include="Hittable.h" />
