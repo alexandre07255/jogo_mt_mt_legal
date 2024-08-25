@@ -7,6 +7,7 @@ private:
 	static InputManager* instance;
 	sf::Keyboard* keyboard;
 	sf::Mouse* mouse;
+	bool wasEscPressed;
 	InputManager();
 public:
 	~InputManager();
@@ -18,6 +19,8 @@ public:
 	const bool isLeftPressed(bool player2);
 	const bool isAttackPressed(bool player2);
 	const bool isPausePressed();
+	const bool getWasEscPressed() const;
+	void setWasEscPressed(const bool wpp);
 	sf::Mouse* getMouse() const;
 };
 

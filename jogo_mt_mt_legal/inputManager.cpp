@@ -23,6 +23,16 @@ InputManager* InputManager::getInstance()
 	return instance;
 }
 
+const bool InputManager::getWasEscPressed() const
+{
+	return wasEscPressed;
+}
+
+void InputManager::setWasEscPressed(const bool wpp)
+{
+	wasEscPressed = wpp;
+}
+
 const bool InputManager::isKeyPressed(sf::Keyboard::Key key) { return keyboard->isKeyPressed(key); }
 
 const bool InputManager::isUpPressed(bool player2)
