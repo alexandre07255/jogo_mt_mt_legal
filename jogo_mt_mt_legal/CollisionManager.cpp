@@ -17,6 +17,81 @@ CollisionManager::~CollisionManager()
 
 }
 
+void CollisionManager::testPlayerToEnemyCollision(Player* player)
+{
+	SceneManager* instance = SceneManager::getInstance();
+	Level* level = static_cast<Level*>(instance->top());
+	List<Hittable>* hittableList = level->getHittableList();
+
+	if (hittableList == NULL)
+		return;
+
+	sf::FloatRect targetBounds;
+	sf::FloatRect collidableBounds;
+
+	float x, y;
+
+	int size = hittableList->size();
+	ListIterator<Hittable> it = hittableList->begin();
+
+	int directionX = 0;
+	int directionY = 0;
+
+	targetBounds = player->getGlobalBounds();
+
+	bool collided = 0;
+	bool collidedDown = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (player->getId() != (*it)->getId()) {
+			collidableBounds = (*it)->getGlobalBounds();
+
+			if (isColliding(collidableBounds, targetBounds)) {
+				collided = 1;
+				//temos colisao
+				if (targetBounds.getPosition().x + targetBounds.width < collidableBounds.getPosition().x + collidableBounds.width) {
+					//se player colidiu pela direita
+					x = targetBounds.getPosition().x + targetBounds.width - collidableBounds.getPosition().x;
+					directionX = -1;
+				}
+				else {
+					//se player colidiu pela esquerda
+					x = collidableBounds.getPosition().x + collidableBounds.width - targetBounds.getPosition().x;
+					directionX = 1;
+				}
+
+				if (targetBounds.getPosition().y + targetBounds.height < collidableBounds.getPosition().y + collidableBounds.height) {
+					//se player coldiu por baixo
+					y = targetBounds.getPosition().y + targetBounds.height - collidableBounds.getPosition().y;
+					directionY = -1;
+					collidedDown = 1;
+				}
+				else {
+					//se player colidiu por cima
+					y = collidableBounds.getPosition().y + collidableBounds.height - targetBounds.getPosition().y;
+					directionY = 1;
+				}
+
+				if (y < x) {
+					player->move(0, (y * directionY));
+					player->setVerticalVelocity(0);
+					if (directionY == -1)
+						player->setOnAir(0);
+				}
+				else {
+					player->move(sf::Vector2f((x * directionX), 0));
+					player->setHorizontalVelocity(0);
+				}
+				targetBounds = player->getGlobalBounds();
+
+			}
+			it++;
+		}
+		if (!collided || !collidedDown)
+			player->setOnAir(1);
+	}
+}
+
 CollisionManager* CollisionManager::getInstance()
 {
 	if (instance == NULL)
