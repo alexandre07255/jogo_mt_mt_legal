@@ -3,7 +3,10 @@
 
 class PauseMenu : public Menu
 {
+private:
+	Button* buttonQuit;
 public:
 	PauseMenu();
+	void update();
 };
 

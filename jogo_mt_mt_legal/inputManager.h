@@ -7,6 +7,7 @@ private:
 	static InputManager* instance;
 	sf::Keyboard* keyboard;
 	sf::Mouse* mouse;
+	bool wasEscPressed;
 	InputManager();
 public:
 	~InputManager();

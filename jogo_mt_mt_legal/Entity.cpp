@@ -16,7 +16,6 @@ void Entity::setOnAir(const bool value)
 }
 
 const float Entity::GRAVITY(1.f);
-}
 
 void Entity::setFriction(float fric){
 	frictionFelt = fric;
