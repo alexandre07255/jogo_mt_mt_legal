@@ -1,10 +1,11 @@
 #include "Level.h"
-//#include "GraphicManager.h"
+#include "GraphicManager.h"
 #include "Player.h"
 #include "CollisionManager.h"
 #include "EnemyMelee.h"
 #include "SceneManager.h"
 #include "PauseMenu.h"
+#include "inputManager.h"
 
 Level::Level(): hittableList(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL)
 {
@@ -18,37 +19,42 @@ Level::~Level() //TODO
 
 void Level::update()
 {
-	//Implementar pause menu aqui
+	InputManager* instance = InputManager::getInstance();
+	if (instance->isKeyPressed(sf::Keyboard::Key::Escape)) {
+		stackPauseMenu();
+	}
 
-	ListIterator<Updatable> itCurrent = updatables->begin();
-	if (updatables->size() > 0)
-	{
-		ListIterator<Updatable> itNext = itCurrent;
-		itNext++;
-		while (itNext != updatables->end())
+	else {
+		ListIterator<Updatable> itCurrent = updatables->begin();
+		if (updatables->size() > 0)
 		{
-			(*itCurrent)->movement();
-			itCurrent = itNext;
+			ListIterator<Updatable> itNext = itCurrent;
 			itNext++;
+			while (itNext != updatables->end())
+			{
+				(*itCurrent)->movement();
+				itCurrent = itNext;
+				itNext++;
+			}
+			(*itCurrent)->movement();
 		}
-		(*itCurrent)->movement();
-	}
 
-	if (endingOnRight)
-	{
-		if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 > endX)
-			levelCompleteHandler();
-		else if (pPlayer2 != NULL)
-			if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 > endX)
+		if (endingOnRight)
+		{
+			if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 > endX)
 				levelCompleteHandler();
-	}
-	else
-	{
-		if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 < endX)
-			levelCompleteHandler();
-		else if (pPlayer2 != NULL)
-			if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 < endX)
+			else if (pPlayer2 != NULL)
+				if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 > endX)
+					levelCompleteHandler();
+		}
+		else
+		{
+			if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 < endX)
 				levelCompleteHandler();
+			else if (pPlayer2 != NULL)
+				if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 < endX)
+					levelCompleteHandler();
+		}
 	}
 }
 
@@ -79,4 +85,9 @@ void Level::stackPauseMenu() {
 	pMenu = new PauseMenu;
 
 	instance->push(pMenu);
+	
+	GraphicManager* graph = GraphicManager::getInstance();
+	sf::RenderWindow* window = graph->getWindow();
+
+	window->setView(window->getDefaultView());
 }

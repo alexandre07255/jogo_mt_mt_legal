@@ -12,3 +12,7 @@ Being::Being() :
 void Being::setHorizontalVelocity(float vel) { horizontalSpeed = vel; }
 
 void Being::setVerticalVelocity(float vel) { verticalSpeed = vel; }
+
+float Being::getVerticalSpeed() {
+	return verticalSpeed;
+}

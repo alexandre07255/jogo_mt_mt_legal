@@ -26,7 +26,6 @@ private:
 	int attackCounter;
 	bool hasAttacked;
 	bool wasAttackPressed;
-	float friction;
 public:
 	Player(const bool isPlayer2, const bool ally, const int health);
 	void movement();

@@ -129,6 +129,7 @@ void CollisionManager::testCollison(Entity* pE)
 			collidableBounds = (*it)->getBounds();
 
 			if (isColliding(collidableBounds, targetBounds)) {
+				(*it)->collisionSolution(pE);
 				collided = 1;
 				//temos colisao
 				if (targetBounds.getPosition().x + targetBounds.width < collidableBounds.getPosition().x + collidableBounds.width) {
@@ -167,8 +168,10 @@ void CollisionManager::testCollison(Entity* pE)
 				targetBounds = pE->getGlobalBounds();
 
 			}
+			
 			it++;
 		}
+		
 		if (!collided || !collidedDown)
 			pE->setOnAir(1);
 	}
