@@ -5,6 +5,7 @@ class Entity : public Being
 {
 protected:
 	bool onAir;
+	static const float GRAVITY;
 public:
 	Entity();
 	virtual ~Entity();
