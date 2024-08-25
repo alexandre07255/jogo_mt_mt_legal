@@ -18,6 +18,8 @@ Level::~Level() //TODO
 
 void Level::update()
 {
+	//Implementar pause menu aqui
+
 	ListIterator<Updatable> itCurrent = updatables->begin();
 	if (updatables->size() > 0)
 	{

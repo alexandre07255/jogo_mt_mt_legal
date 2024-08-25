@@ -8,7 +8,9 @@
 
 EnemyMelee::EnemyMelee():Enemy(),walkingBuffer(0),waitBuffer(0),direction(0), attacking(0),
 attackStartup(72), attackHitboxDuration(5), attackEndLag(20), attackTriggerRange(10.0f), attackTriggerYRange(10.0f){
+    sightSize = 700.;
     setPoints(10);
+    hp = 20;
 }
 
 void EnemyMelee::movementPATROLLING() {
@@ -105,6 +107,18 @@ void EnemyMelee::movement() {
 
     instance->testCollison(this);
     
+    if (fireRemaining)
+    {
+        if (fireCont > 4)
+        {
+            hp--;
+            fireRemaining--;
+            fireCont = 0;
+        }
+        else
+            fireCont++;
+    }
+
     if (hp <= 0) {
         SceneManager* sinstance = SceneManager::getInstance();
         Level* level = static_cast<Level*>(sinstance->top());

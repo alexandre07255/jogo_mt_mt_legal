@@ -13,6 +13,11 @@ const bool Obstacle::getIsActive() const
 	return isActive;
 }
 
+void Obstacle::statusEffect(Hittable* hit)
+{
+
+}
+
 void Obstacle::setIsActive(const bool active)
 {
 	isActive = active;

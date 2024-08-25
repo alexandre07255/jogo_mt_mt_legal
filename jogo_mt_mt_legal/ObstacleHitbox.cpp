@@ -93,8 +93,12 @@ void ObstacleHitbox::hitSolution(Hittable* hit)
 
 	hitList.push_back(hit);
 
+	obstacle->statusEffect(hit);
+
 	cont = 0;
 	hit->dealDamage(damage);
-	hit->setHorizontalVelocity(horLaunchStrength);
-	hit->setVerticalVelocity(verLaunchStrength);
+	if (horLaunchStrength)
+		hit->setHorizontalVelocity(horLaunchStrength);
+	if (verLaunchStrength)
+		hit->setVerticalVelocity(verLaunchStrength);
 }

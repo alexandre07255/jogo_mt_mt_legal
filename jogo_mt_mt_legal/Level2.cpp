@@ -4,6 +4,7 @@
 #include "CollisionManager.h"
 #include "SceneManager.h"
 #include "Terrain.h"
+#include "Fire.h"
 
 Level2::Level2(bool isPlayer2): Level() {
     GraphicManager* instance = GraphicManager::getInstance();
@@ -56,6 +57,13 @@ Level2::Level2(bool isPlayer2): Level() {
         player2->setPosition(100, 900);
         pPlayer2 = player2;
     }
+
+    Fire* fire;
+    fire = new Fire;
+    fire->setPosition(1500.f, 400.f);
+    fire->setSize(sf::Vector2f(100.f, 50.f));
+    //drawables->push_back(spike);
+    updatables->push_back(fire);
 
     inimigo = new EnemyMelee;
     inimigo->setPosition(1000, 900);

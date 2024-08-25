@@ -5,7 +5,7 @@
 class Enemy : public Hittable
 {
 protected:
-	int sightSize;
+	double sightSize;
 	int timer;
 	Player* followingPlayer;
 

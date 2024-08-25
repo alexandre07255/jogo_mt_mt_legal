@@ -15,7 +15,8 @@ contCycle(0),
 cooldownCont(0),
 attackTriggerStrip(20.0f)
 {
-    sightSize = 1000.f;
+    hp = 20;
+    sightSize = 1000.0;
 	upperLimitMultR = 5.0 / 2;
 	lesserLimitMultR = 7.0 / 4;
 	upperLimitMultL = 5.0 / 4;
@@ -50,6 +51,18 @@ void EnemyRanged::movement()
     if (cooldownCont > 0) { cooldownCont--; }
 
     instance->testCollison(this);
+
+    if (fireRemaining)
+    {
+        if (fireCont > 4)
+        {
+            hp--;
+            fireRemaining--;
+            fireCont = 0;
+        }
+        else
+            fireCont++;
+    }
 
     if (hp <= 0) {
         SceneManager* sinstance = SceneManager::getInstance();

@@ -6,9 +6,16 @@ Hittable::Hittable(const bool ally, const int health):
 	stun(0),
 	state(FREE),
 	facingRight(1),
+	fireRemaining(0),
+	fireCont(0),
 	points(0)
 {
 
+}
+
+void Hittable::setFireRemaining(const int cont)
+{
+	fireRemaining = cont;
 }
 
 const bool Hittable::getIsAlly() const
