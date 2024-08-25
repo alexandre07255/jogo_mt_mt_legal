@@ -10,7 +10,9 @@ AttackHitbox::AttackHitbox() :
 	damage(-1),
 	hitList(),
 	hasHit(0),
-	hitstun(0)
+	hitstun(0),
+	isInfinite(0),
+	doesATKCANCEL(1)
 {
 	hitList.clear();
 }
@@ -35,6 +37,21 @@ void AttackHitbox::setHitstun(const int stun)
 	hitstun = stun;
 }
 
+void AttackHitbox::setIsInfinite(const bool inf)
+{
+	isInfinite = inf;
+}
+
+void AttackHitbox::setDoesATKCANCEL(const bool dAC)
+{
+	doesATKCANCEL = dAC;
+}
+
+const bool AttackHitbox::getHasHit() const
+{
+	return hasHit;
+}
+
 const bool AttackHitbox::hasAlreadyHit(Hittable* pA)
 {
 	ListIterator<Hittable> it = hitList.begin();
@@ -50,7 +67,7 @@ const bool AttackHitbox::hasAlreadyHit(Hittable* pA)
 
 void AttackHitbox::movement()
 {
-	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || owner->getState() != Hittable::ATKCANCEL ) ) )
+	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || (doesATKCANCEL && owner->getState() != Hittable::ATKCANCEL) ) ) )
 	{
 		Scene* activeScene = SceneManager::getInstance()->top();
 		List<Updatable>* upList = activeScene->getUpdatables();
@@ -70,7 +87,8 @@ void AttackHitbox::movement()
 	collisionInstance->testHit(target, this);
 	
 	if (hasHit) { hitstun--; }
-	duration--;
+	if (!isInfinite)
+		duration--;
 }
 
 void AttackHitbox::hitSolution(Hittable* hit)
@@ -82,8 +100,11 @@ void AttackHitbox::hitSolution(Hittable* hit)
 	if (!hasHit)
 	{
 		hasHit = 1;
-		owner->setState(Hittable::ATKCANCEL);
-		owner->setStun(hitstun);
+		if (doesATKCANCEL)
+		{
+			owner->setState(Hittable::ATKCANCEL);
+			owner->setStun(hitstun);
+		}
 	}
 
 	hit->setState(Hittable::HITSTUN);

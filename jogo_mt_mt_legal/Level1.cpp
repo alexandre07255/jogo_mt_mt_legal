@@ -7,6 +7,8 @@
 #include "Level2.h"
 #include "SceneManager.h"
 #include "Support.h"
+#include "Spike.h"
+#include "Fire.h"
 #include <iostream>
 
 Level1::Level1(bool isPlayer2):Level() {
@@ -41,6 +43,14 @@ Level1::Level1(bool isPlayer2):Level() {
     teto->setSize(sf::Vector2f(1000, 100));
     collidables->push_back(teto);
     drawables->push_back(teto);
+
+    Spike* spike;
+    spike = new Spike;
+    spike->setPosition(1200.f, 400.f);
+    spike->setSize(sf::Vector2f(100.f, 50.f));
+    //drawables->push_back(spike);
+    updatables->push_back(spike);
+
 
 
     Platform* fallPlatform;

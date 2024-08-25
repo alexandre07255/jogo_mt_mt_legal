@@ -7,8 +7,8 @@ Hitbox::Hitbox():
 	target(0),
 	owner(NULL),
 	boundedTo(NULL),
-	relativePosition(),
-	duration(0)
+	relativePosition(0.f,0.f),
+	duration(1)
 {
 	Scene* activeScene = SceneManager::getInstance()->top();
 	activeScene->addUpdatable(this);

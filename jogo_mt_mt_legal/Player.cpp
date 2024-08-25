@@ -76,6 +76,18 @@ void Player::movement() {
 	}
 	
 	collisionInstance->testCollison(this);
+
+	if (fireRemaining)
+	{
+		if (fireCont > 4)
+		{
+			hp--;
+			fireRemaining--;
+			fireCont = 0;
+		}
+		else
+			fireCont++;
+	}
 }
 
 void Player::movementFREE()

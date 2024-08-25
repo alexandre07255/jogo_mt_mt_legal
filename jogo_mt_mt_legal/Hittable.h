@@ -9,6 +9,8 @@ protected:
 	int stun;
 	bool facingRight;
 	int points;
+	int fireCont;
+	int fireRemaining;
 public:
 	Hittable(const bool ally, const int health);
 	enum States
@@ -20,6 +22,7 @@ public:
 		PATROLLING, //usar apenas com inimigo
 		FOLLOWING //usar apenas com inimigo
 	};
+	void setFireRemaining(const int cont);
 	void setState(const int st);
 	void setStun(const int st);
 	const int getStun() const;

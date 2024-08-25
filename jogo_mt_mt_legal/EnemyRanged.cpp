@@ -3,16 +3,22 @@
 #include "SceneManager.h"
 #include "Level.h"
 
-EnemyRanged::EnemyRanged(): walkingBuffer(0), waitBuffer(0), direction(0),
-	attackStartup(60),
-	attackEndLag(40),
-	heightStrip(10.f),
-	attackTriggerRange(150.f),
-	attackTriggerYRange(10.f),
-    idealHeight(200.f)
+EnemyRanged::EnemyRanged() : walkingBuffer(0), waitBuffer(0), direction(0),
+attackStartup(30),
+attackEndLag(40),
+heightStrip(10.f),
+attackTriggerRange(150.f),
+attackTriggerYRange(10.f),
+idealHeight(200.f),
+cycleLenght(6),
+contCycle(0),
+cooldownCont(0),
+attackTriggerStrip(20.0f)
 {
-	upperLimitMultR = 7.0 / 4;
-	lesserLimitMultR = 5.0 / 2;
+    hp = 20;
+    sightSize = 1000.0;
+	upperLimitMultR = 5.0 / 2;
+	lesserLimitMultR = 7.0 / 4;
 	upperLimitMultL = 5.0 / 4;
 	lesserLimitMultL = 1.0 / 2;
 }
@@ -21,7 +27,6 @@ void EnemyRanged::movement()
 {
     CollisionManager* instance = CollisionManager::getInstance();
 
-    state = PATROLLING;
     switch (state)
     {
     case PATROLLING:
@@ -39,9 +44,25 @@ void EnemyRanged::movement()
         setFillColor(sf::Color::Green);
         movementATKCANCEL();
         break;
+    case ATTACK:
+        movementATTACK();
+        break;
     }
+    if (cooldownCont > 0) { cooldownCont--; }
 
     instance->testCollison(this);
+
+    if (fireRemaining)
+    {
+        if (fireCont > 4)
+        {
+            hp--;
+            fireRemaining--;
+            fireCont = 0;
+        }
+        else
+            fireCont++;
+    }
 
     if (hp <= 0) {
         SceneManager* sinstance = SceneManager::getInstance();
@@ -57,7 +78,7 @@ void EnemyRanged::movement()
 
 void EnemyRanged::movementPATROLLING()
 {
-    CollisionManager* instance = CollisionManager::getInstance();
+    CollisionManager* cInstance = CollisionManager::getInstance();
 
     srand(time(NULL));
 
@@ -112,7 +133,7 @@ void EnemyRanged::movementPATROLLING()
 
     //verticalSpeed += 1;
 
-    float floorY = instance->nearestCollidable(this, MAX_HEIGHT);
+    float floorY = cInstance->nearestCollidable(this, MAX_HEIGHT);
     if (floorY - bottom() > idealHeight + heightStrip)
         verticalSpeed += FLY_STRENGTH;
     else if (floorY - bottom() < idealHeight - heightStrip)
@@ -127,16 +148,178 @@ void EnemyRanged::movementPATROLLING()
 
     move(vetorDesloc);
 
-    //followingPlayer = searchPlayer();
+    followingPlayer = searchPlayer();
 
     if (followingPlayer) {
         state = FOLLOWING;
     }
 }
 
+void EnemyRanged::projectileCalculations(Projectile* proj, const float absHorSpeed, Hittable* target)
+{
+    float height = target->yMid() - yMid();
+    float length = target->xMid() - xMid();
+    
+    float verSpeed = (height / abs(length)) * absHorSpeed - (GRAVITY / 2) * (abs(length) / absHorSpeed);
+
+    proj->setHorizontalVelocity(absHorSpeed * ((length > 0) - (length < 0)));
+    proj->setVerticalVelocity(verSpeed);
+}
+
 void EnemyRanged::movementFOLLOWING()
 {
+    CollisionManager* cInstance = CollisionManager::getInstance();
 
+    int friccao = 1;
+
+    sf::Vector2f vetorDesloc(1, 1);
+
+    if ((!cooldownCont) || (abs(xMid() - followingPlayer->xMid()) > attackTriggerRange + attackTriggerStrip))
+    {
+        if (followingPlayer->left() > right()) {
+            if (horizontalSpeed < FOLLOW_MAX_HORIZONTAL_SPEED) {
+                horizontalSpeed += FOLLOW_ACCELARATION;
+            }
+            else {
+                horizontalSpeed = FOLLOW_MAX_HORIZONTAL_SPEED;
+            }
+            //facingRight = 1;
+        }
+        else if (followingPlayer->right() < left()) {
+            if (horizontalSpeed > -FOLLOW_MAX_HORIZONTAL_SPEED) {
+                horizontalSpeed -= FOLLOW_ACCELARATION;
+            }
+            else {
+                horizontalSpeed = -FOLLOW_MAX_HORIZONTAL_SPEED;
+            }
+            //facingRight = 0;
+        }
+    }
+    else if (abs(xMid() - followingPlayer->xMid()) < attackTriggerRange - attackTriggerStrip)
+    {
+        if (followingPlayer->left() < right()) {
+            if (horizontalSpeed < FOLLOW_MAX_HORIZONTAL_SPEED) {
+                horizontalSpeed += FOLLOW_ACCELARATION;
+            }
+            else {
+                horizontalSpeed = FOLLOW_MAX_HORIZONTAL_SPEED;
+            }
+            //facingRight = 1;
+        }
+        else if (followingPlayer->right() > left()) {
+            if (horizontalSpeed > -FOLLOW_MAX_HORIZONTAL_SPEED) {
+                horizontalSpeed -= FOLLOW_ACCELARATION;
+            }
+            else {
+                horizontalSpeed = -FOLLOW_MAX_HORIZONTAL_SPEED;
+            }
+            //facingRight = 0;
+        }
+    }
+    else
+        horizontalSpeed = 0;
+
+    facingRight = (followingPlayer->xMid() > xMid());
+
+    float floorY = cInstance->nearestCollidable(this, MAX_HEIGHT);
+    if (floorY - bottom() > idealHeight + heightStrip)
+        verticalSpeed += FLY_STRENGTH;
+    else if (floorY - bottom() < idealHeight - heightStrip)
+        verticalSpeed -= FLY_STRENGTH;
+    else
+        verticalSpeed = 0;
+
+    if (abs(horizontalSpeed) > friccao) {
+        horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
+    }
+    else
+        horizontalSpeed = 0;
+
+
+    move(horizontalSpeed, verticalSpeed);
+
+    followingPlayer = searchPlayer();
+    if (!followingPlayer) {
+        if (facingRight) {
+            facingRight = 0;
+        }
+        else
+            facingRight = 1;
+        state = PATROLLING;
+    }
+    else if (!cooldownCont)
+    {
+        if (facingRight)
+        {
+            if (followingPlayer->left() - right() < attackTriggerRange)
+            {
+                state = ATTACK;
+                stun = attackStartup+ attackEndLag;
+            }
+        }
+        else
+        {
+            if (followingPlayer->right() - left() > -attackTriggerRange)
+            {
+                state = ATTACK;
+                stun = attackStartup + attackEndLag;
+            }
+        }
+    }
+}
+
+void EnemyRanged::movementATTACK()
+{
+    if (stun > 0)
+    {
+        setFillColor(sf::Color::Blue);
+        facingRight = (followingPlayer->xMid() > xMid());
+
+        if (stun == attackEndLag)
+        {
+            Projectile* projectile = new Projectile;
+
+            projectileCalculations(projectile, 15.f, followingPlayer);
+
+            projectile->setTarget(1);
+            projectile->setOwner(this);
+            float horKnock = 0.0;
+            projectile->setSize(sf::Vector2f(30.0f, 30.0f));
+            projectile->setVerKnockback(-10.0);
+            projectile->setDamage(3);
+            projectile->setHitstun(25);
+            horKnock = 30.0;
+            if (facingRight)
+            {
+                projectile->setPosition(xMid(), yMid());
+                projectile->setHorKnockback(horKnock);
+            }
+            else
+            {
+                projectile->setPosition(xMid(), yMid());
+                projectile->setHorKnockback(-horKnock);
+            }
+        }
+        stun--;
+    }
+    else
+    {
+        cooldownCont = COOLDOWN;
+
+        followingPlayer = searchPlayer();
+        if (!followingPlayer) {
+            if (facingRight) {
+                facingRight = 0;
+            }
+            else
+                facingRight = 1;
+            state = PATROLLING;
+        }
+        else
+        {
+            state = FOLLOWING;
+        }
+    }
 }
 
 void EnemyRanged::movementATKCANCEL()
@@ -144,6 +327,7 @@ void EnemyRanged::movementATKCANCEL()
     state = PATROLLING;
 }
 
+const int EnemyRanged::COOLDOWN(120);
 const float EnemyRanged::MAX_HEIGHT(350.f);
 const float EnemyRanged::FLY_STRENGTH(0.5f);
 const float EnemyRanged::FOLLOW_MAX_HORIZONTAL_SPEED(5.f);

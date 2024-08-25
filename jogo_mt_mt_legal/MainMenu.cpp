@@ -5,7 +5,7 @@
 #include "CommandStack1.h"
 using namespace std;
 
-MainMenu::MainMenu() {
+MainMenu::MainMenu(): player2False(NULL), player2True(NULL) {
 	CommandStack1* com = new CommandStack1(this);
 	level1Button = new Button(sf::Color::Blue,com,false);
 	level1Button->setPosition(500, 500);
