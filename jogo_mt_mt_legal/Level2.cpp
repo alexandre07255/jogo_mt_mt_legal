@@ -18,9 +18,9 @@ Level2::Level2(bool isPlayer2): Level() {
     Terrain* plataforma, * parede, * teto;
     EnemyMelee* inimigo;
 
-    plataforma = new Terrain;
-    parede = new Terrain;
-    teto = new Terrain;
+    plataforma = new Terrain(1.f);
+    parede = new Terrain(1.f);
+    teto = new Terrain(1.f);
 
     plataforma->setPosition(0, 1000);
     plataforma->setFillColor(sf::Color::Red);

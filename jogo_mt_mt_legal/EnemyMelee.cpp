@@ -14,7 +14,6 @@ attackStartup(72), attackHitboxDuration(5), attackEndLag(20), attackTriggerRange
 void EnemyMelee::movementPATROLLING() {
     srand(time(NULL));
 
-    int friccao = 1;
     sf::Vector2f vetorDesloc(1, 1);
 
     if (walkingBuffer <= 0) {
@@ -57,8 +56,8 @@ void EnemyMelee::movementPATROLLING() {
         walkingBuffer--;
     }
 
-    if (abs(horizontalSpeed) > friccao) {
-        horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
+    if (abs(horizontalSpeed) > frictionFelt) {
+        horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * frictionFelt;
     }
     else
         horizontalSpeed = 0;
@@ -118,7 +117,6 @@ void EnemyMelee::movement() {
 }
 
 void EnemyMelee::movementFOLLOWING() {
-    int friccao = 1;
 
     sf::Vector2f vetorDesloc(1, 1);
 
@@ -154,8 +152,8 @@ void EnemyMelee::movementFOLLOWING() {
         }
     }
 
-    if (abs(horizontalSpeed) > friccao) {
-        horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friccao;
+    if (abs(horizontalSpeed) > frictionFelt) {
+        horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * frictionFelt;
     }
     else
         horizontalSpeed = 0;

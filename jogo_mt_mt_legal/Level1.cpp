@@ -17,7 +17,7 @@ Level1::Level1(bool isPlayer2):Level() {
  
 
     Terrain* plataforma;
-    plataforma = new Terrain;
+    plataforma = new Terrain(1.f);
     plataforma->setPosition(0, 1000);
     plataforma->setFillColor(sf::Color::Red);
     plataforma->setSize(sf::Vector2f(2050, 100));
@@ -26,7 +26,7 @@ Level1::Level1(bool isPlayer2):Level() {
 
 
     Terrain* parede;
-    parede = new Terrain;
+    parede = new Terrain(1.f);
     parede->setPosition(300, 500);
     parede->setFillColor(sf::Color::Green);
     parede->setSize(sf::Vector2f(100, 300));
@@ -35,7 +35,7 @@ Level1::Level1(bool isPlayer2):Level() {
 
 
     Terrain* teto;
-    teto = new Terrain;
+    teto = new Terrain(1.f);
     teto->setPosition(0, 400);
     teto->setFillColor(sf::Color::Blue);
     teto->setSize(sf::Vector2f(1000, 100));

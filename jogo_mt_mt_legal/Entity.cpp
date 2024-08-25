@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(): Being(), onAir(1)
+Entity::Entity(): Being(), onAir(1), frictionFelt(1)
 { }
 
 Entity::~Entity() { }
@@ -13,4 +13,8 @@ const bool Entity::getOnAir() const
 void Entity::setOnAir(const bool value)
 {
 	onAir = value;
+}
+
+void Entity::setFriction(float fric){
+	frictionFelt = fric;
 }

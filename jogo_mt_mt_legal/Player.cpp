@@ -15,7 +15,6 @@ Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	player2(isPlayer2),
 	attackBuffer(0),
 	wasAttackPressed(0),
-	friction(1),
 	attackCounter(0),
 	hasAttacked(0),
 	attackStartup{20, 15, 15},
@@ -110,8 +109,8 @@ void Player::movementFREE()
 	}
 
 	//friction
-	if (abs(horizontalSpeed) > friction) {
-		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * friction;
+	if (abs(horizontalSpeed) > frictionFelt) {
+		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * frictionFelt;
 	}
 	else
 		horizontalSpeed = 0;

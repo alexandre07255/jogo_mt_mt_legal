@@ -13,5 +13,7 @@ public:
 	void setHorizontalVelocity(float vel);
 
 	void setVerticalVelocity(float vel);
+
+	float getVerticalSpeed();
 };
 

@@ -3,7 +3,8 @@
 class Terrain : public Collidable, public MyDrawable
 {
 public:
-	Terrain();
+	Terrain(float frict);
 	virtual sf::FloatRect getBounds();
+	void collisionSolution(Entity* pE);
 };
 
