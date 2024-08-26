@@ -28,10 +28,10 @@ void PauseMenu::update()
 	else
 		instance->setWasEscPressed(0);
 
-	ListIterator<Updatable> itCurrent = updatables->begin();
+	List<Updatable>::Iterator itCurrent = updatables->begin();
 	if (updatables->size() > 0)
 	{
-		ListIterator<Updatable> itNext = itCurrent;
+		List<Updatable>::Iterator itNext = itCurrent;
 		itNext++;
 		while (itNext != updatables->end())
 		{

@@ -32,7 +32,7 @@ void CollisionManager::testHittableCollision(Hittable* target)
 	float x, y;
 
 	int size = hittableList->size();
-	ListIterator<Hittable> it = hittableList->begin();
+	List<Hittable>::Iterator it = hittableList->begin();
 
 	int directionX = 0;
 	int directionY = 0;
@@ -109,7 +109,7 @@ void CollisionManager::testCollison(Entity* pE)
 	float x, y;
 
 	int size = collidables->size();
-	ListIterator<Collidable> it = collidables->begin();
+	List<Collidable>::Iterator it = collidables->begin();
 
 	int directionX = 0;
 	int directionY = 0;
@@ -187,7 +187,7 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 	bool neutral = (hitbox->getOwner() == NULL);
 	//Fazer neutral
 	if (hittableList == NULL) { cout << "No one is hittable" << endl; return; }
-	ListIterator<Hittable> it = hittableList->begin();
+	List<Hittable>::Iterator it = hittableList->begin();
 	int size = hittableList->size();
 
 	sf::FloatRect hitboxBounds = hitbox->getGlobalBounds();
@@ -238,7 +238,7 @@ float CollisionManager::nearestCollidable(MyDrawable* relativeTo, float maxHeigh
 		ret.left = xFinal;
 		ret.top = yFinal;
 
-		for (ListIterator<Collidable> it = collidables->begin(); (it != collidables->end()); it++) {
+		for (List<Collidable>::Iterator it = collidables->begin(); (it != collidables->end()); it++) {
 			sf::FloatRect colli = (*it)->getBounds();
 			if (ret.intersects(colli))
 				return colli.getPosition().y;

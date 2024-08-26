@@ -69,14 +69,14 @@ Player* Enemy::searchPlayer() const{
 			ret.left = xFinal;
 			ret.top = yFinal;
 
-			for (ListIterator<Hittable> it = hittable->begin();it != hittable->end();it++) {
+			for (List<Hittable>::Iterator it = hittable->begin();it != hittable->end();it++) {
 				if (ret.intersects((*it)->getGlobalBounds()) && (*it)->getIsAlly()) {
 					//std::cout << "player achado" << endl;
 					return (Player*)*it;
 				}
 			}
 
-			for (ListIterator<Collidable> it = collidables->begin(); (it != collidables->end()) && flag; it++) {
+			for (List<Collidable>::Iterator it = collidables->begin(); (it != collidables->end()) && flag; it++) {
 				if (ret.intersects((*it)->getBounds()))
 					flag = 0;
 			}

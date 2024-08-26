@@ -163,7 +163,6 @@
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
     <ClCompile Include="List.cpp" />
-    <ClCompile Include="ListIterator.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyDrawable.cpp" />
@@ -211,7 +210,6 @@
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />
     <ClInclude Include="List.h" />
-    <ClInclude Include="ListIterator.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Menu.h" />
