@@ -4,6 +4,7 @@
 #include "Level2.h"
 #include <iostream>
 #include "CommandStack1.h"
+#include "CommandStack2.h"
 #include "CommandStart.h"
 #include "GraphicManager.h"
 #include "inputManager.h"
@@ -43,6 +44,23 @@ MainMenu::MainMenu():version(0){
 	List<Button>* ButtonStart = new List<Button>;
 	buttonVersions->push_back(ButtonStart);
 
+	CommandStack1* com2 = new CommandStack1(this);
+	CommandStack2* com3 = new CommandStack2(this);
+
+	Button* buttonLevel1 = new Button(sf::Color::Blue, com2, false);
+	Button* buttonLevel2 = new Button(sf::Color::Blue, com3, false);
+
+	buttonLevel1->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
+	buttonLevel2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
+
+	updatableStart->push_back(buttonLevel1);
+	MyDrawableStart->push_back(buttonLevel1);
+	ButtonStart->push_back(buttonLevel1);
+
+	updatableStart->push_back(buttonLevel2);
+	MyDrawableStart->push_back(buttonLevel2);
+	ButtonStart->push_back(buttonLevel2);
+
 	List<Updatable>* updatableOptions = new List<Updatable>;
 	updatableVersions->push_back(updatableOptions);
 
@@ -51,12 +69,22 @@ MainMenu::MainMenu():version(0){
 
 	List<Button>* ButtonOptions = new List<Button>;
 	buttonVersions->push_back(ButtonOptions);
+
+	changeMainButtons();
 }
 
 void MainMenu::update() {
 
 	InputManager* instance = InputManager::getInstance();
-
+	if (instance->isPausePressed()) {
+		if (!instance->getWasEscPressed())
+		{
+			goBack();
+		}
+		instance->setWasEscPressed(1);
+	}
+	else
+		instance->setWasEscPressed(0);
 	
 	ListIterator<Updatable> itCurrent = updatables->begin();
 	if (updatables->size() > 0)
@@ -112,4 +140,14 @@ void MainMenu::changeOptionsButtons() {
 	updatables = (*updatableVersions)[2];
 	drawables = (*myDrawableVersions)[2];
 	buttonList = (*buttonVersions)[2];
+}
+
+void MainMenu::goBack() {
+	if (version == 0) {
+		GraphicManager* instance = GraphicManager::getInstance();
+		instance->getWindow()->close();
+	}
+	else {
+		changeMainButtons();
+	}
 }
