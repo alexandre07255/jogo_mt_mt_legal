@@ -1,12 +1,10 @@
 #include "SpriteMatrix.h"
 
 SpriteMatrix::SpriteMatrix() :
-	spriteSheet(),
+	spriteSheet(new vector<vector<Texture*>*>),
 	name(),
 	xStep(0),
-	yStep(0),
-	xSize(0),
-	ySize(0)
+	yStep(0)
 {
 }
 
@@ -31,23 +29,24 @@ void SpriteMatrix::loadFromFile(const string sName, const int stepX, const int s
 	Image img;
 	img.loadFromFile(path);
 	
-	xSize = img.getSize().x / xStep;
-	ySize = img.getSize().y / yStep;
+	int xSize = img.getSize().x / xStep;
+	int ySize = img.getSize().y / yStep;
 
-
+	for (int j = 0; j < ySize; j++)
+	{
+		vector<Texture*>* line = new vector<Texture*>;
+		spriteSheet->push_back(line);
+		for (int i = 0; i < xSize; i++);
+	}
 }
 
 const int SpriteMatrix::getXStep() const { return xStep; }
 
 const int SpriteMatrix::getYStep() const { return yStep; }
 
-const int SpriteMatrix::getXSize() const { return xSize; }
-
-const int SpriteMatrix::getYSize() const { return ySize; }
-
 const string SpriteMatrix::getName() const { return name; }
 
 const Texture* SpriteMatrix::getSprite(int x, int y) const
 {
-
+	return NULL;
 }

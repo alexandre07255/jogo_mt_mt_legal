@@ -8,20 +8,16 @@ using namespace std;
 class SpriteMatrix
 {
 private:
-	vector<vector<Texture*>*> spriteSheet;
+	vector<vector<Texture*>*>* spriteSheet;
 	string name;
 	int xStep;
 	int yStep;
-	int xSize;
-	int ySize;
 	const bool isBlockEmpty(Image& img, const int x, const int y) const;
 public:
 	SpriteMatrix();
 	void loadFromFile(const string sName, const int stepX, const int stepY, const string path);
 	const int getXStep() const;
 	const int getYStep() const;
-	const int getXSize() const;
-	const int getYSize() const;
 	const string getName() const;
 	const Texture* getSprite(int x, int y) const;
 };
