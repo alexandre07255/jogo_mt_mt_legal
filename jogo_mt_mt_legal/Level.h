@@ -15,6 +15,7 @@ protected:
 	bool endingOnRight;
 	float endX;
 	virtual void levelCompleteHandler() = 0;
+	MyDrawable* backgroundAndLevel;
 public:
 	Level();
 	virtual ~Level();

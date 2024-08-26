@@ -16,7 +16,13 @@ Level1::Level1(bool isPlayer2):Level() {
     sf::RenderWindow* window = instance->getWindow();
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
 
- 
+    sf::Texture* background = new sf::Texture();
+    background->loadFromFile("fase1EBA.png");
+
+    backgroundAndLevel = new MyDrawable();
+    backgroundAndLevel->setSize(sf::Vector2f(1344.f, 208.f));
+    backgroundAndLevel->setTexture(background);
+    drawables->push_back(backgroundAndLevel);
 
     Terrain* plataforma;
     plataforma = new Terrain(1.f);

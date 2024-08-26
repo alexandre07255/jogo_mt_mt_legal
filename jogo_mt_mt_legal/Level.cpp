@@ -7,7 +7,7 @@
 #include "PauseMenu.h"
 #include "inputManager.h"
 
-Level::Level(): hittableList(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL)
+Level::Level(): hittableList(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL), backgroundAndLevel(NULL)
 {
     hittableList = new List<Hittable>;
     collidables = new List<Collidable>;
