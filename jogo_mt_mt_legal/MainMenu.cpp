@@ -1,21 +1,62 @@
 #include "MainMenu.h"
 #include "SceneManager.h"
 #include "Level1.h"
+#include "Level2.h"
 #include <iostream>
 #include "CommandStack1.h"
+#include "CommandStart.h"
+#include "GraphicManager.h"
+#include "inputManager.h"
 using namespace std;
 
-MainMenu::MainMenu(): player2False(NULL), player2True(NULL) {
-	CommandStack1* com = new CommandStack1(this);
-	level1Button = new Button(sf::Color::Blue,com,false);
-	level1Button->setPosition(500, 500);
+MainMenu::MainMenu():version(0){
 
-	buttonList->push_back(level1Button);
-	drawables->push_back(level1Button);
-	updatables->push_back(level1Button);
+	GraphicManager* instance = GraphicManager::getInstance();
+
+	updatableVersions = new vector<List<Updatable>*>;
+	myDrawableVersions = new vector<List<MyDrawable>*>;
+	buttonVersions = new vector<List<Button>*>;
+
+	List<Updatable>* updatableMain = new List<Updatable>;
+	updatableVersions->push_back(updatableMain);
+
+	List<MyDrawable>* MyDrawableMain = new List<MyDrawable>;
+	myDrawableVersions->push_back(MyDrawableMain);
+
+	List<Button>* ButtonMain = new List<Button>;
+	buttonVersions->push_back(ButtonMain);
+
+	CommandStart* com1 = new CommandStart(this);
+	Button* startButton = new Button(sf::Color::Blue, com1, true);
+	startButton->setPosition(instance->getWindow()->getSize().x/2, instance->getWindow()->getSize().y / 3 - 25.f);
+
+	updatableMain->push_back(startButton);
+	MyDrawableMain->push_back(startButton);
+	ButtonMain->push_back(startButton);
+
+	List<Updatable>* updatableStart = new List<Updatable>;
+	updatableVersions->push_back(updatableStart);
+
+	List<MyDrawable>* MyDrawableStart = new List<MyDrawable>;
+	myDrawableVersions->push_back(MyDrawableStart);
+
+	List<Button>* ButtonStart = new List<Button>;
+	buttonVersions->push_back(ButtonStart);
+
+	List<Updatable>* updatableOptions = new List<Updatable>;
+	updatableVersions->push_back(updatableOptions);
+
+	List<MyDrawable>* MyDrawableOptions = new List<MyDrawable>;
+	myDrawableVersions->push_back(MyDrawableOptions);
+
+	List<Button>* ButtonOptions = new List<Button>;
+	buttonVersions->push_back(ButtonOptions);
 }
 
 void MainMenu::update() {
+
+	InputManager* instance = InputManager::getInstance();
+
 	
 	ListIterator<Updatable> itCurrent = updatables->begin();
 	if (updatables->size() > 0)
@@ -42,4 +83,33 @@ void MainMenu::stackLevel1(bool player2) {
 
 	instance->push(level);
 
+}
+
+void MainMenu::stackLevel2(bool player2) {
+
+	SceneManager* instance = SceneManager::getInstance();
+	
+	Level2* level;
+	level = new Level2(player2);
+
+	instance->push(level);
+}
+
+void MainMenu::changeMainButtons() {
+	version = 0;
+	updatables = (*updatableVersions)[0];
+	drawables = (*myDrawableVersions)[0];
+	buttonList = (*buttonVersions)[0];
+}
+void MainMenu::changeStartButtons() {
+	version = 1;
+	updatables = (*updatableVersions)[1];
+	drawables = (*myDrawableVersions)[1];
+	buttonList = (*buttonVersions)[1];
+}
+void MainMenu::changeOptionsButtons() {
+	version = 2;
+	updatables = (*updatableVersions)[2];
+	drawables = (*myDrawableVersions)[2];
+	buttonList = (*buttonVersions)[2];
 }
