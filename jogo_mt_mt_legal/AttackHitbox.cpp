@@ -54,7 +54,7 @@ const bool AttackHitbox::getHasHit() const
 
 const bool AttackHitbox::hasAlreadyHit(Hittable* pA)
 {
-	ListIterator<Hittable> it = hitList.begin();
+	List<Hittable>::Iterator it = hitList.begin();
 	int size = hitList.size();
 	for (int i = 0; i < size; i++)
 	{

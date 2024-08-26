@@ -25,10 +25,10 @@ List<Updatable>* Scene::getUpdatables() const
 }
 
 void Scene::draw(sf::RenderWindow* window) {
-	ListIterator<MyDrawable> itCurrent = drawables->begin();
+	List<MyDrawable>::Iterator itCurrent = drawables->begin();
 	if (drawables->size() > 0)
 	{
-		ListIterator<MyDrawable> itNext = itCurrent;
+		List<MyDrawable>::Iterator itNext = itCurrent;
 		itNext++;
 		while (itNext != drawables->end())
 		{
@@ -42,10 +42,10 @@ void Scene::draw(sf::RenderWindow* window) {
 
 void Scene::update()
 {
-	ListIterator<Updatable> itCurrent = updatables->begin();
+	List<Updatable>::Iterator itCurrent = updatables->begin();
 	if (updatables->size() > 1)
 	{
-		ListIterator<Updatable> itNext = itCurrent;
+		List<Updatable>::Iterator itNext = itCurrent;
 		itNext++;
 		while (itNext != updatables->end())
 		{

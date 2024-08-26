@@ -84,7 +84,7 @@ void Platform::movement() {
 			Level* curL = static_cast<Level*>(instance->top());
 			List<Hittable>* lista = curL->getHittableList();
 
-			ListIterator<Hittable> it = lista->begin();
+			List<Hittable>::Iterator it = lista->begin();
 			bool flag = 1;
 			for (int i = 0;i < lista->size();i++) {
 				if ((*it)->bottom() == top() + 1.f) {
