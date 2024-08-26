@@ -36,8 +36,25 @@ void SpriteMatrix::loadFromFile(const string sName, const int stepX, const int s
 	{
 		vector<Texture*>* line = new vector<Texture*>;
 		spriteSheet->push_back(line);
-		for (int i = 0; i < xSize; i++);
+		bool lineEnd = 0;
+		for (int i = 0; i < xSize && !lineEnd; i++)
+		{
+			if (!isBlockEmpty(img, i, j))
+			{
+				Texture* block = new Texture;
+				bool result = 0;
+				do
+				{
+					result = block->loadFromImage(img, IntRect(i * xStep, j * yStep, xStep, yStep));
+				} while (!result);
+
+				line->push_back(block);
+			}
+			else
+				lineEnd = 1;
+		}
 	}
+	name = sName;
 }
 
 const int SpriteMatrix::getXStep() const { return xStep; }
@@ -46,7 +63,11 @@ const int SpriteMatrix::getYStep() const { return yStep; }
 
 const string SpriteMatrix::getName() const { return name; }
 
+const int SpriteMatrix::getLineSize(const int l) const { return spriteSheet->at(l)->size(); }
+
+const int SpriteMatrix::getNumberOfLines() const { return spriteSheet->size(); }
+
 const Texture* SpriteMatrix::getSprite(int x, int y) const
 {
-	return NULL;
+	return spriteSheet->at(y)->at(x);
 }

@@ -18,6 +18,8 @@ public:
 	void loadFromFile(const string sName, const int stepX, const int stepY, const string path);
 	const int getXStep() const;
 	const int getYStep() const;
+	const int getLineSize(const int l) const;
+	const int getNumberOfLines() const;
 	const string getName() const;
 	const Texture* getSprite(int x, int y) const;
 };
