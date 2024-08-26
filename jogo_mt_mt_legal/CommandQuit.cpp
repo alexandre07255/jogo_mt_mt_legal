@@ -8,6 +8,7 @@ CommandQuit::CommandQuit(Menu* _bound):Command(_bound) {
 void CommandQuit::execute() {
 	SceneManager* instance = SceneManager::getInstance();
 
-	instance->pop();
-	instance->pop();
+	while (instance->size() > 1) {
+		instance->pop();
+	}
 }

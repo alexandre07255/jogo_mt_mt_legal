@@ -12,3 +12,7 @@ void Menu::setSize(sf::Vector2f _size) {
 void Menu::addButton(Button* but) {
 	buttonList->push_back(but);
 }
+
+void Menu::save() {
+	cout << "Nossa estou aqui salvando muitas coisas uou" << endl;
+}

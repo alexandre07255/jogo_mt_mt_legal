@@ -16,5 +16,6 @@ public:
 	void pop();
 	Scene* top() const;
 	void step();
+	int size();
 };
 

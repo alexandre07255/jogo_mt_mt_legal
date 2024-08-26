@@ -12,6 +12,6 @@ public:
 	Menu();
 	void setSize(sf::Vector2f _size);
 	void addButton(Button* but);
-
+	void save();
 };
 

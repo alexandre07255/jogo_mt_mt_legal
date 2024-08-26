@@ -56,3 +56,7 @@ void SceneManager::step()
 		sceneActive->draw(window);
 	window->display();
 }
+
+int SceneManager::size() {
+	return scenes.size();
+}
