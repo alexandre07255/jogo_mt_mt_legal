@@ -4,7 +4,9 @@ InputManager* InputManager::instance(NULL);
 
 InputManager::InputManager():
 	keyboard(new sf::Keyboard),
-	mouse(new sf::Mouse)
+	mouse(new sf::Mouse),
+	wasEscPressed(0),
+	wasLMBPressed(0)
 {
 
 }
@@ -21,6 +23,16 @@ InputManager* InputManager::getInstance()
 	if (instance == NULL)
 		instance = new InputManager();
 	return instance;
+}
+
+const bool InputManager::getWasLMBPressed() const
+{
+	return wasLMBPressed;
+}
+
+void InputManager::setWasLMBPressed(const bool lmb)
+{
+	wasLMBPressed = lmb;
 }
 
 const bool InputManager::getWasEscPressed() const

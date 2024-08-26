@@ -5,7 +5,7 @@
 GraphicManager::GraphicManager() {
 	sf::VideoMode video;
 	std::vector< sf::VideoMode > modos = video.getFullscreenModes();
-	window = new sf::RenderWindow (sf::VideoMode(modos[0].width, modos[0].height,modos[0].bitsPerPixel), "jogo",sf::Style::Fullscreen);
+	window = new sf::RenderWindow (sf::VideoMode(modos[0].width, modos[0].height,modos[0].bitsPerPixel), "jogo");
 }
 
 GraphicManager::~GraphicManager() {
