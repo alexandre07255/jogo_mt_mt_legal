@@ -17,7 +17,7 @@ CollisionManager::~CollisionManager()
 
 }
 
-void CollisionManager::testPlayerToEnemyCollision(Player* player)
+void CollisionManager::testHittableCollision(Hittable* target)
 {
 	SceneManager* instance = SceneManager::getInstance();
 	Level* level = static_cast<Level*>(instance->top());
@@ -27,7 +27,7 @@ void CollisionManager::testPlayerToEnemyCollision(Player* player)
 		return;
 
 	sf::FloatRect targetBounds;
-	sf::FloatRect collidableBounds;
+	sf::FloatRect hittableBounds;
 
 	float x, y;
 
@@ -37,58 +37,53 @@ void CollisionManager::testPlayerToEnemyCollision(Player* player)
 	int directionX = 0;
 	int directionY = 0;
 
-	targetBounds = player->getGlobalBounds();
+	targetBounds = target->getGlobalBounds();
 
 	bool collided = 0;
 	bool collidedDown = 0;
 	for (int i = 0; i < size; i++)
 	{
-		if (player->getId() != (*it)->getId()) {
-			collidableBounds = (*it)->getGlobalBounds();
+		if ((target->getId() != (*it)->getId()) && (*it)->getCanBeCollided()) {
+			hittableBounds = (*it)->getGlobalBounds();
 
-			if (isColliding(collidableBounds, targetBounds)) {
+			if (isColliding(hittableBounds, targetBounds)) {
 				collided = 1;
 				//temos colisao
-				if (targetBounds.getPosition().x + targetBounds.width < collidableBounds.getPosition().x + collidableBounds.width) {
-					//se player colidiu pela direita
-					x = targetBounds.getPosition().x + targetBounds.width - collidableBounds.getPosition().x;
+				if (targetBounds.getPosition().x + targetBounds.width < hittableBounds.getPosition().x + hittableBounds.width) {
+					//se target colidiu pela direita
+					x = targetBounds.getPosition().x + targetBounds.width - hittableBounds.getPosition().x;
 					directionX = -1;
 				}
 				else {
-					//se player colidiu pela esquerda
-					x = collidableBounds.getPosition().x + collidableBounds.width - targetBounds.getPosition().x;
+					//se target colidiu pela esquerda
+					x = hittableBounds.getPosition().x + hittableBounds.width - targetBounds.getPosition().x;
 					directionX = 1;
 				}
 
-				if (targetBounds.getPosition().y + targetBounds.height < collidableBounds.getPosition().y + collidableBounds.height) {
-					//se player coldiu por baixo
-					y = targetBounds.getPosition().y + targetBounds.height - collidableBounds.getPosition().y;
+				if (targetBounds.getPosition().y + targetBounds.height < hittableBounds.getPosition().y + hittableBounds.height) {
+					//se target coldiu por baixo
+					y = targetBounds.getPosition().y + targetBounds.height - hittableBounds.getPosition().y;
 					directionY = -1;
 					collidedDown = 1;
 				}
 				else {
-					//se player colidiu por cima
-					y = collidableBounds.getPosition().y + collidableBounds.height - targetBounds.getPosition().y;
+					//se target colidiu por cima
+					y = hittableBounds.getPosition().y + hittableBounds.height - targetBounds.getPosition().y;
 					directionY = 1;
 				}
 
 				if (y < x) {
-					player->move(0, (y * directionY));
-					player->setVerticalVelocity(0);
-					if (directionY == -1)
-						player->setOnAir(0);
+					target->move(0, (y * directionY));
+					target->setVerticalVelocity(10.f * (directionY));
 				}
 				else {
-					player->move(sf::Vector2f((x * directionX), 0));
-					player->setHorizontalVelocity(0);
+					target->move(sf::Vector2f((x * directionX), 0));
+					target->setHorizontalVelocity(10.f * (directionX));
 				}
-				targetBounds = player->getGlobalBounds();
-
+				targetBounds = target->getGlobalBounds();
 			}
-			it++;
 		}
-		if (!collided || !collidedDown)
-			player->setOnAir(1);
+		it++;
 	}
 }
 
@@ -169,12 +164,13 @@ void CollisionManager::testCollison(Entity* pE)
 
 			}
 			
-			it++;
+			
 		}
+		it++;
 		
-		if (!collided || !collidedDown)
-			pE->setOnAir(1);
 	}
+	if (!collided || !collidedDown)
+		pE->setOnAir(1);
 }
 
 const bool CollisionManager::isColliding(sf::FloatRect one, sf::FloatRect other){

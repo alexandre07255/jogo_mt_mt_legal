@@ -2,6 +2,7 @@
 #include "Hitbox.h"
 #include "Collidable.h"
 #include "List.h"
+#include "Player.h"
 
 
 class CollisionManager
@@ -13,7 +14,7 @@ public:
 	static CollisionManager* getInstance();
 	~CollisionManager();
 	void testCollison(Entity* pE);
-	void testPlayerToEnemyCollision(Player* player);
+	void testHittableCollision(Hittable* target);
 	const bool isColliding(sf::FloatRect one, sf::FloatRect other);
 	void testHit(const bool target, Hitbox* hitbox);
 	float nearestCollidable(MyDrawable* relativeTo, float maxHeight) const;

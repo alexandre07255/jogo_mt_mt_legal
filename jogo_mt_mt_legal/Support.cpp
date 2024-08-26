@@ -6,6 +6,7 @@
 
 Support::Support(Platform* plat, const float height):Hittable(false,MAXHEALTH),boundedTo(NULL) {
 	boundedTo = plat;
+	canBeCollided = 0;
 
 	if (boundedTo) {
 		SceneManager* instance = SceneManager::getInstance();

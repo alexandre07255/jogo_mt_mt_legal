@@ -105,7 +105,8 @@ void EnemyMelee::movement() {
     }
 
     instance->testCollison(this);
-    
+    //instance->testHittableCollision(this);
+
     if (fireRemaining)
     {
         if (fireCont > 4)

@@ -51,6 +51,7 @@ void EnemyRanged::movement()
     if (cooldownCont > 0) { cooldownCont--; }
 
     instance->testCollison(this);
+    //instance->testHittableCollision(this);
 
     if (fireRemaining)
     {
