@@ -8,6 +8,7 @@ private:
 	sf::Keyboard* keyboard;
 	sf::Mouse* mouse;
 	bool wasEscPressed;
+	bool wasLMBPressed;
 	InputManager();
 public:
 	~InputManager();
@@ -21,6 +22,8 @@ public:
 	const bool isPausePressed();
 	const bool getWasEscPressed() const;
 	void setWasEscPressed(const bool wpp);
+	const bool getWasLMBPressed() const;
+	void setWasLMBPressed(const bool lmb);
 	sf::Mouse* getMouse() const;
 };
 

@@ -34,12 +34,19 @@ const bool Button::isMouseClicked() {
 
 void Button::movement() {
 	if (isMouseOn() && clickable) {
+		InputManager* iInstance = InputManager::getInstance();
 		setFillColor(sf::Color::Yellow);
 		if (mouse->isButtonPressed(sf::Mouse::Left)) {
-			com->execute();
-			if (!repeatable)
-				clickable = false;
+			if (!iInstance->getWasLMBPressed())
+			{
+				com->execute();
+				if (!repeatable)
+					clickable = false;
+			}
+			iInstance->setWasLMBPressed(1);
 		}
+		else
+			iInstance->setWasLMBPressed(0);
 	}
 	
 	else {

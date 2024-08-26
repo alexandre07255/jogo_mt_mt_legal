@@ -7,7 +7,7 @@ EnemyRanged::EnemyRanged() : walkingBuffer(0), waitBuffer(0), direction(0),
 attackStartup(30),
 attackEndLag(40),
 heightStrip(10.f),
-attackTriggerRange(150.f),
+attackTriggerRange(250.f),
 attackTriggerYRange(10.f),
 idealHeight(200.f),
 cycleLenght(6),
@@ -159,7 +159,7 @@ void EnemyRanged::movementPATROLLING()
 void EnemyRanged::projectileCalculations(Projectile* proj, const float absHorSpeed, Hittable* target)
 {
     float height = target->yMid() - yMid();
-    float length = target->xMid() - xMid();
+    float length = target->xMid() - (left() + getSize().x * facingRight);
     
     float verSpeed = (height / abs(length)) * absHorSpeed - (GRAVITY / 2) * (abs(length) / absHorSpeed);
 
@@ -292,12 +292,12 @@ void EnemyRanged::movementATTACK()
             horKnock = 30.0;
             if (facingRight)
             {
-                projectile->setPosition(xMid(), yMid());
+                projectile->setPosition(right(), yMid());
                 projectile->setHorKnockback(horKnock);
             }
             else
             {
-                projectile->setPosition(xMid(), yMid());
+                projectile->setPosition(left(), yMid());
                 projectile->setHorKnockback(-horKnock);
             }
         }
