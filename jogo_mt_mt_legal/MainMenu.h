@@ -19,5 +19,6 @@ public:
 	void changeStartButtons();
 	void changeOptionsButtons();
 	void goBack();
+	void moreButtons(bool level2);
 };
 

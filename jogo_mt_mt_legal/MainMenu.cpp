@@ -6,6 +6,10 @@
 #include "CommandStack1.h"
 #include "CommandStack2.h"
 #include "CommandStart.h"
+#include "CommandLevel2p2False.h"
+#include "CommandLevel1p2False.h"
+#include "CommandLevel2p2True.h"
+#include "CommandLevel1p2True.h"
 #include "GraphicManager.h"
 #include "inputManager.h"
 using namespace std;
@@ -147,7 +151,51 @@ void MainMenu::goBack() {
 		GraphicManager* instance = GraphicManager::getInstance();
 		instance->getWindow()->close();
 	}
-	else {
+	else if (version == 1 || version == 2){
 		changeMainButtons();
 	}
+}
+
+void MainMenu::moreButtons(bool level2) {
+	//version = 3;//apenas uma ideia tola e sombria
+	GraphicManager* instance = GraphicManager::getInstance();
+
+	if (level2) {
+		CommandLevel2p2False* com1 = new CommandLevel2p2False(this);
+		CommandLevel2p2True* com2 = new CommandLevel2p2True(this);
+
+		Button* greenThing = new Button(sf::Color::Green, com2, false);
+		Button* redThing = new Button(sf::Color::Red, com1, false);
+
+		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 + 125.f);
+		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 + 125.f);
+
+		(*updatableVersions)[1]->push_back(greenThing);
+		(*buttonVersions)[1]->push_back(greenThing);
+		(*myDrawableVersions)[1]->push_back(greenThing);
+
+		(*updatableVersions)[1]->push_back(redThing);
+		(*buttonVersions)[1]->push_back(redThing);
+		(*myDrawableVersions)[1]->push_back(redThing);
+	}
+	else {
+		CommandLevel1p2False* com1 = new CommandLevel1p2False(this);
+		CommandLevel1p2True* com2 = new CommandLevel1p2True(this);
+
+		Button* greenThing = new Button(sf::Color::Green, com2, false);
+		Button* redThing = new Button(sf::Color::Red, com1, false);
+
+		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 - 125.f);
+		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 - 125.f);
+
+		(*updatableVersions)[1]->push_back(greenThing);
+		(*buttonVersions)[1]->push_back(greenThing);
+		(*myDrawableVersions)[1]->push_back(greenThing);
+
+		(*updatableVersions)[1]->push_back(redThing);
+		(*buttonVersions)[1]->push_back(redThing);
+		(*myDrawableVersions)[1]->push_back(redThing);
+	}
+
+	changeStartButtons();
 }
