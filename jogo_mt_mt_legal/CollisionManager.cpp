@@ -17,6 +17,76 @@ CollisionManager::~CollisionManager()
 
 }
 
+void CollisionManager::testHittableCollision(Hittable* target)
+{
+	SceneManager* instance = SceneManager::getInstance();
+	Level* level = static_cast<Level*>(instance->top());
+	List<Hittable>* hittableList = level->getHittableList();
+
+	if (hittableList == NULL)
+		return;
+
+	sf::FloatRect targetBounds;
+	sf::FloatRect hittableBounds;
+
+	float x, y;
+
+	int size = hittableList->size();
+	ListIterator<Hittable> it = hittableList->begin();
+
+	int directionX = 0;
+	int directionY = 0;
+
+	targetBounds = target->getGlobalBounds();
+
+	bool collided = 0;
+	bool collidedDown = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if ((target->getId() != (*it)->getId()) && (*it)->getCanBeCollided()) {
+			hittableBounds = (*it)->getGlobalBounds();
+
+			if (isColliding(hittableBounds, targetBounds)) {
+				collided = 1;
+				//temos colisao
+				if (targetBounds.getPosition().x + targetBounds.width < hittableBounds.getPosition().x + hittableBounds.width) {
+					//se target colidiu pela direita
+					x = targetBounds.getPosition().x + targetBounds.width - hittableBounds.getPosition().x;
+					directionX = -1;
+				}
+				else {
+					//se target colidiu pela esquerda
+					x = hittableBounds.getPosition().x + hittableBounds.width - targetBounds.getPosition().x;
+					directionX = 1;
+				}
+
+				if (targetBounds.getPosition().y + targetBounds.height < hittableBounds.getPosition().y + hittableBounds.height) {
+					//se target coldiu por baixo
+					y = targetBounds.getPosition().y + targetBounds.height - hittableBounds.getPosition().y;
+					directionY = -1;
+					collidedDown = 1;
+				}
+				else {
+					//se target colidiu por cima
+					y = hittableBounds.getPosition().y + hittableBounds.height - targetBounds.getPosition().y;
+					directionY = 1;
+				}
+
+				if (y < x) {
+					target->move(0, (y * directionY));
+					target->setVerticalVelocity(10.f * (directionY));
+				}
+				else {
+					target->move(sf::Vector2f((x * directionX), 0));
+					target->setHorizontalVelocity(10.f * (directionX));
+				}
+				targetBounds = target->getGlobalBounds();
+			}
+		}
+		it++;
+	}
+}
+
 CollisionManager* CollisionManager::getInstance()
 {
 	if (instance == NULL)
@@ -94,12 +164,13 @@ void CollisionManager::testCollison(Entity* pE)
 
 			}
 			
-			it++;
+			
 		}
+		it++;
 		
-		if (!collided || !collidedDown)
-			pE->setOnAir(1);
 	}
+	if (!collided || !collidedDown)
+		pE->setOnAir(1);
 }
 
 const bool CollisionManager::isColliding(sf::FloatRect one, sf::FloatRect other){

@@ -76,6 +76,7 @@ void Player::movement() {
 	}
 	
 	collisionInstance->testCollison(this);
+	collisionInstance->testHittableCollision(this);
 
 	if (fireRemaining)
 	{

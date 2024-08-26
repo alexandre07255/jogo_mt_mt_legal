@@ -11,6 +11,7 @@ protected:
 	int points;
 	int fireCont;
 	int fireRemaining;
+	bool canBeCollided;
 public:
 	Hittable(const bool ally, const int health);
 	enum States
@@ -28,6 +29,7 @@ public:
 	const int getStun() const;
 	const int getState() const;
 	const bool getIsAlly() const;
+	const bool getCanBeCollided() const;
 	void dealDamage(const int dmg);
 	int getHp();
 	int getPoints();

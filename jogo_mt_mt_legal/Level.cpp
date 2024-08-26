@@ -19,43 +19,46 @@ Level::~Level() //TODO
 
 void Level::update()
 {
-	InputManager* instance = InputManager::getInstance();
-	if (instance->isKeyPressed(sf::Keyboard::Key::Escape)) {
-		stackPauseMenu();
-	}
-
-	else {
-		ListIterator<Updatable> itCurrent = updatables->begin();
-		if (updatables->size() > 0)
+	ListIterator<Updatable> itCurrent = updatables->begin();
+	if (updatables->size() > 0)
+	{
+		ListIterator<Updatable> itNext = itCurrent;
+		itNext++;
+		while (itNext != updatables->end())
 		{
-			ListIterator<Updatable> itNext = itCurrent;
-			itNext++;
-			while (itNext != updatables->end())
-			{
-				(*itCurrent)->movement();
-				itCurrent = itNext;
-				itNext++;
-			}
 			(*itCurrent)->movement();
+			itCurrent = itNext;
+			itNext++;
 		}
-
-		if (endingOnRight)
-		{
-			if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 > endX)
-				levelCompleteHandler();
-			else if (pPlayer2 != NULL)
-				if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 > endX)
-					levelCompleteHandler();
-		}
-		else
-		{
-			if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 < endX)
-				levelCompleteHandler();
-			else if (pPlayer2 != NULL)
-				if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 < endX)
-					levelCompleteHandler();
-		}
+		(*itCurrent)->movement();
 	}
+
+	if (endingOnRight)
+	{
+		if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 > endX)
+			levelCompleteHandler();
+		else if (pPlayer2 != NULL)
+			if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 > endX)
+				levelCompleteHandler();
+	}
+	else
+	{
+		if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 < endX)
+			levelCompleteHandler();
+		else if (pPlayer2 != NULL)
+			if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 < endX)
+				levelCompleteHandler();
+	}
+	
+
+	InputManager* instance = InputManager::getInstance();
+	if (instance->isPausePressed()) {
+		if (!instance->getWasEscPressed())
+			stackPauseMenu();
+		instance->setWasEscPressed(1);
+	}
+	else
+		instance->setWasEscPressed(0);
 }
 
 List<Collidable>* Level::getCollidable() {

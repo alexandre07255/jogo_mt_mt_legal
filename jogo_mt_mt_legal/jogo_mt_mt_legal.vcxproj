@@ -176,6 +176,8 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Spike.cpp" />
+    <ClCompile Include="SpriteManager.cpp" />
+    <ClCompile Include="SpriteMatrix.cpp" />
     <ClCompile Include="Support.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="Updatable.cpp" />
@@ -223,6 +225,8 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Spike.h" />
+    <ClInclude Include="SpriteManager.h" />
+    <ClInclude Include="SpriteMatrix.h" />
     <ClInclude Include="Support.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="Updatable.h" />

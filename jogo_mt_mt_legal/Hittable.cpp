@@ -8,7 +8,8 @@ Hittable::Hittable(const bool ally, const int health):
 	facingRight(1),
 	fireRemaining(0),
 	fireCont(0),
-	points(0)
+	points(0),
+	canBeCollided(1)
 {
 
 }
@@ -37,6 +38,8 @@ void Hittable::setState(const int st)
 {
 	state = st;
 }
+
+const bool Hittable::getCanBeCollided() const { return canBeCollided; }
 
 const int Hittable::getState() const
 {

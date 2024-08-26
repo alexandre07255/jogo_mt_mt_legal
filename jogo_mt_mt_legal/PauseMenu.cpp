@@ -18,9 +18,15 @@ void PauseMenu::update()
 {
 	InputManager* instance = InputManager::getInstance();
 	if (instance->isPausePressed()) {
-		SceneManager* sInstance = SceneManager::getInstance();
-		sInstance->pop();
+		if (!instance->getWasEscPressed())
+		{
+			SceneManager* sInstance = SceneManager::getInstance();
+			sInstance->pop();
+		}
+		instance->setWasEscPressed(1);
 	}
+	else
+		instance->setWasEscPressed(0);
 
 	ListIterator<Updatable> itCurrent = updatables->begin();
 	if (updatables->size() > 0)
