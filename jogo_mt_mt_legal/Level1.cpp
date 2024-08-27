@@ -12,6 +12,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+using namespace Scenes;
+using namespace Managers;
+
 
 Level1::Level1(bool isPlayer2):Level() {
     GraphicManager* instance = GraphicManager::getInstance();

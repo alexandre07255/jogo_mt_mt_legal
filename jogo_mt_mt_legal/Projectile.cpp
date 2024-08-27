@@ -4,6 +4,9 @@
 #include <iostream>
 using namespace std;
 using namespace sf;
+using namespace Entities;
+using namespace Managers;
+using namespace Scenes;
 
 Projectile::Projectile():
 	hitbox(NULL),

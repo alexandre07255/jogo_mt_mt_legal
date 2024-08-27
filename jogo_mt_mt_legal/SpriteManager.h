@@ -1,7 +1,10 @@
 #pragma once
 
-class SpriteManager
+namespace Managers
 {
+	class SpriteManager
+	{
 
-};
+	};
+}
 

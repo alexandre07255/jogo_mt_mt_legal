@@ -4,6 +4,7 @@
 #include <iostream>
 #include "SceneManager.h"
 using namespace std;
+using namespace Managers;
 
 CollisionManager* CollisionManager::instance(NULL);
 

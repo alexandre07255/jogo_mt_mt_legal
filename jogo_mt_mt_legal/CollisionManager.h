@@ -4,19 +4,21 @@
 #include "List.h"
 #include "Player.h"
 
-
-class CollisionManager
+namespace Managers
 {
-private:
-	static CollisionManager* instance;
-	CollisionManager();
-public:
-	static CollisionManager* getInstance();
-	~CollisionManager();
-	void testCollison(Entity* pE);
-	void testHittableCollision(Hittable* target);
-	const bool isColliding(sf::FloatRect one, sf::FloatRect other);
-	void testHit(const bool target, Hitbox* hitbox);
-	float nearestCollidable(MyDrawable* relativeTo, float maxHeight) const;
-};
+	class CollisionManager
+	{
+	private:
+		static CollisionManager* instance;
+		CollisionManager();
+	public:
+		static CollisionManager* getInstance();
+		~CollisionManager();
+		void testCollison(Entity* pE);
+		void testHittableCollision(Hittable* target);
+		const bool isColliding(sf::FloatRect one, sf::FloatRect other);
+		void testHit(const bool target, Hitbox* hitbox);
+		float nearestCollidable(MyDrawable* relativeTo, float maxHeight) const;
+	};
+}
 

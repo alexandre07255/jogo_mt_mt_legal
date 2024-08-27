@@ -1,6 +1,7 @@
 #include "GraphicManager.h"
 #include <vector>
 #include <iostream>
+using namespace Managers;
 
 GraphicManager::GraphicManager() {
 	sf::VideoMode video;

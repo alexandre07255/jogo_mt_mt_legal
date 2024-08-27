@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include <iostream>
 using namespace std;
+using namespace Managers;
 
 SceneManager* SceneManager::instance(NULL);
 
