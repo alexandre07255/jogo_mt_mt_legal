@@ -5,8 +5,8 @@
 class Camera : public sf::View, public Updatable
 {
 private:
-	Player* player1;
-	Player* player2;
+	Entities::Characters::Player* player1;
+	Entities::Characters::Player* player2;
 	sf::RenderWindow* window;
 	float xDefault;
 	float yDefault;

@@ -7,7 +7,7 @@ namespace Entities
 	class Projectile : public Entity
 	{
 	private:
-		AttackHitbox* hitbox;
+		Hitboxes::AttackHitbox* hitbox;
 		int hitstun;
 		bool hasHit;
 		bool firstStep;
@@ -19,7 +19,7 @@ namespace Entities
 		void setHitstun(const int stun);
 		void setTarget(const bool tar);
 		void setRelativePosition(sf::Vector2f rel);
-		void setOwner(Hittable* own);
+		void setOwner(Entities::Characters::Hittable* own);
 		void movement();
 	};
 }

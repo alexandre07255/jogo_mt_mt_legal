@@ -6,6 +6,13 @@
 #include "ObstacleHitbox.h"
 #include <math.h>
 #include"iostream"
+using namespace Managers;
+using namespace Entities::Obstacles;
+using namespace Entities::Characters;
+using namespace Scenes;
+using namespace Entities;
+using namespace Entities::Hitboxes;
+
 
 Platform::Platform(float xPosition, float yPosition, float xSize, float ySize) :Obstacle(), Collidable(), support(NULL),
 firstStep(true), minimalHeight(50.f), mass(10.f), time(0),deformation(0),onTop(false) {
@@ -82,9 +89,9 @@ void Platform::movement() {
 			//eu nao sei ta bom, eu so nao sei
 			SceneManager* instance = SceneManager::getInstance();
 			Level* curL = static_cast<Level*>(instance->top());
-			List<Hittable>* lista = curL->getHittableList();
+			list<Hittable*>* lista = curL->getHittableList();
 
-			List<Hittable>::Iterator it = lista->begin();
+			list<Hittable*>::Iterator it = lista->begin();
 			bool flag = 1;
 			for (int i = 0;i < lista->size();i++) {
 				if ((*it)->bottom() == top() + 1.f) {

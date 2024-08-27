@@ -1,7 +1,8 @@
 #include "Menu.h"
+using namespace Scenes;
 
 Menu::Menu() {
-	buttonList = new List<Button>;
+	buttonList = new list<Button*>;
 	size = sf::Vector2f(0, 0);
 }
 

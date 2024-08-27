@@ -1,6 +1,8 @@
 #include "Button.h"
 #include "inputManager.h"
 #include "GraphicManager.h"
+using namespace Managers;
+using namespace Entities;
 
 Button::Button(sf::Color col, Command* _com,bool repeat) : Entity(), defaultColor(col),repeatable(repeat) {
 	InputManager* instance = InputManager::getInstance();

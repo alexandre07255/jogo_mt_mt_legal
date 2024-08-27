@@ -1,6 +1,11 @@
 #include "Hitbox.h"
 //#include "Level.h"
 #include "SceneManager.h"
+using namespace Entities::Hitboxes;
+using namespace Entities::Characters;
+using namespace Scenes;
+using namespace Managers;
+
 
 Hitbox::Hitbox():
 	Being(),

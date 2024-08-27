@@ -1,4 +1,6 @@
 #include "Obstacle.h"
+using namespace Entities::Obstacles;
+using namespace Entities::Characters;
 
 Obstacle::Obstacle() :
 	Entity(),

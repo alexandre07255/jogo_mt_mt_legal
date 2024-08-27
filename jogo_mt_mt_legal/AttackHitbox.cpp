@@ -2,6 +2,11 @@
 #include "SceneManager.h"
 #include <iostream>
 using namespace std;
+using namespace Entities::Hitboxes;
+using namespace Managers;
+using namespace Scenes;
+using namespace Entities::Characters;
+
 
 AttackHitbox::AttackHitbox() :
 	Hitbox(),
@@ -54,7 +59,7 @@ const bool AttackHitbox::getHasHit() const
 
 const bool AttackHitbox::hasAlreadyHit(Hittable* pA)
 {
-	List<Hittable>::Iterator it = hitList.begin();
+	list<Hittable*>::iterator it = hitList.begin();
 	int size = hitList.size();
 	for (int i = 0; i < size; i++)
 	{
@@ -70,7 +75,7 @@ void AttackHitbox::movement()
 	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || (doesATKCANCEL && owner->getState() != Hittable::ATKCANCEL) ) ) )
 	{
 		Scene* activeScene = SceneManager::getInstance()->top();
-		List<Updatable>* upList = activeScene->getUpdatables();
+		list<Updatable>* upList = activeScene->getUpdatables();
 		upList->remove(this);
 		List<MyDrawable>* drawList = activeScene->getDrawables();
 		drawList->remove(this);

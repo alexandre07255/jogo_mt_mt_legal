@@ -2,7 +2,8 @@
 #include "Entity.h"
 #include "Command.h"
 
-class Button : public Entity
+
+class Button : public Entities::Entity
 {
 private:
 	sf::Mouse* mouse;
@@ -11,9 +12,10 @@ private:
 	bool repeatable;
 public:
 	bool clickable;
-	Button(sf::Color col,Command* _com,bool repeat);
+	Button(sf::Color col, Command* _com, bool repeat);
 	const bool isMouseOn();
 	void movement();
 	const bool isMouseClicked();
 };
+
 

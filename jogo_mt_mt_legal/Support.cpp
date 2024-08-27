@@ -3,8 +3,14 @@
 #include "Level.h"
 #include "SceneManager.h"
 #include <iostream>
+#include <list>
+using namespace Managers;
+using namespace Scenes;
+using namespace Entities;
+//using namespace Entities::Characters;
 
-Support::Support(Platform* plat, const float height):Hittable(false,MAXHEALTH),boundedTo(NULL) {
+
+Support::Support(Obstacles::Platform* plat, const float height):Hittable(false,MAXHEALTH),boundedTo(NULL) {
 	boundedTo = plat;
 	canBeCollided = 0;
 
@@ -12,7 +18,7 @@ Support::Support(Platform* plat, const float height):Hittable(false,MAXHEALTH),b
 		SceneManager* instance = SceneManager::getInstance();
 		
 		Level* active = static_cast<Level*>(instance->top());
-		List<Collidable>* collidables = active->getCollidable();
+		list<Collidable*>* collidables = active->getCollidable();
 
 		float positionY = boundedTo->getPosition().y + boundedTo->getSize().y;
 		float positionX = boundedTo->getPosition().x + boundedTo->getSize().x / 2 - 5.f;
@@ -23,7 +29,7 @@ Support::Support(Platform* plat, const float height):Hittable(false,MAXHEALTH),b
 	}
 }
 
-void Support::setPlatform(Platform* plat) {
+void Support::setPlatform(Obstacles::Platform* plat) {
 	boundedTo = plat;
 }
 

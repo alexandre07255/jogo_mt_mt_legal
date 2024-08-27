@@ -1,4 +1,6 @@
 #include "Hittable.h"
+using namespace Entities::Characters;
+
 
 Hittable::Hittable(const bool ally, const int health):
 	isAlly(ally),

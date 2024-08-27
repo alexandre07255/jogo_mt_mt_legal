@@ -13,6 +13,9 @@
 #include "Level1.h"
 #include "SceneManager.h"
 #include "MainMenu.h"
+using namespace Scenes;
+using namespace Managers;
+
 
 int main()
 {   

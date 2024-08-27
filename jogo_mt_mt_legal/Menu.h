@@ -1,17 +1,20 @@
 #pragma once
 #include "Button.h"
 #include "Scene.h"
-#include "List.h"
+#include <list>
 
-class Menu: public Scene
+namespace Scenes
 {
-protected:
-	List<Button>* buttonList;
-	sf::Vector2f size;
-public:
-	Menu();
-	void setSize(sf::Vector2f _size);
-	void addButton(Button* but);
-	void save();
-};
+	class Menu : public Scene
+	{
+	protected:
+		list<Button*>* buttonList;
+		sf::Vector2f size;
+	public:
+		Menu();
+		void setSize(sf::Vector2f _size);
+		void addButton(Button* but);
+		void save();
+	};
+}
 

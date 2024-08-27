@@ -7,6 +7,9 @@
 #include "Fire.h"
 using namespace Scenes;
 using namespace Managers;
+using namespace Entities::Obstacles;
+using namespace Entities;
+using namespace Entities::Characters;
 
 
 Level2::Level2(bool isPlayer2): Level() {

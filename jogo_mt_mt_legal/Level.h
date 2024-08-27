@@ -10,10 +10,10 @@ namespace Scenes
 	{
 	protected:
 		//So that other objects can call methods and modify the updatables and drawables lists //Colocar HittableList e collidables aqui também
-		List<Collidable>* collidables;
-		List<Hittable>* hittableList;
-		Player* pPlayer1;
-		Player* pPlayer2;
+		list<Collidable*>* collidables;
+		list<Entities::Characters::Hittable*>* hittableList;
+		Entities::Characters::Player* pPlayer1;
+		Entities::Characters::Player* pPlayer2;
 		bool endingOnRight;
 		float endX;
 		virtual void levelCompleteHandler() = 0;
@@ -21,10 +21,10 @@ namespace Scenes
 		Level();
 		virtual ~Level();
 		void update();
-		List<Collidable>* getCollidable();
-		void addHittable(Hittable* pH);
-		List<Hittable>* getHittableList();
-		void removeHittable(Hittable* pH);
+		list<Collidable*>* getCollidable();
+		void addHittable(Entities::Characters::Hittable* pH);
+		list<Entities::Characters::Hittable*>* getHittableList();
+		void removeHittable(Entities::Characters::Hittable* pH);
 		void removeCollidable(Collidable* pC);
 
 		void stackPauseMenu();
@@ -32,12 +32,6 @@ namespace Scenes
 		//void loadLevel1(bool isPlayer2);
 		//void loadLevel2(bool isPlayer2);
 		//void loadMenu();
-
-		enum active {
-			LEVEL_1,
-			LEVEL_2,
-			MENU
-		};
 	};
 }
 

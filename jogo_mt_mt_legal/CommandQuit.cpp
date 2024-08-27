@@ -1,5 +1,7 @@
 #include "CommandQuit.h"
 #include "SceneManager.h"
+using namespace Scenes;
+using namespace Managers;
 
 CommandQuit::CommandQuit(Menu* _bound):Command(_bound) {
 

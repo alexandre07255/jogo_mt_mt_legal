@@ -1,5 +1,6 @@
 #include "CommandLevel2p2True.h"
 #include "MainMenu.h"
+using namespace Scenes;
 
 CommandLevel2p2True::CommandLevel2p2True(Menu* _bound) :Command(_bound) {}
 

@@ -1,27 +1,33 @@
 #pragma once
 #include "Hitbox.h"
 #include "Obstacle.h"
-#include "List.h"
+#include <list>
 
-class ObstacleHitbox : public Hitbox
+namespace Entities
 {
-private:
-	float verLaunchStrength;
-	float horLaunchStrength;
-	int damage;
-	List<Hittable> hitList;
-	int cont;
-	int cooldown;
-	Obstacle* obstacle;
-	const bool hasAlreadyHit(Hittable* pA);
-public:
-	ObstacleHitbox(Obstacle* obs);
-	~ObstacleHitbox();
-	void setVerLaunchStrength(const float ver);
-	void setHorLaunchStrength(const float hor);
-	void setDamage(const int dmg);
-	void setCooldown(const int cd);
-	void movement();
-	void hitSolution(Hittable* hit);
-};
+	namespace Hitboxes
+	{
+		class ObstacleHitbox : public Hitbox
+		{
+		private:
+			float verLaunchStrength;
+			float horLaunchStrength;
+			int damage;
+			list<Entities::Characters::Hittable*> hitList;
+			int cont;
+			int cooldown;
+			Entities::Obstacles::Obstacle* obstacle;
+			const bool hasAlreadyHit(Entities::Characters::Hittable* pA);
+		public:
+			ObstacleHitbox(Entities::Obstacles::Obstacle* obs);
+			~ObstacleHitbox();
+			void setVerLaunchStrength(const float ver);
+			void setHorLaunchStrength(const float hor);
+			void setDamage(const int dmg);
+			void setCooldown(const int cd);
+			void movement();
+			void hitSolution(Entities::Characters::Hittable* hit);
+		};
+	}
+}
 

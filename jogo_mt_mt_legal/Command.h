@@ -1,13 +1,13 @@
 #pragma once
-
-class Menu;
+#include "Menu.h"
+//class Menu;
 
 class Command
 {
 protected:
-	Menu* bound;
+	Scenes::Menu* bound;
 public:
-	Command(Menu* _bound);
+	Command(Scenes::Menu* _bound);
 	virtual void execute() = 0;
 };
 

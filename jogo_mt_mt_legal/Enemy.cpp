@@ -4,7 +4,12 @@
 #include "Level.h"
 #include "Terrain.h"
 #include <iostream>
+#include <list>
 #include "SceneManager.h"
+using namespace Scenes;
+using namespace Managers;
+using namespace Entities::Characters;
+
 
 Enemy::Enemy() :Hittable(false, 10), upperLimitMultR(9.0 / 4),
 lesserLimitMultR(3.0/2), upperLimitMultL(3.0/2), lesserLimitMultL(3.0/4){
@@ -26,8 +31,8 @@ Player* Enemy::searchPlayer() const{
 
 
 
-	List<Collidable>* collidables = level->getCollidable();
-	List<Hittable>* hittable = level->getHittableList();
+	list<Collidable*>* collidables = level->getCollidable();
+	list<Hittable*>* hittable = level->getHittableList();
 
 	int flag = 1;
 
@@ -69,14 +74,14 @@ Player* Enemy::searchPlayer() const{
 			ret.left = xFinal;
 			ret.top = yFinal;
 
-			for (List<Hittable>::Iterator it = hittable->begin();it != hittable->end();it++) {
+			for (list<Hittable*>::iterator it = hittable->begin();it != hittable->end();it++) {
 				if (ret.intersects((*it)->getGlobalBounds()) && (*it)->getIsAlly()) {
 					//std::cout << "player achado" << endl;
 					return (Player*)*it;
 				}
 			}
 
-			for (List<Collidable>::Iterator it = collidables->begin(); (it != collidables->end()) && flag; it++) {
+			for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()) && flag; it++) {
 				if (ret.intersects((*it)->getBounds()))
 					flag = 0;
 			}

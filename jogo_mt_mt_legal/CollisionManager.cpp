@@ -3,8 +3,16 @@
 #include "Level.h"
 #include <iostream>
 #include "SceneManager.h"
+#include <list>
 using namespace std;
 using namespace Managers;
+using namespace Entities;
+using namespace Scenes;
+using namespace Entities::Hitboxes;
+using namespace Entities::Characters;
+
+
+
 
 CollisionManager* CollisionManager::instance(NULL);
 
@@ -22,7 +30,7 @@ void CollisionManager::testHittableCollision(Hittable* target)
 {
 	SceneManager* instance = SceneManager::getInstance();
 	Level* level = static_cast<Level*>(instance->top());
-	List<Hittable>* hittableList = level->getHittableList();
+	list<Hittable*>* hittableList = level->getHittableList();
 
 	if (hittableList == NULL)
 		return;
@@ -33,7 +41,7 @@ void CollisionManager::testHittableCollision(Hittable* target)
 	float x, y;
 
 	int size = hittableList->size();
-	List<Hittable>::Iterator it = hittableList->begin();
+	list<Hittable*>::iterator it = hittableList->begin();
 
 	int directionX = 0;
 	int directionY = 0;
@@ -99,7 +107,7 @@ void CollisionManager::testCollison(Entity* pE)
 {
 	SceneManager* instance = SceneManager::getInstance();
 	Level* level = static_cast<Level*>(instance->top());
-	List<Collidable>* collidables = level->getCollidable();
+	list<Collidable*>* collidables = level->getCollidable();
 
 	if (collidables == NULL)
 		return;
@@ -110,7 +118,7 @@ void CollisionManager::testCollison(Entity* pE)
 	float x, y;
 
 	int size = collidables->size();
-	List<Collidable>::Iterator it = collidables->begin();
+	list<Collidable*>::iterator it = collidables->begin();
 
 	int directionX = 0;
 	int directionY = 0;
@@ -182,13 +190,13 @@ void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 {
 	SceneManager* instance = SceneManager::getInstance();
 	Level* level = static_cast<Level*>(instance->top());
-	List<Hittable>* hittableList = level->getHittableList();
+	list<Hittable*>* hittableList = level->getHittableList();
 
 	if (hitbox == NULL) { return; }
 	bool neutral = (hitbox->getOwner() == NULL);
 	//Fazer neutral
 	if (hittableList == NULL) { cout << "No one is hittable" << endl; return; }
-	List<Hittable>::Iterator it = hittableList->begin();
+	list<Hittable*>::iterator it = hittableList->begin();
 	int size = hittableList->size();
 
 	sf::FloatRect hitboxBounds = hitbox->getGlobalBounds();
@@ -217,7 +225,7 @@ float CollisionManager::nearestCollidable(MyDrawable* relativeTo, float maxHeigh
 	const double PI = 3.1415;
 	const double rayStep = 50;
 
-	List<Collidable>* collidables = level->getCollidable();
+	list<Collidable*>* collidables = level->getCollidable();
 
 	double xCenter = relativeTo->xMid();
 	double yCenter = relativeTo->bottom();
@@ -239,7 +247,7 @@ float CollisionManager::nearestCollidable(MyDrawable* relativeTo, float maxHeigh
 		ret.left = xFinal;
 		ret.top = yFinal;
 
-		for (List<Collidable>::Iterator it = collidables->begin(); (it != collidables->end()); it++) {
+		for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()); it++) {
 			sf::FloatRect colli = (*it)->getBounds();
 			if (ret.intersects(colli))
 				return colli.getPosition().y;

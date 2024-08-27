@@ -8,16 +8,16 @@ namespace Scenes
 	class Scene
 	{
 	protected:
-		List<MyDrawable>* drawables;
-		List<Updatable>* updatables;
+		list<MyDrawable*>* drawables;
+		list<Updatable*>* updatables;
 	public:
 		Scene();
 		void draw(sf::RenderWindow* window);
 		virtual void update();
-		void setDrawables(List<MyDrawable>* drawlist);
-		List<MyDrawable>* getDrawables() const;
-		void setUpdatables(List<Updatable>* updatelist);
-		List<Updatable>* getUpdatables() const;
+		void setDrawables(list<MyDrawable*>* drawlist);
+		list<MyDrawable*>* getDrawables() const;
+		void setUpdatables(list<Updatable*>* updatelist);
+		list<Updatable*>* getUpdatables() const;
 		void addUpdatable(Updatable* pU);
 		void addDrawable(MyDrawable* pD);
 		void removeDrawable(MyDrawable* pD);

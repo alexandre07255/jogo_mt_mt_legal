@@ -15,9 +15,9 @@ namespace Managers
 		static CollisionManager* getInstance();
 		~CollisionManager();
 		void testCollison(Entity* pE);
-		void testHittableCollision(Hittable* target);
+		void testHittableCollision(Entities::Characters::Hittable* target);
 		const bool isColliding(sf::FloatRect one, sf::FloatRect other);
-		void testHit(const bool target, Hitbox* hitbox);
+		void testHit(const bool target, Entities::Hitboxes::Hitbox* hitbox);
 		float nearestCollidable(MyDrawable* relativeTo, float maxHeight) const;
 	};
 }

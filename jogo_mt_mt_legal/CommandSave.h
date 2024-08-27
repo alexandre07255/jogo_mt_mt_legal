@@ -1,9 +1,11 @@
 #pragma once
 #include "Command.h"
+//#include "Menu.h"
+
 class CommandSave : public Command
 {
 public:
-	CommandSave(Menu* _bound);
+	CommandSave(Scenes::Menu* _bound);
 	void execute();
 };
 

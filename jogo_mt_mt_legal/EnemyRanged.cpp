@@ -2,6 +2,10 @@
 #include "CollisionManager.h"
 #include "SceneManager.h"
 #include "Level.h"
+using namespace Entities::Characters;
+using namespace Managers;
+using namespace Scenes;
+
 
 EnemyRanged::EnemyRanged() : walkingBuffer(0), waitBuffer(0), direction(0),
 attackStartup(30),

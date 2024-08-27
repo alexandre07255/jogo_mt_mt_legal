@@ -7,6 +7,9 @@ using namespace sf;
 using namespace Entities;
 using namespace Managers;
 using namespace Scenes;
+using namespace Entities::Hitboxes;
+using namespace Entities::Characters;
+
 
 Projectile::Projectile():
 	hitbox(NULL),

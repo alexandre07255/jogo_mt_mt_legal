@@ -5,6 +5,10 @@
 #include <time.h>
 #include "Level.h"
 #include "AttackHitbox.h"
+using namespace Managers;
+using namespace Entities::Characters;
+using namespace Scenes;
+using namespace Entities::Hitboxes;
 
 EnemyMelee::EnemyMelee():Enemy(),walkingBuffer(0),waitBuffer(0),direction(0), attacking(0),
 attackStartup(72), attackHitboxDuration(5), attackEndLag(20), attackTriggerRange(10.0f), attackTriggerYRange(10.0f){
@@ -278,7 +282,7 @@ const bool EnemyMelee::checkOnLedge() const{
 
     SceneManager* LevelInstance = SceneManager::getInstance();
     Level* level = static_cast<Level*>(LevelInstance->top());
-    List<Collidable>* collidables = level->getCollidable();
+    list<Collidable*>* collidables = level->getCollidable();
 
     sf::FloatRect ret;
 
@@ -294,7 +298,7 @@ const bool EnemyMelee::checkOnLedge() const{
         ret.left = getPosition().x;
     }
 
-    for (List<Collidable>::Iterator it = collidables->begin(); (it != collidables->end()); it++) {
+    for (list<Collidable*>::iterator it = collidables->begin(); (it != collidables->end()); it++) {
         if (ret.intersects((*it)->getBounds()))
             return false;
     }

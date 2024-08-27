@@ -1,4 +1,7 @@
 #include "SpriteMatrix.h"
+using namespace sf;
+using namespace std;
+
 
 SpriteMatrix::SpriteMatrix() :
 	spriteSheet(new vector<vector<Texture*>*>),

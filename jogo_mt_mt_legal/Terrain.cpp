@@ -1,4 +1,6 @@
 #include "Terrain.h"
+using namespace Entities;
+
 
 Terrain::Terrain(float frict) :MyDrawable(), Collidable() {
 	collidableId = getId();

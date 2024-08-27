@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace std;
 using namespace Managers;
+using namespace Scenes;
 
 SceneManager* SceneManager::instance(NULL);
 

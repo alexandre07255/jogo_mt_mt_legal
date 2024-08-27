@@ -1,5 +1,7 @@
 #include "CommandLevel1p2False.h"
 #include "MainMenu.h"
+using namespace Scenes;
+
 
 CommandLevel1p2False::CommandLevel1p2False(Menu* _bound) :Command(_bound) {}
 

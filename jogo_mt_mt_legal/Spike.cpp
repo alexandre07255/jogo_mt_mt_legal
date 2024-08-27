@@ -1,6 +1,11 @@
 #include "Spike.h"
 #include "CollisionManager.h"
 #include "ObstacleHitbox.h"
+using namespace Managers;
+using namespace Entities::Hitboxes;
+using namespace Entities::Obstacles;
+
+
 
 Spike::Spike():
 	firstStep(1),

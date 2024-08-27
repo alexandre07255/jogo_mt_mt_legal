@@ -1,6 +1,11 @@
 #include "Fire.h"
 #include "CollisionManager.h"
 #include "ObstacleHitbox.h"
+using namespace Entities::Hitboxes;
+using namespace Entities::Characters;
+using namespace Managers;
+using namespace Entities::Obstacles;
+
 
 Fire::Fire() :
 	firstStep(1),

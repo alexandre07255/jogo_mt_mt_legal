@@ -1,11 +1,11 @@
 #pragma once
 #include "Command.h"
-#include "Menu.h"
+//#include "Menu.h"
 
 class CommandStack2 : public Command
 {
 public:
-	CommandStack2(Menu* _bound);
+	CommandStack2(Scenes::Menu* _bound);
 	void execute();
 
 };

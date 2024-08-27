@@ -13,6 +13,11 @@
 #include "GraphicManager.h"
 #include "inputManager.h"
 using namespace std;
+using namespace Managers;
+using namespace Scenes;
+using namespace Managers;
+
+
 
 MainMenu::MainMenu():version(0){
 

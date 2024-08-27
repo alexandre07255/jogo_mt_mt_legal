@@ -8,12 +8,14 @@
 #include "inputManager.h"
 using namespace Scenes;
 using namespace Managers;
+using namespace Entities::Characters;
+
 
 
 Level::Level(): hittableList(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL), backgroundAndLevel(NULL)
 {
-    hittableList = new List<Hittable>;
-    collidables = new List<Collidable>;
+    hittableList = new list<Hittable*>;
+    collidables = new list<Collidable*>;
 }
 
 Level::~Level() //TODO
@@ -64,11 +66,11 @@ void Level::update()
 		instance->setWasEscPressed(0);
 }
 
-List<Collidable>* Level::getCollidable() {
+list<Collidable*>* Level::getCollidable() {
 	return collidables;
 }
 
-List<Hittable>* Level::getHittableList() {
+list<Hittable*>* Level::getHittableList() {
 	return hittableList;
 }
 

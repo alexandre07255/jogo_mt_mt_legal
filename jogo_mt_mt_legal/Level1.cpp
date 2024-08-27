@@ -14,6 +14,10 @@
 #include <time.h>
 using namespace Scenes;
 using namespace Managers;
+using namespace Entities::Obstacles;
+using namespace Entities;
+using namespace Entities::Characters;
+
 
 
 Level1::Level1(bool isPlayer2):Level() {

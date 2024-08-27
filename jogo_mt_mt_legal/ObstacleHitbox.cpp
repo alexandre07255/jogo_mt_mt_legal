@@ -2,7 +2,15 @@
 #include "CollisionManager.h"
 #include "SceneManager.h"
 #include <iostream>
+#include <list>
+using namespace Managers;
 using namespace std;
+using namespace Entities::Obstacles;
+using namespace Scenes;
+using namespace Entities::Hitboxes;
+using namespace Entities::Characters;
+
+
 
 ObstacleHitbox::ObstacleHitbox(Obstacle* obs):
 	Hitbox(),
@@ -43,7 +51,7 @@ void ObstacleHitbox::setCooldown(const int cd)
 
 const bool ObstacleHitbox::hasAlreadyHit(Hittable* pA)
 {
-	List<Hittable>::Iterator it = hitList.begin();
+	list<Hittable*>::iterator it = hitList.begin();
 	int size = hitList.size();
 	for (int i = 0; i < size; i++)
 	{
@@ -59,9 +67,9 @@ void ObstacleHitbox::movement()
 	if (!obstacle->getIsActive())
 	{
 		Scene* activeScene = SceneManager::getInstance()->top();
-		List<Updatable>* upList = activeScene->getUpdatables();
+		list<Updatable*>* upList = activeScene->getUpdatables();
 		upList->remove(this);
-		List<MyDrawable>* drawList = activeScene->getDrawables();
+		list<MyDrawable*>* drawList = activeScene->getDrawables();
 		drawList->remove(this);
 		obstacle->setSpawnedHitbox(0);
 		delete this;

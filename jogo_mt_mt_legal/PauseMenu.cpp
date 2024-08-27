@@ -3,6 +3,10 @@
 #include "SceneManager.h"
 #include "CommandQuit.h"
 #include "CommandSave.h"
+using namespace Scenes;
+using namespace Managers;
+
+
 
 PauseMenu::PauseMenu(){
 	CommandQuit* com1 = new CommandQuit(this);
@@ -38,10 +42,10 @@ void PauseMenu::update()
 	else
 		instance->setWasEscPressed(0);
 
-	List<Updatable>::Iterator itCurrent = updatables->begin();
+	list<Updatable>::iterator itCurrent = updatables->begin();
 	if (updatables->size() > 0)
 	{
-		List<Updatable>::Iterator itNext = itCurrent;
+		list<Updatable>::iterator itNext = itCurrent;
 		itNext++;
 		while (itNext != updatables->end())
 		{

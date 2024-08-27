@@ -8,15 +8,15 @@ namespace Managers
 	{
 	private:
 		static SceneManager* instance;
-		stack<Scene*> scenes;
+		stack<Scenes::Scene*> scenes;
 		sf::RenderWindow* window;
 		SceneManager();
 	public:
 		static SceneManager* getInstance();
 		void setWindow(sf::RenderWindow* pW);
-		void push(Scene* pS);
+		void push(Scenes::Scene* pS);
 		void pop();
-		Scene* top() const;
+		Scenes::Scene* top() const;
 		void step();
 		int size();
 	};

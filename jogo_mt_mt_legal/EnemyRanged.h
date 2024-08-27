@@ -1,39 +1,46 @@
 #pragma once
 #include "Enemy.h"
 #include "Projectile.h"
-class EnemyRanged : public Enemy
+
+namespace Entities
 {
-private:
-	int walkingBuffer;
-	int waitBuffer;
-	bool direction;
-	int cooldownCont;
-	int contCycle;
+	namespace Characters
+	{
+		class EnemyRanged : public Enemy
+		{
+		private:
+			int walkingBuffer;
+			int waitBuffer;
+			bool direction;
+			int cooldownCont;
+			int contCycle;
 
-	const int cycleLenght;
-	const int attackStartup;
-	const int attackEndLag;
-	const float heightStrip;
-	const float idealHeight;
-	const float attackTriggerRange;
-	const float attackTriggerStrip;
-	const float attackTriggerYRange;
+			const int cycleLenght;
+			const int attackStartup;
+			const int attackEndLag;
+			const float heightStrip;
+			const float idealHeight;
+			const float attackTriggerRange;
+			const float attackTriggerStrip;
+			const float attackTriggerYRange;
 
-	static const int COOLDOWN;
-	static const float MAX_HEIGHT;
-	static const float FLY_STRENGTH;
-	static const float FOLLOW_MAX_HORIZONTAL_SPEED;
-	static const float FOLLOW_ACCELARATION;
-	static const float WALK_ACCELARATION;
-	static const float WALK_MAX_HORIZONTAL_SPEED;
-public:
-	EnemyRanged();
-	void movement();
-private:
-	void projectileCalculations(Projectile* proj, const float absHorSpeed, Hittable* target);
-	void movementFOLLOWING();
-	void movementPATROLLING();
-	void movementATTACK();
-	void movementATKCANCEL();
-};
+			static const int COOLDOWN;
+			static const float MAX_HEIGHT;
+			static const float FLY_STRENGTH;
+			static const float FOLLOW_MAX_HORIZONTAL_SPEED;
+			static const float FOLLOW_ACCELARATION;
+			static const float WALK_ACCELARATION;
+			static const float WALK_MAX_HORIZONTAL_SPEED;
+		public:
+			EnemyRanged();
+			void movement();
+		private:
+			void projectileCalculations(Projectile* proj, const float absHorSpeed, Hittable* target);
+			void movementFOLLOWING();
+			void movementPATROLLING();
+			void movementATTACK();
+			void movementATKCANCEL();
+		};
+	}
+}
 

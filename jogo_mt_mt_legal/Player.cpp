@@ -6,6 +6,11 @@
 
 #include <iostream>
 using namespace std;
+using namespace Managers;
+using namespace Entities::Characters;
+using namespace Scenes;
+using namespace Entities::Hitboxes;
+
 
 Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	Hittable(1, MAX_HP),

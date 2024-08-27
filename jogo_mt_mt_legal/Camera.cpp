@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include <iostream>
+using namespace Entities::Characters;
 
 Camera::Camera(sf::RenderWindow* renderer) :
 	player1(NULL),
