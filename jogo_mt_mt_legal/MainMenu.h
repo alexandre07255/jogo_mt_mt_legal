@@ -1,19 +1,19 @@
 #pragma once
-#include "Scene.h"
+#include "Menu.h"
 #include <vector>
 #include <list>
 
 namespace Scenes
 {
-	class MainMenu : public Scene
+	class MainMenu : public Menu
 	{
 	private:
 		//primeiro é my menu, segundo é start, terceiro é options e assim vai
-		vector<EntityList> versions;
+		vector<Lists::EntityList*> versions;
 		int version;
 	public:
 		MainMenu();
-		void update();
+		~MainMenu();
 
 		void stackLevel1(bool player2);
 		void stackLevel2(bool player2);
@@ -24,6 +24,8 @@ namespace Scenes
 
 		void goBack();
 		void moreButtons(bool level2);
+
+		void escResolver();
 	};
 }
 

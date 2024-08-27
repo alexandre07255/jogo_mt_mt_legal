@@ -18,5 +18,6 @@ public:
 	void setShape(sf::RectangleShape* rect);
 	sf::Texture* getTexture();
 	void setTextureBeing(sf::Texture* ptext);
+	
 };
 

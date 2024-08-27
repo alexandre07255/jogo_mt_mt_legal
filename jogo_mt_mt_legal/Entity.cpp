@@ -40,3 +40,7 @@ void Entity::setPositionEntity(float x, float y) {
 sf::Vector2f Entity::getPosition()const {
 	return (sf::Vector2f(xPos, yPos));
 }
+
+void Entity::setColorBeing(sf::Color col) {
+	pShape->setFillColor(col);
+}

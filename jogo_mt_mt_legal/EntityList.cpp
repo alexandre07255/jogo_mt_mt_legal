@@ -1,4 +1,5 @@
 #include "EntityList.h"
+using namespace Lists;
 
 EntityList::EntityList() {
 }
@@ -53,4 +54,8 @@ void EntityList::drawAll() {
 
 void EntityList::removeEntity(Entities::Entity* pE) {
 	listEntities.remove(pE);
+}
+
+int EntityList::getSize() {
+	return listEntities.size();
 }

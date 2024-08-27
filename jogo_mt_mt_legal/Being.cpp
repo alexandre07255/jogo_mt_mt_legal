@@ -34,3 +34,4 @@ void Being::setTextureBeing(sf::Texture* ptext) {
 		pShape->setTexture(pTexture);
 	}
 }
+

@@ -26,6 +26,8 @@ namespace Entities {
 		void setPositionEntity(float x, float y);
 		sf::Vector2f getPosition() const;
 
+		void setColorBeing(sf::Color col);
+
 		virtual void save() = 0;
 		virtual void execute() = 0;
 	};
