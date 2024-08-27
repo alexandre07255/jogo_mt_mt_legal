@@ -5,7 +5,7 @@
 namespace Scenes{
 	class Menu : public Scene
 	{
-	private:
+	protected:
 		static Managers::SceneManager* pSmanager;
 	public:
 		Menu();

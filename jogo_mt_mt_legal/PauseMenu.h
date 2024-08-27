@@ -1,16 +1,20 @@
 #pragma once
 #include "Menu.h"
+#include "Button.h"
+#include "Level.h"
 
 namespace Scenes
 {
 	class PauseMenu : public Menu
 	{
 	private:
-		Button* buttonQuit;
-		Button* buttonSave;
+		Level* levelActive;
 	public:
-		PauseMenu();
-		void update();
+		PauseMenu(Level* lAct);
+		~PauseMenu();
+		void escResolver();
+
+		void save();
 	};
 }
 

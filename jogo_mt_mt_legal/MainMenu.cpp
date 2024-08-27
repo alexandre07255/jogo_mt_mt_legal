@@ -65,18 +65,16 @@ void MainMenu::stackLevel1(bool player2) {
 	Level1* level;
 	level = new Level1(player2);
 
-	instance->push(level);
+	stackScene(level);
 
 }
 
 void MainMenu::stackLevel2(bool player2) {
-
-	SceneManager* instance = SceneManager::getInstance();
 	
 	Level2* level;
 	level = new Level2(player2);
 
-	instance->push(level);
+	stackScene(level);
 }
 
 void MainMenu::changeMainButtons() {
