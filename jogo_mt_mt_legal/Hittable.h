@@ -34,5 +34,7 @@ public:
 	int getHp();
 	int getPoints();
 	void setPoints(int p);
+
+	virtual void execute() = 0;
 };
 

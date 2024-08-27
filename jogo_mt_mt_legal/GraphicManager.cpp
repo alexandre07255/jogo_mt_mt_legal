@@ -31,3 +31,7 @@ GraphicManager* GraphicManager::getInstance()
 }
 
 GraphicManager* GraphicManager::instance(NULL);
+
+void GraphicManager::drawBeing(Being* pE) {
+	window->draw(*(pE->getShape()));
+}

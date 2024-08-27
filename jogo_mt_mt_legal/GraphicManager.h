@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Entity.h"
 
 class GraphicManager {
 private:
@@ -10,5 +11,6 @@ public:
 	~GraphicManager();
 	const bool isWindowOpen();
 	sf::RenderWindow* getWindow();
+	void drawBeing(Being* pE);
 	static GraphicManager* getInstance();
 };

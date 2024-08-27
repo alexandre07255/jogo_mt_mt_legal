@@ -1,19 +1,23 @@
 #pragma once
-#include "MyDrawable.h"
-#include "Updatable.h"
+#include "GraphicManager.h"
 
-class Being : public MyDrawable, public Updatable
+
+class Being
 {
 protected:
-	float horizontalSpeed;
-	float verticalSpeed;
+	int id;
+	static int idCont;
+	static GraphicManager* pGG;
+	sf::RectangleShape* pShape;
+	sf::Texture* pTexture;
 public:
 	Being();
-
-	void setHorizontalVelocity(float vel);
-
-	void setVerticalVelocity(float vel);
-
-	float getVerticalSpeed();
+	~Being();
+	virtual void execute() = 0;
+	virtual void draw();
+	sf::RectangleShape* getShape();
+	void setShape(sf::RectangleShape* rect);
+	sf::Texture* getTexture();
+	void setTextureBeing(sf::Texture* ptext);
 };
 
