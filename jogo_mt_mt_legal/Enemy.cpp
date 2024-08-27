@@ -9,7 +9,7 @@
 Enemy::Enemy() :Hittable(false, 10), upperLimitMultR(9.0 / 4),
 lesserLimitMultR(3.0/2), upperLimitMultL(3.0/2), lesserLimitMultL(3.0/4){
 	setPosition(sf::Vector2f(10, 10));
-	setSize(sf::Vector2f(100, 100));
+	setSize(sf::Vector2f(80, 80));
 	sightSize = 500.0;
 	followingPlayer = NULL;
 	state = PATROLLING;

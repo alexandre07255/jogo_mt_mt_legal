@@ -14,5 +14,5 @@ void Menu::addButton(Button* but) {
 }
 
 void Menu::save() {
-	cout << "Nossa estou aqui salvando muitas coisas uou" << endl;
+	cout << "Teste salvamento" << endl;
 }

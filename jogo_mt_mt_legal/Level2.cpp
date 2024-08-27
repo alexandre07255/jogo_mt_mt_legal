@@ -44,7 +44,6 @@ Level2::Level2(bool isPlayer2): Level() {
 
     player = new Player(0, 1, 10);
     player->setFillColor(sf::Color::Cyan);
-    //player->setSize(sf::Vector2f(1, 1));
     player->setOrigin(0, 0);
     player->setSize(sf::Vector2f(100, 100));
     player->setPosition(0, 900);

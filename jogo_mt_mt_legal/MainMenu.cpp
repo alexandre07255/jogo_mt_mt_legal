@@ -164,8 +164,8 @@ void MainMenu::moreButtons(bool level2) {
 		CommandLevel2p2False* com1 = new CommandLevel2p2False(this);
 		CommandLevel2p2True* com2 = new CommandLevel2p2True(this);
 
-		Button* greenThing = new Button(sf::Color::Green, com2, false);
-		Button* redThing = new Button(sf::Color::Red, com1, false);
+		Button* greenThing = new Button(sf::Color::Green, com2, true);
+		Button* redThing = new Button(sf::Color::Red, com1, true);
 
 		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 + 125.f);
 		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 + 125.f);
@@ -182,8 +182,8 @@ void MainMenu::moreButtons(bool level2) {
 		CommandLevel1p2False* com1 = new CommandLevel1p2False(this);
 		CommandLevel1p2True* com2 = new CommandLevel1p2True(this);
 
-		Button* greenThing = new Button(sf::Color::Green, com2, false);
-		Button* redThing = new Button(sf::Color::Red, com1, false);
+		Button* greenThing = new Button(sf::Color::Green, com2, true);
+		Button* redThing = new Button(sf::Color::Red, com1, true);
 
 		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 - 125.f);
 		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 - 125.f);
