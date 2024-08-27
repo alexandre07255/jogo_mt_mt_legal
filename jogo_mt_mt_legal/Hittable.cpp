@@ -1,4 +1,5 @@
 #include "Hittable.h"
+using namespace Entities::Characters;
 
 Hittable::Hittable(const bool ally, const int health):
 	isAlly(ally),
@@ -12,6 +13,9 @@ Hittable::Hittable(const bool ally, const int health):
 	canBeCollided(1)
 {
 
+}
+
+Hittable::~Hittable() {
 }
 
 void Hittable::setFireRemaining(const int cont)

@@ -1,4 +1,5 @@
 #include "Entity.h"
+using namespace Entities;
 
 Entity::Entity(): Being(), onAir(1), frictionFelt(1)
 {

@@ -1,27 +1,20 @@
 #pragma once
-#include "List.h"
-#include "MyDrawable.h"
-#include "Updatable.h"
+#include "EntityList.h"
 
 namespace Scenes
 {
-	class Scene
+	class Scene: public Being
 	{
 	protected:
-		List<MyDrawable>* drawables;
-		List<Updatable>* updatables;
+		EntityList* entityList;
 	public:
 		Scene();
-		void draw(sf::RenderWindow* window);
-		virtual void update();
-		void setDrawables(List<MyDrawable>* drawlist);
-		List<MyDrawable>* getDrawables() const;
-		void setUpdatables(List<Updatable>* updatelist);
-		List<Updatable>* getUpdatables() const;
-		void addUpdatable(Updatable* pU);
-		void addDrawable(MyDrawable* pD);
-		void removeDrawable(MyDrawable* pD);
-		void removeUpdatable(Updatable* pU);
+
+		void draw();
+		virtual void update() = 0;
+
+		void addEntity(Entities::Entity* pU);
+		void removeEntity(Entities::Entity* pU);
 	};
 }
 

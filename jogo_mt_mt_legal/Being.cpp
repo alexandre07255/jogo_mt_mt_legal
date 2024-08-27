@@ -1,4 +1,5 @@
 #include "Being.h"
+using namespace Managers;
 
 Being::Being():id(idCont++),pShape(NULL),pTexture(NULL) {
 }
