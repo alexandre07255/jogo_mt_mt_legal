@@ -10,11 +10,15 @@
 #include "Spike.h"
 #include "Fire.h"
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
 Level1::Level1(bool isPlayer2):Level() {
     GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
+
+    srand(time(NULL));
 
     sf::Texture* background = new sf::Texture();
     background->loadFromFile("spritesheets/fase1EBA.png");
@@ -118,6 +122,35 @@ Level1::Level1(bool isPlayer2):Level() {
     updatables->push_back(spike3);
     spike3->setTexture(spikeText, false);
 
+    if (rand() % 2) {
+        Spike* spike4;
+        spike4 = new Spike;
+        spike4->setPosition(28 * 16 * scale, 24 * 16 * scale);
+        spike4->setSize(sf::Vector2f(1 * 16 * scale, 1 * 6 * scale));
+        drawables->push_back(spike4);
+        updatables->push_back(spike4);
+        spike4->setTexture(spikeText, false);
+    }
+
+    if (rand() % 2) {
+        Spike* spike5;
+        spike5 = new Spike;
+        spike5->setPosition(84 * 16 * scale, 21 * 16 * scale);
+        spike5->setSize(sf::Vector2f(2 * 16 * scale, 1 * 6 * scale));
+        drawables->push_back(spike5);
+        updatables->push_back(spike5);
+        spike5->setTexture(spikeText, false);
+    }
+
+    if (rand() % 2) {
+        Spike* spike6;
+        spike6 = new Spike;
+        spike6->setPosition(79 * 16 * scale, 20 * 16 * scale);
+        spike6->setSize(sf::Vector2f(1 * 16 * scale, 1 * 6 * scale));
+        drawables->push_back(spike6);
+        updatables->push_back(spike6);
+        spike6->setTexture(spikeText, false);
+    }
 
     Platform* fallPlatform;
     fallPlatform = new Platform(37*16*scale,23*16*scale,3*16*scale,16*scale);
@@ -138,6 +171,28 @@ Level1::Level1(bool isPlayer2):Level() {
     collidables->push_back(fallPlatform3);
     drawables->push_back(fallPlatform3);
     updatables->push_back(fallPlatform3);
+
+    if (rand() % 2) {
+        Platform* fallPlatform4;
+        fallPlatform4 = new Platform(28 * 16 * scale, 23 * 16 * scale, 1 * 16 * scale, 16 * scale);
+        collidables->push_back(fallPlatform4);
+        drawables->push_back(fallPlatform4);
+        updatables->push_back(fallPlatform4);
+    }
+    if (rand() % 2) {
+        Platform* fallPlatform5;
+        fallPlatform5 = new Platform(62 * 16 * scale, 18 * 16 * scale, 2 * 16 * scale, 16 * scale);
+        collidables->push_back(fallPlatform5);
+        drawables->push_back(fallPlatform5);
+        updatables->push_back(fallPlatform5);
+    }
+    if (rand() % 2) {
+        Platform* fallPlatform6;
+        fallPlatform6 = new Platform(81 * 16 * scale, 19 * 16 * scale, 16 * scale, 16 * scale);
+        collidables->push_back(fallPlatform6);
+        drawables->push_back(fallPlatform6);
+        updatables->push_back(fallPlatform6);
+    }
 
 
     Player* player;
