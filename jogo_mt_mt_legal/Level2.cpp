@@ -5,6 +5,9 @@
 #include "SceneManager.h"
 #include "Terrain.h"
 #include "Fire.h"
+using namespace Scenes;
+using namespace Managers;
+
 
 Level2::Level2(bool isPlayer2): Level() {
     GraphicManager* instance = GraphicManager::getInstance();

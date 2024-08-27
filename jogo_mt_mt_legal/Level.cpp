@@ -6,6 +6,9 @@
 #include "SceneManager.h"
 #include "PauseMenu.h"
 #include "inputManager.h"
+using namespace Scenes;
+using namespace Managers;
+
 
 Level::Level(): hittableList(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL)
 {
