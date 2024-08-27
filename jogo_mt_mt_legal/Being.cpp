@@ -1,18 +1,36 @@
 #include "Being.h"
+using namespace Managers;
 
-Being::Being() :
-	MyDrawable(),
-	Updatable(),
-	horizontalSpeed(0),
-	verticalSpeed(0)
-{
-
+Being::Being():id(idCont++),pShape(NULL),pTexture(NULL) {
 }
 
-void Being::setHorizontalVelocity(float vel) { horizontalSpeed = vel; }
+int Being::idCont(0);
 
-void Being::setVerticalVelocity(float vel) { verticalSpeed = vel; }
+GraphicManager* Being::pGG(GraphicManager::getInstance());
 
-float Being::getVerticalSpeed() {
-	return verticalSpeed;
+Being::~Being() {
+	id = -1;
+}
+
+void Being::draw() {
+	pGG->drawBeing(this);
+}
+
+sf::RectangleShape* Being::getShape() {
+	return pShape;
+}
+
+void Being::setShape(sf::RectangleShape* rect) {
+	pShape = rect;
+}
+
+sf::Texture* Being::getTexture() {
+	return pTexture;
+}
+
+void Being::setTextureBeing(sf::Texture* ptext) {
+	pTexture = ptext;
+	if (ptext) {
+		pShape->setTexture(pTexture);
+	}
 }

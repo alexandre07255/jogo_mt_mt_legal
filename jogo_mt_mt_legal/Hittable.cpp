@@ -16,6 +16,9 @@ Hittable::Hittable(const bool ally, const int health):
 
 }
 
+Hittable::~Hittable() {
+}
+
 void Hittable::setFireRemaining(const int cont)
 {
 	fireRemaining = cont;

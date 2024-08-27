@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Entity.h"
 
-namespace Managers
-{
+namespace Managers {
 	class GraphicManager {
 	private:
 		sf::RenderWindow* window;
@@ -12,6 +12,7 @@ namespace Managers
 		~GraphicManager();
 		const bool isWindowOpen();
 		sf::RenderWindow* getWindow();
+		void drawBeing(Being* pE);
 		static GraphicManager* getInstance();
 	};
 }

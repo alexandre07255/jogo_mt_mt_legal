@@ -23,21 +23,7 @@ MainMenu::MainMenu():version(0){
 
 	GraphicManager* instance = GraphicManager::getInstance();
 
-	updatableVersions = new vector<List<Updatable>*>;
-	myDrawableVersions = new vector<List<MyDrawable>*>;
-	buttonVersions = new vector<List<Button>*>;
-
-	List<Updatable>* updatableMain = new List<Updatable>;
-	updatableVersions->push_back(updatableMain);
-
-	List<MyDrawable>* MyDrawableMain = new List<MyDrawable>;
-	myDrawableVersions->push_back(MyDrawableMain);
-
-	List<Button>* ButtonMain = new List<Button>;
-	buttonVersions->push_back(ButtonMain);
-
-	CommandStart* com1 = new CommandStart(this);
-	Button* startButton = new Button(sf::Color::Blue, com1, true);
+	Button* startButton;
 	startButton->setPosition(instance->getWindow()->getSize().x/2, instance->getWindow()->getSize().y / 3 - 25.f);
 
 	updatableMain->push_back(startButton);
@@ -95,20 +81,7 @@ void MainMenu::update() {
 	else
 		instance->setWasEscPressed(0);
 	
-	List<Updatable>::Iterator itCurrent = updatables->begin();
-	if (updatables->size() > 0)
-	{
-		List<Updatable>::Iterator itNext = itCurrent;
-		itNext++;
-		while (itNext != updatables->end())
-		{
-			(*itCurrent)->movement();
-			itCurrent = itNext;
-			itNext++;
-		}
-		(*itCurrent)->movement();
-	}
-
+	entityList->traverse();
 }
 
 void MainMenu::stackLevel1(bool player2) {

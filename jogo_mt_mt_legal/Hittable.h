@@ -1,10 +1,8 @@
 #pragma once
 #include "Entity.h"
 
-namespace Entities
-{
-	namespace Characters
-	{
+namespace Entities {
+	namespace Characters {
 		class Hittable : public Entity
 		{
 		protected:
@@ -19,6 +17,7 @@ namespace Entities
 			bool canBeCollided;
 		public:
 			Hittable(const bool ally, const int health);
+			virtual  ~Hittable();
 			enum States
 			{
 				FREE,
@@ -39,6 +38,8 @@ namespace Entities
 			int getHp();
 			int getPoints();
 			void setPoints(int p);
+
+			virtual void execute() = 0;
 		};
 	}
 }

@@ -145,6 +145,7 @@
     <ClCompile Include="CommandStart.cpp" />
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="EnemyRanged.cpp" />
+    <ClCompile Include="EntityList.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Hittable.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
@@ -165,7 +166,6 @@
     <ClCompile Include="Level2.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyDrawable.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleHitbox.cpp" />
@@ -195,6 +195,7 @@
     <ClInclude Include="CommandStart.h" />
     <ClInclude Include="Element.h" />
     <ClInclude Include="EnemyRanged.h" />
+    <ClInclude Include="EntityList.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Hittable.h" />
     <ClInclude Include="AttackHitbox.h" />
@@ -214,7 +215,6 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="MyDrawable.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleHitbox.h" />
