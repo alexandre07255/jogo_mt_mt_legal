@@ -8,10 +8,9 @@ using namespace Managers;
 
 
 Hitbox::Hitbox():
-	Being(),
+	Entity(),
 	target(0),
 	owner(NULL),
-	boundedTo(NULL),
 	relativePosition(0.f,0.f),
 	duration(1)
 {
@@ -35,11 +34,6 @@ void Hitbox::setOwner(Hittable* own)
 Hittable* Hitbox::getOwner()
 {
 	return owner;
-}
-
-void Hitbox::setBoundedTo(Entity* boundTo)
-{
-	boundedTo = boundTo;
 }
 
 void Hitbox::setRelativePosition(sf::Vector2f rel)

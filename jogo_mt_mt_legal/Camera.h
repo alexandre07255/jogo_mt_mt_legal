@@ -16,6 +16,6 @@ public:
 	void setWindow(sf::RenderWindow* renderer);
 	void setPlayer1(Player* p1);
 	void setPlayer2(Player* p2);
-	void movement();
+	void execute();
 };
 

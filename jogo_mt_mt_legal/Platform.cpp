@@ -1,6 +1,5 @@
 #include "Platform.h"
 #include "CollisionManager.h"
-#include "Support.h"
 #include "SceneManager.h"
 #include "Level.h"
 #include "ObstacleHitbox.h"
@@ -12,6 +11,7 @@ using namespace Entities::Characters;
 using namespace Scenes;
 using namespace Entities;
 using namespace Entities::Hitboxes;
+
 
 
 Platform::Platform(float xPosition, float yPosition, float xSize, float ySize) :Obstacle(), Collidable(), support(NULL),
@@ -29,7 +29,7 @@ sf::FloatRect Platform::getBounds() {
 	return getGlobalBounds();
 }
 
-void Platform::movement() {
+void Platform::execute() {
 	CollisionManager* instance = CollisionManager::getInstance();
 	
 	if (firstStep) {
@@ -42,9 +42,8 @@ void Platform::movement() {
 		if (height - bottom() > minimalHeight)
 		{
 			support = new Support(this, height - bottom());
-			level->addHittable(support);
-			level->addDrawable(support);
-			level->addUpdatable(support);
+			level->addSupport(support);
+			level->addEntity(support);
 			onAir = 0;
 		}
 		else
@@ -63,7 +62,6 @@ void Platform::movement() {
 
 			ObstacleHitbox* hitboxLeft = new ObstacleHitbox(this);
 			hitboxLeft->setTarget(1);
-			hitboxLeft->setBoundedTo(this);
 			hitboxLeft->setCooldown(20);
 			hitboxLeft->setSize(sf::Vector2f(getSize().x / 2, getSize().y / 2));
 			hitboxLeft->setHorLaunchStrength(-25.0);
@@ -119,11 +117,22 @@ void Platform::movement() {
 	}
 }
 
+void Platform::toObstacle()
+{
+	
+	hitbox->setPosition(getPosition());
+	hitbox->move(hitbox->getRelativePosition());
+	
+
+	CollisionManager* collisionInstance = CollisionManager::getInstance();
+	collisionInstance->testHit(1, hitbox);
+}
+
 Support* Platform::getSupport() {
 	return support;
 }
 
-float HarmonicMovement(float range, float mass, float elasticity, float damping, float time) {
+float Platform::HarmonicMovement(float range, float mass, float elasticity, float damping, float time) {
 	float frequency = sqrt(elasticity / mass - ((damping * damping) / (4 * mass * mass)));
 	float amplitude = range * exp((-damping * time) / (2.f * mass));
 

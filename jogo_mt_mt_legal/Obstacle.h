@@ -14,6 +14,7 @@ namespace Entities
 		public:
 			Obstacle();
 			const bool getIsActive() const;
+			virtual void toObstacle() = 0;
 			virtual void statusEffect(Entities::Characters::Hittable* hit);
 			void setIsActive(const bool active);
 			void setSpawnedHitbox(const bool spa);

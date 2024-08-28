@@ -31,7 +31,7 @@ void Camera::setPlayer2(Player* p2)
 
 void Camera::setWindow(sf::RenderWindow* renderer) { window = renderer; }
 
-void Camera::movement()
+void Camera::execute()
 {
 	if (player2){
 		int x = (player1->getPosition().x + player2->getPosition().x)/2;

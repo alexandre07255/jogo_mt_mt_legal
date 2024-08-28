@@ -10,13 +10,21 @@ using namespace Entities;
 using namespace Scenes;
 using namespace Entities::Hitboxes;
 using namespace Entities::Characters;
+using namespace Entities::Obstacles;
+
 
 
 
 
 CollisionManager* CollisionManager::instance(NULL);
 
-CollisionManager::CollisionManager()
+CollisionManager::CollisionManager():
+	enemyVector(NULL),
+	supportVector(NULL),
+	collidables(NULL),
+	obstaclelist(NULL),
+	player1(NULL),
+	player2(NULL)
 {
 
 }
@@ -26,13 +34,25 @@ CollisionManager::~CollisionManager()
 
 }
 
-void CollisionManager::testHittableCollision(Hittable* target)
+void CollisionManager::testHittableToObstacleCollisions()
 {
-	SceneManager* instance = SceneManager::getInstance();
-	Level* level = static_cast<Level*>(instance->top());
-	list<Hittable*>* hittableList = level->getHittableList();
+	if (!obstaclelist) { return; }
 
-	if (hittableList == NULL)
+	int size = obstaclelist->size();
+	list<Obstacle*>::iterator it = obstaclelist->begin();
+
+	for (int i = 0; i < size; i++)
+	{
+		(*it)->toObstacle();
+		it++;
+	}
+}
+
+
+
+void CollisionManager::testPlayerToEnemyCollision()
+{
+	if (enemyVector == NULL)
 		return;
 
 	sf::FloatRect targetBounds;
@@ -40,61 +60,82 @@ void CollisionManager::testHittableCollision(Hittable* target)
 
 	float x, y;
 
-	int size = hittableList->size();
-	list<Hittable*>::iterator it = hittableList->begin();
+	int size = enemyVector->size();
+	vector<Enemy*>::iterator it = enemyVector->begin();
 
 	int directionX = 0;
 	int directionY = 0;
 
-	targetBounds = target->getGlobalBounds();
+	Player* target[2] = { player1, player2 };
 
-	bool collided = 0;
-	bool collidedDown = 0;
-	for (int i = 0; i < size; i++)
+	for (int j = 0; j < 2; j++)
 	{
-		if ((target->getId() != (*it)->getId()) && (*it)->getCanBeCollided()) {
-			hittableBounds = (*it)->getGlobalBounds();
+		if (target[j])
+		{
+			targetBounds = target[j]->getGlobalBounds();
 
-			if (isColliding(hittableBounds, targetBounds)) {
-				collided = 1;
-				//temos colisao
-				if (targetBounds.getPosition().x + targetBounds.width < hittableBounds.getPosition().x + hittableBounds.width) {
-					//se target colidiu pela direita
-					x = targetBounds.getPosition().x + targetBounds.width - hittableBounds.getPosition().x;
-					directionX = -1;
-				}
-				else {
-					//se target colidiu pela esquerda
-					x = hittableBounds.getPosition().x + hittableBounds.width - targetBounds.getPosition().x;
-					directionX = 1;
-				}
+			for (int i = 0; i < size; i++)
+			{
+				
+				hittableBounds = (*it)->getGlobalBounds();
 
-				if (targetBounds.getPosition().y + targetBounds.height < hittableBounds.getPosition().y + hittableBounds.height) {
-					//se target coldiu por baixo
-					y = targetBounds.getPosition().y + targetBounds.height - hittableBounds.getPosition().y;
-					directionY = -1;
-					collidedDown = 1;
-				}
-				else {
-					//se target colidiu por cima
-					y = hittableBounds.getPosition().y + hittableBounds.height - targetBounds.getPosition().y;
-					directionY = 1;
-				}
+				if (isColliding(hittableBounds, targetBounds)) {
+					//temos colisao
+					if (targetBounds.getPosition().x + targetBounds.width < hittableBounds.getPosition().x + hittableBounds.width) {
+						//se target colidiu pela direita
+						x = targetBounds.getPosition().x + targetBounds.width - hittableBounds.getPosition().x;
+						directionX = -1;
+					}
+					else {
+						//se target colidiu pela esquerda
+						x = hittableBounds.getPosition().x + hittableBounds.width - targetBounds.getPosition().x;
+						directionX = 1;
+					}
 
-				if (y < x) {
-					target->move(0, (y * directionY));
-					target->setVerticalVelocity(10.f * (directionY));
+					if (targetBounds.getPosition().y + targetBounds.height < hittableBounds.getPosition().y + hittableBounds.height) {
+						//se target coldiu por baixo
+						y = targetBounds.getPosition().y + targetBounds.height - hittableBounds.getPosition().y;
+						directionY = -1;
+					}
+					else {
+						//se target colidiu por cima
+						y = hittableBounds.getPosition().y + hittableBounds.height - targetBounds.getPosition().y;
+						directionY = 1;
+					}
+
+					if (y < x) {
+						target[j]->move(0, (y * directionY));
+						target[j]->setVerticalVelocity(10.f * (directionY));
+					}
+					else {
+						target[j]->move(sf::Vector2f((x * directionX), 0));
+						target[j]->setHorizontalVelocity(10.f * (directionX));
+					}
+					targetBounds = target[j]->getGlobalBounds();
 				}
-				else {
-					target->move(sf::Vector2f((x * directionX), 0));
-					target->setHorizontalVelocity(10.f * (directionX));
-				}
-				targetBounds = target->getGlobalBounds();
+				
+				it++;
 			}
 		}
-		it++;
 	}
 }
+
+void CollisionManager::testHittableToCollidableCollisions()
+{
+	Player* target[2] = { player1, player2 };
+
+	for (int i = 0; i < 2; i++)
+		if (target[i])
+			testCollison(target[i]);
+
+	if (enemyVector)
+	{
+		int size = enemyVector->size();
+		for (int i = 0; i < size; i++)
+			testCollison(enemyVector->at(i));
+	}
+}
+
 
 CollisionManager* CollisionManager::getInstance()
 {
@@ -105,10 +146,6 @@ CollisionManager* CollisionManager::getInstance()
 
 void CollisionManager::testCollison(Entity* pE)
 {
-	SceneManager* instance = SceneManager::getInstance();
-	Level* level = static_cast<Level*>(instance->top());
-	list<Collidable*>* collidables = level->getCollidable();
-
 	if (collidables == NULL)
 		return;
 
@@ -188,44 +225,67 @@ const bool CollisionManager::isColliding(sf::FloatRect one, sf::FloatRect other)
 
 void CollisionManager::testHit(const bool target, Hitbox* hitbox)
 {
-	SceneManager* instance = SceneManager::getInstance();
-	Level* level = static_cast<Level*>(instance->top());
-	list<Hittable*>* hittableList = level->getHittableList();
+	
 
 	if (hitbox == NULL) { return; }
 	bool neutral = (hitbox->getOwner() == NULL);
 	//Fazer neutral
-	if (hittableList == NULL) { cout << "No one is hittable" << endl; return; }
-	list<Hittable*>::iterator it = hittableList->begin();
-	int size = hittableList->size();
 
 	sf::FloatRect hitboxBounds = hitbox->getGlobalBounds();
 	sf::FloatRect hittableBounds;
 
-	for (int i = 0; i < size; i++)
+	if (target || neutral)
 	{
-		if ((target == (*it)->getIsAlly()) || neutral)
+		if (player1)
 		{
-			hittableBounds = (*it)->getGlobalBounds();
+			hittableBounds = (player1)->getGlobalBounds();
 			if (isColliding(hitboxBounds, hittableBounds))
 			{
-				hitbox->hitSolution((*it));
+				hitbox->hitSolution(player1);
 			}
 		}
-		it++;
+		if (player2)
+		{
+			hittableBounds = (player2)->getGlobalBounds();
+			if (isColliding(hitboxBounds, hittableBounds))
+			{
+				hitbox->hitSolution(player2);
+			}
+		}
+	}
+
+	if (!target || neutral)
+	{
+		if (!enemyVector || !supportVector) { return; }
+
+		int size = enemyVector->size();
+
+		for (int i = 0; i < size; i++)
+		{
+			hittableBounds = (enemyVector->at(i))->getGlobalBounds();
+			if (isColliding(hitboxBounds, hittableBounds))
+			{
+				hitbox->hitSolution(enemyVector->at(i));
+			}
+		}
+
+		size = supportVector->size();
+		for (int i = 0; i < size; i++)
+		{
+			hittableBounds = (supportVector->at(i))->getGlobalBounds();
+			if (isColliding(hitboxBounds, hittableBounds))
+			{
+				hitbox->hitSolution(supportVector->at(i));
+			}
+		}
 	}
 }
 
-float CollisionManager::nearestCollidable(MyDrawable* relativeTo, float maxHeight) const
+float CollisionManager::nearestCollidable(Entity* relativeTo, float maxHeight) const
 //Returns maxHeight + relativeTo->bottom() if it doesn't find a collidable
 {
-	SceneManager* LevelInstance = SceneManager::getInstance();
-	Level* level = static_cast<Level*>(LevelInstance->top());
-
 	const double PI = 3.1415;
 	const double rayStep = 50;
-
-	list<Collidable*>* collidables = level->getCollidable();
 
 	double xCenter = relativeTo->xMid();
 	double yCenter = relativeTo->bottom();

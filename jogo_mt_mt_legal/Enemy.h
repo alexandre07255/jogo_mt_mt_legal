@@ -20,7 +20,7 @@ namespace Entities
 		public:
 			Enemy();
 		protected:
-			void movementHITSTUN();
+			void executeHITSTUN();
 			Player* searchPlayer() const;
 		};
 	}

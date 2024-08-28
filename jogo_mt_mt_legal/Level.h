@@ -1,8 +1,11 @@
 #pragma once
 #include "Camera.h"
-#include "List.h"
+#include <list>
 #include "Collidable.h"
 #include "Scene.h"
+#include "Support.h"
+#include "Enemy.h"
+
 
 namespace Scenes
 {
@@ -10,22 +13,31 @@ namespace Scenes
 	{
 	protected:
 		//So that other objects can call methods and modify the updatables and drawables lists //Colocar HittableList e collidables aqui também
-		list<Collidable*>* collidables;
-		list<Entities::Characters::Hittable*>* hittableList;
+		std::list<Collidable*>* collidables;
+		std::vector<Entities::Characters::Enemy*>* enemyVector;
+		std::vector<Entities::Support*>* supportVector;
 		Entities::Characters::Player* pPlayer1;
 		Entities::Characters::Player* pPlayer2;
 		bool endingOnRight;
 		float endX;
 		virtual void levelCompleteHandler() = 0;
+		void manageCollisions();
 	public:
 		Level();
 		virtual ~Level();
-		void update();
-		list<Collidable*>* getCollidable();
-		void addHittable(Entities::Characters::Hittable* pH);
-		list<Entities::Characters::Hittable*>* getHittableList();
-		void removeHittable(Entities::Characters::Hittable* pH);
+
+		void excute();
+
+		list<Collidable*>* getCollidables();
 		void removeCollidable(Collidable* pC);
+
+		vector<Entities::Characters::Enemy*>* getEnemyVector();
+		void addEnemy(Entities::Characters::Enemy* pE);
+		void removeEnemy(Entities::Characters::Enemy* pE);
+
+		vector<Entities::Support*>* getSupportVector();
+		void addSupport(Entities::Support* pS);
+		void removeSupport(Entities::Support* pS);
 
 		void stackPauseMenu();
 

@@ -20,7 +20,7 @@ namespace Entities
 		void setTarget(const bool tar);
 		void setRelativePosition(sf::Vector2f rel);
 		void setOwner(Entities::Characters::Hittable* own);
-		void movement();
+		void execute();
 	};
 }
 

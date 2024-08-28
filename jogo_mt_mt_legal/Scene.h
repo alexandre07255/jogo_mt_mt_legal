@@ -6,7 +6,7 @@ namespace Scenes
 	class Scene: public Being
 	{
 	protected:
-		EntityList* entityList;
+		Lists::EntityList* entityList;
 	public:
 		Scene();
 

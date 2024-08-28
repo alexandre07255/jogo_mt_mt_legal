@@ -34,7 +34,7 @@ const bool Button::isMouseClicked() {
 	return false;
 }
 
-void Button::movement() {
+void Button::execute() {
 	if (isMouseOn() && clickable) {
 		InputManager* iInstance = InputManager::getInstance();
 		setFillColor(sf::Color::Yellow);

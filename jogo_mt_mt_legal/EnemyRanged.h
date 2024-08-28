@@ -33,13 +33,13 @@ namespace Entities
 			static const float WALK_MAX_HORIZONTAL_SPEED;
 		public:
 			EnemyRanged();
-			void movement();
+			void execute();
 		private:
 			void projectileCalculations(Projectile* proj, const float absHorSpeed, Hittable* target);
-			void movementFOLLOWING();
-			void movementPATROLLING();
-			void movementATTACK();
-			void movementATKCANCEL();
+			void executeFOLLOWING();
+			void executePATROLLING();
+			void executeATTACK();
+			void executeATKCANCEL();
 		};
 	}
 }

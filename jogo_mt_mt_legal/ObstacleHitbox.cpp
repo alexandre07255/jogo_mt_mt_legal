@@ -62,28 +62,16 @@ const bool ObstacleHitbox::hasAlreadyHit(Hittable* pA)
 	return 0;
 }
 
-void ObstacleHitbox::movement()
+void ObstacleHitbox::execute()
 {
 	if (!obstacle->getIsActive())
 	{
 		Scene* activeScene = SceneManager::getInstance()->top();
-		list<Updatable*>* upList = activeScene->getUpdatables();
-		upList->remove(this);
-		list<MyDrawable*>* drawList = activeScene->getDrawables();
-		drawList->remove(this);
 		obstacle->setSpawnedHitbox(0);
+		activeScene->removeEntity(this);
 		delete this;
 		return;
 	}
-
-	if (boundedTo != NULL)
-	{
-		setPosition(boundedTo->getPosition());
-		move(relativePosition);
-	}
-
-	CollisionManager* collisionInstance = CollisionManager::getInstance();
-	collisionInstance->testHit(target, this);
 
 
 	if (cont < cooldown)
@@ -94,6 +82,8 @@ void ObstacleHitbox::movement()
 		hitList.clear();
 	}
 }
+
+void ObstacleHitbox::save() { }
 
 void ObstacleHitbox::hitSolution(Hittable* hit)
 {

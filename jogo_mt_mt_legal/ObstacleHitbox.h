@@ -25,7 +25,8 @@ namespace Entities
 			void setHorLaunchStrength(const float hor);
 			void setDamage(const int dmg);
 			void setCooldown(const int cd);
-			void movement();
+			void execute();
+			void save();
 			void hitSolution(Entities::Characters::Hittable* hit);
 		};
 	}

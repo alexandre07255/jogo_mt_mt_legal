@@ -12,6 +12,11 @@ Being::~Being() {
 	id = -1;
 }
 
+const int Being::getId() const
+{
+	return id;
+}
+
 void Being::draw() {
 	pGG->drawBeing(this);
 }

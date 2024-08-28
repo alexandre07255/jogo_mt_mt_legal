@@ -17,9 +17,15 @@ AttackHitbox::AttackHitbox() :
 	hasHit(0),
 	hitstun(0),
 	isInfinite(0),
-	doesATKCANCEL(1)
+	doesATKCANCEL(1),
+	boundedTo(NULL)
 {
 	hitList.clear();
+}
+
+void AttackHitbox::setBoundedTo(Entity* boundTo)
+{
+	boundedTo = boundTo;
 }
 
 void AttackHitbox::setHorKnockback(const float horKnock)
@@ -70,15 +76,12 @@ const bool AttackHitbox::hasAlreadyHit(Hittable* pA)
 	return 0;
 }
 
-void AttackHitbox::movement()
+void AttackHitbox::execute()
 {
 	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || (doesATKCANCEL && owner->getState() != Hittable::ATKCANCEL) ) ) )
 	{
 		Scene* activeScene = SceneManager::getInstance()->top();
-		list<Updatable>* upList = activeScene->getUpdatables();
-		upList->remove(this);
-		List<MyDrawable>* drawList = activeScene->getDrawables();
-		drawList->remove(this);
+		activeScene->removeEntity(this);
 		delete this;
 		return;
 	}

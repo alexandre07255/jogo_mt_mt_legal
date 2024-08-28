@@ -29,7 +29,7 @@ Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	
 }
 
-void Player::movement() {
+void Player::execute() {
 
 	InputManager* inputInstance = InputManager::getInstance();
 	CollisionManager* collisionInstance = CollisionManager::getInstance();
@@ -67,16 +67,16 @@ void Player::movement() {
 	switch (state)
 	{
 	case FREE:
-		movementFREE();
+		executeFREE();
 		break;
 	case ATKCANCEL:
-		movementATKCANCEL();
+		executeATKCANCEL();
 		break;
 	case ATTACK:
-		movementATTACK();
+		executeATTACK();
 		break;
 	case HITSTUN:
-		movementHITSTUN();
+		executeHITSTUN();
 		break;
 	}
 	
@@ -96,7 +96,7 @@ void Player::movement() {
 	}
 }
 
-void Player::movementFREE()
+void Player::executeFREE()
 {
 	//Só para mostrar os states
 	if (player2)
@@ -165,7 +165,7 @@ void Player::movementFREE()
 	move(horizontalSpeed, verticalSpeed);
 }
 
-void Player::movementATKCANCEL()
+void Player::executeATKCANCEL()
 {
 	if (stun > 0)
 	{
@@ -187,7 +187,7 @@ void Player::movementATKCANCEL()
 		state = FREE;
 }
 
-void Player::movementATTACK()
+void Player::executeATTACK()
 {
 	if (stun > 0)
 	{
@@ -206,7 +206,7 @@ void Player::movementATTACK()
 	//move(sf::Vector2f(horizontalSpeed*0.15, (++verticalSpeed)*0.85));
 }
 
-void Player::movementHITSTUN()
+void Player::executeHITSTUN()
 {
 	if (stun <= 0)
 	{

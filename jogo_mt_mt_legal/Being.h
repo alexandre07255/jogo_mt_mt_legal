@@ -14,6 +14,7 @@ public:
 	virtual ~Being();
 	virtual void execute() = 0;
 	virtual void draw();
+	const int getId() const;
 	sf::RectangleShape* getShape();
 	void setShape(sf::RectangleShape* rect);
 	sf::Texture* getTexture();

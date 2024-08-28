@@ -25,7 +25,7 @@ void Fire::setLingeringTime(const int time)
 	lingeringTime = time;
 }
 
-void Fire::movement()
+void Fire::execute()
 {
 	if (firstStep)
 	{

@@ -96,7 +96,7 @@ Player* Enemy::searchPlayer() const{
 	return NULL;
 }
 
-void Enemy::movementHITSTUN()
+void Enemy::executeHITSTUN()
 {
 	if (stun <= 0)
 	{

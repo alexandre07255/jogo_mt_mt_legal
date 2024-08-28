@@ -11,10 +11,12 @@ Spike::Spike():
 	firstStep(1),
 	Obstacle()
 {
-
+	//getTexture
+	if (pTexture)
+		pTexture->setRepeated(1);
 }
 
-void Spike::movement()
+void Spike::execute()
 {
 	if (firstStep)
 	{

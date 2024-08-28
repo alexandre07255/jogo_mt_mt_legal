@@ -1,6 +1,7 @@
 #pragma once
 #include "Obstacle.h"
 #include "Collidable.h"
+#include "Support.h"
 
 namespace Entities
 {
@@ -10,6 +11,9 @@ namespace Entities
 		{
 		private:
 			Support* support;
+
+			Hitboxes::ObstacleHitbox* hitboxes[2];
+
 			bool firstStep;
 			const float minimalHeight;
 			float mass;
@@ -21,7 +25,8 @@ namespace Entities
 		public:
 			Platform(float xPosition, float yPosition, float xSize, float ySize);
 			sf::FloatRect getBounds();
-			void movement();
+			void toObstacle();
+			void execute();
 			Support* getSupport();
 			void collisionSolution(Entity* pE);
 		};

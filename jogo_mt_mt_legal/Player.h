@@ -32,11 +32,11 @@ namespace Entities
 			bool wasAttackPressed;
 		public:
 			Player(const bool isPlayer2, const bool ally, const int health);
-			void movement();
-			void movementFREE();
-			void movementATKCANCEL();
-			void movementATTACK();
-			void movementHITSTUN();
+			void execute();
+			void executeFREE();
+			void executeATKCANCEL();
+			void executeATTACK();
+			void executeHITSTUN();
 			void attack();
 		};
 	}

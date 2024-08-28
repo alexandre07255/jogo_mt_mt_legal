@@ -27,11 +27,11 @@ namespace Entities
 			static const float WALK_MAX_HORIZONTAL_SPEED;
 		public:
 			EnemyMelee();
-			void movement();
+			void execute();
 		private:
-			void movementFOLLOWING();
-			void movementPATROLLING();
-			void movementATKCANCEL();
+			void executeFOLLOWING();
+			void executePATROLLING();
+			void executeATKCANCEL();
 			const bool checkOnLedge() const;
 		};
 	}

@@ -1,6 +1,8 @@
 #include "Scene.h"
 #include <iostream>
 using namespace Scenes;
+using namespace Lists;
+
 
 Scene::Scene() {
 	entityList = new EntityList;

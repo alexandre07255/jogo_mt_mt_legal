@@ -27,7 +27,7 @@ attackTriggerStrip(20.0f)
 	lesserLimitMultL = 1.0 / 2;
 }
 
-void EnemyRanged::movement()
+void EnemyRanged::execute()
 {
     CollisionManager* instance = CollisionManager::getInstance();
 
@@ -35,21 +35,21 @@ void EnemyRanged::movement()
     {
     case PATROLLING:
         setFillColor(sf::Color::White);
-        movementPATROLLING();
+        executePATROLLING();
         break;
     case HITSTUN:
-        movementHITSTUN();
+        executeHITSTUN();
         break;
     case FOLLOWING:
         setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
-        movementFOLLOWING();
+        executeFOLLOWING();
         break;
     case ATKCANCEL:
         setFillColor(sf::Color::Green);
-        movementATKCANCEL();
+        executeATKCANCEL();
         break;
     case ATTACK:
-        movementATTACK();
+        executeATTACK();
         break;
     }
     if (cooldownCont > 0) { cooldownCont--; }
@@ -81,7 +81,7 @@ void EnemyRanged::movement()
     }
 }
 
-void EnemyRanged::movementPATROLLING()
+void EnemyRanged::executePATROLLING()
 {
     CollisionManager* cInstance = CollisionManager::getInstance();
 
@@ -171,7 +171,7 @@ void EnemyRanged::projectileCalculations(Projectile* proj, const float absHorSpe
     proj->setVerticalVelocity(verSpeed);
 }
 
-void EnemyRanged::movementFOLLOWING()
+void EnemyRanged::executeFOLLOWING()
 {
     CollisionManager* cInstance = CollisionManager::getInstance();
 
@@ -273,7 +273,7 @@ void EnemyRanged::movementFOLLOWING()
     }
 }
 
-void EnemyRanged::movementATTACK()
+void EnemyRanged::executeATTACK()
 {
     if (stun > 0)
     {
@@ -327,7 +327,7 @@ void EnemyRanged::movementATTACK()
     }
 }
 
-void EnemyRanged::movementATKCANCEL()
+void EnemyRanged::executeATKCANCEL()
 {
     state = PATROLLING;
 }

@@ -13,7 +13,7 @@ namespace Entities
 			int lingeringTime;
 		public:
 			Fire();
-			void movement();
+			void execute();
 			void statusEffect(Hittable* hit);
 			void setLingeringTime(const int time);
 			void activate();

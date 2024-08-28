@@ -12,7 +12,7 @@ namespace Entities
 	public:
 		Support(Obstacles::Platform* plat, const float height);
 		void setPlatform(Obstacles::Platform* plat);
-		void movement();
+		void execute();
 	};
 }
 

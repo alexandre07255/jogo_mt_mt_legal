@@ -12,6 +12,7 @@ namespace Entities
 		class AttackHitbox : public Hitbox
 		{
 		private:
+			Entities::Entity* boundedTo;
 			float verKnockback;
 			float horKnockback;
 			bool isInfinite;
@@ -20,9 +21,10 @@ namespace Entities
 			int hitstun;
 			list<Entities::Characters::Hittable*> hitList;
 			bool hasHit;
-			const bool hasAlreadyHit(Hittable* pA);
+			const bool hasAlreadyHit(Entities::Characters::Hittable* pA);
 		public:
 			AttackHitbox();
+			void setBoundedTo(Entities::Entity* boundTo);
 			void setHorKnockback(const float horKnock);
 			void setVerKnockback(const float verKnock);
 			void setDamage(const int dmg);
@@ -30,8 +32,8 @@ namespace Entities
 			void setIsInfinite(const bool inf);
 			void setDoesATKCANCEL(const bool dAC);
 			const bool getHasHit() const;
-			void movement();
-			void hitSolution(Hittable* hit);
+			void execute();
+			void hitSolution(Entities::Characters::Hittable* hit);
 		};
 
 	}

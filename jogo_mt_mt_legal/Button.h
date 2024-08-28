@@ -14,7 +14,7 @@ public:
 	bool clickable;
 	Button(sf::Color col, Command* _com, bool repeat);
 	const bool isMouseOn();
-	void movement();
+	void execute();
 	const bool isMouseClicked();
 };
 

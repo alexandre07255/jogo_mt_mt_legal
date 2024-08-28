@@ -17,7 +17,7 @@ attackStartup(72), attackHitboxDuration(5), attackEndLag(20), attackTriggerRange
     hp = 20;
 }
 
-void EnemyMelee::movementPATROLLING() {
+void EnemyMelee::executePATROLLING() {
     srand(time(NULL));
 
     sf::Vector2f vetorDesloc(1, 1);
@@ -86,25 +86,25 @@ void EnemyMelee::movementPATROLLING() {
     }
 }
 
-void EnemyMelee::movement() {
+void EnemyMelee::execute() {
     CollisionManager* instance = CollisionManager::getInstance();
 
     switch (state)
     {
     case PATROLLING:
         setFillColor(sf::Color::White);
-        movementPATROLLING();
+        executePATROLLING();
         break;
     case HITSTUN:
-        movementHITSTUN();
+        executeHITSTUN();
         break;
     case FOLLOWING:
         setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
-        movementFOLLOWING();
+        executeFOLLOWING();
         break;
     case ATKCANCEL:
         setFillColor(sf::Color::Green);
-        movementATKCANCEL();
+        executeATKCANCEL();
         break;
     }
 
@@ -135,7 +135,7 @@ void EnemyMelee::movement() {
     }
 }
 
-void EnemyMelee::movementFOLLOWING() {
+void EnemyMelee::executeFOLLOWING() {
 
     sf::Vector2f vetorDesloc(1, 1);
 
@@ -253,7 +253,7 @@ void EnemyMelee::movementFOLLOWING() {
     }
 }
 
-void EnemyMelee::movementATKCANCEL()
+void EnemyMelee::executeATKCANCEL()
 {
     if (stun > 0)
     {

@@ -66,7 +66,7 @@ void Projectile::setRelativePosition(sf::Vector2f rel)
     hitbox->setRelativePosition(rel);
 }
 
-void Projectile::movement()
+void Projectile::execute()
 {
     CollisionManager* cInstance = CollisionManager::getInstance();
 

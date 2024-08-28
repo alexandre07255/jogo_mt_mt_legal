@@ -11,7 +11,7 @@ namespace Entities
 			bool firstStep;
 		public:
 			Spike();
-			void movement();
+			void execute();
 			void activate();
 			void deactivate();
 		};

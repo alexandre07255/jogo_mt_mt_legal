@@ -49,11 +49,11 @@ void PauseMenu::update()
 		itNext++;
 		while (itNext != updatables->end())
 		{
-			(*itCurrent)->movement();
+			(*itCurrent)->execute();
 			itCurrent = itNext;
 			itNext++;
 		}
-		(*itCurrent)->movement();
+		(*itCurrent)->execute();
 	}
 
 }

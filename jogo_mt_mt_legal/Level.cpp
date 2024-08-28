@@ -6,84 +6,94 @@
 #include "SceneManager.h"
 #include "PauseMenu.h"
 #include "inputManager.h"
+using namespace std;
 using namespace Scenes;
 using namespace Managers;
 using namespace Entities::Characters;
+using namespace Entities;
+using namespace Lists;
 
 
 
-Level::Level(): hittableList(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL), backgroundAndLevel(NULL)
+
+Level::Level(): enemyVector(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL)
 {
-    hittableList = new list<Hittable*>;
+    enemyVector = new vector<Enemy*>;
     collidables = new list<Collidable*>;
+	supportVector = new vector<Support*>;
 }
 
 Level::~Level() //TODO
 {
 }
 
-void Level::update()
+void Level::excute()
 {
-	List<Updatable>::Iterator itCurrent = updatables->begin();
-	if (updatables->size() > 0)
-	{
-		List<Updatable>::Iterator itNext = itCurrent;
-		itNext++;
-		while (itNext != updatables->end())
-		{
-			(*itCurrent)->movement();
-			itCurrent = itNext;
-			itNext++;
-		}
-		(*itCurrent)->movement();
-	}
-
-	if (endingOnRight)
-	{
-		if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 > endX)
-			levelCompleteHandler();
-		else if (pPlayer2 != NULL)
-			if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 > endX)
-				levelCompleteHandler();
-	}
-	else
-	{
-		if (pPlayer1->getPosition().x + pPlayer1->getSize().x / 2 < endX)
-			levelCompleteHandler();
-		else if (pPlayer2 != NULL)
-			if (pPlayer2->getPosition().x + pPlayer2->getSize().x / 2 < endX)
-				levelCompleteHandler();
-	}
-	
-
-	InputManager* instance = InputManager::getInstance();
-	if (instance->isPausePressed()) {
-		if (!instance->getWasEscPressed())
-			stackPauseMenu();
-		instance->setWasEscPressed(1);
-	}
-	else
-		instance->setWasEscPressed(0);
+	entityList->traverse();
+	manageCollisions();
+	entityList->drawAll();
 }
 
-list<Collidable*>* Level::getCollidable() {
+void Level::manageCollisions()
+{
+	CollisionManager* cInstance = CollisionManager::getInstance();
+	cInstance->testHittableToObstacleCollisions();
+	cInstance->testPlayerToEnemyCollision();
+	cInstance->testHittableToCollidableCollisions();
+}
+
+list<Collidable*>* Level::getCollidables() {
 	return collidables;
 }
 
-list<Hittable*>* Level::getHittableList() {
-	return hittableList;
+vector<Enemy*>* Level::getEnemyVector() {
+	return enemyVector;
 }
 
-void Level::addHittable(Hittable* pH) {
-	hittableList->push_back(pH);
+void Level::addEnemy(Enemy* pE) {
+	enemyVector->push_back(pE);
 }
 
-void Level::removeHittable(Hittable* pH) {
-	hittableList->remove(pH);
+void Level::removeEnemy(Enemy* pE) {
+	if (!enemyVector) { return; }
+
+	int size = enemyVector->size();
+	for (int i = 0; i < size; i++)
+	{
+		if (enemyVector->at(i) == pE)
+		{
+			vector<Enemy*>::iterator it = enemyVector->begin() + i;
+			enemyVector->erase(it);
+			delete (*it);
+			i--;
+			size--;
+		}
+	}
 }
 
 void Level::removeCollidable(Collidable* pC) {
 	collidables->remove(pC);
+}
+
+vector<Support*>* Level::getSupportVector() { return supportVector; }
+void Level::addSupport(Support* pS) { if (supportVector) supportVector->push_back(pS); }
+void Level::removeSupport(Support* pS)
+{
+	if (!supportVector) { return; }
+	
+	int size = supportVector->size();
+	for (int i = 0; i < size; i++)
+	{
+		if (supportVector->at(i) == pS)
+		{
+			vector<Support*>::iterator it = supportVector->begin() + i;
+			supportVector->erase(it);
+			delete (*it);
+			i--;
+			size--;
+		}
+	}
+
 }
 
 void Level::stackPauseMenu() {
