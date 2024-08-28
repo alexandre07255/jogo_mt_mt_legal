@@ -115,3 +115,8 @@ const float Entity::yMid() const
 {
 	return yPos + height / 2;
 }
+}
+
+void Entity::setColorBeing(sf::Color col) {
+	pShape->setFillColor(col);
+}

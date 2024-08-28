@@ -19,3 +19,12 @@ void Scene::addEntity(Entities::Entity* pU) {
 void Scene::removeEntity(Entities::Entity* pU) {
 	entityList->removeEntity(pU);
 }
+
+void Scene::update() {
+	escResolver();
+	entityList->traverse();
+}
+
+void Scene::setEntityList(EntityList* list) {
+	entityList = list;
+}

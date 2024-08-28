@@ -4,13 +4,18 @@
 using namespace Managers;
 using namespace Entities;
 
-Button::Button(sf::Color col, Command* _com,bool repeat) : Entity(), defaultColor(col),repeatable(repeat) {
+Button::Button(sf::Color col, Command* _com,bool repeat) : Entity(), defaultColor(col), repeatable(repeat) {
 	InputManager* instance = InputManager::getInstance();
 	mouse = instance->getMouse();
-	setSize(sf::Vector2f(200,100));
-	setFillColor(defaultColor);
+	setSizeEntity(200.f,100.f);
+	//setTextureBeing(text);
+	setColorBeing(defaultColor);
 	clickable = true;
 	com = _com;
+}
+
+Button::~Button() {
+	delete com;
 }
 
 const bool Button::isMouseOn() {
@@ -37,7 +42,7 @@ const bool Button::isMouseClicked() {
 void Button::execute() {
 	if (isMouseOn() && clickable) {
 		InputManager* iInstance = InputManager::getInstance();
-		setFillColor(sf::Color::Yellow);
+		setColorBeing(sf::Color::Yellow);
 		if (mouse->isButtonPressed(sf::Mouse::Left)) {
 			if (!iInstance->getWasLMBPressed())
 			{
@@ -52,6 +57,10 @@ void Button::execute() {
 	}
 	
 	else {
-		setFillColor(defaultColor);
+		setColorBeing(defaultColor);
 	}
+}
+
+void Button::save() {
+	cout << "botao salvado com sucesso :3" << endl;
 }

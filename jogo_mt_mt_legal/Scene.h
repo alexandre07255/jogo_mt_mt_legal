@@ -11,10 +11,14 @@ namespace Scenes
 		Scene();
 
 		void draw();
-		virtual void update() = 0;
+		void update();
 
 		void addEntity(Entities::Entity* pU);
 		void removeEntity(Entities::Entity* pU);
+
+		void setEntityList(Lists::EntityList* list);
+
+		virtual void escResolver() = 0;
 	};
 }
 

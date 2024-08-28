@@ -48,6 +48,8 @@ namespace Entities {
 		const float xMid() const;
 		const float yMid() const;
 
+		void setColorBeing(sf::Color col);
+
 		virtual void save() = 0;
 		virtual void execute() = 0;
 	};

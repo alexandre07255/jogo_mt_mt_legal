@@ -12,32 +12,25 @@
 #include "CommandLevel1p2True.h"
 #include "GraphicManager.h"
 #include "inputManager.h"
+#include "Button.h"
+
 using namespace std;
 using namespace Managers;
 using namespace Scenes;
 using namespace Managers;
-
-
+using namespace Lists;
 
 MainMenu::MainMenu():version(0){
 
 	GraphicManager* instance = GraphicManager::getInstance();
 
-	Button* startButton;
-	startButton->setPosition(instance->getWindow()->getSize().x/2, instance->getWindow()->getSize().y / 3 - 25.f);
+	CommandStart* com1 = new CommandStart(this);
 
-	updatableMain->push_back(startButton);
-	MyDrawableMain->push_back(startButton);
-	ButtonMain->push_back(startButton);
+	Button* startButton = new Button(sf::Color::Blue, com1, true);
+	startButton->setPositionEntity(instance->getWindow()->getSize().x/2, instance->getWindow()->getSize().y / 3 - 25.f);
 
-	List<Updatable>* updatableStart = new List<Updatable>;
-	updatableVersions->push_back(updatableStart);
-
-	List<MyDrawable>* MyDrawableStart = new List<MyDrawable>;
-	myDrawableVersions->push_back(MyDrawableStart);
-
-	List<Button>* ButtonStart = new List<Button>;
-	buttonVersions->push_back(ButtonStart);
+	EntityList* startList = new EntityList;
+	startList->push_back(startButton);
 
 	CommandStack1* com2 = new CommandStack1(this);
 	CommandStack2* com3 = new CommandStack2(this);
@@ -45,44 +38,25 @@ MainMenu::MainMenu():version(0){
 	Button* buttonLevel1 = new Button(sf::Color::Blue, com2, false);
 	Button* buttonLevel2 = new Button(sf::Color::Blue, com3, false);
 
-	buttonLevel1->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
-	buttonLevel2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
+	buttonLevel1->setPositionEntity(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
+	buttonLevel2->setPositionEntity(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
 
-	updatableStart->push_back(buttonLevel1);
-	MyDrawableStart->push_back(buttonLevel1);
-	ButtonStart->push_back(buttonLevel1);
+	EntityList* levelsList = new EntityList;
+	levelsList->push_back(buttonLevel1);
+	levelsList->push_back(buttonLevel2);
 
-	updatableStart->push_back(buttonLevel2);
-	MyDrawableStart->push_back(buttonLevel2);
-	ButtonStart->push_back(buttonLevel2);
-
-	List<Updatable>* updatableOptions = new List<Updatable>;
-	updatableVersions->push_back(updatableOptions);
-
-	List<MyDrawable>* MyDrawableOptions = new List<MyDrawable>;
-	myDrawableVersions->push_back(MyDrawableOptions);
-
-	List<Button>* ButtonOptions = new List<Button>;
-	buttonVersions->push_back(ButtonOptions);
+	versions.push_back(startList);
+	versions.push_back(levelsList);
 
 	changeMainButtons();
 }
 
-void MainMenu::update() {
-
-	InputManager* instance = InputManager::getInstance();
-	if (instance->isPausePressed()) {
-		if (!instance->getWasEscPressed())
-		{
-			goBack();
-		}
-		instance->setWasEscPressed(1);
-	}
-	else
-		instance->setWasEscPressed(0);
-	
-	entityList->traverse();
+MainMenu::~MainMenu() {
+	delete versions[0];
+	delete versions[1];
+	delete versions[2];
 }
+
 
 void MainMenu::stackLevel1(bool player2) {
 
@@ -91,37 +65,29 @@ void MainMenu::stackLevel1(bool player2) {
 	Level1* level;
 	level = new Level1(player2);
 
-	instance->push(level);
+	stackScene(level);
 
 }
 
 void MainMenu::stackLevel2(bool player2) {
-
-	SceneManager* instance = SceneManager::getInstance();
 	
 	Level2* level;
 	level = new Level2(player2);
 
-	instance->push(level);
+	stackScene(level);
 }
 
 void MainMenu::changeMainButtons() {
 	version = 0;
-	updatables = (*updatableVersions)[0];
-	drawables = (*myDrawableVersions)[0];
-	buttonList = (*buttonVersions)[0];
+	setEntityList(versions[0]);
 }
 void MainMenu::changeStartButtons() {
 	version = 1;
-	updatables = (*updatableVersions)[1];
-	drawables = (*myDrawableVersions)[1];
-	buttonList = (*buttonVersions)[1];
+	setEntityList(versions[1]);
 }
 void MainMenu::changeOptionsButtons() {
 	version = 2;
-	updatables = (*updatableVersions)[2];
-	drawables = (*myDrawableVersions)[2];
-	buttonList = (*buttonVersions)[2];
+	setEntityList(versions[2]);
 }
 
 void MainMenu::goBack() {
@@ -145,16 +111,11 @@ void MainMenu::moreButtons(bool level2) {
 		Button* greenThing = new Button(sf::Color::Green, com2, true);
 		Button* redThing = new Button(sf::Color::Red, com1, true);
 
-		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 + 125.f);
-		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 + 125.f);
+		greenThing->setPositionEntity(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 + 125.f);
+		redThing->setPositionEntity(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 + 125.f);
 
-		(*updatableVersions)[1]->push_back(greenThing);
-		(*buttonVersions)[1]->push_back(greenThing);
-		(*myDrawableVersions)[1]->push_back(greenThing);
-
-		(*updatableVersions)[1]->push_back(redThing);
-		(*buttonVersions)[1]->push_back(redThing);
-		(*myDrawableVersions)[1]->push_back(redThing);
+		versions[1]->push_back(greenThing);
+		versions[1]->push_back(redThing);
 	}
 	else {
 		CommandLevel1p2False* com1 = new CommandLevel1p2False(this);
@@ -163,17 +124,16 @@ void MainMenu::moreButtons(bool level2) {
 		Button* greenThing = new Button(sf::Color::Green, com2, true);
 		Button* redThing = new Button(sf::Color::Red, com1, true);
 
-		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 - 125.f);
-		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 - 125.f);
+		greenThing->setPositionEntity(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 - 125.f);
+		redThing->setPositionEntity(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 - 125.f);
 
-		(*updatableVersions)[1]->push_back(greenThing);
-		(*buttonVersions)[1]->push_back(greenThing);
-		(*myDrawableVersions)[1]->push_back(greenThing);
-
-		(*updatableVersions)[1]->push_back(redThing);
-		(*buttonVersions)[1]->push_back(redThing);
-		(*myDrawableVersions)[1]->push_back(redThing);
+		versions[1]->push_back(greenThing);
+		versions[1]->push_back(redThing);
 	}
 
 	changeStartButtons();
+}
+
+void MainMenu::escResolver() {
+	goBack();
 }

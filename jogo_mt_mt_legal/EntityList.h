@@ -17,6 +17,8 @@ namespace Lists
 		void drawAll();
 
 		void removeEntity(Entities::Entity* pE);
+
+		int getSize();
 	};
 }
 
