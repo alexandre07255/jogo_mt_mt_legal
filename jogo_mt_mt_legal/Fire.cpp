@@ -8,7 +8,6 @@ using namespace Entities::Obstacles;
 
 
 Fire::Fire() :
-	firstStep(1),
 	Obstacle(),
 	lingeringTime(12)
 {
@@ -27,13 +26,13 @@ void Fire::setLingeringTime(const int time)
 
 void Fire::execute()
 {
-	if (firstStep)
+	if (!spawnedHitbox)
 	{
 		CollisionManager* cInstance = CollisionManager::getInstance();
 		float floor = cInstance->nearestCollidable(this, 900.f);
 		setPosition(left(), floor - getSize().y);
 		activate();
-		firstStep = 0;
+		spawnedHitbox = 1;
 	}
 }
 
@@ -42,13 +41,14 @@ void Fire::activate()
 	isActive = 1;
 	ObstacleHitbox* hitbox = new ObstacleHitbox(this);
 	hitbox->setTarget(1);
-	hitbox->setBoundedTo(this);
 	hitbox->setCooldown(30);
 	hitbox->setSize(getSize());
 	hitbox->setHorLaunchStrength(0.f);
 	hitbox->setVerLaunchStrength(0.f);
 	hitbox->setDamage(1);
 	hitbox->setRelativePosition(sf::Vector2f(0.f, 0.f));
+	hitbox->setPosition(getPosition());
+	hitbox->ajustToRelativePosition();
 }
 
 void Fire::deactivate()

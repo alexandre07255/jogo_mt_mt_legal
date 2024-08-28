@@ -5,7 +5,8 @@ using namespace Entities::Characters;
 Obstacle::Obstacle() :
 	Entity(),
 	isActive(0),
-	spawnedHitbox(0)
+	spawnedHitbox(0),
+	hitbox(NULL)
 {
 
 }

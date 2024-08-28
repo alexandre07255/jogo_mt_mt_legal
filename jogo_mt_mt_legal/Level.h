@@ -41,6 +41,17 @@ namespace Scenes
 
 		void stackPauseMenu();
 
+		void createEnemyMelee(const float x, const float y, const int points);
+		void createEnemyRanged(const float x, const float y, const int points);
+		void createEnemyBoss(const float x, const float y, const int points);
+
+		void createPlatform(const float x, const float y, const float xSize, const float ySize);
+		void createSpike(const float x, const float y, const float xSize, const float ySize);
+		void createFire(const float x, const float y, const float xSize, const float ySize);
+
+
+
+
 		//void loadLevel1(bool isPlayer2);
 		//void loadLevel2(bool isPlayer2);
 		//void loadMenu();

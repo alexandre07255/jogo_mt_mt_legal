@@ -21,6 +21,7 @@ namespace Entities
 		public:
 			ObstacleHitbox(Entities::Obstacles::Obstacle* obs);
 			~ObstacleHitbox();
+			void ajustToRelativePosition();
 			void setVerLaunchStrength(const float ver);
 			void setHorLaunchStrength(const float hor);
 			void setDamage(const int dmg);

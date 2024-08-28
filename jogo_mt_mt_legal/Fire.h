@@ -9,7 +9,6 @@ namespace Entities
 		class Fire : public Obstacle
 		{
 		private:
-			bool firstStep;
 			int lingeringTime;
 		public:
 			Fire();

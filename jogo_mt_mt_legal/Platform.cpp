@@ -15,7 +15,7 @@ using namespace Entities::Hitboxes;
 
 
 Platform::Platform(float xPosition, float yPosition, float xSize, float ySize) :Obstacle(), Collidable(), support(NULL),
-firstStep(true), minimalHeight(50.f), mass(10.f), time(0),deformation(0),onTop(false) {
+firstStep(true), minimalHeight(50.f), mass(10.f), time(0),deformation(0),onTop(false), hitboxRight(NULL) {
 	setPosition(xPosition, yPosition);
 	setSize(sf::Vector2f(xSize, ySize));
 
@@ -60,18 +60,17 @@ void Platform::execute() {
 		{
 			spawnedHitbox = 1;
 
-			ObstacleHitbox* hitboxLeft = new ObstacleHitbox(this);
-			hitboxLeft->setTarget(1);
-			hitboxLeft->setCooldown(20);
-			hitboxLeft->setSize(sf::Vector2f(getSize().x / 2, getSize().y / 2));
-			hitboxLeft->setHorLaunchStrength(-25.0);
-			hitboxLeft->setVerLaunchStrength(0.0);
-			hitboxLeft->setDamage(3);
-			hitboxLeft->setRelativePosition(sf::Vector2f(0.0, getSize().y));
+			hitbox = new ObstacleHitbox(this);
+			hitbox->setTarget(1);
+			hitbox->setCooldown(20);
+			hitbox->setSize(sf::Vector2f(getSize().x / 2, getSize().y / 2));
+			hitbox->setHorLaunchStrength(-25.0);
+			hitbox->setVerLaunchStrength(0.0);
+			hitbox->setDamage(3);
+			hitbox->setRelativePosition(sf::Vector2f(0.0, getSize().y));
 
-			ObstacleHitbox* hitboxRight = new ObstacleHitbox(this);
+			hitboxRight = new ObstacleHitbox(this);
 			hitboxRight->setTarget(1);
-			hitboxRight->setBoundedTo(this);
 			hitboxRight->setCooldown(40);
 			hitboxRight->setSize(sf::Vector2f(getSize().x / 2, getSize().y / 2));
 			hitboxRight->setHorLaunchStrength(25.0);
@@ -119,13 +118,23 @@ void Platform::execute() {
 
 void Platform::toObstacle()
 {
-	
-	hitbox->setPosition(getPosition());
-	hitbox->move(hitbox->getRelativePosition());
-	
+	if (isActive)
+	{
+		hitbox->setPosition(getPosition());
+		hitbox->ajustToRelativePosition();
 
-	CollisionManager* collisionInstance = CollisionManager::getInstance();
-	collisionInstance->testHit(1, hitbox);
+		hitboxRight->setPosition(getPosition());
+		hitboxRight->ajustToRelativePosition();
+
+		CollisionManager* collisionInstance = CollisionManager::getInstance();
+		collisionInstance->testHit(1, hitbox);
+		collisionInstance->testHit(1, hitboxRight);
+	}
+	else
+	{
+		hitbox = NULL;
+		hitboxRight = NULL;
+	}
 }
 
 Support* Platform::getSupport() {

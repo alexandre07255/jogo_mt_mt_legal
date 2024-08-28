@@ -2,6 +2,8 @@
 #include "Obstacle.h"
 #include "Collidable.h"
 #include "Support.h"
+#include "ObstacleHitbox.h"
+
 
 namespace Entities
 {
@@ -12,7 +14,7 @@ namespace Entities
 		private:
 			Support* support;
 
-			Hitboxes::ObstacleHitbox* hitboxes[2];
+			Hitboxes::ObstacleHitbox* hitboxRight;
 
 			bool firstStep;
 			const float minimalHeight;

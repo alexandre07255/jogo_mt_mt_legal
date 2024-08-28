@@ -19,7 +19,7 @@ namespace Entities
 			Entities::Characters::Hittable* getOwner();
 			void setRelativePosition(sf::Vector2f rel);
 			void setDuration(const int dur);
-			virtual void hitSolution(Hittable* hit) = 0;
+			virtual void hitSolution(Entities::Characters::Hittable* hit) = 0;
 		};
 	}
 }

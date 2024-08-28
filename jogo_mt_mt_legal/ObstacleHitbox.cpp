@@ -85,6 +85,11 @@ void ObstacleHitbox::execute()
 
 void ObstacleHitbox::save() { }
 
+void ObstacleHitbox::ajustToRelativePosition()
+{
+	move(relativePosition);
+}
+
 void ObstacleHitbox::hitSolution(Hittable* hit)
 {
 	if (hasAlreadyHit(hit)) { return; }

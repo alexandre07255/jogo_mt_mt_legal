@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Hittable.h"
+#include "ObstacleHitbox.h"
 
 namespace Entities
 {
@@ -11,6 +12,7 @@ namespace Entities
 		protected:
 			bool isActive;
 			bool spawnedHitbox;
+			Hitboxes::ObstacleHitbox* hitbox;
 		public:
 			Obstacle();
 			const bool getIsActive() const;
