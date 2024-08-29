@@ -3,7 +3,7 @@ using namespace Entities;
 
 
 
-Entity::Entity(): Being(), onAir(1), frictionFelt(1)
+Entity::Entity(): Being(), onAir(1), frictionFelt(1), xPos(0.f), yPos(0.f), width(1.f), height(1.f)
 {
 	pShape = new sf::RectangleShape();
 }
@@ -38,8 +38,14 @@ void Entity::setSize(const sf::Vector2f& vec) {
 	pShape->setSize(vec);
 }
 
-sf::Vector2f Entity::getSize() const{
-	return (sf::Vector2f(height, width));
+const float Entity::getXSize() const
+{
+	return width;
+}
+
+const float Entity::getYSize() const
+{
+	return height;
 }
 
 void Entity::setPosition(const float x, const float y) {
@@ -54,8 +60,14 @@ void Entity::setPosition(const sf::Vector2f& vec) {
 	pShape->setPosition(vec);
 }
 
-sf::Vector2f Entity::getPosition() const {
-	return (sf::Vector2f(xPos, yPos));
+const float Entity::getXPosition() const
+{
+	return xPos;
+}
+
+const float Entity::getYPosition() const
+{
+	return yPos;
 }
 
 sf::FloatRect Entity::getGlobalBounds() const

@@ -29,11 +29,14 @@ namespace Entities {
 
 		void setSize(const float x, const float y);
 		void setSize(const sf::Vector2f& vec);
-		sf::Vector2f getSize() const;
+		const float getXSize() const;
+		const float getYSize() const;
 
 		void setPosition(const float x, const float y);
 		void setPosition(const sf::Vector2f& vec);
-		sf::Vector2f getPosition() const;
+		const float getXPosition() const;
+		const float getYPosition() const;
+
 
 		sf::FloatRect getGlobalBounds() const;
 

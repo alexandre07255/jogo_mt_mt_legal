@@ -146,10 +146,10 @@ void Level1::levelCompleteChecker()
     {
         if (endingOnRight)
         {
-            if (pPlayer1->getPosition().x >= endX)
+            if (pPlayer1->getXPosition() >= endX)
                 levelCompleteHandler();
         }
-        else if (pPlayer1->getPosition().x <= endX)
+        else if (pPlayer1->getXPosition() <= endX)
             levelCompleteHandler();
     }
 
@@ -157,10 +157,10 @@ void Level1::levelCompleteChecker()
     {
         if (endingOnRight)
         {
-            if (pPlayer2->getPosition().x >= endX)
+            if (pPlayer2->getXPosition() >= endX)
                 levelCompleteHandler();
         }
-        else if (pPlayer2->getPosition().x <= endX)
+        else if (pPlayer2->getXPosition() <= endX)
             levelCompleteHandler();
     }
 }

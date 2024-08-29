@@ -163,7 +163,7 @@ void EnemyRanged::executePATROLLING()
 void EnemyRanged::projectileCalculations(Projectile* proj, const float absHorVelocity, Hittable* target)
 {
     float height = target->yMid() - yMid();
-    float length = target->xMid() - (left() + getSize().x * facingRight);
+    float length = target->xMid() - (left() + getXSize() * facingRight);
     
     float verVelocity = (height / abs(length)) * absHorVelocity - (GRAVITY / 2) * (abs(length) / absHorVelocity);
 

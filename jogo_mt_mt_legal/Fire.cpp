@@ -31,7 +31,7 @@ void Fire::execute()
 	{
 		CollisionManager* cInstance = CollisionManager::getInstance();
 		float floor = cInstance->nearestCollidable(this, 900.f);
-		setPosition(left(), floor - getSize().y);
+		setPosition(left(), floor - getYSize());
 		activate();
 		spawnedHitbox = 1;
 	}
@@ -43,12 +43,12 @@ void Fire::activate()
 	ObstacleHitbox* hitbox = new ObstacleHitbox(this);
 	hitbox->setTarget(1);
 	hitbox->setCooldown(30);
-	hitbox->setSize(getSize());
+	hitbox->setSize(getXSize(), getYSize());
 	hitbox->setHorLaunchStrength(0.f);
 	hitbox->setVerLaunchStrength(0.f);
 	hitbox->setDamage(1);
 	hitbox->setRelativePosition(sf::Vector2f(0.f, 0.f));
-	hitbox->setPosition(getPosition());
+	hitbox->setPosition(getXPosition(), getYPosition());
 	hitbox->ajustToRelativePosition();
 }
 

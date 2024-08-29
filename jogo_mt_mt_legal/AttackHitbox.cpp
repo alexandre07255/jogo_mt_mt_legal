@@ -88,7 +88,7 @@ void AttackHitbox::execute()
 
 	if (boundedTo != NULL)
 	{
-		setPosition(boundedTo->getPosition());
+		setPosition(boundedTo->getXPosition(), boundedTo->getYPosition());
 		move(relativePosition);
 	}
 	CollisionManager* collisionInstance = CollisionManager::getInstance();

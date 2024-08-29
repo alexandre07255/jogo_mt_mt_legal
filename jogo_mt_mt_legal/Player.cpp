@@ -238,12 +238,12 @@ void Player::attack()
 		horKnock = 30.0;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, 0.0));
+			hitbox->setRelativePosition(sf::Vector2f(getXSize() - 10, 0.0));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
-			float relX = hitbox->getSize().x;
+			float relX = hitbox->getXSize();
 			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 0.0));
 			hitbox->setHorKnockback(-horKnock);
 		}
@@ -256,12 +256,12 @@ void Player::attack()
 		horKnock = 60.0;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, 25.0));
+			hitbox->setRelativePosition(sf::Vector2f(getXSize() - 10, 25.0));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
-			float relX = hitbox->getSize().x;
+			float relX = hitbox->getXSize();
 			hitbox->setRelativePosition(sf::Vector2f(-relX + 10.0, 25.0));
 			hitbox->setHorKnockback(-horKnock);
 		}
@@ -274,12 +274,12 @@ void Player::attack()
 		horKnock = 10.0;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getSize().x - 10, -50));
+			hitbox->setRelativePosition(sf::Vector2f(getXSize() - 10, -50));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
-			float relX = hitbox->getSize().x;
+			float relX = hitbox->getXSize();
 			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, -50));
 			hitbox->setHorKnockback(-horKnock);
 		}

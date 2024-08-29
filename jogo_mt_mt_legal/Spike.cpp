@@ -27,7 +27,7 @@ void Spike::execute()
 	{
 		CollisionManager* cInstance = CollisionManager::getInstance();
 		float floor = cInstance->nearestCollidable(this, 900.f);
-		setPosition(left(), floor - getSize().y);
+		setPosition(left(), floor - getYSize());
 		activate();
 		firstStep = 0;
 	}
@@ -39,12 +39,12 @@ void Spike::activate()
 	hitbox = new ObstacleHitbox(this);
 	hitbox->setTarget(1);
 	hitbox->setCooldown(40);
-	hitbox->setSize(getSize());
+	hitbox->setSize(getXSize(), getYSize());
 	hitbox->setHorLaunchStrength(0.f);
 	hitbox->setVerLaunchStrength(-40.f);
 	hitbox->setDamage(3);
 	hitbox->setRelativePosition(sf::Vector2f(0.f, 0.f));
-	hitbox->setPosition(getPosition());
+	hitbox->setPosition(getXPosition(), getYPosition());
 	hitbox->ajustToRelativePosition();
 }
 

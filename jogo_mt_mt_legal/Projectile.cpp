@@ -75,7 +75,7 @@ void Projectile::execute()
 
 	if (firstStep)
 	{
-        hitbox->setSize(getSize());
+        hitbox->setSize(getXSize(), getYSize());
         firstStep = 0;
 	}
 
@@ -93,11 +93,13 @@ void Projectile::execute()
 
         move(horizontalVelocity, verticalVelocity);
 
-        Vector2f preColli = getPosition();
+        Vector2f preColli(getXPosition(), getYPosition());
 
         cInstance->testCollison(this);
 
-        if (preColli != getPosition())
+        Vector2f posColli(getXPosition(), getYPosition());
+
+        if (preColli != posColli)
             gone = 1;
     }
 
