@@ -5,7 +5,7 @@
 #include "AttackHitbox.h"
 #include "Level.h"
 #include "SceneManager.h"
-#include "ScoreSave.h"
+#include "FinalScreen.h"
 
 #include <iostream>
 using namespace std;
@@ -36,11 +36,10 @@ Player::Player(const bool isPlayer2, const int health) :
 void Player::execute() {
 
 	if (hp <= 0 && !player2) {
-		ScoreSave* save = new ScoreSave;
-		save->savePlayer(getPoints());
-
+		FinalScreen* save = new FinalScreen(getPoints(),true);
 		SceneManager* sceneInstance = SceneManager::getInstance();
-		sceneInstance->pop();
+
+		sceneInstance->push(save);
 	}
 
 	InputManager* inputInstance = InputManager::getInstance();

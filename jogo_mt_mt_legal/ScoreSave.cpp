@@ -4,7 +4,6 @@
 Managers::GraphicManager* ::ScoreSave::pGraphic(Managers::GraphicManager::getInstance());
 
 void ScoreSave::savePlayer(int score) {
-	std::string name = listen();
 	addScore(name, score);
 }
 
@@ -44,4 +43,28 @@ std::string ScoreSave::listen() {
 	return name;
 }
 
-ScoreSave::ScoreSave(){}
+ScoreSave::ScoreSave(){
+	keyPressed = false;
+}
+
+bool ScoreSave::appendLetter() {
+	Managers::InputManager* instance = Managers::InputManager::getInstance();
+	sf::RenderWindow* window = pGraphic->getWindow();
+	sf::Event event;
+
+	if (!instance->isKeyPressed(sf::Keyboard::Key::Enter)) {
+		window->pollEvent(event);
+		if (event.type == sf::Event::TextEntered) {
+			if (!keyPressed) { name.push_back(event.text.unicode); }
+
+			keyPressed = true;
+		}
+		else {
+			keyPressed = false;
+		}
+		return true;
+	}
+	else {
+		return false;
+	}
+}
