@@ -7,6 +7,7 @@ TextContainer::TextContainer() {
 	text->setFont(font);
 	setSize(200.f, 100.f);
 	text->setCharacterSize(12);
+	text->setFillColor(sf::Color::Red);
 }
 
 void TextContainer::draw() {

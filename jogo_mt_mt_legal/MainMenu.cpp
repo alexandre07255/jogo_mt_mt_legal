@@ -33,10 +33,12 @@ MainMenu::MainMenu():version(0){
 
 	Button* startButton = new Button(sf::Color::Blue, com1, true);
 	startButton->setPosition(instance->getWindow()->getSize().x/2, instance->getWindow()->getSize().y / 3 - 25.f);
-	Button* buttonRanking = new Button(sf::Color::Blue, com4, instance->getWindow()->getSize().y / 3 + 25.f);
+	Button* buttonRanking = new Button(sf::Color::Blue, com4, true);
+	buttonRanking->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 + 100.f);
 
 	EntityList* startList = new EntityList;
 	startList->push_back(startButton);
+	startList->push_back(buttonRanking);
 
 	CommandStack1* com2 = new CommandStack1(this);
 	CommandStack2* com3 = new CommandStack2(this);
@@ -51,12 +53,12 @@ MainMenu::MainMenu():version(0){
 	levelsList->push_back(buttonLevel1);
 	levelsList->push_back(buttonLevel2);
 
-	CommandGoBack* com5 = new CommandGoBack(this);
-	Button* goBackButton = new Button(sf::Color::Blue,com5,true);
-	goBackButton->setSize(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 - 25.f);
+	//CommandGoBack* com5 = new CommandGoBack(this);
+	//Button* goBackButton = new Button(sf::Color::Blue,com5,true);
+	//goBackButton->setSize(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 - 25.f);
 
 	EntityList* rankingList = new EntityList;
-	rankingList->push_back(goBackButton);
+	//rankingList->push_back(goBackButton);
 
 	nlohmann::json ranking = Save::readJson("saves.json");
 
