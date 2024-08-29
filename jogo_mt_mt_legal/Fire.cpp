@@ -1,5 +1,6 @@
 #include "Fire.h"
 #include "CollisionManager.h"
+#include "LevelSave.h"
 #include "ObstacleHitbox.h"
 using namespace Entities::Hitboxes;
 using namespace Entities::Characters;

@@ -1,5 +1,6 @@
 #include "Hitbox.h"
 //#include "Level.h"
+#include "LevelSave.h"
 #include "SceneManager.h"
 using namespace Entities::Hitboxes;
 using namespace Entities::Characters;

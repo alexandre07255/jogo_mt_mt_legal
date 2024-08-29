@@ -13,7 +13,7 @@ namespace Entities
 		public:
 			Fire();
 			void execute();
-			void statusEffect(Hittable* hit);
+			void statusEffect(Characters::Hittable* hit);
 			void setLingeringTime(const int time);
 			void activate();
 			void deactivate();

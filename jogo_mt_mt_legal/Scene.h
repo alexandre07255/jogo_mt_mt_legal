@@ -7,6 +7,7 @@ namespace Scenes
 	{
 	protected:
 		Lists::EntityList* entityList;
+		void escChecker();
 	public:
 		Scene();
 

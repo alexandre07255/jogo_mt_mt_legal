@@ -2,7 +2,8 @@
 #include "Obstacle.h"
 #include "Collidable.h"
 #include "Support.h"
-#include "ObstacleHitbox.h"
+
+namespace Entities { namespace Hitboxes { class ObstacleHitbox; } }
 
 
 namespace Entities

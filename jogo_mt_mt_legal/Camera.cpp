@@ -1,3 +1,4 @@
+#include "LevelSave.h"
 #include "Camera.h"
 #include <iostream>
 using namespace Entities::Characters;
@@ -59,3 +60,5 @@ void Camera::execute()
 	//setSize((sf::Vector2f)window->getSize());
 	window->setView(view);
 }
+
+void Camera::save(LevelSave* save) { }

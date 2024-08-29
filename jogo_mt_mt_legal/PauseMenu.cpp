@@ -12,12 +12,12 @@ PauseMenu::PauseMenu(Level* lAct): levelActive(lAct){
 	CommandQuit* com1 = new CommandQuit(this);
 
 	Button* buttonQuit = new Button(sf::Color::Blue, com1, false);
-	buttonQuit->setPositionEntity(500.f, 500.f);
+	buttonQuit->setPosition(500.f, 500.f);
 
 	CommandSave* com2 = new CommandSave(this);
 
 	Button* buttonSave = new Button(sf::Color::Blue, com2, true);
-	buttonSave->setPositionEntity(500.f,700.f);
+	buttonSave->setPosition(500.f,700.f);
 
 	entityList->push_back(buttonQuit);
 	entityList->push_back(buttonSave);
@@ -31,5 +31,5 @@ void PauseMenu::escResolver() {
 }
 
 void PauseMenu::save() {
-	//todo
+	levelActive->save();
 }

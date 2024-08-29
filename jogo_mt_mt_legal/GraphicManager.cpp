@@ -1,4 +1,5 @@
 #include "GraphicManager.h"
+#include "Being.h"
 #include <vector>
 #include <iostream>
 using namespace Managers;

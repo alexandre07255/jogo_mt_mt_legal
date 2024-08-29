@@ -1,6 +1,7 @@
 #include "Button.h"
 #include "inputManager.h"
 #include "GraphicManager.h"
+#include "LevelSave.h"
 using namespace Managers;
 using namespace Entities;
 
@@ -9,7 +10,7 @@ Button::Button(sf::Color col, Command* _com,bool repeat) : Entity(), defaultColo
 	mouse = instance->getMouse();
 	setSize(200.f,100.f);
 	//setTextureBeing(text);
-	setColorBeing(defaultColor);
+	setFillColor(defaultColor);
 	clickable = true;
 	com = _com;
 }
@@ -42,7 +43,7 @@ const bool Button::isMouseClicked() {
 void Button::execute() {
 	if (isMouseOn() && clickable) {
 		InputManager* iInstance = InputManager::getInstance();
-		setColorBeing(sf::Color::Yellow);
+		setFillColor(sf::Color::Yellow);
 		if (mouse->isButtonPressed(sf::Mouse::Left)) {
 			if (!iInstance->getWasLMBPressed())
 			{
@@ -57,10 +58,10 @@ void Button::execute() {
 	}
 	
 	else {
-		setColorBeing(defaultColor);
+		setFillColor(defaultColor);
 	}
 }
 
-void Button::save() {
+void Button::save(LevelSave* save) {
 	cout << "botao salvado com sucesso :3" << endl;
 }

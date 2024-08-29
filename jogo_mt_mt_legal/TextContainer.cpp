@@ -1,4 +1,5 @@
 #include "TextContainer.h"
+#include "LevelSave.h"
 using namespace Entities;
 
 TextContainer::TextContainer() {
@@ -16,7 +17,7 @@ void TextContainer::draw() {
 void TextContainer::execute() {
 }
 
-void TextContainer::save() {
+void TextContainer::save(LevelSave* save) {
 }
 
 sf::Font TextContainer::getFont() {

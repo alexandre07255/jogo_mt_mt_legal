@@ -1,5 +1,7 @@
 #include "Menu.h"
 using namespace Scenes;
+using namespace Managers;
+
 
 Menu::Menu() {
 }
@@ -14,3 +16,5 @@ void Menu::stackScene(Scene* pS) {
 void Menu::removeScene() {
 	pSmanager->pop();
 }
+
+SceneManager* Menu::pSmanager(SceneManager::getInstance());

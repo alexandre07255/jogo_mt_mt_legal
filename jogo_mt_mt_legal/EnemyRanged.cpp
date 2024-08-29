@@ -1,6 +1,7 @@
 #include "EnemyRanged.h"
 #include "CollisionManager.h"
 #include "SceneManager.h"
+#include "LevelSave.h"
 #include "Level.h"
 using namespace Entities::Characters;
 using namespace Managers;
@@ -337,7 +338,6 @@ const float EnemyRanged::FLY_STRENGTH(0.5f);
 const float EnemyRanged::FOLLOW_MAX_HORIZONTAL_VELOCITY(5.f);
 const float EnemyRanged::FOLLOW_ACCELARATION(2.0f);
 const float EnemyRanged::WALK_ACCELARATION(1.5f);
-const float EnemyRanged::WALK_MAX_HORIZONTAL_VELOCITY(3.f);
 const float EnemyRanged::WALK_MAX_HORIZONTAL_VELOCITY(3.f);
 
 void EnemyRanged::save(LevelSave* save) {

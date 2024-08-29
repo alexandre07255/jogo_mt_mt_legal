@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "GraphicManager.h"
-#include "MyDrawable.h"
 #include "Player.h"
 #include "inputManager.h"
 #include "Collidable.h"

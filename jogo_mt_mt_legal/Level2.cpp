@@ -1,10 +1,18 @@
 #include "Level2.h"
 #include"GraphicManager.h"
 #include "EnemyMelee.h"
-#include "CollisionManager.h"
-#include "SceneManager.h"
+#include "EnemyRanged.h"
 #include "Terrain.h"
+#include "CollisionManager.h"
+#include "Level2.h"
+#include "SceneManager.h"
+#include "Support.h"
+#include "Spike.h"
 #include "Fire.h"
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include "Background.h"
 using namespace Scenes;
 using namespace Managers;
 using namespace Entities::Obstacles;
@@ -12,101 +20,113 @@ using namespace Entities;
 using namespace Entities::Characters;
 
 
-Level2::Level2(bool isPlayer2): Level() {
+
+Level2::Level2(bool isPlayer2) :Level() {
     GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
+    CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
+
+    srand(time(NULL));
+
+    sf::Texture* background = new sf::Texture();
+    background->loadFromFile("spritesheets/fase1EBA.png");
+
+
+    float x = background->getSize().x * SCALE / 16;
+    float y = background->getSize().y * SCALE / 16;
+
+    Background* backgroundAndLevel = new Background;
+
+    backgroundAndLevel->setSize(sf::Vector2f(x, y));
+    backgroundAndLevel->setTexture(background);
+    entityList->push_back(backgroundAndLevel);
+
+
+    if (false)
+    {
+
+    }
+    else
+        createFromScratch(isPlayer2);
+
+
 
     Camera* view;
     view = new Camera(window);
-    CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
-
-    Player* player;
-    Player* player2 = NULL;
-    Terrain* plataforma, * parede, * teto;
-    EnemyMelee* inimigo;
-
-    plataforma = new Terrain(1.f);
-    parede = new Terrain(1.f);
-    teto = new Terrain(1.f);
-
-    plataforma->setPosition(0, 1000);
-    plataforma->setFillColor(sf::Color::Red);
-    plataforma->setSize(sf::Vector2f(3000, 900));
-
-    parede->setPosition(300, 700);
-    parede->setFillColor(sf::Color::Green);
-    parede->setSize(sf::Vector2f(100, 300));
-
-    teto->setPosition(0, 500);
-    teto->setFillColor(sf::Color::Blue);
-    teto->setSize(sf::Vector2f(1000, 100));
-
-    collidables->push_back(plataforma);
-    collidables->push_back(parede);
-    collidables->push_back(teto);
-
-    player = new Player(0, 1, 10);
-    player->setFillColor(sf::Color::Cyan);
-    player->setOrigin(0, 0);
-    player->setSize(sf::Vector2f(100, 100));
-    player->setPosition(0, 900);
-    pPlayer1 = player;
-
-
-    if (isPlayer2) {
-        player2 = new Player(1, 1, 10);
-        player2->setFillColor(sf::Color::Magenta);
-        player2->setSize(sf::Vector2f(1, 1));
-        player2->setOrigin(sf::Vector2f(0, 0));
-        player2->setSize(sf::Vector2f(100, 100));
-        player2->setPosition(100, 900);
-        pPlayer2 = player2;
-    }
-
-    Fire* fire;
-    fire = new Fire;
-    fire->setPosition(1500.f, 400.f);
-    fire->setSize(sf::Vector2f(100.f, 50.f));
-    //drawables->push_back(spike);
-    updatables->push_back(fire);
-
-    inimigo = new EnemyMelee;
-    inimigo->setPosition(1000, 900);
-
-    hittableList->push_back(player);
+    entityList->push_back(view);
+    view->setPlayer1(pPlayer1);
     if (isPlayer2)
-        hittableList->push_back(player2);
-    hittableList->push_back(inimigo);
-
-    updatables->push_back(player);
-    if (isPlayer2)
-        updatables->push_back(player2);
-    updatables->push_back(view);
-    updatables->push_back(inimigo);
-
-    drawables->push_back(player);
-    if (isPlayer2)
-        drawables->push_back(player2);
-    drawables->push_back(parede);
-    drawables->push_back(plataforma);
-    drawables->push_back(inimigo);
-    drawables->push_back(teto);
-
-    SceneManager::getInstance()->push(this);
-
-    view->setPlayer1(player);
-    if (isPlayer2)
-        view->setPlayer2(player2);
-
-    endingOnRight = 1;
-    endX = 1000;
+        view->setPlayer2(pPlayer2);
 }
 
 Level2::~Level2() {
 
 }
 
+void Level2::loadTerrains()
+{
+    createTerrain(0, 0, 7 * SCALE, 26 * SCALE, 1.f); //leftWall
+    createTerrain(7 * SCALE, 26 * SCALE, 89 * SCALE, 2 * SCALE, 1.f); //floor
+    createTerrain(14 * SCALE, 24 * SCALE, 7 * SCALE, 2 * SCALE, 1.f); //firstTerrain
+    createTerrain(27 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE, 1.f); //secondTerrain
+    createTerrain(44 * SCALE, 25 * SCALE, 1 * SCALE, 1 * SCALE, 1.f); //littleBlock
+    createTerrain(45 * SCALE, 23 * SCALE, 45 * SCALE, 3 * SCALE, 1.f); //megaRetangulo
+    createTerrain(54 * SCALE, 22 * SCALE, 18 * SCALE, 1 * SCALE, 1.f); //thirdTerrain
+    createTerrain(61 * SCALE, 21 * SCALE, 8 * SCALE, 1 * SCALE, 1.f); //fourthTerrain
+    createTerrain(79 * SCALE, 21 * SCALE, 1 * SCALE, 2 * SCALE, 1.f); //fifthTerrain
+    createTerrain(84 * SCALE, 22 * SCALE, 6 * SCALE, 1 * SCALE, 1.f); //sixthTerrain
+    createTerrain(86 * SCALE, 21 * SCALE, 1 * SCALE, 1 * SCALE, 1.f); //seventhTerrain
+    createTerrain(90 * SCALE, 6 * SCALE, 1 * SCALE, 30 * SCALE, 1.f); //rightWall
+}
+
+void Level2::createFromScratch(const bool isPlayer2)
+{
+    createSpike(33 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE / 2);
+    createSpike(57 * SCALE, 21 * SCALE, 4 * SCALE, 1 * SCALE / 2);
+    createSpike(65 * SCALE, 20 * SCALE, 3 * SCALE, 1 * SCALE / 2);
+    if (rand() % 2)
+        createSpike(28 * SCALE, 24 * SCALE, 1 * SCALE, 1 * SCALE / 2);
+    if (rand() % 2)
+        createSpike(84 * SCALE, 21 * SCALE, 2 * SCALE, 1 * SCALE / 2);
+    if (rand() % 2)
+        createSpike(79 * SCALE, 20 * SCALE, 1 * SCALE, 1 * SCALE / 2);
+
+
+    createPlatform(37 * SCALE, 23 * SCALE, 3 * SCALE, SCALE);
+    createPlatform(49 * SCALE, 20 * SCALE, 3 * SCALE, SCALE);
+    createPlatform(70 * SCALE, 19 * SCALE, 2 * SCALE, SCALE);
+    if (rand() % 2)
+        createPlatform(28 * SCALE, 23 * SCALE, 1 * SCALE, SCALE);
+    if (rand() % 2)
+        createPlatform(62 * SCALE, 18 * SCALE, 2 * SCALE, SCALE);
+    if (rand() % 2)
+        createPlatform(81 * SCALE, 19 * SCALE, SCALE, SCALE);
+
+
+    createPlayer1(8 * SCALE, 20 * SCALE, 0);
+
+    if (isPlayer2)
+        createPlayer2(9 * SCALE, 20 * SCALE, 0);
+
+    createEnemyMelee(23 * SCALE, 25 * SCALE, 0);
+    createEnemyMelee(47 * SCALE, 22 * SCALE, 0);
+    createEnemyMelee(75 * SCALE, 22 * SCALE, 0);
+
+    createEnemyRanged(31 * SCALE, 24 * SCALE, 0);
+    createEnemyRanged(55 * SCALE, 20 * SCALE, 0);
+    createEnemyRanged(75 * SCALE, 20 * SCALE, 0);
+}
+
 void Level2::levelCompleteHandler()
+{
+    Level2* level2 = new Level2(pPlayer2 != NULL);
+    SceneManager* sceneManInstance = SceneManager::getInstance();
+    sceneManInstance->pop();
+    //Deletar Level2
+    sceneManInstance->push(level2);
+}
+
+void Level2::levelCompleteChecker()
 {
     
 }

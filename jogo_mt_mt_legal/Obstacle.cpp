@@ -1,4 +1,5 @@
 #include "Obstacle.h"
+#include "ObstacleHitbox.h"
 using namespace Entities::Obstacles;
 using namespace Entities::Characters;
 

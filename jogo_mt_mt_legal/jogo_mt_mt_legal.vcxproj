@@ -172,7 +172,6 @@
     <ClCompile Include="List.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="MyDrawable.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="ObstacleHitbox.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
@@ -189,7 +188,6 @@
     <ClCompile Include="Support.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TextContainer.cpp" />
-    <ClCompile Include="Updatable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h" />
@@ -230,7 +228,6 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="MyDrawable.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="ObstacleHitbox.h" />
     <ClInclude Include="PauseMenu.h" />
@@ -247,7 +244,6 @@
     <ClInclude Include="Support.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TextContainer.h" />
-    <ClInclude Include="Updatable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

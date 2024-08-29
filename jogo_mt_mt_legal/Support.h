@@ -1,6 +1,7 @@
 #pragma once
 #include "Hittable.h"
-#include "Platform.h"
+
+namespace Entities { namespace Obstacles { class Platform; } }
 
 namespace Entities
 {
