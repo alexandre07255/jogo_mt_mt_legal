@@ -11,12 +11,17 @@ namespace Entities
 		protected:
 			double sightSize;
 			int timer;
+			int searchPlayerCont;
 			Player* followingPlayer;
 
 			double upperLimitMultR;
 			double lesserLimitMultR;
 			double upperLimitMultL;
 			double lesserLimitMultL;
+
+			static const int SEARCH_PLAYER_COOLDOWN;
+
+			const bool isInSearchPlayerCooldown();
 		public:
 			Enemy();
 		protected:

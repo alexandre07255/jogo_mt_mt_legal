@@ -14,6 +14,7 @@ namespace Entities
 			bool direction;
 			int cooldownCont;
 			int contCycle;
+			int nearestCollidableCont;
 
 			const int cycleLenght;
 			const int attackStartup;
@@ -25,6 +26,7 @@ namespace Entities
 			const float attackTriggerYRange;
 
 			static const int COOLDOWN;
+			static const int NEAREST_COLLIDABLE_COOLDOWN;
 			static const float MAX_HEIGHT;
 			static const float FLY_STRENGTH;
 			static const float FOLLOW_MAX_HORIZONTAL_VELOCITY;

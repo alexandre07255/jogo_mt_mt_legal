@@ -18,7 +18,8 @@ idealHeight(200.f),
 cycleLenght(6),
 contCycle(0),
 cooldownCont(0),
-attackTriggerStrip(20.0f)
+attackTriggerStrip(20.0f),
+nearestCollidableCont(NEAREST_COLLIDABLE_COOLDOWN)
 {
     hp = 20;
     sightSize = 1000.0;
@@ -138,13 +139,21 @@ void EnemyRanged::executePATROLLING()
 
     //verticalVelocity += 1;
 
-    float floorY = cInstance->nearestCollidable(this, MAX_HEIGHT);
-    if (floorY - bottom() > idealHeight + heightStrip)
-        verticalVelocity += FLY_STRENGTH;
-    else if (floorY - bottom() < idealHeight - heightStrip)
-        verticalVelocity -= FLY_STRENGTH;
+    if (nearestCollidableCont > 0)
+    {
+        nearestCollidableCont--;
+    }
     else
-        verticalVelocity = 0;
+    {
+        nearestCollidableCont = NEAREST_COLLIDABLE_COOLDOWN;
+        float floorY = cInstance->nearestCollidable(this, MAX_HEIGHT);
+        if (floorY - bottom() > idealHeight + heightStrip)
+            verticalVelocity += FLY_STRENGTH;
+        else if (floorY - bottom() < idealHeight - heightStrip)
+            verticalVelocity -= FLY_STRENGTH;
+        //else
+            //verticalVelocity = 0;
+    }
     //cout << floorY << endl;
 
 
@@ -153,7 +162,8 @@ void EnemyRanged::executePATROLLING()
 
     move(vetorDesloc);
 
-    followingPlayer = searchPlayer();
+    if (!isInSearchPlayerCooldown())
+        followingPlayer = searchPlayer();
 
     if (followingPlayer) {
         state = FOLLOWING;
@@ -226,13 +236,22 @@ void EnemyRanged::executeFOLLOWING()
 
     facingRight = (followingPlayer->xMid() > xMid());
 
-    float floorY = cInstance->nearestCollidable(this, MAX_HEIGHT);
-    if (floorY - bottom() > idealHeight + heightStrip)
-        verticalVelocity += FLY_STRENGTH;
-    else if (floorY - bottom() < idealHeight - heightStrip)
-        verticalVelocity -= FLY_STRENGTH;
+
+    if (nearestCollidableCont > 0)
+    {
+        nearestCollidableCont--;
+    }
     else
-        verticalVelocity = 0;
+    {
+        nearestCollidableCont = NEAREST_COLLIDABLE_COOLDOWN;
+        float floorY = cInstance->nearestCollidable(this, MAX_HEIGHT);
+        if (floorY - bottom() > idealHeight + heightStrip)
+            verticalVelocity += FLY_STRENGTH;
+        else if (floorY - bottom() < idealHeight - heightStrip)
+            verticalVelocity -= FLY_STRENGTH;
+        //else
+            //verticalVelocity = 0;
+    }
 
     if (abs(horizontalVelocity) > friccao) {
         horizontalVelocity -= ((horizontalVelocity > 0) - (horizontalVelocity < 0)) * friccao;
@@ -243,7 +262,9 @@ void EnemyRanged::executeFOLLOWING()
 
     move(horizontalVelocity, verticalVelocity);
 
-    followingPlayer = searchPlayer();
+    if (!isInSearchPlayerCooldown())
+        followingPlayer = searchPlayer();
+
     if (!followingPlayer) {
         if (facingRight) {
             facingRight = 0;
@@ -332,6 +353,7 @@ void EnemyRanged::executeATKCANCEL()
     state = PATROLLING;
 }
 
+const int EnemyRanged::NEAREST_COLLIDABLE_COOLDOWN(3);
 const int EnemyRanged::COOLDOWN(120);
 const float EnemyRanged::MAX_HEIGHT(350.f);
 const float EnemyRanged::FLY_STRENGTH(0.5f);
