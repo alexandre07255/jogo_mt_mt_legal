@@ -7,6 +7,11 @@ namespace Entities
 	{
 		class EnemyBoss : public Enemy
 		{
+		public:
+			EnemyBoss();
+			void execute();
+			void save(LevelSave* save);
+
 		};
 	}
 }
