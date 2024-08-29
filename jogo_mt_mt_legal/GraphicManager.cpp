@@ -36,3 +36,7 @@ GraphicManager* GraphicManager::instance(NULL);
 void GraphicManager::drawBeing(Being* pE) {
 	window->draw(*(pE->getShape()));
 }
+
+void GraphicManager::drawText(sf::Text text) {
+	window->draw(text);
+}

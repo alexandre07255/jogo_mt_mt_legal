@@ -13,6 +13,10 @@
 #include "GraphicManager.h"
 #include "inputManager.h"
 #include "Button.h"
+#include "CommandRanking.h"
+#include "CommandGoBack.h"
+#include "TextContainer.h"
+#include "ScoreSave.h"
 
 using namespace std;
 using namespace Managers;
@@ -25,9 +29,11 @@ MainMenu::MainMenu():version(0){
 	GraphicManager* instance = GraphicManager::getInstance();
 
 	CommandStart* com1 = new CommandStart(this);
+	CommandRanking* com4 = new CommandRanking(this);
 
 	Button* startButton = new Button(sf::Color::Blue, com1, true);
-	startButton->setPositionEntity(instance->getWindow()->getSize().x/2, instance->getWindow()->getSize().y / 3 - 25.f);
+	startButton->setPosition(instance->getWindow()->getSize().x/2, instance->getWindow()->getSize().y / 3 - 25.f);
+	Button* buttonRanking = new Button(sf::Color::Blue, com4, instance->getWindow()->getSize().y / 3 + 25.f);
 
 	EntityList* startList = new EntityList;
 	startList->push_back(startButton);
@@ -38,15 +44,40 @@ MainMenu::MainMenu():version(0){
 	Button* buttonLevel1 = new Button(sf::Color::Blue, com2, false);
 	Button* buttonLevel2 = new Button(sf::Color::Blue, com3, false);
 
-	buttonLevel1->setPositionEntity(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
-	buttonLevel2->setPositionEntity(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
+	buttonLevel1->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
+	buttonLevel2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
 
 	EntityList* levelsList = new EntityList;
 	levelsList->push_back(buttonLevel1);
 	levelsList->push_back(buttonLevel2);
 
+	CommandGoBack* com5 = new CommandGoBack(this);
+	Button* goBackButton = new Button(sf::Color::Blue,com5,true);
+	goBackButton->setSize(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 - 25.f);
+
+	EntityList* rankingList = new EntityList;
+	rankingList->push_back(goBackButton);
+
+	nlohmann::json ranking = Save::readJson("saves.json");
+
+	Entities::TextContainer* textCont;
+	int i = 0;
+	for (auto it = ranking.begin(); it != ranking.end(); it++) {
+		textCont = new Entities::TextContainer;
+
+		std::string textToWrite = static_cast<std::string>(it.key()) + " : " + static_cast<std::string>(it.value());
+
+		textCont->write(textToWrite);
+		textCont->setPosition(instance->getWindow()->getSize().x / 2, i * 100.f);
+		textCont->setTextPosition(instance->getWindow()->getSize().x / 2, i * 100.f);
+
+		rankingList->push_back(textCont);
+		i++;
+	}
+
 	versions.push_back(startList);
 	versions.push_back(levelsList);
+	versions.push_back(rankingList);
 
 	changeMainButtons();
 }
@@ -85,8 +116,9 @@ void MainMenu::changeStartButtons() {
 	version = 1;
 	setEntityList(versions[1]);
 }
-void MainMenu::changeOptionsButtons() {
+void MainMenu::changeRanking() {
 	version = 2;
+
 	setEntityList(versions[2]);
 }
 
@@ -111,8 +143,8 @@ void MainMenu::moreButtons(bool level2) {
 		Button* greenThing = new Button(sf::Color::Green, com2, true);
 		Button* redThing = new Button(sf::Color::Red, com1, true);
 
-		greenThing->setPositionEntity(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 + 125.f);
-		redThing->setPositionEntity(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 + 125.f);
+		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 + 125.f);
+		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 + 125.f);
 
 		versions[1]->push_back(greenThing);
 		versions[1]->push_back(redThing);
@@ -124,8 +156,8 @@ void MainMenu::moreButtons(bool level2) {
 		Button* greenThing = new Button(sf::Color::Green, com2, true);
 		Button* redThing = new Button(sf::Color::Red, com1, true);
 
-		greenThing->setPositionEntity(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 - 125.f);
-		redThing->setPositionEntity(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 - 125.f);
+		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 - 125.f);
+		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 - 125.f);
 
 		versions[1]->push_back(greenThing);
 		versions[1]->push_back(redThing);

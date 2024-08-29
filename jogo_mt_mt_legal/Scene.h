@@ -11,7 +11,7 @@ namespace Scenes
 		Scene();
 
 		void draw();
-		void update();
+		void execute();
 
 		void addEntity(Entities::Entity* pU);
 		void removeEntity(Entities::Entity* pU);

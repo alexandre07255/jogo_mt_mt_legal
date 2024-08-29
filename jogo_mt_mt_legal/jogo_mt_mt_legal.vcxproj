@@ -134,11 +134,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandGoBack.cpp" />
     <ClCompile Include="CommandLevel1p2False.cpp" />
     <ClCompile Include="CommandLevel1p2True.cpp" />
     <ClCompile Include="CommandLevel2p2False.cpp" />
     <ClCompile Include="CommandLevel2p2True.cpp" />
     <ClCompile Include="CommandQuit.cpp" />
+    <ClCompile Include="CommandRanking.cpp" />
     <ClCompile Include="CommandSave.cpp" />
     <ClCompile Include="CommandStack1.cpp" />
     <ClCompile Include="CommandStack2.cpp" />
@@ -164,6 +166,7 @@
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="LevelSave.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Menu.cpp" />
@@ -174,22 +177,27 @@
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Save.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="ScoreSave.cpp" />
     <ClCompile Include="Spike.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="SpriteMatrix.cpp" />
     <ClCompile Include="Support.cpp" />
     <ClCompile Include="Terrain.cpp" />
+    <ClCompile Include="TextContainer.cpp" />
     <ClCompile Include="Updatable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandGoBack.h" />
     <ClInclude Include="CommandLevel1p2False.h" />
     <ClInclude Include="CommandLevel1p2True.h" />
     <ClInclude Include="CommandLevel2p2False.h" />
     <ClInclude Include="CommandLevel2p2True.h" />
     <ClInclude Include="CommandQuit.h" />
+    <ClInclude Include="CommandRanking.h" />
     <ClInclude Include="CommandSave.h" />
     <ClInclude Include="CommandStack1.h" />
     <ClInclude Include="CommandStack2.h" />
@@ -213,6 +221,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />
+    <ClInclude Include="LevelSave.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Entity.h" />
@@ -224,13 +233,16 @@
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="Save.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ScoreSave.h" />
     <ClInclude Include="Spike.h" />
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="SpriteMatrix.h" />
     <ClInclude Include="Support.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TextContainer.h" />
     <ClInclude Include="Updatable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

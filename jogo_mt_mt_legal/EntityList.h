@@ -15,6 +15,7 @@ namespace Lists
 		void push_back(Entities::Entity* pE);
 		void traverse();
 		void drawAll();
+		void saveAll(LevelSave* save);
 
 		void removeEntity(Entities::Entity* pE);
 

@@ -8,7 +8,7 @@ namespace Scenes
 	class MainMenu : public Menu
 	{
 	private:
-		//primeiro é my menu, segundo é start, terceiro é options e assim vai
+		//primeiro é my menu, segundo é start, terceiro é ranking e assim vai
 		vector<Lists::EntityList*> versions;
 		int version;
 	public:
@@ -20,7 +20,7 @@ namespace Scenes
 
 		void changeMainButtons();
 		void changeStartButtons();
-		void changeOptionsButtons();
+		void changeRanking();
 
 		void goBack();
 		void moreButtons(bool level2);

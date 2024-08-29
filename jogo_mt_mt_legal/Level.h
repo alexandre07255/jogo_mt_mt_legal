@@ -49,7 +49,7 @@ namespace Scenes
 		void createSpike(const float x, const float y, const float xSize, const float ySize);
 		void createFire(const float x, const float y, const float xSize, const float ySize);
 
-
+		void save();
 
 
 		//void loadLevel1(bool isPlayer2);

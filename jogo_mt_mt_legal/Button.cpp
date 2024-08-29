@@ -7,7 +7,7 @@ using namespace Entities;
 Button::Button(sf::Color col, Command* _com,bool repeat) : Entity(), defaultColor(col), repeatable(repeat) {
 	InputManager* instance = InputManager::getInstance();
 	mouse = instance->getMouse();
-	setSizeEntity(200.f,100.f);
+	setSize(200.f,100.f);
 	//setTextureBeing(text);
 	setColorBeing(defaultColor);
 	clickable = true;

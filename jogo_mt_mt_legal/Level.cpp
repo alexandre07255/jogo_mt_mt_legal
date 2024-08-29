@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 #include "PauseMenu.h"
 #include "inputManager.h"
+#include "LevelSave.h"
 using namespace std;
 using namespace Scenes;
 using namespace Managers;
@@ -108,4 +109,12 @@ void Level::stackPauseMenu() {
 	sf::RenderWindow* window = graph->getWindow();
 
 	window->setView(window->getDefaultView());
+}
+
+void Level::save() {
+	LevelSave* save = new LevelSave(this);
+
+	entityList->saveAll(save);
+
+	save->saveFinal();
 }

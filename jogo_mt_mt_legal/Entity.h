@@ -50,7 +50,7 @@ namespace Entities {
 
 		void setColorBeing(sf::Color col);
 
-		virtual void save() = 0;
+		virtual void save(LevelSave* save) = 0;
 		virtual void execute() = 0;
 	};
 }
