@@ -80,7 +80,8 @@ void EnemyMelee::executePATROLLING() {
 
     move(vetorDesloc);
 
-    followingPlayer = searchPlayer();
+    if (!isInSearchPlayerCooldown())
+        followingPlayer = searchPlayer();
 
     if (followingPlayer) {
         state = FOLLOWING;
@@ -187,7 +188,9 @@ void EnemyMelee::executeFOLLOWING() {
 
     if (!attacking)
     {
-        followingPlayer = searchPlayer();
+        if (!isInSearchPlayerCooldown())
+            followingPlayer = searchPlayer();
+
         if (!followingPlayer) {
             if (facingRight) {
                 facingRight = 0;

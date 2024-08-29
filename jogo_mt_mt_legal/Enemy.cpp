@@ -12,7 +12,7 @@ using namespace Entities::Characters;
 
 
 Enemy::Enemy() :Hittable(false, 10), upperLimitMultR(9.0 / 4),
-lesserLimitMultR(3.0/2), upperLimitMultL(3.0/2), lesserLimitMultL(3.0/4){
+lesserLimitMultR(3.0/2), upperLimitMultL(3.0/2), lesserLimitMultL(3.0/4), searchPlayerCont(SEARCH_PLAYER_COOLDOWN){
 	setPosition(sf::Vector2f(10, 10));
 	setSize(sf::Vector2f(80, 80));
 	sightSize = 500.0;
@@ -109,3 +109,16 @@ void Enemy::executeHITSTUN()
 		setFillColor(sf::Color::Red);
 	}
 }
+
+const bool Enemy::isInSearchPlayerCooldown()
+{
+	if (searchPlayerCont > 0)
+	{
+		searchPlayerCont--;
+		return 1;
+	}
+	searchPlayerCont = SEARCH_PLAYER_COOLDOWN;
+	return 0;
+}
+
+const int Enemy::SEARCH_PLAYER_COOLDOWN(30);
