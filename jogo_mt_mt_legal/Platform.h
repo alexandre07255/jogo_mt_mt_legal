@@ -31,7 +31,7 @@ namespace Entities
 			void execute();
 			Support* getSupport();
 			void collisionSolution(Entity* pE);
-			void save();
+			void save(LevelSave* save);
 		};
 	}
 }

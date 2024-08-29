@@ -156,3 +156,6 @@ void Platform::collisionSolution(Entity* pE) {
 	pE->setFriction(friction);
 }
 
+void Platform::save(LevelSave* save) {
+	save->addPlatform(this);
+}
