@@ -12,7 +12,7 @@ using namespace Entities;
 //using namespace Entities::Characters;
 
 
-Support::Support(Obstacles::Platform* plat, const float height):Hittable(false,MAXHEALTH),boundedTo(NULL) {
+Support::Support(Obstacles::Platform* plat, const float sHeight):Hittable(false,MAXHEALTH),boundedTo(NULL) {
 	boundedTo = plat;
 	canBeCollided = 0;
 
@@ -22,12 +22,12 @@ Support::Support(Obstacles::Platform* plat, const float height):Hittable(false,M
 		Level* active = static_cast<Level*>(instance->top());
 		list<Collidable*>* collidables = active->getCollidables();
 
-		float positionY = boundedTo->getPosition().y + boundedTo->getSize().y;
-		float positionX = boundedTo->getPosition().x + boundedTo->getSize().x / 2 - 5.f;
+		float positionY = boundedTo->bottom();
+		float positionX = boundedTo->xMid() - 5.f;
 		setPosition(positionX, positionY);
 
 		
-		setSize(sf::Vector2f(10.0, height));
+		setSize(sf::Vector2f(10.0, sHeight));
 	}
 }
 

@@ -38,8 +38,8 @@ Player* Enemy::searchPlayer() const{
 
 	sf::Vector2f rayPos;
 
-	double xCenter = getPosition().x + getSize().x / 2;
-	double yCenter = getPosition().y + getSize().y;
+	double xCenter = getXPosition() + getXSize() / 2;
+	double yCenter = getYPosition() + getYSize();
 	
 	double yFinal;
 	double xFinal;

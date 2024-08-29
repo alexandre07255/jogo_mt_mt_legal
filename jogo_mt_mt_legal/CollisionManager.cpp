@@ -322,3 +322,33 @@ float CollisionManager::nearestCollidable(Entity* relativeTo, float maxHeight) c
 
 	return maxHeight + relativeTo->bottom();
 }
+
+void CollisionManager::setPlayer1(Player* p1)
+{
+	player1 = p1;
+}
+
+void CollisionManager::setPlayer2(Player* p2)
+{
+	player2 = p2;
+}
+
+void CollisionManager::setEnemyVector(vector<Enemy*>* ev)
+{
+	enemyVector = ev;
+}
+
+void CollisionManager::setSupportVector(vector<Support*>* sv)
+{
+	supportVector = sv;
+}
+
+void CollisionManager::setCollidables(list<Collidable*>* col)
+{
+	collidables = col;
+}
+
+void CollisionManager::setObstacleList(list<Obstacle*>* ol)
+{
+	obstaclelist = ol;
+}

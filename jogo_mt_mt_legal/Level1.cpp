@@ -41,7 +41,8 @@ Level1::Level1(bool isPlayer2):Level(), endX(0), endingOnRight(1) {
     backgroundAndLevel->setTexture(background);
     entityList->push_back(backgroundAndLevel);
 
-    
+    loadTerrains();
+
     if (false)
     {
 
@@ -58,6 +59,15 @@ Level1::Level1(bool isPlayer2):Level(), endX(0), endingOnRight(1) {
     if (isPlayer2)
         view->setPlayer2(pPlayer2);
 
+
+    CollisionManager* cInstance = CollisionManager::getInstance();
+    
+    cInstance->setPlayer1(pPlayer1);
+    cInstance->setPlayer2(pPlayer2);
+    cInstance->setEnemyVector(enemyVector);
+    cInstance->setSupportVector(supportVector);
+    cInstance->setCollidables(collidables);
+    cInstance->setObstacleList(obstacleList);
 
     endingOnRight = 1;
     endX = x - SCALE;
@@ -136,10 +146,10 @@ void Level1::levelCompleteChecker()
     {
         if (endingOnRight)
         {
-            if (pPlayer1->getPosition().x >= endX)
+            if (pPlayer1->getXPosition() >= endX)
                 levelCompleteHandler();
         }
-        else if (pPlayer1->getPosition().x <= endX)
+        else if (pPlayer1->getXPosition() <= endX)
             levelCompleteHandler();
     }
 
@@ -147,10 +157,10 @@ void Level1::levelCompleteChecker()
     {
         if (endingOnRight)
         {
-            if (pPlayer2->getPosition().x >= endX)
+            if (pPlayer2->getXPosition() >= endX)
                 levelCompleteHandler();
         }
-        else if (pPlayer2->getPosition().x <= endX)
+        else if (pPlayer2->getXPosition() <= endX)
             levelCompleteHandler();
     }
 }

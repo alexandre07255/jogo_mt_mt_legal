@@ -28,6 +28,7 @@ Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NU
     enemyVector = new vector<Enemy*>;
     collidables = new list<Collidable*>;
 	supportVector = new vector<Support*>;
+	obstacleList = new list<Obstacle*>;
 }
 
 Level::~Level() //TODO
@@ -78,7 +79,6 @@ void Level::removeEnemy(Enemy* pE) {
 		{
 			vector<Enemy*>::iterator it = enemyVector->begin() + i;
 			enemyVector->erase(it);
-			delete (*it);
 			i--;
 			size--;
 		}
@@ -102,7 +102,6 @@ void Level::removeSupport(Support* pS)
 		{
 			vector<Support*>::iterator it = supportVector->begin() + i;
 			supportVector->erase(it);
-			delete (*it);
 			i--;
 			size--;
 		}
@@ -214,6 +213,7 @@ void Level::createPlayer1(const float x, const float y, const int points)
 	if (pPlayer1) { return; }
 
 	Player* player1 = new Player(0);
+	player1->setPosition(8 * SCALE, 25 * SCALE);
 	pPlayer1 = player1;
 	entityList->push_back(player1);
 }
@@ -223,6 +223,7 @@ void Level::createPlayer2(const float x, const float y, const int points, const 
 	if (pPlayer2) { return; }
 
 	Player* player2 = new Player(1, hp);
+	player2->setPosition(9 * SCALE, 25 * SCALE);
 	pPlayer2 = player2;
 	entityList->push_back(player2);
 }

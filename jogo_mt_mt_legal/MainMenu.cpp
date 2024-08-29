@@ -55,7 +55,7 @@ MainMenu::MainMenu():version(0){
 
 	//CommandGoBack* com5 = new CommandGoBack(this);
 	//Button* goBackButton = new Button(sf::Color::Blue,com5,true);
-	//goBackButton->setSize(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 - 25.f);
+	//goBackButton->setSize(instance->getWindow()->getXSize() / 2, instance->getWindow()->getYSize() / 3 - 25.f);
 
 	EntityList* rankingList = new EntityList;
 	//rankingList->push_back(goBackButton);

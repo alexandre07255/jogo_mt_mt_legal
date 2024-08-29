@@ -64,26 +64,26 @@ void Platform::execute() {
 			hitbox = new ObstacleHitbox(this);
 			hitbox->setTarget(1);
 			hitbox->setCooldown(20);
-			hitbox->setSize(sf::Vector2f(getSize().x / 2, getSize().y / 2));
+			hitbox->setSize(sf::Vector2f(getXSize() / 2, getYSize() / 2));
 			hitbox->setHorLaunchStrength(-25.0);
 			hitbox->setVerLaunchStrength(0.0);
 			hitbox->setDamage(3);
-			hitbox->setRelativePosition(sf::Vector2f(0.0, getSize().y));
+			hitbox->setRelativePosition(sf::Vector2f(0.0, getYSize()));
 
 			hitboxRight = new ObstacleHitbox(this);
 			hitboxRight->setTarget(1);
 			hitboxRight->setCooldown(40);
-			hitboxRight->setSize(sf::Vector2f(getSize().x / 2, getSize().y / 2));
+			hitboxRight->setSize(sf::Vector2f(getXSize() / 2, getYSize() / 2));
 			hitboxRight->setHorLaunchStrength(25.0);
 			hitboxRight->setVerLaunchStrength(0.0);
 			hitboxRight->setDamage(3);
-			hitboxRight->setRelativePosition(sf::Vector2f(getSize().x / 2, getSize().y));
+			hitboxRight->setRelativePosition(sf::Vector2f(getXSize() / 2, getYSize()));
 		}
 	}
 	/*else if (support)
 	{
 		if (onTop) {
-			deformation = getPosition().y - defaultY;
+			deformation = getYPosition() - defaultY;
 			//eu nao sei ta bom, eu so nao sei
 			SceneManager* instance = SceneManager::getInstance();
 			Level* curL = static_cast<Level*>(instance->top());
@@ -104,7 +104,7 @@ void Platform::execute() {
 
 		if (deformation && !onTop) {
 			float yDislocation = HarmonicMovement(deformation + 10, mass, 5.f, 2.f, time);
-			setPosition(getPosition().x, yDislocation + defaultY);
+			setPosition(getXPosition(), yDislocation + defaultY);
 			time++;
 		}
 		else {
@@ -121,10 +121,10 @@ void Platform::toObstacle()
 {
 	if (isActive)
 	{
-		hitbox->setPosition(getPosition());
+		hitbox->setPosition(getXPosition(), getYPosition());
 		hitbox->ajustToRelativePosition();
 
-		hitboxRight->setPosition(getPosition());
+		hitboxRight->setPosition(getXPosition(), getYPosition());
 		hitboxRight->ajustToRelativePosition();
 
 		CollisionManager* collisionInstance = CollisionManager::getInstance();

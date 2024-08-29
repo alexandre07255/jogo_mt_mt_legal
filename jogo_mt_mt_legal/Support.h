@@ -11,7 +11,7 @@ namespace Entities
 		Obstacles::Platform* boundedTo;
 		static int MAXHEALTH;
 	public:
-		Support(Obstacles::Platform* plat, const float height);
+		Support(Obstacles::Platform* plat, const float sHeight);
 		void setPlatform(Obstacles::Platform* plat);
 		void execute();
 
