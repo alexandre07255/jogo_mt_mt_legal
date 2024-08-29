@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+
 namespace Entities {
 	class TextContainer : public Entity
 	{
@@ -11,7 +12,7 @@ namespace Entities {
 		TextContainer();
 		void draw();
 		void execute();
-		void save();
+		void save(LevelSave* save);
 		void write(std::string sText);
 		void setTextPosition(float x, float y);
 	};

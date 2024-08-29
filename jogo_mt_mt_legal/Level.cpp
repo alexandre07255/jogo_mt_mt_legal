@@ -23,7 +23,7 @@ using namespace Entities::Obstacles;
 
 
 
-Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL)
+Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL), obstacleList(NULL)
 {
     enemyVector = new vector<Enemy*>;
     collidables = new list<Collidable*>;
@@ -36,12 +36,10 @@ Level::~Level() //TODO
 
 void Level::execute()
 {
-	escResolver();
 	entityList->traverse();
 	manageCollisions();
-	if (SceneManager::getInstance()->top() == this)
-		entityList->drawAll();
 	levelCompleteChecker();
+	escChecker();
 }
 
 void Level::escResolver()
@@ -160,11 +158,11 @@ void Level::createEnemyRanged(const float x, const float y, const int points)
 
 void Level::createEnemyBoss(const float x, const float y, const int points)
 {
-	EnemyBoss* enemy = new EnemyBoss;
-	enemy->setPosition(x, y);
-	enemy->setPoints(points);
-	entityList->push_back(enemy);
-	enemyVector->push_back(enemy);
+	//EnemyBoss* enemy = new EnemyBoss;
+	//enemy->setPosition(x, y);
+	//enemy->setPoints(points);
+	//entityList->push_back(enemy);
+	//enemyVector->push_back(enemy);
 }
 
 void Level::createPlatform(const float x, const float y, const float xSize, const float ySize)

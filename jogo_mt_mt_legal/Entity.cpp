@@ -122,8 +122,3 @@ void Entity::setFillColor(const sf::Color & col) {
 	pShape->setFillColor(col);
 }
 
-void Entity::setTexture(sf::Texture* tex)
-{
-	pTexture = tex;
-	pShape->setTexture(tex);
-}

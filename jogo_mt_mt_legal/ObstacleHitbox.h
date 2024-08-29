@@ -13,7 +13,7 @@ namespace Entities
 			float verLaunchStrength;
 			float horLaunchStrength;
 			int damage;
-			list<Entities::Characters::Hittable*> hitList;
+			std::list<Entities::Characters::Hittable*> hitList;
 			int cont;
 			int cooldown;
 			Entities::Obstacles::Obstacle* obstacle;

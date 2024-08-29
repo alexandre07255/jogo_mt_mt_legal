@@ -52,10 +52,10 @@ void SceneManager::step()
 		return;
 	}
 	Scene* sceneActive = scenes.top();
-	sceneActive->update();
 	window->clear(sf::Color::Black);
-	if (sceneActive == scenes.top())
-		sceneActive->draw(window);
+	sceneActive->execute();
+	if (scenes.top() == sceneActive)
+		sceneActive->draw();
 	window->display();
 }
 

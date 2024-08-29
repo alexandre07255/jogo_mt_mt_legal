@@ -3,7 +3,9 @@
 #include "Level.h"
 #include "SceneManager.h"
 #include <iostream>
+#include "LevelSave.h"
 #include <list>
+#include "Platform.h"
 using namespace Managers;
 using namespace Scenes;
 using namespace Entities;
@@ -18,7 +20,7 @@ Support::Support(Obstacles::Platform* plat, const float height):Hittable(false,M
 		SceneManager* instance = SceneManager::getInstance();
 		
 		Level* active = static_cast<Level*>(instance->top());
-		list<Collidable*>* collidables = active->getCollidable();
+		list<Collidable*>* collidables = active->getCollidables();
 
 		float positionY = boundedTo->getPosition().y + boundedTo->getSize().y;
 		float positionX = boundedTo->getPosition().x + boundedTo->getSize().x / 2 - 5.f;
@@ -45,6 +47,11 @@ void Support::execute() {
 		delete this;
 	}
 	//std::cout << hp << endl;
+}
+
+void Support::save(LevelSave* save)
+{
+
 }
 
 int Support::MAXHEALTH(10);

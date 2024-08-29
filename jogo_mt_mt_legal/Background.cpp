@@ -1,4 +1,5 @@
 #include "Background.h"
+#include "LevelSave.h"
 using namespace Entities;
 
 Background::Background():
@@ -24,4 +25,4 @@ void Background::setScale(const float sca)
 
 void Background::execute() { }
 
-void Background::save() { }
+void Background::save(LevelSave* save) { }

@@ -13,7 +13,7 @@ namespace Entities
 		const float getScale() const;
 		void setScale(const float sca);
 		void execute();
-		void save();
+		void save(LevelSave* save);
 	};
 }
 

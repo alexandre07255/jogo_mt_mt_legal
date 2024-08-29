@@ -3,6 +3,7 @@
 #include "SceneManager.h"
 #include "Level.h"
 #include "ObstacleHitbox.h"
+#include "LevelSave.h"
 #include <math.h>
 #include"iostream"
 using namespace Managers;

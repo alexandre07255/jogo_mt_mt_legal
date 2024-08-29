@@ -7,6 +7,9 @@ namespace Scenes
 	{
 	private:
 		void levelCompleteHandler();
+		void levelCompleteChecker();
+		void createFromScratch(const bool isPlayer2);
+		void loadTerrains();
 	public:
 		Level2(bool isPlayer2);
 		~Level2();

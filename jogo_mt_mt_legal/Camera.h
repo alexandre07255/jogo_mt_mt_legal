@@ -1,6 +1,5 @@
 #pragma once
 #include "Player.h"
-#include "Updatable.h"
 
 namespace Entities
 {
@@ -20,6 +19,7 @@ namespace Entities
 		void setPlayer1(Entities::Characters::Player* p1);
 		void setPlayer2(Entities::Characters::Player* p2);
 		void execute();
+		void save(LevelSave* save);
 	};
 }
 

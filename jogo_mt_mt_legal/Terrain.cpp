@@ -1,4 +1,5 @@
 #include "Terrain.h"
+#include "LevelSave.h"
 using namespace Entities;
 
 
@@ -16,3 +17,5 @@ sf::FloatRect Terrain::getBounds() {
 void Terrain::collisionSolution(Entity* pE) {	
 	pE->setFriction(friction);
 }
+
+void Terrain::save(LevelSave* save) { }

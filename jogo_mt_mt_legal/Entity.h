@@ -1,6 +1,7 @@
 #pragma once
 #include "Being.h"
-#include "LevelSave.h"
+
+class LevelSave;
 
 namespace Entities {
 	class Entity : public Being
@@ -49,7 +50,6 @@ namespace Entities {
 		const float xMid() const;
 		const float yMid() const;
 
-		void setTexture(sf::Texture* tex);
 		void setFillColor(const sf::Color & col);
 
 		virtual void save(LevelSave* save) = 0;

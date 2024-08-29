@@ -2,7 +2,6 @@
 #include "Entity.h"
 #include "Command.h"
 
-
 class Button : public Entities::Entity
 {
 private:
@@ -18,7 +17,7 @@ public:
 	const bool isMouseOn();
 	void execute();
 	const bool isMouseClicked();
-	void save();
+	void save(LevelSave* save);
 };
 
 

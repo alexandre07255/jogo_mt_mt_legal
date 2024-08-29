@@ -1,5 +1,6 @@
 #include "Hitbox.h"
 //#include "Level.h"
+#include "LevelSave.h"
 #include "SceneManager.h"
 using namespace Entities::Hitboxes;
 using namespace Entities::Characters;
@@ -15,7 +16,6 @@ Hitbox::Hitbox():
 	duration(1)
 {
 	Scene* activeScene = SceneManager::getInstance()->top();
-	activeScene->addUpdatable(this);
 
 	setFillColor(sf::Color::Yellow);
 	activeScene->addEntity(this);

@@ -3,6 +3,7 @@
 #include "CollisionManager.h"
 #include "SceneManager.h"
 #include <time.h>
+#include "LevelSave.h"
 #include "Level.h"
 #include "AttackHitbox.h"
 using namespace Managers;
@@ -125,9 +126,8 @@ void EnemyMelee::execute() {
         SceneManager* sinstance = SceneManager::getInstance();
         Level* level = static_cast<Level*>(sinstance->top());
 
-        level->removeDrawable(this);
-        level->removeHittable(this);
-        level->removeUpdatable(this);
+        level->removeEntity(this);
+        level->removeEnemy(this);
 
         delete this;
     }
@@ -280,7 +280,7 @@ const bool EnemyMelee::checkOnLedge() const{
 
     SceneManager* LevelInstance = SceneManager::getInstance();
     Level* level = static_cast<Level*>(LevelInstance->top());
-    list<Collidable*>* collidables = level->getCollidable();
+    list<Collidable*>* collidables = level->getCollidables();
 
     sf::FloatRect ret;
 
