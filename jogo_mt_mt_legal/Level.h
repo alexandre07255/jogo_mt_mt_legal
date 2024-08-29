@@ -20,6 +20,7 @@ namespace Scenes
 		std::vector<Entities::Support*>* supportVector;
 		Entities::Characters::Player* pPlayer1;
 		Entities::Characters::Player* pPlayer2;
+		Camera* camera;
 		static const float SCALE;
 		virtual void levelCompleteHandler() = 0;
 		virtual void levelCompleteChecker() = 0;

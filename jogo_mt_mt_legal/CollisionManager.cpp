@@ -61,7 +61,7 @@ void CollisionManager::testPlayerToEnemyCollision()
 	float x, y;
 
 	int size = enemyVector->size();
-	vector<Enemy*>::iterator it = enemyVector->begin();
+	vector<Enemy*>::iterator it;
 
 	int directionX = 0;
 	int directionY = 0;
@@ -73,6 +73,7 @@ void CollisionManager::testPlayerToEnemyCollision()
 		if (target[j])
 		{
 			targetBounds = target[j]->getGlobalBounds();
+			it = enemyVector->begin();
 
 			for (int i = 0; i < size; i++)
 			{

@@ -23,7 +23,7 @@ using namespace Entities::Obstacles;
 
 
 
-Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL), obstacleList(NULL)
+Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL), obstacleList(NULL), camera()
 {
     enemyVector = new vector<Enemy*>;
     collidables = new list<Collidable*>;
@@ -40,6 +40,7 @@ void Level::execute()
 	entityList->traverse();
 	manageCollisions();
 	levelCompleteChecker();
+	camera->execute();
 	escChecker();
 }
 
@@ -47,14 +48,15 @@ void Level::escResolver()
 {
 	PauseMenu* pMenu = new PauseMenu(this);
 	SceneManager::getInstance()->push(pMenu);
+	pGG->getWindow()->setView(pGG->getWindow()->getDefaultView());
 }
 
 void Level::manageCollisions()
 {
 	CollisionManager* cInstance = CollisionManager::getInstance();
-	cInstance->testHittableToObstacleCollisions();
 	cInstance->testPlayerToEnemyCollision();
 	cInstance->testHittableToCollidableCollisions();
+	cInstance->testHittableToObstacleCollisions();
 }
 
 list<Collidable*>* Level::getCollidables() {
@@ -204,6 +206,8 @@ void Level::createPlayer1(const float x, const float y, const int points, const 
 	if (pPlayer1) { return; }
 	
 	Player* player1 = new Player(0, hp);
+	player1->setPosition(x, y);
+	player1->setPoints(points);
 	pPlayer1 = player1;
 	entityList->push_back(player1);
 }
@@ -213,7 +217,8 @@ void Level::createPlayer1(const float x, const float y, const int points)
 	if (pPlayer1) { return; }
 
 	Player* player1 = new Player(0);
-	player1->setPosition(8 * SCALE, 25 * SCALE);
+	player1->setPosition(x, y);
+	player1->setPoints(points);
 	pPlayer1 = player1;
 	entityList->push_back(player1);
 }
@@ -223,7 +228,8 @@ void Level::createPlayer2(const float x, const float y, const int points, const 
 	if (pPlayer2) { return; }
 
 	Player* player2 = new Player(1, hp);
-	player2->setPosition(9 * SCALE, 25 * SCALE);
+	player2->setPosition(x, y);
+	player2->setPoints(points);
 	pPlayer2 = player2;
 	entityList->push_back(player2);
 }
@@ -233,6 +239,8 @@ void Level::createPlayer2(const float x, const float y, const int points)
 	if (pPlayer2) { return; }
 
 	Player* player2 = new Player(1);
+	player2->setPosition(x, y);
+	player2->setPoints(points);
 	pPlayer2 = player2;
 	entityList->push_back(player2);
 }

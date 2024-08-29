@@ -41,6 +41,7 @@ Level2::Level2(bool isPlayer2) :Level() {
     backgroundAndLevel->setTexture(background);
     entityList->push_back(backgroundAndLevel);
 
+    loadTerrains();
 
     if (false)
     {
@@ -53,10 +54,19 @@ Level2::Level2(bool isPlayer2) :Level() {
 
     Camera* view;
     view = new Camera(window);
-    entityList->push_back(view);
+    camera = view;
     view->setPlayer1(pPlayer1);
     if (isPlayer2)
         view->setPlayer2(pPlayer2);
+
+    CollisionManager* cInstance = CollisionManager::getInstance();
+
+    cInstance->setPlayer1(pPlayer1);
+    cInstance->setPlayer2(pPlayer2);
+    cInstance->setEnemyVector(enemyVector);
+    cInstance->setSupportVector(supportVector);
+    cInstance->setCollidables(collidables);
+    cInstance->setObstacleList(obstacleList);
 }
 
 Level2::~Level2() {
