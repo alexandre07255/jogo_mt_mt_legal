@@ -1,4 +1,5 @@
 #include "EntityList.h"
+#include "LevelSave.h"
 using namespace Lists;
 
 EntityList::EntityList() {
@@ -58,4 +59,20 @@ void EntityList::removeEntity(Entities::Entity* pE) {
 
 int EntityList::getSize() {
 	return listEntities.size();
+}
+
+void EntityList::saveAll(LevelSave* save) {
+	List<Entities::Entity>::Iterator itCurrent = listEntities.begin();
+	if (listEntities.size() > 0)
+	{
+		List<Entities::Entity>::Iterator itNext = itCurrent;
+		itNext++;
+		while (itNext != listEntities.end())
+		{
+			(*itCurrent)->save(save);
+			itCurrent = itNext;
+			itNext++;
+		}
+		(*itCurrent)->save(save);
+	}
 }

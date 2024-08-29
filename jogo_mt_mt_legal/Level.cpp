@@ -12,6 +12,7 @@
 #include "Spike.h"
 #include "Fire.h"
 #include "Terrain.h"
+#include "LevelSave.h"
 using namespace std;
 using namespace Scenes;
 using namespace Managers;
@@ -121,7 +122,7 @@ void Level::stackPauseMenu() {
 	SceneManager* instance = SceneManager::getInstance();
 
 	PauseMenu* pMenu;
-	pMenu = new PauseMenu;
+	pMenu = new PauseMenu(this);
 
 	instance->push(pMenu);
 	
@@ -129,6 +130,14 @@ void Level::stackPauseMenu() {
 	sf::RenderWindow* window = graph->getWindow();
 
 	window->setView(window->getDefaultView());
+}
+
+void Level::save() {
+	LevelSave* save = new LevelSave(this);
+
+	entityList->saveAll(save);
+
+	save->saveFinal();
 }
 
 void Level::createEnemyMelee(const float x, const float y, const int points)

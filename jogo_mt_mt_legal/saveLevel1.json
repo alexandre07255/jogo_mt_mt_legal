@@ -1,0 +1,54 @@
+{
+    "EnemyMeleeArray": [
+        {
+            "x" : 1,
+            "y" : 2,
+            "hp" : 3,
+            "points" : 10
+        },
+        {
+            "x" : 30,
+            "y" : 25,
+            "hp" : 3,
+            "points" : 23
+        }
+    ],
+    "EnemyRangedArray": [
+        {
+            "x" : 1,
+            "y" : 2,
+            "hp" : 3,
+            "points" : 10
+        },
+        {
+            "x" : 30,
+            "y" : 25,
+            "hp" : 3,
+            "points" : 23
+        }
+    ],
+    "SpikeArray": [
+        {
+            "x":1,
+            "y":2,
+            "height":2,
+            "width":32
+        }
+    ],
+    "PlatformArray": [
+        {
+            "x":1,
+            "y":2,
+            "height":2,
+            "width":32
+        }
+    ],
+    "FireArray": [
+        {
+            "x":1,
+            "y":2,
+            "height":2,
+            "width":32
+        }
+    ]
+}

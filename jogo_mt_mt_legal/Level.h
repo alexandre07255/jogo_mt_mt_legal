@@ -57,6 +57,7 @@ namespace Scenes
 		void createSpike(const float x, const float y, const float xSize, const float ySize);
 		void createFire(const float x, const float y, const float xSize, const float ySize);
 
+		void save();
 		void createTerrain(const float x, const float y, const float xSize, const float ySize, const float frict);
 
 		void createPlayer1(const float x, const float y, const int points, const int hp);

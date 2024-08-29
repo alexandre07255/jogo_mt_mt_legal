@@ -1,5 +1,6 @@
 #pragma once
 #include "Being.h"
+#include "LevelSave.h"
 
 namespace Entities {
 	class Entity : public Being
@@ -51,7 +52,7 @@ namespace Entities {
 		void setTexture(sf::Texture* tex);
 		void setFillColor(const sf::Color & col);
 
-		virtual void save() { }
+		virtual void save(LevelSave* save) = 0;
 		virtual void execute() = 0;
 	};
 }

@@ -6,7 +6,7 @@ class Command
 protected:
 	Scenes::Menu* bound;
 public:
-	Command(Scenes::MainMenu* _bound);
+	Command(Scenes::Menu* _bound);
 	virtual void execute() = 0;
 };
 

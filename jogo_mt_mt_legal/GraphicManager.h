@@ -13,6 +13,7 @@ namespace Managers {
 		const bool isWindowOpen();
 		sf::RenderWindow* getWindow();
 		void drawBeing(Being* pE);
+		void drawText(sf::Text text);
 		static GraphicManager* getInstance();
 	};
 }

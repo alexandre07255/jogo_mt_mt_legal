@@ -20,7 +20,7 @@ void Scene::removeEntity(Entities::Entity* pU) {
 	entityList->removeEntity(pU);
 }
 
-void Scene::update() {
+void Scene::execute() {
 	escResolver();
 	entityList->traverse();
 }
