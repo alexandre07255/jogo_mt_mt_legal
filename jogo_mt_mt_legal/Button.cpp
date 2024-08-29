@@ -26,9 +26,16 @@ const bool Button::isMouseOn() {
 	int mouseX = mouse->getPosition(*window).x;
 	int mouseY = mouse->getPosition(*window).y;
 
-	if (mouseX >= getPosition().x && mouseX <= getPosition().x + getSize().x) {
-		if (mouseY >= getPosition().y && mouseY <= getPosition().y + getSize().y)
-			return true;
+	sf::FloatRect mouseRect;
+	mouseRect.left = mouseX;
+	mouseRect.top = mouseY;
+	mouseRect.width = 1;
+	mouseRect.height = 1;
+
+	sf::FloatRect bound = getGlobalBounds();
+
+	if (mouseRect.intersects(bound)){
+		return true;
 	}
 
 	return false;
