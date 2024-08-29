@@ -6,6 +6,8 @@ using namespace Entities;
 Terrain::Terrain(float frict) :Entity(), Collidable() {
 	collidableId = getId();
 	friction = frict;
+
+	setFillColor(sf::Color::Transparent);
 }
 
 void Terrain::execute() { }

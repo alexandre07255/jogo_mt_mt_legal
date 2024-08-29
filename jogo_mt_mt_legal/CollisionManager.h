@@ -31,6 +31,13 @@ namespace Managers
 		const bool isColliding(sf::FloatRect one, sf::FloatRect other);
 		void testHit(const bool target, Entities::Hitboxes::Hitbox* hitbox);
 		float nearestCollidable(Entities::Entity* relativeTo, float maxHeight) const;
+
+		void setPlayer1(Entities::Characters::Player* p1);
+		void setPlayer2(Entities::Characters::Player* p2);
+		void setEnemyVector(std::vector<Entities::Characters::Enemy*>* ev);
+		void setSupportVector(std::vector<Entities::Support*>* sv);
+		void setCollidables(std::list<Collidable*>* col);
+		void setObstacleList(std::list<Entities::Obstacles::Obstacle*>* ol);
 	};
 }
 

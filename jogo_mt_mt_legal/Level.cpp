@@ -28,6 +28,7 @@ Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NU
     enemyVector = new vector<Enemy*>;
     collidables = new list<Collidable*>;
 	supportVector = new vector<Support*>;
+	obstacleList = new list<Obstacle*>;
 }
 
 Level::~Level() //TODO
