@@ -34,6 +34,7 @@ namespace Entities
 		public:
 			EnemyRanged();
 			void execute();
+			void save(LevelSave* save);
 		private:
 			void projectileCalculations(Projectile* proj, const float absHorSpeed, Hittable* target);
 			void executeFOLLOWING();

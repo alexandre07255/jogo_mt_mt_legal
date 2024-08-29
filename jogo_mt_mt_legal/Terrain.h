@@ -10,6 +10,8 @@ namespace Entities
 		void execute();
 		virtual sf::FloatRect getBounds();
 		void collisionSolution(Entity* pE);
+
+		void save(LevelSave* save);
 	};
 }
 

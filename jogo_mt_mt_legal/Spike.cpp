@@ -64,3 +64,7 @@ void Spike::toObstacle()
 		hitbox = NULL;
 	}
 }
+
+void Spike::save(LevelSave* save){
+	save->addSpike(this);
+}

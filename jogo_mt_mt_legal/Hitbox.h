@@ -20,6 +20,7 @@ namespace Entities
 			void setRelativePosition(sf::Vector2f rel);
 			void setDuration(const int dur);
 			virtual void hitSolution(Entities::Characters::Hittable* hit) = 0;
+			void save(LevelSave* save);
 		};
 	}
 }

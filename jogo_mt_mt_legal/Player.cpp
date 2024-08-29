@@ -109,43 +109,43 @@ void Player::executeFREE()
 	InputManager* inputInstance = InputManager::getInstance();
 	//Movement input
 	if (inputInstance->isRightPressed(player2)) {
-		if (horizontalSpeed < MAX_HORIZONTAL_SPEED) {
-			horizontalSpeed += ACCELARATION;
+		if (horizontalVelocity < MAX_HORIZONTAL_SPEED) {
+			horizontalVelocity += ACCELARATION;
 		}
 		else {
-			horizontalSpeed = MAX_HORIZONTAL_SPEED;
+			horizontalVelocity = MAX_HORIZONTAL_SPEED;
 		}
 		facingRight = 1;
 	}
 	else if (inputInstance->isLeftPressed(player2)) {
-		if (horizontalSpeed > -MAX_HORIZONTAL_SPEED) {
-			horizontalSpeed -= ACCELARATION;
+		if (horizontalVelocity > -MAX_HORIZONTAL_SPEED) {
+			horizontalVelocity -= ACCELARATION;
 		}
 		else {
-			horizontalSpeed = -MAX_HORIZONTAL_SPEED;
+			horizontalVelocity = -MAX_HORIZONTAL_SPEED;
 		}
 		facingRight = 0;
 	}
 
 	//friction
-	if (abs(horizontalSpeed) > frictionFelt) {
-		horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * frictionFelt;
+	if (abs(horizontalVelocity) > frictionFelt) {
+		horizontalVelocity -= ((horizontalVelocity > 0) - (horizontalVelocity < 0)) * frictionFelt;
 	}
 	else
-		horizontalSpeed = 0;
+		horizontalVelocity = 0;
 
 	if (isStillJumping)
 	{
 		if (jumpLength < MAX_JUMP_PERIOD)
 		{
-			verticalSpeed -= JUMP_STRENGTH;
+			verticalVelocity -= JUMP_STRENGTH;
 			jumpLength++;
 		}
 	}
 
 	if (!onAir && jumpBuffer)
 	{
-		verticalSpeed = -JUMP_STRENGTH;
+		verticalVelocity = -JUMP_STRENGTH;
 		jumpBuffer = 0;
 		onAir = 1;
 		isStillJumping = 1;
@@ -161,16 +161,16 @@ void Player::executeFREE()
 		stun = attackStartup[attackCounter] + attackHitboxDuration[attackCounter] + attackEndLag[attackCounter];
 	}
 
-	verticalSpeed += 1;
+	verticalVelocity += 1;
 
-	move(horizontalSpeed, verticalSpeed);
+	move(horizontalVelocity, verticalVelocity);
 }
 
 void Player::executeATKCANCEL()
 {
 	if (stun > 0)
 	{
-		horizontalSpeed = 0;
+		horizontalVelocity = 0;
 		setFillColor(sf::Color::Green);
 		if (attackBuffer)
 		{
@@ -203,7 +203,7 @@ void Player::executeATTACK()
 	}
 	else
 		state = FREE;
-	move((float) horizontalSpeed * 0.15, (float) (++verticalSpeed) * 0.85);
+	move((float) horizontalVelocity * 0.15, (float) (++verticalVelocity) * 0.85);
 	//move(sf::Vector2f(horizontalSpeed*0.15, (++verticalSpeed)*0.85));
 }
 
@@ -301,3 +301,7 @@ const float Player::ACCELARATION(2.0);
 const int Player::MAX_HP(20);
 
 const int Player::MAX_ATTACK_BUFFER(20);
+
+void Player::save(LevelSave* save) {
+	save->addPlayer(this, player2);
+}

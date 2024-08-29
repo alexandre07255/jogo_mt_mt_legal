@@ -18,7 +18,6 @@ Projectile::Projectile():
     hasHit(0)
 {
     Scene* activeScene = SceneManager::getInstance()->top();
-    activeScene->addUpdatable(this);
 
     hitbox = new AttackHitbox;
 
@@ -27,7 +26,8 @@ Projectile::Projectile():
     hitbox->setDoesATKCANCEL(0);
 
     setFillColor(Color::Blue);
-    activeScene->addDrawable(this);
+   
+    activeScene->addEntity(this);
 }
 
 void Projectile::setOwner(Hittable* own)
@@ -88,9 +88,9 @@ void Projectile::execute()
     }
     else
     {
-        verticalSpeed += GRAVITY;
+        verticalVelocity += GRAVITY;
 
-        move(horizontalSpeed, verticalSpeed);
+        move(horizontalVelocity, verticalVelocity);
 
         Vector2f preColli = getPosition();
 
@@ -104,11 +104,10 @@ void Projectile::execute()
     {
         hitbox->setDuration(0);
         Scene* activeScene = SceneManager::getInstance()->top();
-        List<Updatable>* upList = activeScene->getUpdatables();
-        upList->remove(this);
-        List<MyDrawable>* drawList = activeScene->getDrawables();
-        drawList->remove(this);
+        activeScene->removeEntity(this);
         delete this;
         return;
     }
 }
+
+void Projectile::save(LevelSave* save){}

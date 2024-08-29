@@ -124,3 +124,4 @@ void AttackHitbox::hitSolution(Hittable* hit)
 	hit->setHorizontalVelocity(horKnockback);
 	hit->setVerticalVelocity(verKnockback);
 }
+

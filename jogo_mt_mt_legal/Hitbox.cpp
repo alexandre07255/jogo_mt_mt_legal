@@ -15,10 +15,8 @@ Hitbox::Hitbox():
 	duration(1)
 {
 	Scene* activeScene = SceneManager::getInstance()->top();
-	activeScene->addUpdatable(this);
-
 	setFillColor(sf::Color::Yellow);
-	activeScene->addDrawable(this);
+	activeScene->addEntity(this);
 }
 
 void Hitbox::setTarget(const bool tar)
@@ -45,3 +43,5 @@ void Hitbox::setDuration(const int dur)
 {
 	duration = dur;
 }
+
+void Hitbox::save(LevelSave* save){}

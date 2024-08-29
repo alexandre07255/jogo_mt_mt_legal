@@ -28,6 +28,7 @@ namespace Entities
 		public:
 			EnemyMelee();
 			void execute();
+			void save(LevelSave* save);
 		private:
 			void executeFOLLOWING();
 			void executePATROLLING();
