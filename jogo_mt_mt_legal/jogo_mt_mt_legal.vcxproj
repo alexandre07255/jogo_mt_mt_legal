@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandLevel1p2False.cpp" />
     <ClCompile Include="CommandLevel1p2True.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="CommandStack2.cpp" />
     <ClCompile Include="CommandStart.cpp" />
     <ClCompile Include="Element.cpp" />
+    <ClCompile Include="EnemyBoss.cpp" />
     <ClCompile Include="EnemyRanged.cpp" />
     <ClCompile Include="EntityList.cpp" />
     <ClCompile Include="Fire.cpp" />
@@ -184,6 +186,7 @@
     <ClCompile Include="Updatable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandLevel1p2False.h" />
     <ClInclude Include="CommandLevel1p2True.h" />
@@ -195,6 +198,7 @@
     <ClInclude Include="CommandStack2.h" />
     <ClInclude Include="CommandStart.h" />
     <ClInclude Include="Element.h" />
+    <ClInclude Include="EnemyBoss.h" />
     <ClInclude Include="EnemyRanged.h" />
     <ClInclude Include="EntityList.h" />
     <ClInclude Include="Fire.h" />

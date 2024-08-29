@@ -3,20 +3,26 @@
 #include "Player.h"
 #include "CollisionManager.h"
 #include "EnemyMelee.h"
+#include "EnemyRanged.h"
+#include "EnemyBoss.h"
 #include "SceneManager.h"
 #include "PauseMenu.h"
 #include "inputManager.h"
+#include "Platform.h"
+#include "Spike.h"
+#include "Fire.h"
+#include "Terrain.h"
 using namespace std;
 using namespace Scenes;
 using namespace Managers;
 using namespace Entities::Characters;
 using namespace Entities;
 using namespace Lists;
+using namespace Entities::Obstacles;
 
 
 
-
-Level::Level(): enemyVector(NULL),collidables(NULL), endX(0), endingOnRight(1), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL)
+Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL)
 {
     enemyVector = new vector<Enemy*>;
     collidables = new list<Collidable*>;
@@ -27,11 +33,20 @@ Level::~Level() //TODO
 {
 }
 
-void Level::excute()
+void Level::execute()
 {
+	escResolver();
 	entityList->traverse();
 	manageCollisions();
-	entityList->drawAll();
+	if (SceneManager::getInstance()->top() == this)
+		entityList->drawAll();
+	levelCompleteChecker();
+}
+
+void Level::escResolver()
+{
+	PauseMenu* pMenu = new PauseMenu(this);
+	SceneManager::getInstance()->push(pMenu);
 }
 
 void Level::manageCollisions()
@@ -96,6 +111,12 @@ void Level::removeSupport(Support* pS)
 
 }
 
+
+Player* Level::getPlayer1() const { return pPlayer1; }
+
+Player* Level::getPlayer2() const { return pPlayer2; }
+
+
 void Level::stackPauseMenu() {
 	SceneManager* instance = SceneManager::getInstance();
 
@@ -109,3 +130,103 @@ void Level::stackPauseMenu() {
 
 	window->setView(window->getDefaultView());
 }
+
+void Level::createEnemyMelee(const float x, const float y, const int points)
+{
+	EnemyMelee* enemy = new EnemyMelee;
+	enemy->setPosition(x, y);
+	enemy->setPoints(points);
+	entityList->push_back(enemy);
+	enemyVector->push_back(enemy);
+}
+
+void Level::createEnemyRanged(const float x, const float y, const int points)
+{
+	EnemyRanged* enemy = new EnemyRanged;
+	enemy->setPosition(x, y);
+	enemy->setPoints(points);
+	entityList->push_back(enemy);
+	enemyVector->push_back(enemy);
+}
+
+void Level::createEnemyBoss(const float x, const float y, const int points)
+{
+	EnemyBoss* enemy = new EnemyBoss;
+	enemy->setPosition(x, y);
+	enemy->setPoints(points);
+	entityList->push_back(enemy);
+	enemyVector->push_back(enemy);
+}
+
+void Level::createPlatform(const float x, const float y, const float xSize, const float ySize)
+{
+	Platform* obst = new Platform(x, y, xSize, ySize);
+	entityList->push_back(obst);
+	obstacleList->push_back(obst);
+	collidables->push_back(obst);
+}
+
+void Level::createSpike(const float x, const float y, const float xSize, const float ySize)
+{
+	Spike* obst = new Spike;
+	obst->setPosition(x, y);
+	obst->setSize(xSize, ySize);
+	entityList->push_back(obst);
+	obstacleList->push_back(obst);
+}
+
+void Level::createFire(const float x, const float y, const float xSize, const float ySize)
+{
+	Fire* obst = new Fire;
+	obst->setPosition(x, y);
+	obst->setSize(xSize, ySize);
+	entityList->push_back(obst);
+	obstacleList->push_back(obst);
+}
+
+void Level::createTerrain(const float x, const float y, const float xSize, const float ySize, const float frict)
+{
+	Terrain* ter = new Terrain(frict);
+	ter->setPosition(x, y);
+	ter->setSize(xSize, ySize);
+	entityList->push_back(ter);
+	collidables->push_back(ter);
+}
+
+void Level::createPlayer1(const float x, const float y, const int points, const int hp)
+{
+	if (pPlayer1) { return; }
+	
+	Player* player1 = new Player(0, hp);
+	pPlayer1 = player1;
+	entityList->push_back(player1);
+}
+
+void Level::createPlayer1(const float x, const float y, const int points)
+{
+	if (pPlayer1) { return; }
+
+	Player* player1 = new Player(0);
+	pPlayer1 = player1;
+	entityList->push_back(player1);
+}
+
+void Level::createPlayer2(const float x, const float y, const int points, const int hp)
+{
+	if (pPlayer2) { return; }
+
+	Player* player2 = new Player(1, hp);
+	pPlayer2 = player2;
+	entityList->push_back(player2);
+}
+
+void Level::createPlayer2(const float x, const float y, const int points)
+{
+	if (pPlayer2) { return; }
+
+	Player* player2 = new Player(1);
+	pPlayer2 = player2;
+	entityList->push_back(player2);
+}
+
+const float Level::SCALE(16 * 5.33333f);

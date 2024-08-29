@@ -31,8 +31,8 @@ Player* Enemy::searchPlayer() const{
 
 
 
-	list<Collidable*>* collidables = level->getCollidable();
-	list<Hittable*>* hittable = level->getHittableList();
+	list<Collidable*>* collidables = level->getCollidables();
+	Player* players[2] = { level->getPlayer1(), level->getPlayer2() };
 
 	int flag = 1;
 
@@ -74,10 +74,10 @@ Player* Enemy::searchPlayer() const{
 			ret.left = xFinal;
 			ret.top = yFinal;
 
-			for (list<Hittable*>::iterator it = hittable->begin();it != hittable->end();it++) {
-				if (ret.intersects((*it)->getGlobalBounds()) && (*it)->getIsAlly()) {
+			for (int j = 0; j < 2; j++) {
+				if (players[j] && ret.intersects((players[j])->getGlobalBounds())) {
 					//std::cout << "player achado" << endl;
-					return (Player*)*it;
+					return players[j];
 				}
 			}
 

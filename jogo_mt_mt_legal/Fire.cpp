@@ -55,3 +55,16 @@ void Fire::deactivate()
 {
 	isActive = 0;
 }
+
+void Fire::toObstacle()
+{
+	if (isActive)
+	{
+		CollisionManager* collisionInstance = CollisionManager::getInstance();
+		collisionInstance->testHit(1, hitbox);
+	}
+	else
+	{
+		hitbox = NULL;
+	}
+}

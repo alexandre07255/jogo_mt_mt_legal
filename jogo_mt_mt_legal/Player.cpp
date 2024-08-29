@@ -12,7 +12,7 @@ using namespace Scenes;
 using namespace Entities::Hitboxes;
 
 
-Player::Player(const bool isPlayer2, const bool ally, const int health) :
+Player::Player(const bool isPlayer2, const int health) :
 	Hittable(1, MAX_HP),
 	jumpBuffer(0),
 	isStillJumping(0),
@@ -26,7 +26,8 @@ Player::Player(const bool isPlayer2, const bool ally, const int health) :
 	attackHitboxDuration{5, 5, 5},
 	attackEndLag{20, 15, 15}
 {
-	
+	setSize(sf::Vector2f(80, 80));
+
 }
 
 void Player::execute() {

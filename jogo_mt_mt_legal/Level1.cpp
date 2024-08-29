@@ -12,6 +12,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include "Background.h"
 using namespace Scenes;
 using namespace Managers;
 using namespace Entities::Obstacles;
@@ -20,7 +21,7 @@ using namespace Entities::Characters;
 
 
 
-Level1::Level1(bool isPlayer2):Level() {
+Level1::Level1(bool isPlayer2):Level(), endX(0), endingOnRight(1) {
     GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
@@ -30,261 +31,94 @@ Level1::Level1(bool isPlayer2):Level() {
     sf::Texture* background = new sf::Texture();
     background->loadFromFile("spritesheets/fase1EBA.png");
 
-    sf::Texture* spikeText = new sf::Texture();
-    spikeText->loadFromFile("spritesheets/s_spike.png");
 
-    float scale = 5.33333;
-    float x = background->getSize().x * scale;
-    float y = background->getSize().y * scale;
+    float x = background->getSize().x * SCALE/16;
+    float y = background->getSize().y * SCALE/16;
 
-    backgroundAndLevel = new MyDrawable();
+    Background* backgroundAndLevel = new Background;
+
     backgroundAndLevel->setSize(sf::Vector2f(x, y));
     backgroundAndLevel->setTexture(background);
-    drawables->push_back(backgroundAndLevel);
-    backgroundAndLevel->setOutlineThickness(2.f);
-    backgroundAndLevel->setOutlineColor(sf::Color::Red);
+    entityList->push_back(backgroundAndLevel);
 
-    Terrain* leftWall = new Terrain(1.f);
-    leftWall->setPosition(0, 0);
-    leftWall->setSize(sf::Vector2f(7 * scale * 16, scale * 26 * 16));
-    collidables->push_back(leftWall);
-
-    Terrain* floor = new Terrain(1.f);
-    floor->setPosition(7*16*scale, scale * 26 * 16);
-    floor->setSize(sf::Vector2f(89 * 16 * scale,2 * 16* scale));
-    collidables->push_back(floor);
-
-
-    Terrain* firstTerrain = new Terrain(1.f);
-    firstTerrain->setPosition(14*16 * scale , 24*16 * scale);
-    firstTerrain->setSize(sf::Vector2f(scale * 16 * 7, scale * 2 * 16));
-    collidables->push_back(firstTerrain);
-
-    Terrain* secondTerrain = new Terrain(1.f);
-    secondTerrain->setPosition(27 * 16 * scale, 25 * 16 * scale);
-    secondTerrain->setSize(sf::Vector2f(scale * 16 * 3, scale * 1 * 16));
-    collidables->push_back(secondTerrain);
-
-    Terrain* littleBlock = new Terrain(1.f);
-    littleBlock->setPosition(44 * 16 * scale, 25 * 16 * scale);
-    littleBlock->setSize(sf::Vector2f(scale * 16 * 1, scale * 1 * 16));
-    collidables->push_back(littleBlock);
-
-    Terrain* megaRetangulo = new Terrain(1.f);
-    megaRetangulo->setPosition(45 * 16 * scale, 23 * 16 * scale);
-    megaRetangulo->setSize(sf::Vector2f(scale * 16 * 45, scale * 3 * 16));
-    collidables->push_back(megaRetangulo);
-
-    Terrain* thirdTerrain = new Terrain(1.f);
-    thirdTerrain->setPosition(54 * 16 * scale, 22 * 16 * scale);
-    thirdTerrain->setSize(sf::Vector2f(scale * 16 * 18, scale * 1 * 16));
-    collidables->push_back(thirdTerrain);
-
-    Terrain* fourthTerrain = new Terrain(1.f);
-    fourthTerrain->setPosition(61 * 16 * scale, 21 * 16 * scale);
-    fourthTerrain->setSize(sf::Vector2f(scale * 16 * 8, scale * 1 * 16));
-    collidables->push_back(fourthTerrain);
-
-    Terrain* fifthTerrain = new Terrain(1.f);
-    fifthTerrain->setPosition(79 * 16 * scale, 21 * 16 * scale);
-    fifthTerrain->setSize(sf::Vector2f(scale * 16 * 1, scale * 2 * 16));
-    collidables->push_back(fifthTerrain);
-
-    Terrain* sixthTerrain = new Terrain(1.f);
-    sixthTerrain->setPosition(84 * 16 * scale, 22 * 16 * scale);
-    sixthTerrain->setSize(sf::Vector2f(scale * 16 * 6, scale * 1 * 16));
-    collidables->push_back(sixthTerrain);
-
-    Terrain* seventhTerrain = new Terrain(1.f);
-    seventhTerrain->setPosition(86 * 16 * scale, 21 * 16 * scale);
-    seventhTerrain->setSize(sf::Vector2f(scale * 16 * 1, scale * 1 * 16));
-    collidables->push_back(seventhTerrain);
-
-    Terrain* rightWall = new Terrain(1.f);
-    rightWall->setPosition(90 * 16 * scale, 6 * 16 * scale);
-    rightWall->setSize(sf::Vector2f(scale * 16 * 1, scale * 30 * 16));
-    collidables->push_back(rightWall);
-
-    Spike* spike1;
-    spike1 = new Spike;
-    spike1->setPosition(33 * 16 * scale, 25 * 16 * scale);
-    spike1->setSize(sf::Vector2f(3 * 16 * scale, 1 * 6 * scale));
-    drawables->push_back(spike1);
-    updatables->push_back(spike1);
-    spike1->setTexture(spikeText, false);
-
-    Spike* spike2;
-    spike2 = new Spike;
-    spike2->setPosition(57 * 16 * scale, 21 * 16 * scale);
-    spike2->setSize(sf::Vector2f(4 * 16 * scale, 1 * 6 * scale));
-    drawables->push_back(spike2);
-    updatables->push_back(spike2);
-    spike2->setTexture(spikeText, false);
-
-    Spike* spike3;
-    spike3 = new Spike;
-    spike3->setPosition(65 * 16 * scale, 20 * 16 * scale);
-    spike3->setSize(sf::Vector2f(3 * 16 * scale, 1 * 6 * scale));
-    drawables->push_back(spike3);
-    updatables->push_back(spike3);
-    spike3->setTexture(spikeText, false);
-
-    if (rand() % 2) {
-        Spike* spike4;
-        spike4 = new Spike;
-        spike4->setPosition(28 * 16 * scale, 24 * 16 * scale);
-        spike4->setSize(sf::Vector2f(1 * 16 * scale, 1 * 6 * scale));
-        drawables->push_back(spike4);
-        updatables->push_back(spike4);
-        spike4->setTexture(spikeText, false);
-    }
-
-    if (rand() % 2) {
-        Spike* spike5;
-        spike5 = new Spike;
-        spike5->setPosition(84 * 16 * scale, 21 * 16 * scale);
-        spike5->setSize(sf::Vector2f(2 * 16 * scale, 1 * 6 * scale));
-        drawables->push_back(spike5);
-        updatables->push_back(spike5);
-        spike5->setTexture(spikeText, false);
-    }
-
-    if (rand() % 2) {
-        Spike* spike6;
-        spike6 = new Spike;
-        spike6->setPosition(79 * 16 * scale, 20 * 16 * scale);
-        spike6->setSize(sf::Vector2f(1 * 16 * scale, 1 * 6 * scale));
-        drawables->push_back(spike6);
-        updatables->push_back(spike6);
-        spike6->setTexture(spikeText, false);
-    }
-
-    Platform* fallPlatform;
-    fallPlatform = new Platform(37*16*scale,23*16*scale,3*16*scale,16*scale);
-    collidables->push_back(fallPlatform);
-    drawables->push_back(fallPlatform);
-    updatables->push_back(fallPlatform);
-
-
-    Platform* fallPlatform2;
-    fallPlatform2 = new Platform(49 * 16 * scale, 20 * 16 * scale, 3 * 16 * scale, 16 * scale);
-    collidables->push_back(fallPlatform2);
-    drawables->push_back(fallPlatform2);
-    updatables->push_back(fallPlatform2);
-
-
-    Platform* fallPlatform3;
-    fallPlatform3 = new Platform(70 * 16 * scale, 19 * 16 * scale, 2 * 16 * scale, 16 * scale);
-    collidables->push_back(fallPlatform3);
-    drawables->push_back(fallPlatform3);
-    updatables->push_back(fallPlatform3);
-
-    if (rand() % 2) {
-        Platform* fallPlatform4;
-        fallPlatform4 = new Platform(28 * 16 * scale, 23 * 16 * scale, 1 * 16 * scale, 16 * scale);
-        collidables->push_back(fallPlatform4);
-        drawables->push_back(fallPlatform4);
-        updatables->push_back(fallPlatform4);
-    }
-    if (rand() % 2) {
-        Platform* fallPlatform5;
-        fallPlatform5 = new Platform(62 * 16 * scale, 18 * 16 * scale, 2 * 16 * scale, 16 * scale);
-        collidables->push_back(fallPlatform5);
-        drawables->push_back(fallPlatform5);
-        updatables->push_back(fallPlatform5);
-    }
-    if (rand() % 2) {
-        Platform* fallPlatform6;
-        fallPlatform6 = new Platform(81 * 16 * scale, 19 * 16 * scale, 16 * scale, 16 * scale);
-        collidables->push_back(fallPlatform6);
-        drawables->push_back(fallPlatform6);
-        updatables->push_back(fallPlatform6);
-    }
-
-
-    Player* player;
-    player = new Player(0, 1, 10);
-    player->setFillColor(sf::Color::Cyan);
-    player->setOrigin(0, 0);
-    player->setSize(sf::Vector2f(80, 80));
-    player->setPosition(8 * 16 * scale, 20 * 16 * scale);
-    pPlayer1 = player;
-    hittableList->push_back(player);
-    updatables->push_back(player);
-    drawables->push_back(player);
-
-
-    Player* player2 = NULL;
-    if (isPlayer2) {
-        player2 = new Player(1, 1, 10);
-        player2->setFillColor(sf::Color::Magenta);
-        //player2->setSize(sf::Vector2f(1, 1));
-        player2->setOrigin(0, 0);
-        player2->setSize(sf::Vector2f(80, 80));
-        player2->setPosition(9 * 16 * scale, 20 * 16 * scale);
-        pPlayer2 = player2;
-        hittableList->push_back(player2);
-        updatables->push_back(player2);
-        drawables->push_back(player2);
+    
+    if (false)
+    {
 
     }
+    else
+        createFromScratch(isPlayer2);
+    
 
-    EnemyMelee* inimigoMelee1;
-    inimigoMelee1 = new EnemyMelee;
-    inimigoMelee1->setPosition(23*16*scale, 25*16*scale);
-    hittableList->push_back(inimigoMelee1);
-    updatables->push_back(inimigoMelee1);
-    drawables->push_back(inimigoMelee1);
-
-    EnemyMelee* inimigoMelee2;
-    inimigoMelee2 = new EnemyMelee;
-    inimigoMelee2->setPosition(47 * 16 * scale, 22 * 16 * scale);
-    hittableList->push_back(inimigoMelee2);
-    updatables->push_back(inimigoMelee2);
-    drawables->push_back(inimigoMelee2);
-
-    EnemyMelee* inimigoMelee3;
-    inimigoMelee3 = new EnemyMelee;
-    inimigoMelee3->setPosition(75 * 16 * scale, 22 * 16 * scale);
-    hittableList->push_back(inimigoMelee3);
-    updatables->push_back(inimigoMelee3);
-    drawables->push_back(inimigoMelee3);
-
-
-    EnemyRanged* inimigoRanged1;
-    inimigoRanged1 = new EnemyRanged;
-    inimigoRanged1->setPosition(31 * 16 * scale, 24 * 16 * scale);
-    hittableList->push_back(inimigoRanged1);
-    updatables->push_back(inimigoRanged1);
-    drawables->push_back(inimigoRanged1);
-
-    EnemyRanged* inimigoRanged2;
-    inimigoRanged2 = new EnemyRanged;
-    inimigoRanged2->setPosition(55 * 16 * scale, 20 * 16 * scale);
-    hittableList->push_back(inimigoRanged2);
-    updatables->push_back(inimigoRanged2);
-    drawables->push_back(inimigoRanged2);
-
-    EnemyRanged* inimigoRanged3;
-    inimigoRanged3 = new EnemyRanged;
-    inimigoRanged3->setPosition(75 * 16 * scale, 20 * 16 * scale);
-    hittableList->push_back(inimigoRanged3);
-    updatables->push_back(inimigoRanged3);
-    drawables->push_back(inimigoRanged3);
 
     Camera* view;
     view = new Camera(window);
-    updatables->push_back(view);
-    view->setPlayer1(player);
+    entityList->push_back(view);
+    view->setPlayer1(pPlayer1);
     if (isPlayer2)
-        view->setPlayer2(player2);
+        view->setPlayer2(pPlayer2);
+
 
     endingOnRight = 1;
-    endX = x - 16*scale;
+    endX = x - SCALE;
 }
 
 Level1::~Level1() {
 
+}
+
+void Level1::loadTerrains()
+{
+    createTerrain(0, 0, 7 * SCALE, 26 * SCALE, 1.f); //leftWall
+    createTerrain(7 * SCALE, 26 * SCALE, 89 * SCALE, 2 * SCALE, 1.f); //floor
+    createTerrain(14 * SCALE, 24 * SCALE, 7 * SCALE, 2 * SCALE, 1.f); //firstTerrain
+    createTerrain(27 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE, 1.f); //secondTerrain
+    createTerrain(44 * SCALE, 25 * SCALE, 1 * SCALE, 1 * SCALE, 1.f); //littleBlock
+    createTerrain(45 * SCALE, 23 * SCALE, 45 * SCALE, 3 * SCALE, 1.f); //megaRetangulo
+    createTerrain(54 * SCALE, 22 * SCALE, 18 * SCALE, 1 * SCALE, 1.f); //thirdTerrain
+    createTerrain(61 * SCALE, 21 * SCALE, 8 * SCALE, 1 * SCALE, 1.f); //fourthTerrain
+    createTerrain(79 * SCALE, 21 * SCALE, 1 * SCALE, 2 * SCALE, 1.f); //fifthTerrain
+    createTerrain(84 * SCALE, 22 * SCALE, 6 * SCALE, 1 * SCALE, 1.f); //sixthTerrain
+    createTerrain(86 * SCALE, 21 * SCALE, 1 * SCALE, 1 * SCALE, 1.f); //seventhTerrain
+    createTerrain(90 * SCALE, 6 * SCALE, 1 * SCALE, 30 * SCALE, 1.f); //rightWall
+}
+
+void Level1::createFromScratch(const bool isPlayer2)
+{
+    createSpike(33 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE / 2);
+    createSpike(57 * SCALE, 21 * SCALE, 4 * SCALE, 1 * SCALE / 2);
+    createSpike(65 * SCALE, 20 * SCALE, 3 * SCALE, 1 * SCALE / 2);
+    if (rand() % 2)
+        createSpike(28 * SCALE, 24 * SCALE, 1 * SCALE, 1 * SCALE / 2);
+    if (rand() % 2)
+        createSpike(84 * SCALE, 21 * SCALE, 2 * SCALE, 1 * SCALE / 2);
+    if (rand() % 2)
+        createSpike(79 * SCALE, 20 * SCALE, 1 * SCALE, 1 * SCALE / 2);
+
+
+    createPlatform(37 * SCALE, 23 * SCALE, 3 * SCALE, SCALE);
+    createPlatform(49 * SCALE, 20 * SCALE, 3 * SCALE, SCALE);
+    createPlatform(70 * SCALE, 19 * SCALE, 2 * SCALE, SCALE);
+    if (rand() % 2)
+        createPlatform(28 * SCALE, 23 * SCALE, 1 * SCALE, SCALE);
+    if (rand() % 2)
+        createPlatform(62 * SCALE, 18 * SCALE, 2 * SCALE, SCALE);
+    if (rand() % 2)
+        createPlatform(81 * SCALE, 19 * SCALE, SCALE, SCALE);
+
+
+    createPlayer1(8 * SCALE, 20 * SCALE, 0);
+
+    if (isPlayer2)
+        createPlayer2(9 * SCALE, 20 * SCALE, 0);
+
+    createEnemyMelee(23 * SCALE, 25 * SCALE, 0);
+    createEnemyMelee(47 * SCALE, 22 * SCALE, 0);
+    createEnemyMelee(75 * SCALE, 22 * SCALE, 0);
+
+    createEnemyRanged(31 * SCALE, 24 * SCALE, 0);
+    createEnemyRanged(55 * SCALE, 20 * SCALE, 0);
+    createEnemyRanged(75 * SCALE, 20 * SCALE, 0);
 }
 
 void Level1::levelCompleteHandler()
@@ -294,4 +128,29 @@ void Level1::levelCompleteHandler()
     sceneManInstance->pop();
     //Deletar level1
     sceneManInstance->push(level2);
+}
+
+void Level1::levelCompleteChecker()
+{
+    if (pPlayer1)
+    {
+        if (endingOnRight)
+        {
+            if (pPlayer1->getPosition().x >= endX)
+                levelCompleteHandler();
+        }
+        else if (pPlayer1->getPosition().x <= endX)
+            levelCompleteHandler();
+    }
+
+    if (pPlayer2)
+    {
+        if (endingOnRight)
+        {
+            if (pPlayer2->getPosition().x >= endX)
+                levelCompleteHandler();
+        }
+        else if (pPlayer2->getPosition().x <= endX)
+            levelCompleteHandler();
+    }
 }

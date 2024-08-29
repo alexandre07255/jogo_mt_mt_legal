@@ -3,10 +3,11 @@
 
 namespace Entities
 {
-	class Terrain : public Collidable, public MyDrawable
+	class Terrain : public Collidable, public Entity
 	{
 	public:
 		Terrain(float frict);
+		void execute();
 		virtual sf::FloatRect getBounds();
 		void collisionSolution(Entity* pE);
 	};

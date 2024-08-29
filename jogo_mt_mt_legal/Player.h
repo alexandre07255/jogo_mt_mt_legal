@@ -31,7 +31,7 @@ namespace Entities
 			bool hasAttacked;
 			bool wasAttackPressed;
 		public:
-			Player(const bool isPlayer2, const bool ally, const int health);
+			Player(const bool isPlayer2, const int health = MAX_HP);
 			void execute();
 			void executeFREE();
 			void executeATKCANCEL();

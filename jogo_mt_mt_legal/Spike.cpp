@@ -11,6 +11,10 @@ Spike::Spike():
 	firstStep(1),
 	Obstacle()
 {
+	sf::Texture* spikeText = new sf::Texture();
+	spikeText->loadFromFile("spritesheets/s_spike.png");
+
+	setTexture(spikeText);
 	//getTexture
 	if (pTexture)
 		pTexture->setRepeated(1);

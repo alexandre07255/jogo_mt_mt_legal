@@ -2,6 +2,7 @@
 using namespace Entities;
 
 
+
 Entity::Entity(): Being(), onAir(1), frictionFelt(1)
 {
 	pShape = new sf::RectangleShape();
@@ -115,8 +116,14 @@ const float Entity::yMid() const
 {
 	return yPos + height / 2;
 }
+
+
+void Entity::setFillColor(const sf::Color & col) {
+	pShape->setFillColor(col);
 }
 
-void Entity::setColorBeing(sf::Color col) {
-	pShape->setFillColor(col);
+void Entity::setTexture(sf::Texture* tex)
+{
+	pTexture = tex;
+	pShape->setTexture(tex);
 }

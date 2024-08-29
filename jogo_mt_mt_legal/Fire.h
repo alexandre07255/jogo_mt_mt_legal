@@ -17,6 +17,7 @@ namespace Entities
 			void setLingeringTime(const int time);
 			void activate();
 			void deactivate();
+			void toObstacle();
 		};
 	}
 }
