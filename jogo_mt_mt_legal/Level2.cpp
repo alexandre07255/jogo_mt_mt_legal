@@ -29,7 +29,7 @@ Level2::Level2(bool isPlayer2) :Level() {
     srand(time(NULL));
 
     sf::Texture* background = new sf::Texture();
-    background->loadFromFile("spritesheets/fase1EBA.png");
+    background->loadFromFile("spritesheets/fase2EBA.png");
 
 
     float x = background->getSize().x * SCALE / 16;
@@ -65,13 +65,13 @@ Level2::~Level2() {
 
 void Level2::loadTerrains()
 {
-    createTerrain(0, 0, 7 * SCALE, 26 * SCALE, 1.f); //leftWall
+    createTerrain(0, 0, 6 * SCALE, 25 * SCALE, 1.f); //leftWall
     createTerrain(7 * SCALE, 26 * SCALE, 89 * SCALE, 2 * SCALE, 1.f); //floor
-    createTerrain(14 * SCALE, 24 * SCALE, 7 * SCALE, 2 * SCALE, 1.f); //firstTerrain
-    createTerrain(27 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE, 1.f); //secondTerrain
-    createTerrain(44 * SCALE, 25 * SCALE, 1 * SCALE, 1 * SCALE, 1.f); //littleBlock
-    createTerrain(45 * SCALE, 23 * SCALE, 45 * SCALE, 3 * SCALE, 1.f); //megaRetangulo
-    createTerrain(54 * SCALE, 22 * SCALE, 18 * SCALE, 1 * SCALE, 1.f); //thirdTerrain
+    createTerrain(18 * SCALE, 24 * SCALE, 1 * SCALE, 2 * SCALE, 1.f); //firstPillar
+    createTerrain(21 * SCALE, 23 * SCALE, 1 * SCALE, 3 * SCALE, 1.f); //secondPillar
+    createTerrain(27 * SCALE, 24 * SCALE, 24 * SCALE, 2 * SCALE, 1.f); //bigRetangulo
+    createTerrain(28 * SCALE, 23 * SCALE, 23 * SCALE, 1 * SCALE, 1.f); //tripa
+    createTerrain(44 * SCALE, 21 * SCALE, 3 * SCALE, 2 * SCALE, 1.f); //retangulo//parei aqui
     createTerrain(61 * SCALE, 21 * SCALE, 8 * SCALE, 1 * SCALE, 1.f); //fourthTerrain
     createTerrain(79 * SCALE, 21 * SCALE, 1 * SCALE, 2 * SCALE, 1.f); //fifthTerrain
     createTerrain(84 * SCALE, 22 * SCALE, 6 * SCALE, 1 * SCALE, 1.f); //sixthTerrain
