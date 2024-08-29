@@ -2,7 +2,6 @@
 #include "Camera.h"
 #include <iostream>
 using namespace Entities::Characters;
-using namespace Entities;
 
 
 Camera::Camera(sf::RenderWindow* renderer) :
@@ -61,4 +60,3 @@ void Camera::execute()
 	window->setView(view);
 }
 
-void Camera::save(LevelSave* save) { }

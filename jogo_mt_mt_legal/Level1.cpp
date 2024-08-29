@@ -54,7 +54,7 @@ Level1::Level1(bool isPlayer2):Level(), endX(0), endingOnRight(1) {
 
     Camera* view;
     view = new Camera(window);
-    entityList->push_back(view);
+    camera = view;
     view->setPlayer1(pPlayer1);
     if (isPlayer2)
         view->setPlayer2(pPlayer2);
