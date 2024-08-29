@@ -35,13 +35,13 @@ Player::Player(const bool isPlayer2, const int health) :
 
 void Player::execute() {
 
-	/*if (hp <= 0 && !player2) {
+	if (hp <= 0 && !player2) {
 		ScoreSave* save = new ScoreSave;
 		save->savePlayer(getPoints());
 
 		SceneManager* sceneInstance = SceneManager::getInstance();
 		sceneInstance->pop();
-	}*/
+	}
 
 	InputManager* inputInstance = InputManager::getInstance();
 	CollisionManager* collisionInstance = CollisionManager::getInstance();
