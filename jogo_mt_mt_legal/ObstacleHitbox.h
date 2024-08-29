@@ -27,7 +27,6 @@ namespace Entities
 			void setDamage(const int dmg);
 			void setCooldown(const int cd);
 			void execute();
-			void save();
 			void hitSolution(Entities::Characters::Hittable* hit);
 		};
 	}

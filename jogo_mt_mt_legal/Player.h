@@ -10,8 +10,8 @@ namespace Entities
 		private:
 
 			static const int MAX_HP;
-			static const float MAX_HORIZONTAL_SPEED;
-			static const float MAX_VERTICAL_SPEED;
+			static const float MAX_HORIZONTAL_VELOCITY;
+			static const float MAX_VERTICAL_VELOCITY;
 			static const float ACCELARATION;
 			static const int MAX_JUMP_BUFFER;
 			static const float JUMP_STRENGTH;

@@ -27,15 +27,15 @@ namespace Entities
 			static const int COOLDOWN;
 			static const float MAX_HEIGHT;
 			static const float FLY_STRENGTH;
-			static const float FOLLOW_MAX_HORIZONTAL_SPEED;
+			static const float FOLLOW_MAX_HORIZONTAL_VELOCITY;
 			static const float FOLLOW_ACCELARATION;
 			static const float WALK_ACCELARATION;
-			static const float WALK_MAX_HORIZONTAL_SPEED;
+			static const float WALK_MAX_HORIZONTAL_VELOCITY;
 		public:
 			EnemyRanged();
 			void execute();
 		private:
-			void projectileCalculations(Projectile* proj, const float absHorSpeed, Hittable* target);
+			void projectileCalculations(Projectile* proj, const float absHorVelocity, Hittable* target);
 			void executeFOLLOWING();
 			void executePATROLLING();
 			void executeATTACK();

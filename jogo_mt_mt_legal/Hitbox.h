@@ -15,7 +15,8 @@ namespace Entities
 		public:
 			Hitbox();
 			void setTarget(const bool tar);
-			void setOwner(Hittable* own);
+			void setOwner(Entities::Characters::Hittable* own);
+			void save();
 			Entities::Characters::Hittable* getOwner();
 			void setRelativePosition(sf::Vector2f rel);
 			void setDuration(const int dur);

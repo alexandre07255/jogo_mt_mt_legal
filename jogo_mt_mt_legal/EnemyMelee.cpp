@@ -41,41 +41,41 @@ void EnemyMelee::executePATROLLING() {
     else {
         if (direction) {
             //decidiu andar para direita
-            if (horizontalSpeed < WALK_MAX_HORIZONTAL_SPEED) {
-                horizontalSpeed += WALK_ACCELARATION;
+            if (horizontalVelocity < WALK_MAX_HORIZONTAL_VELOCITY) {
+                horizontalVelocity += WALK_ACCELARATION;
             }
             else {
-                horizontalSpeed = WALK_MAX_HORIZONTAL_SPEED;
+                horizontalVelocity = WALK_MAX_HORIZONTAL_VELOCITY;
             }
             facingRight = 1;
         }
         else {
             //decidiu andar para a esquerda
-            if (horizontalSpeed > -WALK_MAX_HORIZONTAL_SPEED) {
-                horizontalSpeed -= WALK_ACCELARATION;
+            if (horizontalVelocity > -WALK_MAX_HORIZONTAL_VELOCITY) {
+                horizontalVelocity -= WALK_ACCELARATION;
             }
             else {
-                horizontalSpeed = -WALK_MAX_HORIZONTAL_SPEED;
+                horizontalVelocity = -WALK_MAX_HORIZONTAL_VELOCITY;
             }
             facingRight = 0;
         }
         walkingBuffer--;
     }
 
-    if (abs(horizontalSpeed) > frictionFelt) {
-        horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * frictionFelt;
+    if (abs(horizontalVelocity) > frictionFelt) {
+        horizontalVelocity -= ((horizontalVelocity > 0) - (horizontalVelocity < 0)) * frictionFelt;
     }
     else
-        horizontalSpeed = 0;
+        horizontalVelocity = 0;
 
-    verticalSpeed += 1;
+    verticalVelocity += 1;
 
     if (!onAir && checkOnLedge()) {
-        horizontalSpeed = 0;
+        horizontalVelocity = 0;
     }
 
-    vetorDesloc.x *= horizontalSpeed;
-    vetorDesloc.y *= verticalSpeed;
+    vetorDesloc.x *= horizontalVelocity;
+    vetorDesloc.y *= verticalVelocity;
 
     move(vetorDesloc);
 
@@ -108,8 +108,6 @@ void EnemyMelee::execute() {
         break;
     }
 
-    instance->testCollison(this);
-    //instance->testHittableCollision(this);
 
     if (fireRemaining)
     {
@@ -140,20 +138,20 @@ void EnemyMelee::executeFOLLOWING() {
     sf::Vector2f vetorDesloc(1, 1);
 
     if (followingPlayer->getPosition().x > getPosition().x + getSize().x) {
-        if (horizontalSpeed < FOLLOW_MAX_HORIZONTAL_SPEED) {
-            horizontalSpeed += FOLLOW_ACCELARATION;
+        if (horizontalVelocity < FOLLOW_MAX_HORIZONTAL_VELOCITY) {
+            horizontalVelocity += FOLLOW_ACCELARATION;
         }
         else {
-            horizontalSpeed = FOLLOW_MAX_HORIZONTAL_SPEED;
+            horizontalVelocity = FOLLOW_MAX_HORIZONTAL_VELOCITY;
         }
         //facingRight = 1;
     }
     else if (followingPlayer->getPosition().x + followingPlayer->getSize().x < getPosition().x){
-        if (horizontalSpeed > -FOLLOW_MAX_HORIZONTAL_SPEED) {
-            horizontalSpeed -= FOLLOW_ACCELARATION;
+        if (horizontalVelocity > -FOLLOW_MAX_HORIZONTAL_VELOCITY) {
+            horizontalVelocity -= FOLLOW_ACCELARATION;
         }
         else {
-            horizontalSpeed = -FOLLOW_MAX_HORIZONTAL_SPEED;
+            horizontalVelocity = -FOLLOW_MAX_HORIZONTAL_VELOCITY;
         }
         //facingRight = 0;
     }
@@ -163,7 +161,7 @@ void EnemyMelee::executeFOLLOWING() {
     if (!attacking && (followingPlayer->getPosition().y + followingPlayer->getSize().y) < (getPosition().y + getSize().y)) {
         if (!onAir)
         {
-            verticalSpeed = -JUMP_STRENGTH;
+            verticalVelocity = -JUMP_STRENGTH;
             onAir = 1;
         }
         else {
@@ -171,18 +169,18 @@ void EnemyMelee::executeFOLLOWING() {
         }
     }
 
-    if (abs(horizontalSpeed) > frictionFelt) {
-        horizontalSpeed -= ((horizontalSpeed > 0) - (horizontalSpeed < 0)) * frictionFelt;
+    if (abs(horizontalVelocity) > frictionFelt) {
+        horizontalVelocity -= ((horizontalVelocity > 0) - (horizontalVelocity < 0)) * frictionFelt;
     }
     else
-        horizontalSpeed = 0;
+        horizontalVelocity = 0;
 
-    verticalSpeed += 1;
+    verticalVelocity += 1;
 
     if (attacking && stun < attackEndLag)
-        horizontalSpeed = 0;
+        horizontalVelocity = 0;
 
-    move(horizontalSpeed - (attacking * 0.85f) * horizontalSpeed, verticalSpeed);
+    move(horizontalVelocity - (attacking * 0.85f) * horizontalVelocity, verticalVelocity);
 
     if (attacking && stun <= 0)
         attacking = 0;
@@ -307,10 +305,10 @@ const bool EnemyMelee::checkOnLedge() const{
 
 }
 
-const float EnemyMelee::FOLLOW_MAX_HORIZONTAL_SPEED(10.0f);
+const float EnemyMelee::FOLLOW_MAX_HORIZONTAL_VELOCITY(10.0f);
 const float EnemyMelee::FOLLOW_ACCELARATION(2.0f);
 
 const float EnemyMelee::WALK_ACCELARATION(1.5f);
-const float EnemyMelee::WALK_MAX_HORIZONTAL_SPEED(6.0f);
+const float EnemyMelee::WALK_MAX_HORIZONTAL_VELOCITY(6.0f);
 
 const float EnemyMelee::JUMP_STRENGTH(20.0f);

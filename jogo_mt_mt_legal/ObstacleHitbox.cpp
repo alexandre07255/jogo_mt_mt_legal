@@ -83,8 +83,6 @@ void ObstacleHitbox::execute()
 	}
 }
 
-void ObstacleHitbox::save() { }
-
 void ObstacleHitbox::ajustToRelativePosition()
 {
 	move(relativePosition);

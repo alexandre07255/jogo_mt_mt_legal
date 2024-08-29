@@ -151,7 +151,7 @@ float Platform::HarmonicMovement(float range, float mass, float elasticity, floa
 
 void Platform::collisionSolution(Entity* pE) {
 	//if(!onTop)
-	//	move(0, 1.f * pE->getVerticalSpeed());
+	//	move(0, 1.f * pE->getVerticalVelocity());
 	//onTop = true;
 	pE->setFriction(friction);
 }

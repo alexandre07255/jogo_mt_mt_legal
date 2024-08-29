@@ -88,9 +88,9 @@ void Projectile::execute()
     }
     else
     {
-        verticalSpeed += GRAVITY;
+        verticalVelocity += GRAVITY;
 
-        move(horizontalSpeed, verticalSpeed);
+        move(horizontalVelocity, verticalVelocity);
 
         Vector2f preColli = getPosition();
 
