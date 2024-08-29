@@ -312,3 +312,7 @@ const float EnemyMelee::WALK_ACCELARATION(1.5f);
 const float EnemyMelee::WALK_MAX_HORIZONTAL_VELOCITY(6.0f);
 
 const float EnemyMelee::JUMP_STRENGTH(20.0f);
+
+void EnemyMelee::save(LevelSave* save) {
+    save->addMeleeEnemy(this);
+}

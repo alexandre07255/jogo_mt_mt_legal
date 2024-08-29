@@ -13,6 +13,8 @@ namespace Entities
 		Support(Obstacles::Platform* plat, const float height);
 		void setPlatform(Obstacles::Platform* plat);
 		void execute();
+
+		void save(LevelSave* save);
 	};
 }
 

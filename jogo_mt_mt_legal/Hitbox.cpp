@@ -15,9 +15,10 @@ Hitbox::Hitbox():
 	duration(1)
 {
 	Scene* activeScene = SceneManager::getInstance()->top();
-	activeScene->addEntity(this);
+	activeScene->addUpdatable(this);
 
 	setFillColor(sf::Color::Yellow);
+	activeScene->addEntity(this);
 }
 
 void Hitbox::setTarget(const bool tar)
@@ -35,8 +36,6 @@ Hittable* Hitbox::getOwner()
 	return owner;
 }
 
-void Hitbox::save() { }
-
 void Hitbox::setRelativePosition(sf::Vector2f rel)
 {
 	relativePosition = rel;
@@ -46,3 +45,5 @@ void Hitbox::setDuration(const int dur)
 {
 	duration = dur;
 }
+
+void Hitbox::save(LevelSave* save){}

@@ -21,6 +21,7 @@ namespace Entities
 		void setRelativePosition(sf::Vector2f rel);
 		void setOwner(Entities::Characters::Hittable* own);
 		void execute();
+		void save(LevelSave* save);
 	};
 }
 

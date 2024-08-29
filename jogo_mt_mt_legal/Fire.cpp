@@ -68,3 +68,7 @@ void Fire::toObstacle()
 		hitbox = NULL;
 	}
 }
+
+void Fire::save(LevelSave* save) {
+	save->addFire(this);
+}

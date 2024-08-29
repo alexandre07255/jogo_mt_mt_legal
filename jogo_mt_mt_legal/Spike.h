@@ -15,6 +15,8 @@ namespace Entities
 			void activate();
 			void deactivate();
 			void toObstacle();
+
+			void save(LevelSave* save);
 		};
 	}
 }

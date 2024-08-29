@@ -38,6 +38,7 @@ namespace Entities
 			void executeATTACK();
 			void executeHITSTUN();
 			void attack();
+			void save(LevelSave* save);
 		};
 	}
 }

@@ -298,3 +298,7 @@ const float Player::ACCELARATION(2.0);
 const int Player::MAX_HP(20);
 
 const int Player::MAX_ATTACK_BUFFER(20);
+
+void Player::save(LevelSave* save) {
+	save->addPlayer(this, player2);
+}
