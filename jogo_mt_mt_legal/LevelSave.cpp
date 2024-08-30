@@ -5,7 +5,7 @@
 
 LevelSave::LevelSave(Scenes::Level* bound) {
 	boundLevel = bound;
-	//saveJson["isPlayer2"].push_back(false);
+	saveJson["isPlayer2"][0] = false;
 }
 LevelSave::LevelSave() {
 	boundLevel = NULL;
@@ -35,7 +35,7 @@ void LevelSave::addFire(Entities::Obstacles::Fire* obst) {
 
 void LevelSave::addPlayer(Entities::Characters::Player* player, bool player2) {
 	if (player2) {
-		//saveJson["isPlayer2"].push_back(true);
+		saveJson["isPlayer2"][0] = true;
 		saveJson["player2"].push_back({ {"x",player->getXPosition()},{"y",player->getYPosition()},{"hp",player->getHp()},{"points",player->getPoints()} });
 	}
 	else {
@@ -61,9 +61,9 @@ void LevelSave::loadLevel(bool level2) {
 	else {
 		saveJson = readJson("saveLevel1.json");
 	}
-	//if (saveJson["isPlayer2"]) {
-	//	isPlayer2 = true;
-	//}
+	if (saveJson["isPlayer2"][0]) {
+		isPlayer2 = true;
+	}
 
 	if (level2) {
 		Scenes::Level2* level = new Scenes::Level2(isPlayer2, true);
