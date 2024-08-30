@@ -24,6 +24,12 @@ FinalScreen::FinalScreen(int _score, bool death) {
 	save = new ScoreSave;
 }
 
+FinalScreen::~FinalScreen()
+{
+	delete text;
+	delete save;
+}
+
 void FinalScreen::execute() {
 	entityList->drawAll();
 	if (!save->appendLetter()) {

@@ -35,6 +35,7 @@ namespace Entities
 			static const float WALK_MAX_HORIZONTAL_VELOCITY;
 		public:
 			EnemyRanged();
+			~EnemyRanged();
 			void execute();
 			void save(LevelSave* save);
 		private:

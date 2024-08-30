@@ -15,6 +15,8 @@ Fire::Fire() :
 
 }
 
+Fire::~Fire() { }
+
 void Fire::statusEffect(Hittable* hit)
 {
 	hit->setFireRemaining(lingeringTime);
@@ -49,7 +51,7 @@ void Fire::activate()
 	hitbox->setDamage(1);
 	hitbox->setRelativePosition(sf::Vector2f(0.f, 0.f));
 	hitbox->setPosition(getXPosition(), getYPosition());
-	hitbox->ajustToRelativePosition();
+	hitbox->adjustToRelativePosition();
 }
 
 void Fire::deactivate()

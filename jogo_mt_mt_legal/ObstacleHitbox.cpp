@@ -83,7 +83,7 @@ void ObstacleHitbox::execute()
 	}
 }
 
-void ObstacleHitbox::ajustToRelativePosition()
+void ObstacleHitbox::adjustToRelativePosition()
 {
 	move(relativePosition);
 }

@@ -25,7 +25,7 @@ using namespace Entities::Obstacles;
 
 
 
-Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL), obstacleList(NULL), camera()
+Level::Level(): level2(0), enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL), obstacleList(NULL), camera()
 {
     enemyVector = new vector<Enemy*>;
     collidables = new list<Collidable*>;
@@ -35,6 +35,20 @@ Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NU
 
 Level::~Level() //TODO
 {
+	if (enemyVector)
+		delete enemyVector;
+	if (collidables)
+		delete collidables;
+	if (supportVector)
+		delete supportVector;
+	if (obstacleList)
+		delete obstacleList;
+	if (pPlayer1)
+		delete pPlayer1;
+	if (pPlayer2)
+		delete pPlayer2;
+	if (camera)
+		delete camera;
 }
 
 void Level::execute()

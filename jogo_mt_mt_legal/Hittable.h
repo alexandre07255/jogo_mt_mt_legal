@@ -14,7 +14,6 @@ namespace Entities {
 			int points;
 			int fireCont;
 			int fireRemaining;
-			bool canBeCollided;
 		public:
 			Hittable(const bool ally, const int health);
 			virtual  ~Hittable();
@@ -33,10 +32,9 @@ namespace Entities {
 			const int getStun() const;
 			const int getState() const;
 			const bool getIsAlly() const;
-			const bool getCanBeCollided() const;
 			void dealDamage(const int dmg);
-			int getHp();
-			int getPoints();
+			const int getHp() const;
+			const int getPoints() const;
 			void setPoints(int p);
 
 			virtual void execute() = 0;

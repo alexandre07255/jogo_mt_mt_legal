@@ -10,6 +10,7 @@ namespace Entities {
 		static sf::Font getFont();
 	public:
 		TextContainer();
+		~TextContainer();
 		void draw();
 		void execute();
 		void save(LevelSave* save);

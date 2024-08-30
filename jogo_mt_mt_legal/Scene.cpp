@@ -9,6 +9,11 @@ Scene::Scene() {
 	entityList = new EntityList;
 }
 
+Scene::~Scene()
+{
+	delete entityList;
+}
+
 void Scene::draw() {
 	entityList->drawAll();
 }

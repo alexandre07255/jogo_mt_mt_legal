@@ -91,6 +91,8 @@ void AttackHitbox::execute()
 {
 	if ( !isPersistent && ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || (doesATKCANCEL && owner->getState() != Hittable::ATKCANCEL) ) ) ) )
 	{
+		Scene* activeScene = SceneManager::getInstance()->top();
+		activeScene->removeEntity(this);
 		delete this;
 		return;
 	}

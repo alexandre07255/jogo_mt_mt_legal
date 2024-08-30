@@ -10,6 +10,7 @@ namespace Scenes
 		void escChecker();
 	public:
 		Scene();
+		virtual ~Scene();
 
 		void draw();
 		void execute();

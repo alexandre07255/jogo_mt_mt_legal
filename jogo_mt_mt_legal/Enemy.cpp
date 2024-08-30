@@ -21,6 +21,11 @@ lesserLimitMultR(3.0/2), upperLimitMultL(3.0/2), lesserLimitMultL(3.0/4), search
 	timer = 0;
 }
 
+Enemy::~Enemy()
+{
+	followingPlayer = NULL;
+}
+
 Player* Enemy::searchPlayer() const{
 	CollisionManager* instance = CollisionManager::getInstance();
 	SceneManager* LevelInstance = SceneManager::getInstance();

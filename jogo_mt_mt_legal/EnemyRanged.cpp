@@ -29,6 +29,11 @@ nearestCollidableCont(NEAREST_COLLIDABLE_COOLDOWN)
 	lesserLimitMultL = 1.0 / 2;
 }
 
+EnemyRanged::~EnemyRanged()
+{
+
+}
+
 void EnemyRanged::execute()
 {
     CollisionManager* instance = CollisionManager::getInstance();

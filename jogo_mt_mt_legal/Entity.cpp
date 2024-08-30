@@ -3,12 +3,15 @@ using namespace Entities;
 
 
 
-Entity::Entity(): Being(), onAir(1), frictionFelt(1), xPos(0.f), yPos(0.f), width(1.f), height(1.f)
+Entity::Entity(): Being(), horizontalVelocity(0), verticalVelocity(0), onAir(1), frictionFelt(1), xPos(0.f), yPos(0.f), width(1.f), height(1.f)
 {
 	pShape = new sf::RectangleShape();
 }
 
-Entity::~Entity() { }
+Entity::~Entity()
+{
+	delete pShape;
+}
 
 const bool Entity::getOnAir() const
 {

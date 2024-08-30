@@ -10,6 +10,11 @@ TextContainer::TextContainer() {
 	text->setFillColor(sf::Color::Red);
 }
 
+TextContainer::~TextContainer()
+{
+	delete text;
+}
+
 void TextContainer::draw() {
 	pGG->drawBeing(this);
 	pGG->drawText(*text);

@@ -12,6 +12,7 @@ namespace Entities
 			int lingeringTime;
 		public:
 			Fire();
+			~Fire();
 			void execute();
 			void statusEffect(Characters::Hittable* hit);
 			void setLingeringTime(const int time);

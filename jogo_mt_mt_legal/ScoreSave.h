@@ -11,6 +11,7 @@ private:
 	bool keyPressed;
 public:
 	ScoreSave();
+	~ScoreSave();
 	void savePlayer(int score);
 	void addScore(std::string name, int score);
 	//std::string listen();

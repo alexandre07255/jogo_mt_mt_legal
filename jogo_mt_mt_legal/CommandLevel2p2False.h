@@ -7,6 +7,7 @@ class CommandLevel2p2False : public Command
 {
 public:
 	CommandLevel2p2False(Scenes::Menu* _bound);
+	~CommandLevel2p2False();
 	void execute();
 };
 

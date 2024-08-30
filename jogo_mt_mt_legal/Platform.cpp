@@ -26,6 +26,12 @@ firstStep(true), minimalHeight(50.f), mass(10.f), time(0),deformation(0),onTop(f
 	friction = 1.f;
 }
 
+Platform::~Platform()
+{
+	support = NULL;
+	hitboxRight = NULL;
+}
+
 sf::FloatRect Platform::getBounds() {
 	return getGlobalBounds();
 }
@@ -122,10 +128,10 @@ void Platform::toObstacle()
 	if (isActive)
 	{
 		hitbox->setPosition(getXPosition(), getYPosition());
-		hitbox->ajustToRelativePosition();
+		hitbox->adjustToRelativePosition();
 
 		hitboxRight->setPosition(getXPosition(), getYPosition());
-		hitboxRight->ajustToRelativePosition();
+		hitboxRight->adjustToRelativePosition();
 
 		CollisionManager* collisionInstance = CollisionManager::getInstance();
 		collisionInstance->testHit(1, hitbox);

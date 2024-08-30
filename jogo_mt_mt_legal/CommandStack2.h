@@ -6,7 +6,7 @@ class CommandStack2 : public Command
 {
 public:
 	CommandStack2(Scenes::Menu* _bound);
+	~CommandStack2();
 	void execute();
-
 };
 

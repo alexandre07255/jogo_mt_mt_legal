@@ -13,6 +13,7 @@ namespace Entities
 		bool firstStep;
 	public:
 		Projectile();
+		~Projectile();
 		void setHorKnockback(const float horKnock);
 		void setVerKnockback(const float verKnock);
 		void setDamage(const int dmg);

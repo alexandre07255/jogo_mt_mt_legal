@@ -4,6 +4,8 @@ using namespace Scenes;
 
 CommandLevel2p2False::CommandLevel2p2False(Menu* _bound) :Command(_bound) {}
 
+CommandLevel2p2False::~CommandLevel2p2False() { }
+
 void CommandLevel2p2False::execute() {
 	static_cast<MainMenu*>(bound)->stackLevel2(false);
 }

@@ -12,6 +12,7 @@ namespace Entities
 		static int MAXHEALTH;
 	public:
 		Support(Obstacles::Platform* plat, const float sHeight);
+		~Support();
 		void setPlatform(Obstacles::Platform* plat);
 		void execute();
 

@@ -48,6 +48,11 @@ ScoreSave::ScoreSave(){
 	name = new std::string;
 }
 
+ScoreSave::~ScoreSave()
+{
+	delete name;
+}
+
 bool ScoreSave::appendLetter() {
 	Managers::InputManager* instance = Managers::InputManager::getInstance();
 	sf::RenderWindow* window = pGraphic->getWindow();

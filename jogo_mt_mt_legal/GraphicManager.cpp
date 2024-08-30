@@ -13,6 +13,7 @@ GraphicManager::GraphicManager() {
 
 GraphicManager::~GraphicManager() {
 	delete window;
+	instance = NULL;
 }
 
 const bool GraphicManager::isWindowOpen(){
