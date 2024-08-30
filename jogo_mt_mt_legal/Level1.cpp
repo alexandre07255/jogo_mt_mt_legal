@@ -21,7 +21,7 @@ using namespace Entities::Characters;
 
 
 
-Level1::Level1(bool isPlayer2):Level(), endX(0), endingOnRight(1) {
+Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRight(1) {
     GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
@@ -43,11 +43,7 @@ Level1::Level1(bool isPlayer2):Level(), endX(0), endingOnRight(1) {
 
     loadTerrains();
 
-    if (false)
-    {
-
-    }
-    else
+    if (!isBeingLoaded)
         createFromScratch(isPlayer2);
     
 
@@ -135,7 +131,7 @@ void Level1::createFromScratch(const bool isPlayer2)
 
 void Level1::levelCompleteHandler()
 {
-    Level2* level2 = new Level2(pPlayer2 != NULL);
+    Level2* level2 = new Level2(pPlayer2 != NULL,false);
     SceneManager* sceneManInstance = SceneManager::getInstance();
     sceneManInstance->pop();
     //Deletar level1

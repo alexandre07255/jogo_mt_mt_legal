@@ -117,7 +117,7 @@ void MainMenu::stackLevel1(bool player2) {
 	SceneManager* instance = SceneManager::getInstance();
 	//cria level1 aqui? mainmenu teria um ponteiro para level1? de fato, são muitas perguntas, e poucas respostas
 	Level1* level;
-	level = new Level1(player2);
+	level = new Level1(player2,false);
 
 	stackScene(level);
 
@@ -126,7 +126,7 @@ void MainMenu::stackLevel1(bool player2) {
 void MainMenu::stackLevel2(bool player2) {
 	
 	Level2* level;
-	level = new Level2(player2);
+	level = new Level2(player2,false);
 
 	stackScene(level);
 }
