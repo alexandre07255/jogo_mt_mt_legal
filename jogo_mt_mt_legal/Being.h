@@ -16,7 +16,6 @@ public:
 	virtual void draw();
 	const int getId() const;
 	sf::RectangleShape* getShape();
-	void setShape(sf::RectangleShape* rect);
 	sf::Texture* getTexture();
 	void setTexture(sf::Texture* ptext);
 	

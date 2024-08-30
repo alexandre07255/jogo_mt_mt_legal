@@ -9,11 +9,7 @@ Camera::Camera(sf::RenderWindow* renderer) :
 	player2(NULL)
 {
 	setWindow(renderer);
-	xDefault = renderer->getSize().x/2;
-	yDefault = renderer->getSize().y / 2;
 	view.setSize((sf::Vector2f)window->getSize());
-	//setSize(sf::Vector2f(xDefault, yDefault));
-	//setViewport(sf::FloatRect(0, 0, 0.5f, 0.5f));
 }
 
 Camera::~Camera()

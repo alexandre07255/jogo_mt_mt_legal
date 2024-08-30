@@ -25,10 +25,6 @@ sf::RectangleShape* Being::getShape() {
 	return pShape;
 }
 
-void Being::setShape(sf::RectangleShape* rect) {
-	pShape = rect;
-}
-
 sf::Texture* Being::getTexture() {
 	return pTexture;
 }

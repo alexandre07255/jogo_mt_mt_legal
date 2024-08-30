@@ -9,8 +9,6 @@ private:
 	Entities::Characters::Player* player2;
 	sf::View view;
 	sf::RenderWindow* window;
-	float xDefault;
-	float yDefault;
 public:
 	Camera(sf::RenderWindow* renderer);
 	~Camera();

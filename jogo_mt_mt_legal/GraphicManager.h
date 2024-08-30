@@ -8,8 +8,8 @@ namespace Managers {
 	private:
 		sf::RenderWindow* window;
 		static GraphicManager* instance;
-	public:
 		GraphicManager();
+	public:
 		~GraphicManager();
 		const bool isWindowOpen();
 		sf::RenderWindow* getWindow();

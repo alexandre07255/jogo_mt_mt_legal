@@ -12,6 +12,7 @@ namespace Managers
 		sf::RenderWindow* window;
 		SceneManager();
 	public:
+		~SceneManager();
 		static SceneManager* getInstance();
 		void setWindow(sf::RenderWindow* pW);
 		void push(Scenes::Scene* pS);

@@ -62,3 +62,5 @@ void SceneManager::step()
 int SceneManager::size() {
 	return scenes.size();
 }
+
+SceneManager::~SceneManager(){}
