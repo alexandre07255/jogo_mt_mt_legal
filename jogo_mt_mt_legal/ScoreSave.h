@@ -15,5 +15,6 @@ public:
 	void addScore(std::string name, int score);
 	//std::string listen();
 	bool appendLetter();
+	void setName(std::string* nm);
 };
 

@@ -9,8 +9,10 @@ void ScoreSave::savePlayer(int score) {
 
 void ScoreSave::addScore(std::string name, int score) {
 	saveJson = readJson("saves.json");
+	
+	std::string stringScore = std::to_string(score);
 
-	saveJson[name] = static_cast<char>(score);
+	saveJson[name] = stringScore;
 
 	writejson("saves.json", saveJson);
 }
@@ -53,19 +55,26 @@ bool ScoreSave::appendLetter() {
 	sf::RenderWindow* window = pGraphic->getWindow();
 	sf::Event event;
 
-	if (!instance->isKeyPressed(sf::Keyboard::Key::Enter)) {
-		window->pollEvent(event);
-		if (event.type == sf::Event::TextEntered) {
-			if (!keyPressed) { name->push_back(event.text.unicode); }
+	window->pollEvent(event);
 
-			keyPressed = true;
-		}
+	if (event.type == sf::Event::TextEntered) {
+		
+		if (!keyPressed) { name->push_back(event.text.unicode); }
+		
+		
 		else {
-			keyPressed = false;
+			return false;
 		}
-		return true;
+		std::cout << event.text.unicode << endl;
+
+		keyPressed = true;
 	}
 	else {
-		return false;
+		keyPressed = false;
 	}
+	return true;
+}
+
+void ScoreSave::setName(std::string* nm) {
+	name = nm;
 }

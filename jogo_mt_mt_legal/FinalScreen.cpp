@@ -26,12 +26,21 @@ FinalScreen::FinalScreen(int _score, bool death) {
 
 void FinalScreen::execute() {
 	entityList->drawAll();
-	if (!save->appendLetter()) {
+	if (false) {
 		save->savePlayer(score);
 		SceneManager* sInstance = SceneManager::getInstance();
 		while (sInstance->size() > 1) {
 			sInstance->pop();
 		}
+	}
+	
+	std::string* name = new std::string;
+	std::cin >> *name;
+	save->setName(name);
+	save->savePlayer(score);
+	SceneManager* sInstance = SceneManager::getInstance();
+	while (sInstance->size() > 1) {
+		sInstance->pop();
 	}
 }
 

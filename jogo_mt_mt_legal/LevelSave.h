@@ -7,6 +7,7 @@
 #include "Fire.h"
 #include "Platform.h"
 #include "Player.h"
+#include "EnemyBoss.h"
 
 class LevelSave : public Save
 {
@@ -19,6 +20,7 @@ public:
 
 	void addRangedEnemy(Entities::Characters::EnemyRanged* enemy);
 	void addMeleeEnemy(Entities::Characters::EnemyMelee* enemy);
+	void addEnemyBoss(Entities::Characters::EnemyBoss* enemy);
 
 	void addSpike(Entities::Obstacles::Spike* obst);
 	void addPlatform(Entities::Obstacles::Platform* obst);
