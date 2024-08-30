@@ -1,5 +1,9 @@
 #include "FinalScreen.h"
 #include "SceneManager.h"
+#include <iostream>
+#include <windows.h>
+using namespace std;
+
 using namespace Scenes;
 using namespace Entities;
 using namespace Managers;
@@ -25,24 +29,26 @@ FinalScreen::FinalScreen(int _score, bool death) {
 }
 
 void FinalScreen::execute() {
-	entityList->drawAll();
-	if (false) {
-		save->savePlayer(score);
-		SceneManager* sInstance = SceneManager::getInstance();
-		while (sInstance->size() > 1) {
-			sInstance->pop();
-		}
-	}
 	
-	std::string* name = new std::string;
+	entityList->drawAll();
+	save->appendLetter();
+	//Sleep(1);
+	text->write(*save->getName());
+	escChecker();
+	/*std::string* name = new std::string;
 	std::cin >> *name;
 	save->setName(name);
 	save->savePlayer(score);
 	SceneManager* sInstance = SceneManager::getInstance();
 	while (sInstance->size() > 1) {
 		sInstance->pop();
-	}
+	}*/
 }
 
 void FinalScreen::escResolver() {
+	save->savePlayer(score);
+	SceneManager* sInstance = SceneManager::getInstance();
+	while (sInstance->size() > 1) {
+		sInstance->pop();
+	}
 }
