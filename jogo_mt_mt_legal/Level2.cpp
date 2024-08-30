@@ -75,19 +75,19 @@ Level2::~Level2() {
 
 void Level2::loadTerrains()
 {
-    createTerrain(0, 0, 6 * SCALE, 25 * SCALE, 1.f); //leftWall
+    createTerrain(0, 0, 7 * SCALE, 25 * SCALE, 1.f); //leftWall
     createTerrain(7 * SCALE, 26 * SCALE, 89 * SCALE, 2 * SCALE, 1.f);//floor
     createTerrain(35 * SCALE, 22 * SCALE, 2 * SCALE, 1 * SCALE, 1.f);
     createTerrain(18 * SCALE, 24 * SCALE, 1 * SCALE, 2 * SCALE, 1.f); //firstPillar
     createTerrain(21 * SCALE, 23 * SCALE, 1 * SCALE, 3 * SCALE, 1.f); //secondPillar
     createTerrain(27 * SCALE, 24 * SCALE, 25 * SCALE, 2 * SCALE, 1.f); //bigRetangulo
-    createTerrain(28 * SCALE, 23 * SCALE, 23 * SCALE, 1 * SCALE, 1.f); //tripa
+    createTerrain(28 * SCALE, 23 * SCALE, 24 * SCALE, 1 * SCALE, 1.f); //tripa
     createTerrain(44 * SCALE, 21 * SCALE, 3 * SCALE, 2 * SCALE, 1.f); //retangulo
     createTerrain(63 * SCALE, 25 * SCALE, 5 * SCALE, 1 * SCALE, 1.f); //fourthTerrain
     createTerrain(64 * SCALE, 24 * SCALE, 4 * SCALE, 1 * SCALE, 1.f); //fifthTerrain
     createTerrain(65 * SCALE, 23 * SCALE, 3 * SCALE, 1 * SCALE, 1.f); //sixthTerrain
     createTerrain(66 * SCALE, 22 * SCALE, 2 * SCALE, 1 * SCALE, 1.f); //seventhTerrain
-    createTerrain(90 * SCALE, 0 * SCALE, 6 * SCALE, 25 * SCALE, 1.f); //rightWall
+    createTerrain(90 * SCALE, 0 * SCALE, 6 * SCALE, 26 * SCALE, 1.f); //rightWall
 }
 
 void Level2::createFromScratch(const bool isPlayer2)
