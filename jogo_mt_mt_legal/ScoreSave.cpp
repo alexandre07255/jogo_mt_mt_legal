@@ -27,7 +27,7 @@ ScoreSave::~ScoreSave()
 	delete name;
 }
 
-bool ScoreSave::appendLetter() {
+
 void ScoreSave::appendLetter() {
 	Managers::InputManager* instance = Managers::InputManager::getInstance();
 	sf::RenderWindow* window = pGraphic->getWindow();

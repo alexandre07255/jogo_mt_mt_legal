@@ -43,10 +43,6 @@ Level::~Level() //TODO
 		delete supportVector;
 	if (obstacleList)
 		delete obstacleList;
-	if (pPlayer1)
-		delete pPlayer1;
-	if (pPlayer2)
-		delete pPlayer2;
 	if (camera)
 		delete camera;
 }
@@ -55,7 +51,6 @@ void Level::execute()
 {
 	entityList->traverse();
 	manageCollisions();
-	levelCompleteChecker();
 	camera->execute();
 	escChecker();
 
@@ -65,6 +60,7 @@ void Level::execute()
 		pGG->getWindow()->setView(pGG->getWindow()->getDefaultView());
 		sceneInstance->push(save);
 	}
+	levelCompleteChecker();
 }
 
 void Level::escResolver()

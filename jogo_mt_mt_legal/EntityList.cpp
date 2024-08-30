@@ -9,7 +9,6 @@ EntityList::~EntityList(){
 	List<Entities::Entity>::Iterator it;
 
 	it = listEntities.begin();
-
 	while (it != listEntities.end()) {
 		if (*it)
 			delete (*it);
