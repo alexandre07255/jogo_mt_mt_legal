@@ -3,6 +3,9 @@
 LevelSave::LevelSave(Scenes::Level* bound) {
 	boundLevel = bound;
 }
+LevelSave::LevelSave() {
+	boundLevel = NULL;
+}
 LevelSave::~LevelSave() {
 }
 
@@ -35,6 +38,20 @@ void LevelSave::addPlayer(Entities::Characters::Player* player, bool player2) {
 	}
 }
 
-void LevelSave::saveFinal() {
-	writejson("saveLevel1.json", saveJson);
+void LevelSave::saveFinal(bool level2) {
+	if (level2) {
+		writejson("saveLevel2.json", saveJson);
+	}
+	else {
+		writejson("saveLevel1.json", saveJson);
+	}
+}
+
+void LevelSave::loadLevel(bool level2) {
+	if (level2) {
+		saveJson = readJson("saveLevel2.json");
+	}
+	else {
+		saveJson = readJson("saveLevel1.json");
+	}
 }

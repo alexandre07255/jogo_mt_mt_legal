@@ -21,11 +21,14 @@ namespace Scenes
 		void changeMainButtons();
 		void changeStartButtons();
 		void changeRanking();
+		void changeLoadButtons();
 
 		void goBack();
 		void moreButtons(bool level2);
 
 		void escResolver();
+
+		void load(bool level2);
 	};
 }
 

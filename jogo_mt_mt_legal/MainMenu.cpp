@@ -10,6 +10,9 @@
 #include "CommandLevel1p2False.h"
 #include "CommandLevel2p2True.h"
 #include "CommandLevel1p2True.h"
+#include "CommandLoad.h"
+#include "CommandLoad1.h"
+#include "CommandLoad2.h"
 #include "GraphicManager.h"
 #include "inputManager.h"
 #include "Button.h"
@@ -17,6 +20,7 @@
 #include "CommandGoBack.h"
 #include "TextContainer.h"
 #include "ScoreSave.h"
+#include "LevelSave.h"
 
 using namespace std;
 using namespace Managers;
@@ -30,15 +34,18 @@ MainMenu::MainMenu():version(0){
 
 	CommandStart* com1 = new CommandStart(this);
 	CommandRanking* com4 = new CommandRanking(this);
-
+	CommandLoad* com6 = new CommandLoad(this);
 	Button* startButton = new Button(sf::Color::Blue, com1, true);
 	startButton->setPosition(instance->getWindow()->getSize().x/2, instance->getWindow()->getSize().y / 3 - 25.f);
 	Button* buttonRanking = new Button(sf::Color::Blue, com4, true);
 	buttonRanking->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 + 100.f);
+	Button* buttonLoad = new Button(sf::Color::Blue, com6, true);
+	buttonLoad->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 + 225.f);
 
 	EntityList* startList = new EntityList;
 	startList->push_back(startButton);
 	startList->push_back(buttonRanking);
+	startList->push_back(buttonLoad);
 
 	CommandStack1* com2 = new CommandStack1(this);
 	CommandStack2* com3 = new CommandStack2(this);
@@ -77,9 +84,23 @@ MainMenu::MainMenu():version(0){
 		i++;
 	}
 
+	CommandLoad1* com7 = new CommandLoad1(this);
+	CommandLoad2* com8 = new CommandLoad2(this);
+
+	Button* buttonLoad1 = new Button(sf::Color::Blue, com7, true);
+	Button* buttonLoad2 = new Button(sf::Color::Blue, com8, true);
+
+	buttonLoad1->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
+	buttonLoad2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
+
+	EntityList* loadList = new EntityList;
+	loadList->push_back(buttonLoad1);
+	loadList->push_back(buttonLoad2);
+
 	versions.push_back(startList);
 	versions.push_back(levelsList);
 	versions.push_back(rankingList);
+	versions.push_back(loadList);
 
 	changeMainButtons();
 }
@@ -123,13 +144,18 @@ void MainMenu::changeRanking() {
 
 	setEntityList(versions[2]);
 }
+void MainMenu::changeLoadButtons() {
+	version = 3;
+
+	setEntityList(versions[3]);
+}
 
 void MainMenu::goBack() {
 	if (version == 0) {
 		GraphicManager* instance = GraphicManager::getInstance();
 		instance->getWindow()->close();
 	}
-	else if (version == 1 || version == 2){
+	else if (version == 1 || version == 2 || version == 3){
 		changeMainButtons();
 	}
 }
@@ -170,4 +196,9 @@ void MainMenu::moreButtons(bool level2) {
 
 void MainMenu::escResolver() {
 	goBack();
+}
+
+void MainMenu::load(bool level2) {
+	LevelSave save;
+	save.loadLevel(level2);
 }

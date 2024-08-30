@@ -71,6 +71,8 @@ Level1::Level1(bool isPlayer2):Level(), endX(0), endingOnRight(1) {
 
     endingOnRight = 1;
     endX = x - SCALE;
+
+    level2 = false;
 }
 
 Level1::~Level1() {

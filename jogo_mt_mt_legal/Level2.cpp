@@ -67,6 +67,8 @@ Level2::Level2(bool isPlayer2) :Level(), isBossAlive(1) {
     cInstance->setSupportVector(supportVector);
     cInstance->setCollidables(collidables);
     cInstance->setObstacleList(obstacleList);
+
+    level2 = true;
 }
 
 Level2::~Level2() {

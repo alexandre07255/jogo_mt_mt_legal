@@ -55,9 +55,9 @@ void Level::execute()
 
 void Level::escResolver()
 {
+	pGG->getWindow()->setView(pGG->getWindow()->getDefaultView());
 	PauseMenu* pMenu = new PauseMenu(this);
 	SceneManager::getInstance()->push(pMenu);
-	pGG->getWindow()->setView(pGG->getWindow()->getDefaultView());
 }
 
 void Level::manageCollisions()
@@ -145,7 +145,7 @@ void Level::save() {
 
 	entityList->saveAll(save);
 
-	save->saveFinal();
+	save->saveFinal(level2);
 }
 
 void Level::createEnemyMelee(const float x, const float y, const int points)

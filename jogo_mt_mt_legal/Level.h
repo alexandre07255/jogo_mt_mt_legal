@@ -27,6 +27,7 @@ namespace Scenes
 		virtual void createFromScratch(const bool isPlayer2) = 0;
 		virtual void loadTerrains() = 0;
 		void manageCollisions();
+		bool level2;
 	public:
 		Level();
 		virtual ~Level();

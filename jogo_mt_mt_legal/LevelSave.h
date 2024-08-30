@@ -14,6 +14,7 @@ private:
 	Scenes::Level* boundLevel;
 public:
 	LevelSave(Scenes::Level* bound);
+	LevelSave();
 	~LevelSave();
 
 	void addRangedEnemy(Entities::Characters::EnemyRanged* enemy);
@@ -25,6 +26,8 @@ public:
 
 	void addPlayer(Entities::Characters::Player* player, bool player2);
 
-	void saveFinal();
+	void saveFinal(bool level2);
+
+	void loadLevel(bool level2);
 };
 
