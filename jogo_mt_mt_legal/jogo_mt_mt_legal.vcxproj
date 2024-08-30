@@ -140,6 +140,9 @@
     <ClCompile Include="CommandLevel1p2True.cpp" />
     <ClCompile Include="CommandLevel2p2False.cpp" />
     <ClCompile Include="CommandLevel2p2True.cpp" />
+    <ClCompile Include="CommandLoad.cpp" />
+    <ClCompile Include="CommandLoad1.cpp" />
+    <ClCompile Include="CommandLoad2.cpp" />
     <ClCompile Include="CommandQuit.cpp" />
     <ClCompile Include="CommandRanking.cpp" />
     <ClCompile Include="CommandSave.cpp" />
@@ -198,6 +201,9 @@
     <ClInclude Include="CommandLevel1p2True.h" />
     <ClInclude Include="CommandLevel2p2False.h" />
     <ClInclude Include="CommandLevel2p2True.h" />
+    <ClInclude Include="CommandLoad.h" />
+    <ClInclude Include="CommandLoad1.h" />
+    <ClInclude Include="CommandLoad2.h" />
     <ClInclude Include="CommandQuit.h" />
     <ClInclude Include="CommandRanking.h" />
     <ClInclude Include="CommandSave.h" />

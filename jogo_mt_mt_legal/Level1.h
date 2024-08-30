@@ -13,7 +13,7 @@ namespace Scenes
 		void createFromScratch(const bool isPlayer2);
 		void loadTerrains();
 	public:
-		Level1(bool isPlayer2);
+		Level1(bool isPlayer2,bool isBeingLoaded);
 		~Level1();
 	};
 }
