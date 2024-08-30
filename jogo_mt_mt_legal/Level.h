@@ -67,6 +67,8 @@ namespace Scenes
 		void createPlayer2(const float x, const float y, const int points, const int hp);
 		void createPlayer2(const float x, const float y, const int points);
 
+		void setEverything();
+
 		//void loadLevel1(bool isPlayer2);
 		//void loadLevel2(bool isPlayer2);
 		//void loadMenu();

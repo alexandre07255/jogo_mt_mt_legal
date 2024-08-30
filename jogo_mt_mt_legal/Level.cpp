@@ -269,3 +269,16 @@ void Level::createPlayer2(const float x, const float y, const int points)
 }
 
 const float Level::SCALE(16 * 5.33333f);
+
+void Level::setEverything() {
+	CollisionManager* cInstance = CollisionManager::getInstance();
+
+	cInstance->setPlayer1(pPlayer1);
+	cInstance->setPlayer2(pPlayer2);
+	cInstance->setEnemyVector(enemyVector);
+	cInstance->setSupportVector(supportVector);
+	cInstance->setCollidables(collidables);
+	cInstance->setObstacleList(obstacleList);
+	camera->setPlayer1(pPlayer1);
+	camera->setPlayer2(pPlayer1);
+}
