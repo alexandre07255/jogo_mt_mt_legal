@@ -147,10 +147,12 @@ void EnemyRanged::executePATROLLING()
     {
         nearestCollidableCont = NEAREST_COLLIDABLE_COOLDOWN;
         float floorY = cInstance->nearestCollidable(this, MAX_HEIGHT);
-        if (floorY - bottom() > idealHeight + heightStrip)
-            verticalVelocity += FLY_STRENGTH;
+        if (floorY >= bottom() + MAX_HEIGHT)
+            verticalVelocity += FLY_STRENGTH * 2 + GRAVITY - GRAVITY;
+        else if (floorY - bottom() > idealHeight + heightStrip)
+            verticalVelocity += FLY_STRENGTH + GRAVITY - GRAVITY;
         else if (floorY - bottom() < idealHeight - heightStrip)
-            verticalVelocity -= FLY_STRENGTH;
+            verticalVelocity -= FLY_STRENGTH + GRAVITY - GRAVITY;
         //else
             //verticalVelocity = 0;
     }
