@@ -6,6 +6,7 @@ namespace Scenes
 	class Level2 : public Level
 	{
 	private:
+		bool isBossAlive;
 		void levelCompleteHandler();
 		void levelCompleteChecker();
 		void createFromScratch(const bool isPlayer2);
@@ -13,6 +14,7 @@ namespace Scenes
 	public:
 		Level2(bool isPlayer2);
 		~Level2();
+		void setIsBossAlive(const bool ba);
 	};
 }
 

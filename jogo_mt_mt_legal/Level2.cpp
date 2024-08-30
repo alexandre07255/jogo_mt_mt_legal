@@ -21,7 +21,7 @@ using namespace Entities::Characters;
 
 
 
-Level2::Level2(bool isPlayer2) :Level() {
+Level2::Level2(bool isPlayer2) :Level(), isBossAlive(1) {
     GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
@@ -134,6 +134,11 @@ void Level2::levelCompleteHandler()
     sceneManInstance->pop();
     //Deletar Level2
     sceneManInstance->push(level2);
+}
+
+void Level2::setIsBossAlive(const bool ba)
+{
+    isBossAlive = ba;
 }
 
 void Level2::levelCompleteChecker()
