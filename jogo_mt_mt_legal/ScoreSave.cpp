@@ -4,7 +4,7 @@
 Managers::GraphicManager* ::ScoreSave::pGraphic(Managers::GraphicManager::getInstance());
 
 void ScoreSave::savePlayer(int score) {
-	addScore(name, score);
+	addScore(*name, score);
 }
 
 void ScoreSave::addScore(std::string name, int score) {
@@ -15,7 +15,7 @@ void ScoreSave::addScore(std::string name, int score) {
 	writejson("saves.json", saveJson);
 }
 
-std::string ScoreSave::listen() {
+/*std::string ScoreSave::listen() {
 	Managers::InputManager* instance = Managers::InputManager::getInstance();
 
 	std::string name;
@@ -41,10 +41,11 @@ std::string ScoreSave::listen() {
 	} while (!isEnterPressed);
 
 	return name;
-}
+}*/
 
 ScoreSave::ScoreSave(){
 	keyPressed = false;
+	name = new std::string;
 }
 
 bool ScoreSave::appendLetter() {
@@ -55,7 +56,7 @@ bool ScoreSave::appendLetter() {
 	if (!instance->isKeyPressed(sf::Keyboard::Key::Enter)) {
 		window->pollEvent(event);
 		if (event.type == sf::Event::TextEntered) {
-			if (!keyPressed) { name.push_back(event.text.unicode); }
+			if (!keyPressed) { name->push_back(event.text.unicode); }
 
 			keyPressed = true;
 		}

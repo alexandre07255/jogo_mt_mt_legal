@@ -13,6 +13,8 @@
 #include "Fire.h"
 #include "Terrain.h"
 #include "LevelSave.h"
+#include "SceneManager.h"
+#include "FinalScreen.h"
 using namespace std;
 using namespace Scenes;
 using namespace Managers;
@@ -42,6 +44,13 @@ void Level::execute()
 	levelCompleteChecker();
 	camera->execute();
 	escChecker();
+
+	if (pPlayer1->getHp() <= 0) {
+		FinalScreen* save = new FinalScreen(pPlayer1->getPoints(), true);
+		SceneManager* sceneInstance = SceneManager::getInstance();
+		pGG->getWindow()->setView(pGG->getWindow()->getDefaultView());
+		sceneInstance->push(save);
+	}
 }
 
 void Level::escResolver()

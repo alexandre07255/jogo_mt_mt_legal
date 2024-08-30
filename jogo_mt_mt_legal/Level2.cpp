@@ -76,41 +76,42 @@ Level2::~Level2() {
 void Level2::loadTerrains()
 {
     createTerrain(0, 0, 6 * SCALE, 25 * SCALE, 1.f); //leftWall
-    createTerrain(7 * SCALE, 26 * SCALE, 89 * SCALE, 2 * SCALE, 1.f); //floor
+    createTerrain(7 * SCALE, 26 * SCALE, 89 * SCALE, 2 * SCALE, 1.f);//floor
+    createTerrain(35 * SCALE, 22 * SCALE, 2 * SCALE, 1 * SCALE, 1.f);
     createTerrain(18 * SCALE, 24 * SCALE, 1 * SCALE, 2 * SCALE, 1.f); //firstPillar
     createTerrain(21 * SCALE, 23 * SCALE, 1 * SCALE, 3 * SCALE, 1.f); //secondPillar
-    createTerrain(27 * SCALE, 24 * SCALE, 24 * SCALE, 2 * SCALE, 1.f); //bigRetangulo
+    createTerrain(27 * SCALE, 24 * SCALE, 25 * SCALE, 2 * SCALE, 1.f); //bigRetangulo
     createTerrain(28 * SCALE, 23 * SCALE, 23 * SCALE, 1 * SCALE, 1.f); //tripa
-    createTerrain(44 * SCALE, 21 * SCALE, 3 * SCALE, 2 * SCALE, 1.f); //retangulo//parei aqui
-    createTerrain(61 * SCALE, 21 * SCALE, 8 * SCALE, 1 * SCALE, 1.f); //fourthTerrain
-    createTerrain(79 * SCALE, 21 * SCALE, 1 * SCALE, 2 * SCALE, 1.f); //fifthTerrain
-    createTerrain(84 * SCALE, 22 * SCALE, 6 * SCALE, 1 * SCALE, 1.f); //sixthTerrain
-    createTerrain(86 * SCALE, 21 * SCALE, 1 * SCALE, 1 * SCALE, 1.f); //seventhTerrain
-    createTerrain(90 * SCALE, 6 * SCALE, 1 * SCALE, 30 * SCALE, 1.f); //rightWall
+    createTerrain(44 * SCALE, 21 * SCALE, 3 * SCALE, 2 * SCALE, 1.f); //retangulo
+    createTerrain(63 * SCALE, 25 * SCALE, 5 * SCALE, 1 * SCALE, 1.f); //fourthTerrain
+    createTerrain(64 * SCALE, 24 * SCALE, 4 * SCALE, 1 * SCALE, 1.f); //fifthTerrain
+    createTerrain(65 * SCALE, 23 * SCALE, 3 * SCALE, 1 * SCALE, 1.f); //sixthTerrain
+    createTerrain(66 * SCALE, 22 * SCALE, 2 * SCALE, 1 * SCALE, 1.f); //seventhTerrain
+    createTerrain(90 * SCALE, 0 * SCALE, 6 * SCALE, 25 * SCALE, 1.f); //rightWall
 }
 
 void Level2::createFromScratch(const bool isPlayer2)
 {
-    createSpike(33 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE / 2);
-    createSpike(57 * SCALE, 21 * SCALE, 4 * SCALE, 1 * SCALE / 2);
-    createSpike(65 * SCALE, 20 * SCALE, 3 * SCALE, 1 * SCALE / 2);
+    createFire(22 * SCALE, 25 * SCALE, 5 * SCALE, 1 * SCALE);
+    createFire(48 * SCALE, 22 * SCALE, 3 * SCALE, 1 * SCALE);
+    createFire(57 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createSpike(28 * SCALE, 24 * SCALE, 1 * SCALE, 1 * SCALE / 2);
+        createFire(29 * SCALE, 22 * SCALE, 1 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createSpike(84 * SCALE, 21 * SCALE, 2 * SCALE, 1 * SCALE / 2);
+        createFire(19 * SCALE, 25 * SCALE, 2 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createSpike(79 * SCALE, 20 * SCALE, 1 * SCALE, 1 * SCALE / 2);
+        createFire(67 * SCALE, 21 * SCALE, 1 * SCALE, 1 * SCALE);
 
 
-    createPlatform(37 * SCALE, 23 * SCALE, 3 * SCALE, SCALE);
-    createPlatform(49 * SCALE, 20 * SCALE, 3 * SCALE, SCALE);
-    createPlatform(70 * SCALE, 19 * SCALE, 2 * SCALE, SCALE);
+    createPlatform(30 * SCALE, 20 * SCALE, 3 * SCALE, SCALE);
+    createPlatform(39 * SCALE, 21 * SCALE, 2 * SCALE, SCALE);
+    createPlatform(53 * SCALE, 24 * SCALE, 3 * SCALE, SCALE);
     if (rand() % 2)
-        createPlatform(28 * SCALE, 23 * SCALE, 1 * SCALE, SCALE);
+        createPlatform(13 * SCALE, 24 * SCALE, 2 * SCALE, SCALE);
     if (rand() % 2)
-        createPlatform(62 * SCALE, 18 * SCALE, 2 * SCALE, SCALE);
+        createPlatform(46 * SCALE, 19 * SCALE, SCALE, SCALE);
     if (rand() % 2)
-        createPlatform(81 * SCALE, 19 * SCALE, SCALE, SCALE);
+        createPlatform(51 * SCALE, 21 * SCALE, SCALE, SCALE);
 
 
     createPlayer1(8 * SCALE, 20 * SCALE, 0);
@@ -118,13 +119,13 @@ void Level2::createFromScratch(const bool isPlayer2)
     if (isPlayer2)
         createPlayer2(9 * SCALE, 20 * SCALE, 0);
 
-    createEnemyMelee(23 * SCALE, 25 * SCALE, 0);
-    createEnemyMelee(47 * SCALE, 22 * SCALE, 0);
-    createEnemyMelee(75 * SCALE, 22 * SCALE, 0);
+    createEnemyMelee(31 * SCALE, 22 * SCALE, 0);
+    createEnemyMelee(44 * SCALE, 20 * SCALE, 0);
+    createEnemyMelee(54 * SCALE, 23 * SCALE, 0);
 
-    createEnemyRanged(31 * SCALE, 24 * SCALE, 0);
-    createEnemyRanged(55 * SCALE, 20 * SCALE, 0);
-    createEnemyRanged(75 * SCALE, 20 * SCALE, 0);
+    createEnemyRanged(21 * SCALE, 22 * SCALE, 0);
+    createEnemyRanged(36 * SCALE, 21 * SCALE, 0);
+    createEnemyRanged(46 * SCALE, 20 * SCALE, 0);
 }
 
 void Level2::levelCompleteHandler()
