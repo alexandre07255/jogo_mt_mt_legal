@@ -22,6 +22,12 @@ Hitbox::Hitbox():
 	activeScene->addEntity(this);
 }
 
+Hitbox::~Hitbox()
+{
+	Scene* activeScene = SceneManager::getInstance()->top();
+	activeScene->removeEntity(this);
+}
+
 void Hitbox::setTarget(const bool tar)
 {
 	target = tar;

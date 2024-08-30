@@ -1,6 +1,8 @@
 #pragma once
 #include "Enemy.h"
 
+namespace Entities { namespace Hitboxes { class AttackHitbox; } }
+
 namespace Entities
 {
 	namespace Characters
@@ -16,9 +18,9 @@ namespace Entities
 			bool followingPlayer2;
 			int attackPart;
 			int attackTimer;
+			bool attacking;
 			int startup;
 			int endLag;
-			int frameCont;
 
 			enum attackParts
 			{
@@ -27,11 +29,12 @@ namespace Entities
 				DESCENDING
 			};
 
-			Player* pPlayer1;
-			Player* pPlayer2;
+			Player* targetPlayer[2];
+			Hitboxes::AttackHitbox* hitboxes[2];
 
 			static const int TIREDNESS_DURATION;
 			static const int ASCENSION_DURATION;
+			static const float HORIZONTAL_VELOCITY;
 			static const float ASCENDING_VELOCITY;
 			static const float DESCENDING_VELOCITY;
 

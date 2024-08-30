@@ -14,6 +14,7 @@ namespace Entities
 			int duration;
 		public:
 			Hitbox();
+			~Hitbox();
 			void setTarget(const bool tar);
 			void setOwner(Entities::Characters::Hittable* own);
 			void save(LevelSave* save);

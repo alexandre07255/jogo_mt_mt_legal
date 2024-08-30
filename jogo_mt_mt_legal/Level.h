@@ -52,7 +52,7 @@ namespace Scenes
 
 		void createEnemyMelee(const float x, const float y, const int points);
 		void createEnemyRanged(const float x, const float y, const int points);
-		void createEnemyBoss(const float x, const float y, const int points);
+		void createEnemyBoss(const float x, const float y, const int points, Entities::Characters::Player* p1, Entities::Characters::Player* p2);
 
 		void createPlatform(const float x, const float y, const float xSize, const float ySize);
 		void createSpike(const float x, const float y, const float xSize, const float ySize);

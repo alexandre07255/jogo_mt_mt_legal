@@ -166,13 +166,13 @@ void Level::createEnemyRanged(const float x, const float y, const int points)
 	enemyVector->push_back(enemy);
 }
 
-void Level::createEnemyBoss(const float x, const float y, const int points)
+void Level::createEnemyBoss(const float x, const float y, const int points, Player* p1, Player* p2)
 {
-	//EnemyBoss* enemy = new EnemyBoss;
-	//enemy->setPosition(x, y);
-	//enemy->setPoints(points);
-	//entityList->push_back(enemy);
-	//enemyVector->push_back(enemy);
+	EnemyBoss* enemy = new EnemyBoss(p1, p2);
+	enemy->setPosition(x, y);
+	enemy->setPoints(points);
+	entityList->push_back(enemy);
+	enemyVector->push_back(enemy);
 }
 
 void Level::createPlatform(const float x, const float y, const float xSize, const float ySize)

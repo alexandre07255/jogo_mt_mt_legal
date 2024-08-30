@@ -18,9 +18,20 @@ AttackHitbox::AttackHitbox() :
 	hitstun(0),
 	isInfinite(0),
 	doesATKCANCEL(1),
-	boundedTo(NULL)
+	boundedTo(NULL),
+	isPersistent(0)
 {
 	hitList.clear();
+}
+
+AttackHitbox::~AttackHitbox()
+{
+	boundedTo = NULL;
+}
+
+void AttackHitbox::setIsPersistent(const bool pers)
+{
+	isPersistent = pers;
 }
 
 void AttackHitbox::setBoundedTo(Entity* boundTo)
@@ -78,10 +89,8 @@ const bool AttackHitbox::hasAlreadyHit(Hittable* pA)
 
 void AttackHitbox::execute()
 {
-	if ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || (doesATKCANCEL && owner->getState() != Hittable::ATKCANCEL) ) ) )
+	if ( !isPersistent && ( (duration <= 0 && !hasHit) || (hasHit && ( hitstun <= 0 || (doesATKCANCEL && owner->getState() != Hittable::ATKCANCEL) ) ) ) )
 	{
-		Scene* activeScene = SceneManager::getInstance()->top();
-		activeScene->removeEntity(this);
 		delete this;
 		return;
 	}

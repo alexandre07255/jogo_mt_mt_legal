@@ -126,15 +126,13 @@ void Level2::createFromScratch(const bool isPlayer2)
     createEnemyRanged(21 * SCALE, 22 * SCALE, 0);
     createEnemyRanged(36 * SCALE, 21 * SCALE, 0);
     createEnemyRanged(46 * SCALE, 20 * SCALE, 0);
+
+    createEnemyBoss(75 * SCALE, 20 * SCALE, 0, pPlayer1, pPlayer2);
 }
 
 void Level2::levelCompleteHandler()
 {
-    Level2* level2 = new Level2(pPlayer2 != NULL);
-    SceneManager* sceneManInstance = SceneManager::getInstance();
-    sceneManInstance->pop();
-    //Deletar Level2
-    sceneManInstance->push(level2);
+    cout << "Yupi" << endl;
 }
 
 void Level2::setIsBossAlive(const bool ba)
@@ -144,5 +142,6 @@ void Level2::setIsBossAlive(const bool ba)
 
 void Level2::levelCompleteChecker()
 {
-    
+    if (!isBossAlive)
+        levelCompleteHandler();
 }

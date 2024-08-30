@@ -17,6 +17,7 @@ namespace Entities
 			float horKnockback;
 			bool isInfinite;
 			bool doesATKCANCEL;
+			bool isPersistent;
 			int damage;
 			int hitstun;
 			list<Entities::Characters::Hittable*> hitList;
@@ -24,7 +25,9 @@ namespace Entities
 			const bool hasAlreadyHit(Entities::Characters::Hittable* pA);
 		public:
 			AttackHitbox();
+			~AttackHitbox();
 			void setBoundedTo(Entities::Entity* boundTo);
+			void setIsPersistent(const bool pers);
 			void setHorKnockback(const float horKnock);
 			void setVerKnockback(const float verKnock);
 			void setDamage(const int dmg);
