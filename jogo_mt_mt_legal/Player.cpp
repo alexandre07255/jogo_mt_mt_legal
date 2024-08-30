@@ -4,8 +4,6 @@
 #include "LevelSave.h"
 #include "AttackHitbox.h"
 #include "Level.h"
-#include "SceneManager.h"
-#include "ScoreSave.h"
 
 #include <iostream>
 using namespace std;
@@ -35,17 +33,9 @@ Player::Player(const bool isPlayer2, const int health) :
 
 void Player::execute() {
 
-	/*if (hp <= 0 && !player2) {
-		ScoreSave* save = new ScoreSave;
-		save->savePlayer(getPoints());
-
-		SceneManager* sceneInstance = SceneManager::getInstance();
-		sceneInstance->pop();
-	}*/
-
 	InputManager* inputInstance = InputManager::getInstance();
 	CollisionManager* collisionInstance = CollisionManager::getInstance();
-	
+
 	//Attack input
 	if (inputInstance->isAttackPressed(player2))
 	{

@@ -146,6 +146,7 @@
     <ClCompile Include="CommandStack1.cpp" />
     <ClCompile Include="CommandStack2.cpp" />
     <ClCompile Include="CommandStart.cpp" />
+    <ClCompile Include="FinalScreen.cpp" />
     <ClCompile Include="Element.cpp" />
     <ClCompile Include="EnemyBoss.cpp" />
     <ClCompile Include="EnemyRanged.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="CommandStack1.h" />
     <ClInclude Include="CommandStack2.h" />
     <ClInclude Include="CommandStart.h" />
+    <ClInclude Include="FinalScreen.h" />
     <ClInclude Include="Element.h" />
     <ClInclude Include="EnemyBoss.h" />
     <ClInclude Include="EnemyRanged.h" />

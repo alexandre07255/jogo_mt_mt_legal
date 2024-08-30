@@ -9,15 +9,18 @@ using namespace Managers;
 
 
 PauseMenu::PauseMenu(Level* lAct): levelActive(lAct){
+	GraphicManager* gInstance = GraphicManager::getInstance();
+	sf::RenderWindow* window = gInstance->getWindow();
+
 	CommandQuit* com1 = new CommandQuit(this);
 
 	Button* buttonQuit = new Button(sf::Color::Blue, com1, false);
-	buttonQuit->setPosition(500.f, 500.f);
+	buttonQuit->setPosition(window->getSize().x,window->getSize().y/2 -100.f);
 
 	CommandSave* com2 = new CommandSave(this);
 
 	Button* buttonSave = new Button(sf::Color::Blue, com2, true);
-	buttonSave->setPosition(500.f,700.f);
+	buttonSave->setPosition(window->getSize().x, window->getSize().y / 2 + 100.f);
 
 	entityList->push_back(buttonQuit);
 	entityList->push_back(buttonSave);
