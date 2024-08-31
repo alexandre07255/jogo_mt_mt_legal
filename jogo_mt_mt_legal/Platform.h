@@ -19,12 +19,14 @@ namespace Entities
 
 			bool firstStep;
 			const float minimalHeight;
+			//a partir daqui é o poinhonhoin
 			float mass;
 			int time;
 			float defaultY;
 			float deformation;
 			bool onTop;
 			float HarmonicMovement(float range, float mass, float elasticity, float damping, float time);
+			//===========================================================================================//
 		public:
 			Platform(float xPosition, float yPosition, float xSize, float ySize);
 			sf::FloatRect getBounds();
