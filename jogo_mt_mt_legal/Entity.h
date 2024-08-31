@@ -19,6 +19,11 @@ namespace Entities {
 
 		float height;
 		float width;
+
+		int frameCont;
+		int spriteMatrixIndex;
+		int spriteX;
+		int spriteY;
 	public:
 		Entity();
 		virtual ~Entity();

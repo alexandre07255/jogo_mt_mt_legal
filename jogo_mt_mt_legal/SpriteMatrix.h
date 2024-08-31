@@ -20,6 +20,6 @@ public:
 	const int getLineSize(const int l) const;
 	const int getNumberOfLines() const;
 	const std::string getName() const;
-	const sf::Texture* getSprite(int x, int y) const;
+	sf::Texture* getSprite(const int x, const int y) const;
 };
 

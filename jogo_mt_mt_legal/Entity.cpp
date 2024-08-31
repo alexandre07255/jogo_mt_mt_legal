@@ -3,7 +3,8 @@ using namespace Entities;
 
 
 
-Entity::Entity(): Being(), horizontalVelocity(0), verticalVelocity(0), onAir(1), frictionFelt(1), xPos(0.f), yPos(0.f), width(1.f), height(1.f)
+Entity::Entity(): Being(), horizontalVelocity(0), verticalVelocity(0), onAir(1), frictionFelt(1),
+xPos(0.f), yPos(0.f), width(1.f), height(1.f), spriteMatrixIndex(0), spriteX(0), spriteY(0), frameCont(0)
 {
 	pShape = new sf::RectangleShape();
 }

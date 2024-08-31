@@ -4,6 +4,7 @@
 #include "LevelSave.h"
 #include "AttackHitbox.h"
 #include "Level.h"
+#include "SpriteManager.h"
 
 #include <iostream>
 using namespace std;
@@ -27,8 +28,19 @@ Player::Player(const bool isPlayer2, const int health) :
 	attackHitboxDuration{5, 5, 5},
 	attackEndLag{20, 15, 15}
 {
-	setSize(sf::Vector2f(80, 80));
+	setSize(sf::Vector2f(108.f, 132.f));
 
+	SpriteManager* spInstance = SpriteManager::getInstance();
+	if (!isPlayer2)
+		spriteMatrixIndex = spInstance->getMatrixIndex("Samurai1");
+	else
+		spriteMatrixIndex = spInstance->getMatrixIndex("Samurai1");
+
+	spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
+
+	pShape->setTextureRect(sf::IntRect(0, -44, 36, 44));
+	pShape->setOutlineColor(sf::Color::Red);
+	pShape->setOutlineThickness(1.f);
 }
 
 Player::~Player() {}

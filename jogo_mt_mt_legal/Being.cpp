@@ -31,7 +31,7 @@ sf::Texture* Being::getTexture() {
 
 void Being::setTexture(sf::Texture* ptext) {
 	pTexture = ptext;
-	if (ptext) {
+	if (pShape) {
 		pShape->setTexture(pTexture);
 	}
 }

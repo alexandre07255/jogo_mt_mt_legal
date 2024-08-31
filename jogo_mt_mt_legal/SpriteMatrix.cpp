@@ -81,7 +81,7 @@ const int SpriteMatrix::getLineSize(const int l) const { return spriteSheet->at(
 
 const int SpriteMatrix::getNumberOfLines() const { return spriteSheet->size(); }
 
-const Texture* SpriteMatrix::getSprite(int x, int y) const
+Texture* SpriteMatrix::getSprite(const int x, const int y) const
 {
 	return spriteSheet->at(y)->at(x);
 }

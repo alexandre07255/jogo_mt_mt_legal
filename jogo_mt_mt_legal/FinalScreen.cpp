@@ -30,7 +30,7 @@ FinalScreen::FinalScreen(int _score, bool death) {
 
 FinalScreen::~FinalScreen()
 {
-	delete text;
+	//delete text;
 	delete save;
 }
 
