@@ -29,6 +29,7 @@ namespace Entities
 			//===========================================================================================//
 		public:
 			Platform(float xPosition, float yPosition, float xSize, float ySize);
+			~Platform();
 			sf::FloatRect getBounds();
 			void toObstacle();
 			void execute();

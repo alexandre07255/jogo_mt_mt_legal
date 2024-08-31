@@ -24,6 +24,7 @@ namespace Entities
 			const bool isInSearchPlayerCooldown();
 		public:
 			Enemy();
+			virtual ~Enemy();
 		protected:
 			void executeHITSTUN();
 			Player* searchPlayer() const;

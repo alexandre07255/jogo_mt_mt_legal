@@ -14,7 +14,7 @@ namespace Entities
 			int stompCont;
 			int stompMax;
 			bool triggered;
-			int triggerRange;
+			float triggerRange;
 			bool followingPlayer2;
 			int attackPart;
 			int attackTimer;

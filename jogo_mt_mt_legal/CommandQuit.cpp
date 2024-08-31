@@ -7,6 +7,8 @@ CommandQuit::CommandQuit(Menu* _bound):Command(_bound) {
 
 }
 
+CommandQuit::~CommandQuit() { }
+
 void CommandQuit::execute() {
 	SceneManager* instance = SceneManager::getInstance();
 

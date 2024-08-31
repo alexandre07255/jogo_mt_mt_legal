@@ -155,6 +155,7 @@
     <ClCompile Include="EnemyRanged.cpp" />
     <ClCompile Include="EntityList.cpp" />
     <ClCompile Include="Fire.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Hittable.cpp" />
     <ClCompile Include="AttackHitbox.cpp" />
     <ClCompile Include="Being.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="EnemyRanged.h" />
     <ClInclude Include="EntityList.h" />
     <ClInclude Include="Fire.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="Hittable.h" />
     <ClInclude Include="AttackHitbox.h" />
     <ClInclude Include="Being.h" />

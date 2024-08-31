@@ -13,12 +13,13 @@ private:
 	const bool isBlockEmpty(sf::Image& img, const int x, const int y) const;
 public:
 	SpriteMatrix();
+	~SpriteMatrix();
 	void loadFromFile(const std::string sName, const int stepX, const int stepY, const std::string path);
 	const int getXStep() const;
 	const int getYStep() const;
 	const int getLineSize(const int l) const;
 	const int getNumberOfLines() const;
 	const std::string getName() const;
-	const sf::Texture* getSprite(int x, int y) const;
+	sf::Texture* getSprite(const int x, const int y) const;
 };
 

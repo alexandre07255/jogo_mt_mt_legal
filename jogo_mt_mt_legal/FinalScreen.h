@@ -11,6 +11,7 @@ namespace Scenes {
         int score;
     public:
         FinalScreen(int _score,bool death);
+        ~FinalScreen();
         void execute();
         void escResolver();
     };

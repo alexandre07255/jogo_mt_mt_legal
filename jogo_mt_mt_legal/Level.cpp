@@ -25,7 +25,7 @@ using namespace Entities::Obstacles;
 
 
 
-Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL), obstacleList(NULL), camera()
+Level::Level(): level2(0), enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NULL), supportVector(NULL), obstacleList(NULL), camera()
 {
     enemyVector = new vector<Enemy*>;
     collidables = new list<Collidable*>;
@@ -35,13 +35,22 @@ Level::Level(): enemyVector(NULL),collidables(NULL), pPlayer1(NULL), pPlayer2(NU
 
 Level::~Level() //TODO
 {
+	if (enemyVector)
+		delete enemyVector;
+	if (collidables)
+		delete collidables;
+	if (supportVector)
+		delete supportVector;
+	if (obstacleList)
+		delete obstacleList;
+	if (camera)
+		delete camera;
 }
 
 void Level::execute()
 {
 	entityList->traverse();
 	manageCollisions();
-	levelCompleteChecker();
 	camera->execute();
 	escChecker();
 
@@ -51,6 +60,7 @@ void Level::execute()
 		pGG->getWindow()->setView(pGG->getWindow()->getDefaultView());
 		sceneInstance->push(save);
 	}
+	levelCompleteChecker();
 }
 
 void Level::escResolver()

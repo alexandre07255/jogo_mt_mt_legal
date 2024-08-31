@@ -4,6 +4,7 @@
 #include "LevelSave.h"
 #include "AttackHitbox.h"
 #include "Level.h"
+#include "SpriteManager.h"
 
 #include <iostream>
 using namespace std;
@@ -27,9 +28,22 @@ Player::Player(const bool isPlayer2, const int health) :
 	attackHitboxDuration{5, 5, 5},
 	attackEndLag{20, 15, 15}
 {
-	setSize(sf::Vector2f(80, 80));
+	setSize(sf::Vector2f(108.f, 132.f));
 
+	SpriteManager* spInstance = SpriteManager::getInstance();
+	if (!isPlayer2)
+		spriteMatrixIndex = spInstance->getMatrixIndex("Samurai1");
+	else
+		spriteMatrixIndex = spInstance->getMatrixIndex("Samurai1");
+
+	spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
+
+	pShape->setTextureRect(sf::IntRect(0, -44, 36, 44));
+	pShape->setOutlineColor(sf::Color::Red);
+	pShape->setOutlineThickness(1.f);
 }
+
+Player::~Player() {}
 
 void Player::execute() {
 
@@ -201,7 +215,7 @@ void Player::executeATTACK()
 	}
 	else
 		state = FREE;
-	move((float) horizontalVelocity * 0.15, (float) (++verticalVelocity) * 0.85);
+	move((float) horizontalVelocity * 0.15f, (float) (++verticalVelocity) * 0.85f);
 	//move(sf::Vector2f(horizontalVelocity*0.15, (++verticalVelocity)*0.85));
 }
 
@@ -262,7 +276,7 @@ void Player::attack()
 		else
 		{
 			float relX = hitbox->getXSize();
-			hitbox->setRelativePosition(sf::Vector2f(-relX + 10.0, 25.0));
+			hitbox->setRelativePosition(sf::Vector2f(-relX + 10.0f, 25.0f));
 			hitbox->setHorKnockback(-horKnock);
 		}
 		break;
@@ -289,12 +303,12 @@ void Player::attack()
 }
 
 const int Player::MAX_JUMP_BUFFER(8);
-const float Player::JUMP_STRENGTH(2.2);
+const float Player::JUMP_STRENGTH(2.2f);
 const int Player::MAX_JUMP_PERIOD(15);
 
-const float Player::MAX_HORIZONTAL_VELOCITY(10.0);
-const float Player::MAX_VERTICAL_VELOCITY(15.0);
-const float Player::ACCELARATION(2.0);
+const float Player::MAX_HORIZONTAL_VELOCITY(10.0f);
+const float Player::MAX_VERTICAL_VELOCITY(15.0f);
+const float Player::ACCELARATION(2.0f);
 
 const int Player::MAX_HP(20);
 

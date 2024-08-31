@@ -11,6 +11,7 @@ LevelSave::LevelSave() {
 	boundLevel = NULL;
 }
 LevelSave::~LevelSave() {
+	boundLevel = NULL;
 }
 
 void LevelSave::addRangedEnemy(Entities::Characters::EnemyRanged* enemy) {

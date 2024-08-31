@@ -29,7 +29,7 @@ Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRig
     srand(time(NULL));
 
     sf::Texture* background = new sf::Texture();
-    background->loadFromFile("spritesheets/fase1EBA.png");
+    background->loadFromFile("HizaSprites/Environment/fase1EBA.png");
 
 
     float x = background->getSize().x * SCALE/16;
@@ -140,15 +140,16 @@ void Level1::levelCompleteHandler()
 
 void Level1::levelCompleteChecker()
 {
+    bool completed = 0;
     if (pPlayer1)
     {
         if (endingOnRight)
         {
             if (pPlayer1->getXPosition() >= endX)
-                levelCompleteHandler();
+                completed = 1;
         }
         else if (pPlayer1->getXPosition() <= endX)
-            levelCompleteHandler();
+            completed = 1;
     }
 
     if (pPlayer2)
@@ -156,9 +157,12 @@ void Level1::levelCompleteChecker()
         if (endingOnRight)
         {
             if (pPlayer2->getXPosition() >= endX)
-                levelCompleteHandler();
+                completed = 1;
         }
         else if (pPlayer2->getXPosition() <= endX)
-            levelCompleteHandler();
+            completed = 1;
     }
+
+    if (completed)
+        levelCompleteHandler();
 }

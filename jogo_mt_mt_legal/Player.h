@@ -8,7 +8,6 @@ namespace Entities
 		class Player : public Hittable
 		{
 		private:
-
 			static const int MAX_HP;
 			static const float MAX_HORIZONTAL_VELOCITY;
 			static const float MAX_VERTICAL_VELOCITY;
@@ -32,13 +31,15 @@ namespace Entities
 			bool wasAttackPressed;
 		public:
 			Player(const bool isPlayer2, const int health = MAX_HP);
+			~Player();
 			void execute();
+			void save(LevelSave* save);
+		private:
 			void executeFREE();
 			void executeATKCANCEL();
 			void executeATTACK();
 			void executeHITSTUN();
 			void attack();
-			void save(LevelSave* save);
 		};
 	}
 }

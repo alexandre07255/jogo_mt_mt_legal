@@ -30,8 +30,8 @@ PauseMenu::PauseMenu(Level* lAct): levelActive(lAct){
 	Button* buttonSave = new Button(sf::Color::Blue, com2, true);
 	buttonSave->setPosition(x / 2.0f, y / 2.0f + 100.f);
 
-	entityList->push_back(buttonQuit);
 	entityList->push_back(buttonSave);
+	entityList->push_back(buttonQuit);
 }
 
 PauseMenu::~PauseMenu() {

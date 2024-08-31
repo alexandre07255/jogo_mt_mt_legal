@@ -14,7 +14,6 @@ using namespace Entities;
 
 Support::Support(Obstacles::Platform* plat, const float sHeight):Hittable(false,MAXHEALTH),boundedTo(NULL) {
 	boundedTo = plat;
-	canBeCollided = 0;
 
 	if (boundedTo) {
 		SceneManager* instance = SceneManager::getInstance();
@@ -29,6 +28,11 @@ Support::Support(Obstacles::Platform* plat, const float sHeight):Hittable(false,
 		
 		setSize(sf::Vector2f(10.0, sHeight));
 	}
+}
+
+Support::~Support()
+{
+	boundedTo = NULL;
 }
 
 void Support::setPlatform(Obstacles::Platform* plat) {

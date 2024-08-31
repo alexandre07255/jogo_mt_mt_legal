@@ -12,6 +12,11 @@ Obstacle::Obstacle() :
 
 }
 
+Obstacle::~Obstacle()
+{
+	hitbox = NULL;
+}
+
 const bool Obstacle::getIsActive() const
 {
 	return isActive;

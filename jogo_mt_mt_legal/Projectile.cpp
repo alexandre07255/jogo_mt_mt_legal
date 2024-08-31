@@ -31,6 +31,11 @@ Projectile::Projectile():
     activeScene->addEntity(this);
 }
 
+Projectile::~Projectile()
+{
+
+}
+
 void Projectile::setOwner(Hittable* own)
 {
      hitbox->setOwner(own);

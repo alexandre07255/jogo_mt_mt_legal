@@ -13,6 +13,17 @@ SceneManager::SceneManager():
 
 }
 
+SceneManager::~SceneManager()
+{
+	while (scenes.size() > 0)
+	{
+		Scene* sce = scenes.top();
+		scenes.pop();
+		if (sce)
+			delete sce;
+	}
+}
+
 SceneManager* SceneManager::getInstance()
 {
 	if (instance == NULL)
@@ -34,7 +45,9 @@ void SceneManager::pop()
 {
 	if (scenes.size() == 0)
 		return;
-	return scenes.pop();
+	Scene* del = scenes.top();
+	scenes.pop();
+	delete del;
 }
 
 Scene* SceneManager::top() const
@@ -63,4 +76,3 @@ int SceneManager::size() {
 	return scenes.size();
 }
 
-SceneManager::~SceneManager(){}

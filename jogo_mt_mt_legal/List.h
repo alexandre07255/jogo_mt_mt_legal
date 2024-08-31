@@ -24,6 +24,7 @@ namespace Lists
 			Element<TYPE>* pContent;
 		public:
 			Iterator(Element<TYPE>* content = NULL) : pContent(content) { }
+			~Iterator() { pContent = NULL; }
 			Element<TYPE>* getPContent() const { return pContent; }
 			void setPContent(Element<TYPE>* pC) { pContent = pC; }
 			TYPE* operator*() const { return (pContent->getInfo()); }

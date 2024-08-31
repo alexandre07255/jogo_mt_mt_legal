@@ -106,9 +106,9 @@ MainMenu::MainMenu():version(0){
 }
 
 MainMenu::~MainMenu() {
-	delete versions[0];
-	delete versions[1];
-	delete versions[2];
+	for (int i = 0; i < 4; i++)
+		if (i != version)
+			delete versions[i];
 }
 
 

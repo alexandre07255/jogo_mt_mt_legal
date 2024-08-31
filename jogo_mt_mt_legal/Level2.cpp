@@ -29,7 +29,7 @@ Level2::Level2(bool isPlayer2, bool isBeingLoaded) :Level(), isBossAlive(1) {
     srand(time(NULL));
 
     sf::Texture* background = new sf::Texture();
-    background->loadFromFile("spritesheets/fase2EBA.png");
+    background->loadFromFile("HizaSprites/Environment/fase2EBA.png");
 
 
     float x = background->getSize().x * SCALE / 16;

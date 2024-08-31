@@ -7,6 +7,7 @@ namespace Entities
 	{
 	public:
 		Terrain(float frict);
+		~Terrain();
 		void execute();
 		virtual sf::FloatRect getBounds();
 		void collisionSolution(Entity* pE);

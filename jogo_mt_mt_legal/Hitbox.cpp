@@ -24,8 +24,7 @@ Hitbox::Hitbox():
 
 Hitbox::~Hitbox()
 {
-	Scene* activeScene = SceneManager::getInstance()->top();
-	activeScene->removeEntity(this);
+	owner = NULL;
 }
 
 void Hitbox::setTarget(const bool tar)

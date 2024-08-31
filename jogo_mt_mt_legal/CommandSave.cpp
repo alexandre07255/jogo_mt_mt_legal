@@ -6,6 +6,8 @@ using namespace Scenes;
 CommandSave::CommandSave(Menu* _bound):Command(_bound) {
 }
 
+CommandSave::~CommandSave() { }
+
 void CommandSave::execute() {
 	static_cast<PauseMenu*>(bound)->save();
 }

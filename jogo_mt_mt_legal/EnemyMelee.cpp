@@ -18,6 +18,11 @@ attackStartup(72), attackHitboxDuration(5), attackEndLag(20), attackTriggerRange
     hp = 20;
 }
 
+EnemyMelee::~EnemyMelee()
+{
+
+}
+
 void EnemyMelee::executePATROLLING() {
     srand(time(NULL));
 

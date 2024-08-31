@@ -10,6 +10,11 @@ Terrain::Terrain(float frict) :Entity(), Collidable() {
 	setFillColor(sf::Color::Transparent);
 }
 
+Terrain::~Terrain()
+{
+
+}
+
 void Terrain::execute() { }
 
 sf::FloatRect Terrain::getBounds() {

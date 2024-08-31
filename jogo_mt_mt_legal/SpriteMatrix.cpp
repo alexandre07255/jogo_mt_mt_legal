@@ -11,6 +11,17 @@ SpriteMatrix::SpriteMatrix() :
 {
 }
 
+SpriteMatrix::~SpriteMatrix()
+{
+	for (int j = 0; j < spriteSheet->size(); j++)
+	{
+		for (int i = 0; i < spriteSheet->at(j)->size(); i++)
+			delete spriteSheet->at(j)->at(i);
+		delete spriteSheet->at(j);
+	}
+	delete spriteSheet;
+}
+
 const bool SpriteMatrix::isBlockEmpty(Image& img, const int x, const int y) const
 {
 	for (int j = y * yStep; j < (y + 1) * yStep; j++)
@@ -70,7 +81,7 @@ const int SpriteMatrix::getLineSize(const int l) const { return spriteSheet->at(
 
 const int SpriteMatrix::getNumberOfLines() const { return spriteSheet->size(); }
 
-const Texture* SpriteMatrix::getSprite(int x, int y) const
+Texture* SpriteMatrix::getSprite(const int x, const int y) const
 {
 	return spriteSheet->at(y)->at(x);
 }

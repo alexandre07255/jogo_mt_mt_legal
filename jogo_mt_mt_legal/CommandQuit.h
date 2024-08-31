@@ -6,6 +6,7 @@ class CommandQuit : public Command
 {
 public:
 	CommandQuit(Scenes::Menu* _bound);
+	~CommandQuit();
 	void execute();
 };
 

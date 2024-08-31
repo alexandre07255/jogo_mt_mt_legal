@@ -21,6 +21,8 @@ Spike::Spike():
 		pTexture->setRepeated(1);
 }
 
+Spike::~Spike() { }
+
 void Spike::execute()
 {
 	if (firstStep)
@@ -45,7 +47,7 @@ void Spike::activate()
 	hitbox->setDamage(3);
 	hitbox->setRelativePosition(sf::Vector2f(0.f, 0.f));
 	hitbox->setPosition(getXPosition(), getYPosition());
-	hitbox->ajustToRelativePosition();
+	hitbox->adjustToRelativePosition();
 }
 
 void Spike::deactivate()

@@ -6,6 +6,7 @@ class CommandStart : public Command
 {
 public:
 	CommandStart(Scenes::Menu* _bound);
+	~CommandStart();
 	void execute();
 };
 

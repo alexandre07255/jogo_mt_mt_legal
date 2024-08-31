@@ -32,12 +32,8 @@ EnemyBoss::EnemyBoss(Player* p1, Player* p2):
 
 EnemyBoss::~EnemyBoss()
 {
-	SceneManager* sinstance = SceneManager::getInstance();
-	Level2* level = static_cast<Level2*>(sinstance->top());
-
-	level->setIsBossAlive(0);
-	level->removeEntity(this);
-	level->removeEnemy(this);
+	hitboxes[0] = NULL;
+	hitboxes[1] = NULL;
 }
 
 void EnemyBoss::execute()
@@ -78,6 +74,13 @@ void EnemyBoss::execute()
 	}
 
 	if (hp <= 0) {
+		SceneManager* sinstance = SceneManager::getInstance();
+		Level2* level = static_cast<Level2*>(sinstance->top());
+
+		level->setIsBossAlive(0);
+		level->removeEntity(this);
+		level->removeEnemy(this);
+
 		delete this;
 	}
 }
