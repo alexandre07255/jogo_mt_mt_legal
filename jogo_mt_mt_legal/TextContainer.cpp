@@ -6,7 +6,7 @@ TextContainer::TextContainer() {
 	text = new sf::Text;
 	text->setFont(font);
 	setSize(200.f, 100.f);
-	text->setCharacterSize(12);
+	text->setCharacterSize(24);
 	text->setFillColor(sf::Color::Red);
 }
 

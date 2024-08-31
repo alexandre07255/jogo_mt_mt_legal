@@ -22,6 +22,7 @@ namespace Scenes
 		void changeStartButtons();
 		void changeRanking();
 		void changeLoadButtons();
+		void changeCreditsButtons();
 
 		void goBack();
 		void moreButtons(bool level2);

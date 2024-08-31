@@ -17,6 +17,7 @@
 #include "inputManager.h"
 #include "Button.h"
 #include "CommandRanking.h"
+#include "CommandCredits.h"
 #include "CommandGoBack.h"
 #include "TextContainer.h"
 #include "ScoreSave.h"
@@ -41,11 +42,15 @@ MainMenu::MainMenu():version(0){
 	buttonRanking->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 + 100.f);
 	Button* buttonLoad = new Button(sf::Color::Blue, com6, true);
 	buttonLoad->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 + 225.f);
+	CommandCredits* com9 = new CommandCredits(this);
+	Button* changeCreditsButton = new Button(sf::Color::Blue, com9, true);
+	changeCreditsButton->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 + 350.f);
 
 	EntityList* startList = new EntityList;
 	startList->push_back(startButton);
 	startList->push_back(buttonRanking);
 	startList->push_back(buttonLoad);
+	startList->push_back(changeCreditsButton);
 
 	CommandStack1* com2 = new CommandStack1(this);
 	CommandStack2* com3 = new CommandStack2(this);
@@ -97,10 +102,19 @@ MainMenu::MainMenu():version(0){
 	loadList->push_back(buttonLoad1);
 	loadList->push_back(buttonLoad2);
 
+	Entities::TextContainer* credits = new Entities::TextContainer;
+	credits->write("PROGRAMAÇÃO:\n\nAlexandre Aires Amorim\nJohn William Souza Harrison\n\nARTE:\n\nNícolas Vinicius de Santa Gaio");
+	credits->setTextPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2);
+	credits->setFillColor(sf::Color::Transparent);
+
+	EntityList* CreditList = new EntityList;
+	CreditList->push_back(credits);
+
 	versions.push_back(startList);
 	versions.push_back(levelsList);
 	versions.push_back(rankingList);
 	versions.push_back(loadList);
+	versions.push_back(CreditList);
 
 	changeMainButtons();
 }
@@ -149,13 +163,18 @@ void MainMenu::changeLoadButtons() {
 
 	setEntityList(versions[3]);
 }
+void MainMenu::changeCreditsButtons() {
+	version = 4;
+
+	setEntityList(versions[4]);
+}
 
 void MainMenu::goBack() {
 	if (version == 0) {
 		GraphicManager* instance = GraphicManager::getInstance();
 		instance->getWindow()->close();
 	}
-	else if (version == 1 || version == 2 || version == 3){
+	else if (version == 1 || version == 2 || version == 3 || version == 4){
 		changeMainButtons();
 	}
 }

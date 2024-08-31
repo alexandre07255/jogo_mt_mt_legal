@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandCredits.cpp" />
     <ClCompile Include="CommandGoBack.cpp" />
     <ClCompile Include="CommandLevel1p2False.cpp" />
     <ClCompile Include="CommandLevel1p2True.cpp" />
@@ -197,6 +198,7 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandCredits.h" />
     <ClInclude Include="CommandGoBack.h" />
     <ClInclude Include="CommandLevel1p2False.h" />
     <ClInclude Include="CommandLevel1p2True.h" />
