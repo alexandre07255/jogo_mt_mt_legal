@@ -1,5 +1,8 @@
 #include "ScoreSave.h"
-#include "inputManager.h"
+#include "Game.h"
+#include "SceneManager.h"
+using namespace Managers;
+using namespace Scenes;
 
 Managers::GraphicManager* ::ScoreSave::pGraphic(Managers::GraphicManager::getInstance());
 
@@ -28,19 +31,26 @@ ScoreSave::~ScoreSave()
 }
 
 
-void ScoreSave::appendLetter() {
+const bool ScoreSave::appendLetter() {
 	Managers::InputManager* instance = Managers::InputManager::getInstance();
 	sf::RenderWindow* window = pGraphic->getWindow();
-	sf::Event event;
+	sf::Event* event = Game::getEvent();
 
-	while (window->pollEvent(event)) {
-
-		if (event.type == sf::Event::TextEntered) {
-
-			name->push_back(event.text.unicode);
-			
+	if (event->type == sf::Event::TextEntered)
+	{
+		if (event->text.unicode == '\b' && !name->empty())
+		{
+			name->pop_back();
+			return 1;
+		}
+		else if (event->text.unicode < 128 && event->text.unicode != 27)
+		{
+			name->push_back(event->text.unicode);
+			return 1;
 		}
 	}
+	
+	return 0;
 }
 
 void ScoreSave::setName(std::string* nm) {

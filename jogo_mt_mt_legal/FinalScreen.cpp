@@ -26,6 +26,7 @@ FinalScreen::FinalScreen(int _score, bool death) {
 	entityList->push_back(text);
 
 	save = new ScoreSave;
+	text->setFillColor(sf::Color::Transparent);
 }
 
 FinalScreen::~FinalScreen()
@@ -37,9 +38,11 @@ FinalScreen::~FinalScreen()
 void FinalScreen::execute() {
 	
 	entityList->drawAll();
-	save->appendLetter();
-	//Sleep(1);
-	text->write(*save->getName());
+	if (save->appendLetter())
+	{
+		Sleep(140);
+		text->write(*save->getName());
+	}
 	escChecker();
 	/*std::string* name = new std::string;
 	std::cin >> *name;

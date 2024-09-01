@@ -78,9 +78,10 @@ MainMenu::MainMenu():version(0){
 	int i = 0;
 	for (auto it = ranking.begin(); it != ranking.end(); it++) {
 		textCont = new Entities::TextContainer;
-
+		
 		std::string textToWrite = static_cast<std::string>(it.key()) + " : " + static_cast<std::string>(it.value());
-
+		
+		textCont->setFillColor(sf::Color::Transparent);
 		textCont->write(textToWrite);
 		textCont->setPosition(instance->getWindow()->getSize().x / 2, i * 100.f);
 		textCont->setTextPosition(instance->getWindow()->getSize().x / 2, i * 100.f);
@@ -103,7 +104,7 @@ MainMenu::MainMenu():version(0){
 	loadList->push_back(buttonLoad2);
 
 	Entities::TextContainer* credits = new Entities::TextContainer;
-	credits->write("PROGRAMAÇÃO:\n\nAlexandre Aires Amorim\nJohn William Souza Harrison\n\nARTE:\n\nNícolas Vinicius de Santa Gaio");
+	credits->write("PROGRAMAÇÃO:\n\nAlexandre Aires Amorim\nJohn William Souza Harrison\n\nARTE:\n\nNícolas Vinícius de Santa Gaio");
 	credits->setTextPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2);
 	credits->setFillColor(sf::Color::Transparent);
 
