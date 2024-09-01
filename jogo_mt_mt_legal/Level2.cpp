@@ -126,11 +126,11 @@ void Level2::createFromScratch(const bool isPlayer2)
     createFire(48 * SCALE, 22 * SCALE, 3 * SCALE, 1 * SCALE);
     createFire(57 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(29 * SCALE, 23 * SCALE, 1 * SCALE, 1 * SCALE);
+        createFire(29 * SCALE, 22 * SCALE, 1 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(19 * SCALE, 26 * SCALE, 2 * SCALE, 1 * SCALE);
+        createFire(19 * SCALE, 25 * SCALE, 2 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(67 * SCALE, 22 * SCALE, 1 * SCALE, 1 * SCALE);
+        createFire(67 * SCALE, 21 * SCALE, 1 * SCALE, 1 * SCALE);
 
 
     createPlatform(30 * SCALE, 19 * SCALE, 3 * SCALE, SCALE);
