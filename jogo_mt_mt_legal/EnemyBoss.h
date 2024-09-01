@@ -50,6 +50,9 @@ namespace Entities
 			~EnemyBoss();
 			void execute();
 			void save(LevelSave* save);
+
+			bool getTriggered()const;
+			void setTriggered(const bool trig);
 		};
 	}
 }

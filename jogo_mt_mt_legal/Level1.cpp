@@ -61,10 +61,17 @@ Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRig
     if (!isBeingLoaded)
         createFromScratch(isPlayer2);
     
-
+    player1Hp = new TextContainer;
+    entityList->push_back(player1Hp);
+    player1Hp->setSize(SCALE/2, SCALE/2);
+    if (isPlayer2) {
+        player2Hp = new TextContainer;
+        player2Hp->setSize(SCALE/2, SCALE/2);
+        entityList->push_back(player2Hp);
+    }
 
     Camera* view;
-    view = new Camera(window, trueBackground);
+    view = new Camera(window, trueBackground,player1Hp,player2Hp);
     camera = view;
     view->setPlayer1(pPlayer1);
     if (isPlayer2)
@@ -84,13 +91,6 @@ Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRig
     endX = 1440 * SCALE / 16 - SCALE;
 
     level2 = false;
-
-    player1Hp = new TextContainer;
-    player1Hp->setSize(SCALE*3,SCALE*3);
-    if (isPlayer2) {
-        player2Hp = new TextContainer;
-        player2Hp->setSize(SCALE * 3, SCALE * 3);
-    }
 }
 
 TextContainer* Level1::getTextContainer(bool isPlayer2) {

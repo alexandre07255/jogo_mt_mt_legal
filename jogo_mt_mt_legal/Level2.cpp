@@ -67,12 +67,17 @@ Level2::Level2(bool isPlayer2, bool isBeingLoaded, int p1Points, int p2Points) :
             pPlayer2->setPoints(p2Points);
     }
 
-    
-
-
+    player1Hp = new TextContainer;
+    entityList->push_back(player1Hp);
+    player1Hp->setSize(SCALE/2, SCALE/2);
+    if (isPlayer2) {
+        player2Hp = new TextContainer;
+        entityList->push_back(player2Hp);
+        player2Hp->setSize(SCALE/2, SCALE/2);
+    }
 
     Camera* view;
-    view = new Camera(window, trueBackground);
+    view = new Camera(window, trueBackground,player1Hp,player2Hp);
     camera = view;
     view->setPlayer1(pPlayer1);
     if (isPlayer2)

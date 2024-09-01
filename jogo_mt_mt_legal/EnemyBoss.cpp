@@ -302,7 +302,15 @@ void EnemyBoss::checkTrigger()
 
 void EnemyBoss::save(LevelSave* save)
 {
+	save->addEnemyBoss(this);
+}
 
+bool EnemyBoss::getTriggered()const {
+	return triggered;
+}
+
+void EnemyBoss::setTriggered(const bool trig) {
+	triggered = trig;
 }
 
 const int EnemyBoss::TIREDNESS_DURATION(300);
