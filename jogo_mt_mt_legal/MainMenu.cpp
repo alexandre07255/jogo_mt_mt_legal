@@ -42,22 +42,21 @@ MainMenu::MainMenu():version(0){
 	CommandLoad* com6 = new CommandLoad(this);
 	matrixIndex = spInstance->getMatrixIndex("StartButton");
 	Button* startButton = new Button(sf::Color::White, com1, true, matrixIndex);
-	startButton->setSize(54.f * 6, 17.f * 6);
-	startButton->setPosition(instance->getWindow()->getSize().x/2 - startButton->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 40.f);
+	startButton->setSize(62.f * 6, 17.f * 6);
+	startButton->setPosition(instance->getWindow()->getSize().x/2 - startButton->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 40.f - 90.f);
 	matrixIndex = spInstance->getMatrixIndex("ContinueButton");
 	Button* buttonLoad = new Button(sf::Color::White, com6, true, matrixIndex);
-	spInstance->getTexture(buttonLoad, matrixIndex, 0, 0);
-	buttonLoad->setSize(54.f * 6, 17.f * 6);
-	buttonLoad->setPosition(instance->getWindow()->getSize().x / 2 - buttonLoad->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 85.f);
-	Button* buttonRanking = new Button(sf::Color::Blue, com4, true, -1);
+	buttonLoad->setSize(62.f * 6, 17.f * 6);
+	buttonLoad->setPosition(instance->getWindow()->getSize().x / 2 - buttonLoad->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 85.f - 90.f);
+	matrixIndex = spInstance->getMatrixIndex("RankingButton");
+	Button* buttonRanking = new Button(sf::Color::White, com4, true, matrixIndex);
 	buttonRanking->setSize(62.f * 6, 17.f * 6);
-	buttonRanking->setPosition(instance->getWindow()->getSize().x / 2 - buttonRanking->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 210.f);
+	buttonRanking->setPosition(instance->getWindow()->getSize().x / 2 - buttonRanking->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 210.f - 90.f);
 	CommandCredits* com9 = new CommandCredits(this);
-	Button* changeCreditsButton = new Button(sf::Color::White, com9, true, matrixIndex);
 	matrixIndex = spInstance->getMatrixIndex("CreditsButton");
-	spInstance->getTexture(changeCreditsButton, matrixIndex, 0, 0);
-	changeCreditsButton->setSize(54.f * 6, 17.f * 6);
-	changeCreditsButton->setPosition(instance->getWindow()->getSize().x / 2 - changeCreditsButton->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 335.f);
+	Button* changeCreditsButton = new Button(sf::Color::White, com9, true, matrixIndex);
+	changeCreditsButton->setSize(62.f * 6, 17.f * 6);
+	changeCreditsButton->setPosition(instance->getWindow()->getSize().x / 2 - changeCreditsButton->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 335.f - 90.f);
 
 	int backgroundMatrixIndex = spInstance->getMatrixIndex("Menu");
 	Background* background = NULL;
@@ -76,12 +75,17 @@ MainMenu::MainMenu():version(0){
 	CommandStack1* com2 = new CommandStack1(this);
 	CommandStack2* com3 = new CommandStack2(this);
 
-	Button* buttonLevel1 = new Button(sf::Color::Blue, com2, false, matrixIndex);
-	Button* buttonLevel2 = new Button(sf::Color::Blue, com3, false, matrixIndex);
+	matrixIndex = spInstance->getMatrixIndex("Level1Button");
+	Button* buttonLevel1 = new Button(sf::Color::White, com2, false, matrixIndex);
+	matrixIndex = spInstance->getMatrixIndex("Level2Button");
+	Button* buttonLevel2 = new Button(sf::Color::White, com3, false, matrixIndex);
 
-	buttonLevel1->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
-	buttonLevel2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
+	buttonLevel1->setSize(20.f * 6, 17.f * 6);
+	buttonLevel1->setPosition(instance->getWindow()->getSize().x / 2 - buttonLevel1->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 40.f);
+	buttonLevel2->setSize(20.f * 6, 17.f * 6);
+	buttonLevel2->setPosition(instance->getWindow()->getSize().x / 2 - buttonLevel2->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 140.f);
 
+	backgroundMatrixIndex = spInstance->getMatrixIndex("MenuBackground");
 	background = new Background;
 	spInstance->getTexture(background, backgroundMatrixIndex, 0, 0);
 	background->setSize(320.f * 6, 180.f * 6);
@@ -98,7 +102,13 @@ MainMenu::MainMenu():version(0){
 	EntityList* rankingList = new EntityList;
 	//rankingList->push_back(goBackButton);
 
-	nlohmann::json ranking = Save::readJson("saves.json");
+	backgroundMatrixIndex = spInstance->getMatrixIndex("MenuDark");
+	background = new Background;
+	spInstance->getTexture(background, backgroundMatrixIndex, 0, 0);
+	background->setSize(320.f * 6, 180.f * 6);
+	rankingList->push_back(background);
+
+	nlohmann::json ranking = Save::readJson("saves/score_save.json");
 
 	Entities::TextContainer* textCont;
 	int i = 0;
@@ -108,9 +118,10 @@ MainMenu::MainMenu():version(0){
 		std::string textToWrite = static_cast<std::string>(it.key()) + " : " + static_cast<std::string>(it.value());
 		
 		textCont->setFillColor(sf::Color::Transparent);
+		textCont->setTextFillColor(sf::Color::White);
 		textCont->write(textToWrite);
-		textCont->setPosition(instance->getWindow()->getSize().x / 2, i * 100.f);
-		textCont->setTextPosition(instance->getWindow()->getSize().x / 2, i * 100.f);
+		textCont->setPosition(instance->getWindow()->getSize().x / 2, (i + 1) * 50.f);
+		textCont->setTextPosition(instance->getWindow()->getSize().x / 2 - 100.f, (i + 1) * 50.f);
 
 		rankingList->push_back(textCont);
 		i++;
@@ -119,12 +130,18 @@ MainMenu::MainMenu():version(0){
 	CommandLoad1* com7 = new CommandLoad1(this);
 	CommandLoad2* com8 = new CommandLoad2(this);
 
-	Button* buttonLoad1 = new Button(sf::Color::Blue, com7, true, matrixIndex);
-	Button* buttonLoad2 = new Button(sf::Color::Blue, com8, true, matrixIndex);
 
-	buttonLoad1->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
-	buttonLoad2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
+	matrixIndex = spInstance->getMatrixIndex("Level1Button");
+	Button* buttonLoad1 = new Button(sf::Color::White, com7, true, matrixIndex);
+	matrixIndex = spInstance->getMatrixIndex("Level2Button");
+	Button* buttonLoad2 = new Button(sf::Color::White, com8, true, matrixIndex);
 
+	buttonLoad1->setSize(20.f * 6, 17.f * 6);
+	buttonLoad1->setPosition(instance->getWindow()->getSize().x / 2 - buttonLoad1->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 40.f);
+	buttonLoad2->setSize(20.f * 6, 17.f * 6);
+	buttonLoad2->setPosition(instance->getWindow()->getSize().x / 2 - buttonLoad2->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 140.f);
+
+	backgroundMatrixIndex = spInstance->getMatrixIndex("MenuBackground");
 	background = new Background;
 	spInstance->getTexture(background, backgroundMatrixIndex, 0, 0);
 	background->setSize(320.f * 6, 180.f * 6);
@@ -141,6 +158,7 @@ MainMenu::MainMenu():version(0){
 	credits->setPosition(instance->getWindow()->getSize().x / 2 - credits->getXSize() / 2, instance->getWindow()->getSize().y / 2);
 	credits->setFillColor(sf::Color::Black);
 
+	backgroundMatrixIndex = spInstance->getMatrixIndex("MenuDark");
 	background = new Background;
 	spInstance->getTexture(background, backgroundMatrixIndex, 0, 0);
 	background->setSize(320.f * 6, 180.f * 6);
@@ -230,13 +248,15 @@ void MainMenu::moreButtons(bool level2) {
 		CommandLevel2p2False* com1 = new CommandLevel2p2False(this);
 		CommandLevel2p2True* com2 = new CommandLevel2p2True(this);
 
-		matrixIndex = spInstance->getMatrixIndex("IsPlayer1");
+		matrixIndex = spInstance->getMatrixIndex("IsPlayer2");
 		Button* greenThing = new Button(sf::Color::White, com2, true, matrixIndex);
 		matrixIndex = spInstance->getMatrixIndex("IsPlayer1");
 		Button* redThing = new Button(sf::Color::White, com1, true, matrixIndex);
 
-		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 + 125.f);
-		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 + 125.f);
+		greenThing->setSize(54.f * 6, 17.f * 6);
+		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 250 - greenThing->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 140.f);
+		redThing->setSize(54.f * 6, 17.f * 6);
+		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 250 - redThing->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 140.f);
 
 		versions[1]->push_back(greenThing);
 		versions[1]->push_back(redThing);
@@ -245,13 +265,15 @@ void MainMenu::moreButtons(bool level2) {
 		CommandLevel1p2False* com1 = new CommandLevel1p2False(this);
 		CommandLevel1p2True* com2 = new CommandLevel1p2True(this);
 
-		matrixIndex = spInstance->getMatrixIndex("IsPlayer1");
-		Button* greenThing = new Button(sf::Color::White, com2, true, matrixIndex);
 		matrixIndex = spInstance->getMatrixIndex("IsPlayer2");
+		Button* greenThing = new Button(sf::Color::White, com2, true, matrixIndex);
+		matrixIndex = spInstance->getMatrixIndex("IsPlayer1");
 		Button* redThing = new Button(sf::Color::White, com1, true, matrixIndex);
 
-		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 300, instance->getWindow()->getSize().y / 2 - 125.f);
-		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 300, instance->getWindow()->getSize().y / 2 - 125.f);
+		greenThing->setSize(54.f * 6, 17.f * 6);
+		greenThing->setPosition(instance->getWindow()->getSize().x / 2 + 250 - greenThing->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 40.f);
+		redThing->setSize(54.f * 6, 17.f * 6);
+		redThing->setPosition(instance->getWindow()->getSize().x / 2 - 250 - redThing->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 40.f);
 
 		versions[1]->push_back(greenThing);
 		versions[1]->push_back(redThing);

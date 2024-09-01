@@ -11,13 +11,13 @@ void ScoreSave::savePlayer(int score) {
 }
 
 void ScoreSave::addScore(std::string name, int score) {
-	saveJson = readJson("saves.json");
+	saveJson = readJson("saves/score_save.json");
 	
 	std::string stringScore = std::to_string(score);
 
 	saveJson[name] = stringScore;
 
-	writejson("saves.json", saveJson);
+	writejson("saves/score_save.json", saveJson);
 }
 
 ScoreSave::ScoreSave(){

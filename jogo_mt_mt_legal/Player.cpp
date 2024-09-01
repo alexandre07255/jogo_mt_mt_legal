@@ -15,7 +15,7 @@ using namespace Entities::Hitboxes;
 
 
 Player::Player(const bool isPlayer2, const int health) :
-	Hittable(1, MAX_HP),
+	Hittable(1, health),
 	jumpBuffer(0),
 	isStillJumping(0),
 	jumpLength(0),
@@ -30,7 +30,7 @@ Player::Player(const bool isPlayer2, const int health) :
 {
 	//setSize(sf::Vector2f(108.f, 132.f));
 	//Base 36 / 44
-	setSize(sf::Vector2f(21.f * 3, 30.f * 3));
+	setSize(sf::Vector2f(22.f * 3, 30.f * 3));
 
 	SpriteManager* spInstance = SpriteManager::getInstance();
 	if (!isPlayer2)
@@ -48,7 +48,7 @@ Player::Player(const bool isPlayer2, const int health) :
 	pShape->setOrigin(width / 2.f, 0);
 
 	//setSize(sf::Vector2f(21.f * 3, 30.f * 3));
-	pShape->setTextureRect(sf::IntRect(0, 14, 21, 30));
+	pShape->setTextureRect(sf::IntRect(0, 14, 22, 30));
 	//pShape->setScale(-1.f, 1.f);
 	//pShape->setScale(1.f, 1.f);
 	//pShape->setTextureRect(sf::IntRect(0, -44, 36, 44));
@@ -125,7 +125,7 @@ void Player::execute() {
 	if (fireRemaining)
 	{
 		setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
-		if (fireCont > 4)
+		if (fireCont > 40)
 		{
 			hp--;
 			fireRemaining--;
@@ -275,9 +275,9 @@ void Player::executeATKCANCEL()
 		spriteY = 0;
 
 		float prevHeight = height;
-		setSize(sf::Vector2f(21.f * 3, 30.f * 3));
+		setSize(sf::Vector2f(22.f * 3, 30.f * 3));
 		move(0, prevHeight - height);
-		pShape->setTextureRect(sf::IntRect(0, 14, 21, 30));
+		pShape->setTextureRect(sf::IntRect(0, 14, 22, 30));
 	}
 }
 
@@ -301,9 +301,9 @@ void Player::executeATTACK()
 		spriteY = 0;
 
 		float prevHeight = height;
-		setSize(sf::Vector2f(21.f * 3, 30.f * 3));
+		setSize(sf::Vector2f(22.f * 3, 30.f * 3));
 		move(0, prevHeight - height);
-		pShape->setTextureRect(sf::IntRect(0, 14, 21, 30));
+		pShape->setTextureRect(sf::IntRect(0, 14, 22, 30));
 	}
 	move((float) horizontalVelocity * 0.15f, (float) (++verticalVelocity) * 0.85f);
 	//move(sf::Vector2f(horizontalVelocity*0.15, (++verticalVelocity)*0.85));
@@ -320,9 +320,9 @@ void Player::executeHITSTUN()
 		spriteY = 0;
 
 		float prevHeight = height;
-		setSize(sf::Vector2f(21.f * 3, 30.f * 3));
+		setSize(sf::Vector2f(22.f * 3, 30.f * 3));
 		move(0, prevHeight - height);
-		pShape->setTextureRect(sf::IntRect(0, 14, 21, 30));
+		pShape->setTextureRect(sf::IntRect(0, 14, 22, 30));
 
 		setFillColor(sf::Color::White);
 	}

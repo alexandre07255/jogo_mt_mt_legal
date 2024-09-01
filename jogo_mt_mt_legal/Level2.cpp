@@ -71,12 +71,14 @@ Level2::Level2(bool isPlayer2, bool isBeingLoaded, int p1Points, int p2Points) :
     entityList->push_back(player1Hp);
     player1Hp->setSize(SCALE/2, SCALE/2);
     index = spInstance->getMatrixIndex("SamuraiRedIcon");
+    player1Hp->setTextFillColor(sf::Color::Black);
     spInstance->getTexture(player1Hp, index, 0, 0);
     if (isPlayer2) {
         player2Hp = new TextContainer;
         entityList->push_back(player2Hp);
         player2Hp->setSize(SCALE/2, SCALE/2);
         index = spInstance->getMatrixIndex("SamuraiBlueIcon");
+        player2Hp->setTextFillColor(sf::Color::Black);
         spInstance->getTexture(player2Hp, index, 0, 0);
     }
 
@@ -130,7 +132,7 @@ void Level2::createFromScratch(const bool isPlayer2)
     if (rand() % 2)
         createFire(19 * SCALE, 25 * SCALE, 2 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(67 * SCALE, 21 * SCALE, 1 * SCALE, 1 * SCALE);
+        createFire(65 * SCALE, 22 * SCALE, 1 * SCALE, 1 * SCALE);
 
 
     createPlatform(30 * SCALE, 19 * SCALE, 3 * SCALE, SCALE);
@@ -165,7 +167,7 @@ void Level2::createFromScratch(const bool isPlayer2)
     if (rand() % 2)
         createEnemyRanged(31 * SCALE, 18 * SCALE, 20);
 
-    createEnemyBoss(75 * SCALE, 20 * SCALE, 0, pPlayer1, pPlayer2);
+    createEnemyBoss(75 * SCALE, 20 * SCALE, 50, pPlayer1, pPlayer2);
 }
 
 void Level2::levelCompleteHandler()

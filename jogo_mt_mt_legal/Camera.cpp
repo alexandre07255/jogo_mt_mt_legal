@@ -63,13 +63,14 @@ void Camera::execute()
 	else if (player1) {
 		view.setCenter(player1->getXPosition(), player1->bottom() - 45);
 	}
-	p1Health->write(std::to_string(player1->getHp()));
+	if (player1)
+		p1Health->write(std::to_string(player1->getHp()));
 
 	background->setPosition(view.getCenter().x - background->getXSize() / 2, view.getCenter().y - background->getYSize() / 2);
-	p1Health->setTextPosition(view.getCenter().x - view.getSize().x / 2 + 5.3333*16, view.getCenter().y - view.getSize().y / 2);
+	p1Health->setTextPosition(view.getCenter().x - view.getSize().x / 2 + 5.3333*16 - 30.f, view.getCenter().y - view.getSize().y / 2 + 5.f);
 	p1Health->setPosition(view.getCenter().x - view.getSize().x / 2, view.getCenter().y - view.getSize().y / 2);
 	if (player2) {
-		p2Health->setTextPosition(view.getCenter().x - view.getSize().x / 2 + 5.3333 * 16, view.getCenter().y - view.getSize().y / 2 + 50.f);
+		p2Health->setTextPosition(view.getCenter().x - view.getSize().x / 2 + 5.3333 * 16 - 30.f, view.getCenter().y - view.getSize().y / 2 + 50.f + 5.f);
 		p2Health->setPosition(view.getCenter().x - view.getSize().x / 2, view.getCenter().y - view.getSize().y / 2 + 50.f);
 	}
 

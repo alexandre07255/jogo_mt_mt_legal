@@ -50,10 +50,10 @@ void LevelSave::addPlayer(Entities::Characters::Player* player, bool player2) {
 
 void LevelSave::saveFinal(bool level2) {
 	if (level2) {
-		writejson("saveLevel2.json", saveJson);
+		writejson("saves/saveLevel2.json", saveJson);
 	}
 	else {
-		writejson("saveLevel1.json", saveJson);
+		writejson("saves/saveLevel1.json", saveJson);
 	}
 }
 
@@ -61,10 +61,10 @@ void LevelSave::loadLevel(bool level2) {
 	bool isPlayer2 = false;
 	
 	if (level2) {
-		saveJson = readJson("saveLevel2.json");
+		saveJson = readJson("saves/saveLevel2.json");
 	}
 	else {
-		saveJson = readJson("saveLevel1.json");
+		saveJson = readJson("saves/saveLevel1.json");
 	}
 	if (saveJson["isPlayer2"][0]) {
 		isPlayer2 = true;
@@ -86,10 +86,10 @@ void LevelSave::loadLevel(bool level2) {
 			level->createFire((*it)["x"], (*it)["y"], (*it)["width"], (*it)["height"]);
 		}
 
-		level->createPlayer1(saveJson["player1"][0]["x"], saveJson["player1"][0]["y"], saveJson["player1"][0]["points"]);
+		level->createPlayer1(saveJson["player1"][0]["x"], saveJson["player1"][0]["y"], saveJson["player1"][0]["points"], saveJson["player1"][0]["hp"]);
 
 		if (isPlayer2) {
-			level->createPlayer2(saveJson["player2"][0]["x"], saveJson["player2"][0]["y"], saveJson["player2"][0]["points"]);
+			level->createPlayer2(saveJson["player2"][0]["x"], saveJson["player2"][0]["y"], saveJson["player2"][0]["points"], saveJson["player2"][0]["hp"]);
 		}
 		for (auto it = saveJson["BossList"].begin(); it != saveJson["BossList"].end();it++) {
 			level->createEnemyBoss((*it)["x"], (*it)["y"], (*it)["points"],level->getPlayer1(),level->getPlayer2());
@@ -115,10 +115,10 @@ void LevelSave::loadLevel(bool level2) {
 			level->createPlatform((*it)["x"], (*it)["y"], (*it)["width"], (*it)["height"]);
 		}
 
-		level->createPlayer1(saveJson["player1"][0]["x"], saveJson["player1"][0]["y"], saveJson["player1"][0]["points"]);
+		level->createPlayer1(saveJson["player1"][0]["x"], saveJson["player1"][0]["y"], saveJson["player1"][0]["points"], saveJson["player1"][0]["hp"]);
 
 		if (isPlayer2) {
-			level->createPlayer2(saveJson["player2"][0]["x"], saveJson["player2"][0]["y"], saveJson["player2"][0]["points"]);
+			level->createPlayer2(saveJson["player2"][0]["x"], saveJson["player2"][0]["y"], saveJson["player2"][0]["points"], saveJson["player2"][0]["hp"]);
 		}
 
 		Managers::SceneManager* sInstance = Managers::SceneManager::getInstance();

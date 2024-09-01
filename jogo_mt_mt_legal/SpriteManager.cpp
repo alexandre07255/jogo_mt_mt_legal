@@ -47,7 +47,7 @@ SpriteManager::SpriteManager():
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("StartButton", 54, 17, "HizaSprites/UI/s_start.png");
+	spriteSheet->loadFromFile("StartButton", 62, 17, "HizaSprites/UI/s_start.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
@@ -55,23 +55,23 @@ SpriteManager::SpriteManager():
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("CreditsButton", 54, 17, "HizaSprites/UI/s_credits.png");
+	spriteSheet->loadFromFile("CreditsButton", 62, 17, "HizaSprites/UI/s_credits.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("IsPlayer1", 50, 50, "HizaSprites/UI/s_players_one.png");
+	spriteSheet->loadFromFile("IsPlayer1", 54, 17, "HizaSprites/UI/s_players_one.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("IsPlayer2", 50, 50, "HizaSprites/UI/s_players_two.png");
+	spriteSheet->loadFromFile("IsPlayer2", 54, 17, "HizaSprites/UI/s_players_two.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("Level1Button", 20, 20, "HizaSprites/UI/s_lvl1.png");
+	spriteSheet->loadFromFile("Level1Button", 20, 17, "HizaSprites/UI/s_lvl1.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("Level2Button", 20, 20, "HizaSprites/UI/s_lvl2.png");
+	spriteSheet->loadFromFile("Level2Button", 20, 17, "HizaSprites/UI/s_lvl2.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
@@ -84,6 +84,42 @@ SpriteManager::SpriteManager():
 
 	spriteSheet = new SpriteMatrix;
 	spriteSheet->loadFromFile("SamuraiBlueIcon", 16, 16, "HizaSprites/UI/s_samurai_Blue_icon.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("QuitButton", 33, 17, "HizaSprites/UI/s_quit.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("SaveButton", 33, 17, "HizaSprites/UI/s_save.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("GameOver", 320, 180, "HizaSprites/UI/s_gameover.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("RankingButton", 62, 17, "HizaSprites/UI/s_ranking.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("MenuDark", 320, 180, "HizaSprites/UI/s_bg_dark.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("MenuBackground", 320, 180, "HizaSprites/UI/s_background_menu.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("MenuBackground", 320, 180, "HizaSprites/UI/s_background_menu.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("Spit", 8, 8, "HizaSprites/Environment/s_spit.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("HappyEnding", 320, 180, "HizaSprites/UI/s_happy_ending.png");
 	spriteMatrices.push_back(spriteSheet);
 }
 

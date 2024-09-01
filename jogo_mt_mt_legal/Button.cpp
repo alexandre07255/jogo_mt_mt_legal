@@ -2,6 +2,7 @@
 #include "inputManager.h"
 #include "GraphicManager.h"
 #include "LevelSave.h"
+#include "SpriteManager.h"
 using namespace Managers;
 using namespace Entities;
 
@@ -51,7 +52,11 @@ const bool Button::isMouseClicked() {
 void Button::execute() {
 	if (isMouseOn() && clickable) {
 		InputManager* iInstance = InputManager::getInstance();
-		setFillColor(sf::Color::Yellow);
+		if (spriteMatrixIndex >= 0)
+			spriteY = 1;
+		else
+			setFillColor(sf::Color::Yellow);
+
 		if (mouse->isButtonPressed(sf::Mouse::Left)) {
 			if (!iInstance->getWasLMBPressed())
 			{
@@ -66,7 +71,16 @@ void Button::execute() {
 	}
 	
 	else {
-		setFillColor(defaultColor);
+		if (spriteMatrixIndex >= 0)
+			spriteY = 0;
+		else
+			setFillColor(defaultColor);
+	}
+	if (spriteMatrixIndex >= 0)
+	{
+		SpriteManager* spInstance = SpriteManager::getInstance();
+
+		spInstance->getTexture(this, spriteMatrixIndex,spriteX, spriteY);
 	}
 }
 

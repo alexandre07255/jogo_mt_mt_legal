@@ -28,7 +28,7 @@ void TextContainer::save(LevelSave* save) {
 
 sf::Font TextContainer::getFont() {
 	sf::Font font;
-	font.loadFromFile("HizaSprites/Fonts/PixeloidSans-mLxMm.ttf");
+	font.loadFromFile("HizaSprites/Fonts/mc-ten-lowercase-alt.ttf");
 	return font;
 }
 
@@ -40,4 +40,9 @@ sf::Font TextContainer::font(TextContainer::getFont());
 
 void TextContainer::setTextPosition(float x, float y) {
 	text->setPosition(x, y);
+}
+
+void TextContainer::setTextFillColor(sf::Color col)
+{
+	text->setFillColor(col);
 }

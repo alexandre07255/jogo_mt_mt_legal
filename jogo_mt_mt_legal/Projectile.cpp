@@ -3,6 +3,7 @@
 #include "CollisionManager.h"
 #include "LevelSave.h"
 #include <iostream>
+#include "SpriteManager.h"
 using namespace std;
 using namespace sf;
 using namespace Entities;
@@ -26,8 +27,13 @@ Projectile::Projectile():
     hitbox->setIsInfinite(1);
     hitbox->setDoesATKCANCEL(0);
 
-    setFillColor(Color::Blue);
+    setFillColor(Color::White);
    
+    SpriteManager* spInstance = SpriteManager::getInstance();
+    spriteMatrixIndex = spInstance->getMatrixIndex("Spit");
+
+    spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
+
     activeScene->addEntity(this);
 }
 

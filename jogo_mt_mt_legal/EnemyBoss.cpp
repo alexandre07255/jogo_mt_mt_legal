@@ -70,6 +70,14 @@ void EnemyBoss::execute()
 		break;
 	}
 
+	if (stun)
+	{
+		stun--;
+		setFillColor(sf::Color::Red);
+	}
+	else
+		setFillColor(sf::Color::White);
+
 	SpriteManager* spInstance = SpriteManager::getInstance();
 	if (frameCont >= 6)
 	{
@@ -85,7 +93,7 @@ void EnemyBoss::execute()
 	if (fireRemaining)
 	{
 		setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
-		if (fireCont > 4)
+		if (fireCont > 40)
 		{
 			hp--;
 			fireRemaining--;

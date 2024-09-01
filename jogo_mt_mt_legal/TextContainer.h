@@ -16,6 +16,7 @@ namespace Entities {
 		void save(LevelSave* save);
 		void write(std::string sText);
 		void setTextPosition(float x, float y);
+		void setTextFillColor(sf::Color col);
 	};
 }
 

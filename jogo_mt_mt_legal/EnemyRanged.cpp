@@ -22,7 +22,7 @@ cooldownCont(0),
 attackTriggerStrip(20.0f),
 nearestCollidableCont(NEAREST_COLLIDABLE_COOLDOWN)
 {
-    hp = 5;
+    hp = 2;
     sightSize = 1000.0;
 	upperLimitMultR = 5.0 / 2;
 	lesserLimitMultR = 7.0 / 4;
@@ -86,7 +86,7 @@ void EnemyRanged::execute()
     if (fireRemaining)
     {
         setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
-        if (fireCont > 4)
+        if (fireCont > 40)
         {
             hp--;
             fireRemaining--;
@@ -138,8 +138,9 @@ void EnemyRanged::executePATROLLING()
         }
         if (spriteY != 2)
         {
+            if (spriteY != 0)
+                spriteX = 0;
             frameCont = 0;
-            spriteX = 0;
             spriteY = 2;
         }
     }
@@ -154,8 +155,9 @@ void EnemyRanged::executePATROLLING()
             }
             if (spriteY != 0)
             {
+                if (spriteY != 2)
+                    spriteX = 0;
                 frameCont = 0;
-                spriteX = 0;
                 spriteY = 0;
             }
 
@@ -224,8 +226,9 @@ void EnemyRanged::executePATROLLING()
         state = FOLLOWING;
         if (spriteY != 0)
         {
+            if (spriteY != 2)
+                spriteX = 0;
             frameCont = 0;
-            spriteX = 0;
             spriteY = 0;
         }
     }
@@ -381,7 +384,7 @@ void EnemyRanged::executeATTACK()
             projectile->setTarget(1);
             projectile->setOwner(this);
             float horKnock = 0.0;
-            projectile->setSize(sf::Vector2f(30.0f, 30.0f));
+            projectile->setSize(sf::Vector2f(8.0f * 3, 8.0f * 3));
             projectile->setVerKnockback(-10.0);
             projectile->setDamage(3);
             projectile->setHitstun(25);

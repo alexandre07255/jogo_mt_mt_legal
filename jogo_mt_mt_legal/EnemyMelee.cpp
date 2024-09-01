@@ -166,7 +166,7 @@ void EnemyMelee::execute() {
     if (fireRemaining)
     {
         setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
-        if (fireCont > 4)
+        if (fireCont > 40)
         {
             hp--;
             fireRemaining--;

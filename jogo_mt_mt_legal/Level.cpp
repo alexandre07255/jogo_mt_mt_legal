@@ -54,12 +54,22 @@ void Level::execute()
 	camera->execute();
 	escChecker();
 
+	if (pPlayer2)
+	{
+		if (pPlayer2->getHp() <= 0) {
+			pPlayer2->setSize(0.f, pPlayer2->getYSize());
+			pPlayer2->setPosition(pPlayer1->xMid(), pPlayer1->getYPosition());
+			pPlayer2->setVerticalVelocity(0);
+		}
+	}
+
 	if (pPlayer1->getHp() <= 0) {
 		FinalScreen* save = new FinalScreen(pPlayer1->getPoints(), true);
 		SceneManager* sceneInstance = SceneManager::getInstance();
 		pGG->getWindow()->setView(pGG->getWindow()->getDefaultView());
 		sceneInstance->push(save);
 	}
+	
 	levelCompleteChecker();
 }
 
@@ -224,7 +234,8 @@ void Level::createPlayer1(const float x, const float y, const int points, const 
 {
 	if (pPlayer1) { return; }
 	
-	Player* player1 = new Player(0, hp);
+	Player* player1 = new Player(0);
+	player1->dealDamage(player1->getHp() - hp);
 	player1->setPosition(x, y);
 	player1->setPoints(points);
 	pPlayer1 = player1;
@@ -276,5 +287,5 @@ void Level::setEverything() {
 	cInstance->setCollidables(collidables);
 	cInstance->setObstacleList(obstacleList);
 	camera->setPlayer1(pPlayer1);
-	camera->setPlayer2(pPlayer1);
+	camera->setPlayer2(pPlayer2);
 }
