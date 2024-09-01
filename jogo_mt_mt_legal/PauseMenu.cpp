@@ -16,7 +16,8 @@ PauseMenu::PauseMenu(Level* lAct): levelActive(lAct){
 
 	CommandQuit* com1 = new CommandQuit(this);
 
-	Button* buttonQuit = new Button(sf::Color::Blue, com1, false);
+	int matrixIndex = 0;
+	Button* buttonQuit = new Button(sf::Color::Blue, com1, false, matrixIndex);
 
 	float x = window->getSize().x;
 	float y = window->getSize().y;
@@ -27,7 +28,7 @@ PauseMenu::PauseMenu(Level* lAct): levelActive(lAct){
 
 	CommandSave* com2 = new CommandSave(this);
 
-	Button* buttonSave = new Button(sf::Color::Blue, com2, true);
+	Button* buttonSave = new Button(sf::Color::Blue, com2, true, matrixIndex);
 	buttonSave->setPosition(x / 2.0f, y / 2.0f + 100.f);
 
 	entityList->push_back(buttonSave);

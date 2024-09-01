@@ -11,7 +11,7 @@ private:
 	bool repeatable;
 public:
 	bool clickable;
-	Button(sf::Color col, Command* _com, bool repeat, const int matriIndex);
+	Button(sf::Color col, Command* _com, bool repeat, const int matriIndex = -1);
 	~Button();
 	const bool isMouseOn();
 	void execute();

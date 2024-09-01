@@ -13,6 +13,7 @@ Button::Button(sf::Color col, Command* _com,bool repeat, const int matriIndex) :
 	setFillColor(defaultColor);
 	clickable = true;
 	com = _com;
+	spriteMatrixIndex = matriIndex;
 }
 
 Button::~Button() {
