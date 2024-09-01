@@ -70,10 +70,14 @@ Level2::Level2(bool isPlayer2, bool isBeingLoaded, int p1Points, int p2Points) :
     player1Hp = new TextContainer;
     entityList->push_back(player1Hp);
     player1Hp->setSize(SCALE/2, SCALE/2);
+    index = spInstance->getMatrixIndex("SamuraiRedIcon");
+    spInstance->getTexture(player1Hp, index, 0, 0);
     if (isPlayer2) {
         player2Hp = new TextContainer;
         entityList->push_back(player2Hp);
         player2Hp->setSize(SCALE/2, SCALE/2);
+        index = spInstance->getMatrixIndex("SamuraiBlueIcon");
+        spInstance->getTexture(player2Hp, index, 0, 0);
     }
 
     Camera* view;
