@@ -47,7 +47,7 @@ SpriteManager::SpriteManager():
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("StartButton", 92, 109, "HizaSprites/UI/s_start.png");
+	spriteSheet->loadFromFile("StartButton", 54, 17, "HizaSprites/UI/s_start.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
