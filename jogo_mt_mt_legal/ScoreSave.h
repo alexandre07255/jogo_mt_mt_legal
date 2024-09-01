@@ -14,7 +14,7 @@ public:
 	~ScoreSave();
 	void savePlayer(int score);
 	void addScore(std::string name, int score);
-	void appendLetter();
+	const bool appendLetter();
 	std::string* getName();
 	void setName(std::string* nm);
 };

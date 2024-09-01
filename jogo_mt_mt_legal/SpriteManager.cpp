@@ -51,8 +51,34 @@ SpriteManager::SpriteManager():
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("StartButton", 92, 109, "HizaSprites/UI/s_start.png");
+	spriteSheet->loadFromFile("ContinueButton", 62, 17, "HizaSprites/UI/s_continue.png");
 	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("ContinueButton", 62, 17, "HizaSprites/UI/s_continue.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("ContinueButton", 62, 17, "HizaSprites/UI/s_continue.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("Level1Button", 20, 20, "HizaSprites/UI/s_lvl1.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("Level2Button", 20, 20, "HizaSprites/UI/s_lvl2.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("Menu", 320, 180, "HizaSprites/UI/s_menu.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("Level1Button", 20, 20, "HizaSprites/UI/s_lvl1.png");
+	spriteMatrices.push_back(spriteSheet);
+
+
 }
 
 SpriteManager* SpriteManager::getInstance()

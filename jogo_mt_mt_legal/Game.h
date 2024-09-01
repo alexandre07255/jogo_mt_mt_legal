@@ -17,11 +17,13 @@ class Game
 private:
 	Managers::SceneManager* pSM;
 	Managers::GraphicManager* pGM;
+	static sf::Event* event;
 	void createManagers();
 	void createMenu();
 public:
 	Game();
 	~Game();
+	static sf::Event* getEvent();
 	void run();
 };
 

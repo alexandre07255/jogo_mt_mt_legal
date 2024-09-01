@@ -39,7 +39,9 @@ Player::Player(const bool isPlayer2, const int health) :
 		spriteMatrixIndex = spInstance->getMatrixIndex("Samurai2");
 
 	spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
-
+	
+	
+	//hp = 1;
 	//if (pTexture)
 		//pTexture->setRepeated(1);
 
