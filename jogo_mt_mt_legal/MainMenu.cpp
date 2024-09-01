@@ -35,29 +35,36 @@ MainMenu::MainMenu():version(0){
 
 	GraphicManager* instance = GraphicManager::getInstance();
 	SpriteManager* spInstance = SpriteManager::getInstance();
+	int matrixIndex = 0;
 
 	CommandStart* com1 = new CommandStart(this);
 	CommandRanking* com4 = new CommandRanking(this);
 	CommandLoad* com6 = new CommandLoad(this);
-	Button* startButton = new Button(sf::Color::Blue, com1, true);
+	Button* startButton = new Button(sf::Color::White, com1, true);
+	matrixIndex = spInstance->getMatrixIndex("StartButton");
+	spInstance->getTexture(startButton, matrixIndex, 0, 0);
 	startButton->setSize(54.f * 6, 17.f * 6);
-	startButton->setPosition(instance->getWindow()->getSize().x/2 - startButton->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 25.f);
+	startButton->setPosition(instance->getWindow()->getSize().x/2 - startButton->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 40.f);
+	Button* buttonLoad = new Button(sf::Color::White, com6, true);
+	matrixIndex = spInstance->getMatrixIndex("ContinueButton");
+	spInstance->getTexture(buttonLoad, matrixIndex, 0, 0);
+	buttonLoad->setSize(54.f * 6, 17.f * 6);
+	buttonLoad->setPosition(instance->getWindow()->getSize().x / 2 - buttonLoad->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 85.f);
 	Button* buttonRanking = new Button(sf::Color::Blue, com4, true);
 	buttonRanking->setSize(62.f * 6, 17.f * 6);
-	buttonRanking->setPosition(instance->getWindow()->getSize().x / 2 - buttonRanking->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 100.f);
-	Button* buttonLoad = new Button(sf::Color::Blue, com6, true);
-	buttonLoad->setSize(54.f * 6, 17.f * 6);
-	buttonLoad->setPosition(instance->getWindow()->getSize().x / 2 - buttonLoad->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 225.f);
+	buttonRanking->setPosition(instance->getWindow()->getSize().x / 2 - buttonRanking->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 210.f);
 	CommandCredits* com9 = new CommandCredits(this);
-	buttonLoad->setSize(54.f * 6, 17.f * 6);
-	Button* changeCreditsButton = new Button(sf::Color::Blue, com9, true);
-	changeCreditsButton->setPosition(instance->getWindow()->getSize().x / 2 - changeCreditsButton->getXSize() / 2, instance->getWindow()->getSize().y / 3 + 350.f);
+	Button* changeCreditsButton = new Button(sf::Color::White, com9, true);
+	matrixIndex = spInstance->getMatrixIndex("CreditsButton");
+	spInstance->getTexture(changeCreditsButton, matrixIndex, 0, 0);
+	changeCreditsButton->setSize(54.f * 6, 17.f * 6);
+	changeCreditsButton->setPosition(instance->getWindow()->getSize().x / 2 - changeCreditsButton->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 335.f);
 
-	int matrixIndex = spInstance->getMatrixIndex("Menu");
+	int backgroundMatrixIndex = spInstance->getMatrixIndex("Menu");
 	Background* background = NULL;
 
 	background = new Background;
-	spInstance->getTexture(background, matrixIndex, 0, 0);
+	spInstance->getTexture(background, backgroundMatrixIndex, 0, 0);
 	background->setSize(320.f * 6, 180.f * 6);
 
 	EntityList* startList = new EntityList;
@@ -77,7 +84,7 @@ MainMenu::MainMenu():version(0){
 	buttonLevel2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
 
 	background = new Background;
-	spInstance->getTexture(background, matrixIndex, 0, 0);
+	spInstance->getTexture(background, backgroundMatrixIndex, 0, 0);
 	background->setSize(320.f * 6, 180.f * 6);
 
 	EntityList* levelsList = new EntityList;
@@ -120,7 +127,7 @@ MainMenu::MainMenu():version(0){
 	buttonLoad2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
 
 	background = new Background;
-	spInstance->getTexture(background, matrixIndex, 0, 0);
+	spInstance->getTexture(background, backgroundMatrixIndex, 0, 0);
 	background->setSize(320.f * 6, 180.f * 6);
 
 	EntityList* loadList = new EntityList;
@@ -130,11 +137,13 @@ MainMenu::MainMenu():version(0){
 
 	Entities::TextContainer* credits = new Entities::TextContainer;
 	credits->write("PROGRAMAÇÃO:\n\nAlexandre Aires Amorim\nJohn William Souza Harrison\n\nARTE:\n\nNícolas Vinícius de Santa Gaio");
-	credits->setTextPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2);
-	credits->setFillColor(sf::Color::Transparent);
+	credits->setSize(16 * 5.333 * 4.65, 16 * 5.333 * 3);
+	credits->setTextPosition(instance->getWindow()->getSize().x / 2 - credits->getXSize() / 2 + 10, instance->getWindow()->getSize().y / 2);
+	credits->setPosition(instance->getWindow()->getSize().x / 2 - credits->getXSize() / 2, instance->getWindow()->getSize().y / 2);
+	credits->setFillColor(sf::Color::Black);
 
 	background = new Background;
-	spInstance->getTexture(background, matrixIndex, 0, 0);
+	spInstance->getTexture(background, backgroundMatrixIndex, 0, 0);
 	background->setSize(320.f * 6, 180.f * 6);
 
 	EntityList* CreditList = new EntityList;

@@ -5,7 +5,7 @@
 using namespace Managers;
 using namespace Entities;
 
-Button::Button(sf::Color col, Command* _com,bool repeat) : Entity(), defaultColor(col), repeatable(repeat) {
+Button::Button(sf::Color col, Command* _com,bool repeat, const int matriIndex) : Entity(), defaultColor(col), repeatable(repeat) {
 	InputManager* instance = InputManager::getInstance();
 	mouse = instance->getMouse();
 	setSize(200.f,100.f);
