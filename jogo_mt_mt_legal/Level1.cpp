@@ -14,6 +14,7 @@
 #include <time.h>
 #include "Background.h"
 #include "SpriteManager.h"
+#include "TextContainer.h"
 using namespace Scenes;
 using namespace Managers;
 using namespace Entities::Obstacles;
@@ -21,8 +22,7 @@ using namespace Entities;
 using namespace Entities::Characters;
 
 
-
-Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRight(1) {
+Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRight(1),player1Hp(NULL),player2Hp(NULL) {
     GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
@@ -84,6 +84,20 @@ Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRig
     endX = 1440 * SCALE / 16 - SCALE;
 
     level2 = false;
+
+    player1Hp = new TextContainer;
+    player1Hp->setSize(SCALE*3,SCALE*3);
+    if (isPlayer2) {
+        player2Hp = new TextContainer;
+        player2Hp->setSize(SCALE * 3, SCALE * 3);
+    }
+}
+
+TextContainer* Level1::getTextContainer(bool isPlayer2) {
+    if (isPlayer2) {
+        return player2Hp;
+    }
+    return
 }
 
 Level1::~Level1() {

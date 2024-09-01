@@ -7,7 +7,7 @@ TextContainer::TextContainer() {
 	text->setFont(font);
 	setSize(200.f, 100.f);
 	text->setCharacterSize(24);
-	text->setFillColor(sf::Color::Red);
+	text->setFillColor(sf::Color::White);
 }
 
 TextContainer::~TextContainer()
@@ -28,7 +28,7 @@ void TextContainer::save(LevelSave* save) {
 
 sf::Font TextContainer::getFont() {
 	sf::Font font;
-	font.loadFromFile("arial.ttf");
+	font.loadFromFile("Minecraft.ttf");
 	return font;
 }
 
