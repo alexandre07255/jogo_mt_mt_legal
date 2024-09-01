@@ -34,6 +34,10 @@ void LevelSave::addFire(Entities::Obstacles::Fire* obst) {
 	saveJson["FireList"].push_back({ {"x",obst->getXPosition()},{"y",obst->getYPosition()},{"height",obst->getYSize()},{"width",obst->getXSize()} });
 }
 
+void LevelSave::addEnemyBoss(Entities::Characters::EnemyBoss* enemy) {
+	saveJson["BossList"].push_back({ {"x",enemy->getXPosition()},{"y",enemy->getYPosition()},{"hp",enemy->getHp()}, {"points",enemy->getYSize()},{"triggered",enemy->getTriggered()} });
+}
+
 void LevelSave::addPlayer(Entities::Characters::Player* player, bool player2) {
 	if (player2) {
 		saveJson["isPlayer2"][0] = true;
@@ -86,6 +90,9 @@ void LevelSave::loadLevel(bool level2) {
 
 		if (isPlayer2) {
 			level->createPlayer2(saveJson["player2"][0]["x"], saveJson["player2"][0]["y"], saveJson["player2"][0]["points"]);
+		}
+		for (auto it = saveJson["BossList"].begin(); it != saveJson["BossList"].end();it++) {
+			level->createEnemyBoss((*it)["x"], (*it)["y"], (*it)["points"],level->getPlayer1(),level->getPlayer2());
 		}
 
 		Managers::SceneManager* sInstance = Managers::SceneManager::getInstance();
