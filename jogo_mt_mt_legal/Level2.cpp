@@ -70,10 +70,14 @@ Level2::Level2(bool isPlayer2, bool isBeingLoaded, int p1Points, int p2Points) :
     player1Hp = new TextContainer;
     entityList->push_back(player1Hp);
     player1Hp->setSize(SCALE/2, SCALE/2);
+    index = spInstance->getMatrixIndex("SamuraiRedIcon");
+    spInstance->getTexture(player1Hp, index, 0, 0);
     if (isPlayer2) {
         player2Hp = new TextContainer;
         entityList->push_back(player2Hp);
         player2Hp->setSize(SCALE/2, SCALE/2);
+        index = spInstance->getMatrixIndex("SamuraiBlueIcon");
+        spInstance->getTexture(player2Hp, index, 0, 0);
     }
 
     Camera* view;
@@ -122,11 +126,11 @@ void Level2::createFromScratch(const bool isPlayer2)
     createFire(48 * SCALE, 22 * SCALE, 3 * SCALE, 1 * SCALE);
     createFire(57 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(29 * SCALE, 23 * SCALE, 1 * SCALE, 1 * SCALE);
+        createFire(29 * SCALE, 22 * SCALE, 1 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(19 * SCALE, 26 * SCALE, 2 * SCALE, 1 * SCALE);
+        createFire(19 * SCALE, 25 * SCALE, 2 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(67 * SCALE, 22 * SCALE, 1 * SCALE, 1 * SCALE);
+        createFire(67 * SCALE, 21 * SCALE, 1 * SCALE, 1 * SCALE);
 
 
     createPlatform(30 * SCALE, 19 * SCALE, 3 * SCALE, SCALE);
