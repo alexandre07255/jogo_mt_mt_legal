@@ -17,8 +17,8 @@ Hitbox::Hitbox():
 {
 	Scene* activeScene = SceneManager::getInstance()->top();
 
-	setFillColor(sf::Color::Yellow);
-	//setFillColor(sf::Color::Transparent);
+
+	setFillColor(sf::Color::Transparent);
 	activeScene->addEntity(this);
 }
 

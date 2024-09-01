@@ -1,6 +1,7 @@
 #include "EnemyRanged.h"
 #include "CollisionManager.h"
 #include "SceneManager.h"
+#include "SpriteManager.h"
 #include "LevelSave.h"
 #include "Level.h"
 using namespace Entities::Characters;
@@ -10,7 +11,7 @@ using namespace Scenes;
 
 EnemyRanged::EnemyRanged() : walkingBuffer(0), waitBuffer(0), direction(0),
 attackStartup(30),
-attackEndLag(40),
+attackEndLag(6),
 heightStrip(10.f),
 attackTriggerRange(250.f),
 attackTriggerYRange(10.f),
@@ -21,12 +22,21 @@ cooldownCont(0),
 attackTriggerStrip(20.0f),
 nearestCollidableCont(NEAREST_COLLIDABLE_COOLDOWN)
 {
-    hp = 20;
+    hp = 5;
     sightSize = 1000.0;
 	upperLimitMultR = 5.0 / 2;
 	lesserLimitMultR = 7.0 / 4;
 	upperLimitMultL = 5.0 / 4;
 	lesserLimitMultL = 1.0 / 2;
+
+    setSize(sf::Vector2f(32.f * 3, 16.f * 3));
+
+    SpriteManager* spInstance = SpriteManager::getInstance();
+    spriteMatrixIndex = spInstance->getMatrixIndex("Koi");
+
+    spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
+
+    pShape->setOrigin(width / 2.f, 0);
 }
 
 EnemyRanged::~EnemyRanged()
@@ -41,34 +51,49 @@ void EnemyRanged::execute()
     switch (state)
     {
     case PATROLLING:
-        setFillColor(sf::Color::White);
         executePATROLLING();
         break;
     case HITSTUN:
         executeHITSTUN();
         break;
     case FOLLOWING:
-        setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
         executeFOLLOWING();
         break;
     case ATKCANCEL:
-        setFillColor(sf::Color::Green);
         executeATKCANCEL();
         break;
     case ATTACK:
         executeATTACK();
         break;
+    default:
+        executePATROLLING();
+        break;
     }
     if (cooldownCont > 0) { cooldownCont--; }
 
+    SpriteManager* spInstance = SpriteManager::getInstance();
+    if (frameCont >= 6)
+    {
+        spInstance->next(this, spriteMatrixIndex, spriteX, spriteY);
+        frameCont = 0;
+    }
+    else
+    {
+        spInstance->getTexture(this, spriteMatrixIndex, spriteX, spriteY);
+        frameCont++;
+    }
 
     if (fireRemaining)
     {
+        setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
         if (fireCont > 4)
         {
             hp--;
             fireRemaining--;
             fireCont = 0;
+
+            if (!fireRemaining)
+                setFillColor(sf::Color::White);
         }
         else
             fireCont++;
@@ -111,6 +136,12 @@ void EnemyRanged::executePATROLLING()
         else {
             waitBuffer--;
         }
+        if (spriteY != 2)
+        {
+            frameCont = 0;
+            spriteX = 0;
+            spriteY = 2;
+        }
     }
     else {
         if (direction) {
@@ -121,7 +152,15 @@ void EnemyRanged::executePATROLLING()
             else {
                 horizontalVelocity = WALK_MAX_HORIZONTAL_VELOCITY;
             }
+            if (spriteY != 0)
+            {
+                frameCont = 0;
+                spriteX = 0;
+                spriteY = 0;
+            }
+
             facingRight = 1;
+            pShape->setScale(1.f, 1.f);
         }
         else {
             //decidiu andar para a esquerda
@@ -131,10 +170,19 @@ void EnemyRanged::executePATROLLING()
             else {
                 horizontalVelocity = -WALK_MAX_HORIZONTAL_VELOCITY;
             }
+            if (spriteY != 0)
+            {
+                frameCont = 0;
+                spriteX = 0;
+                spriteY = 0;
+            }
+
             facingRight = 0;
+            pShape->setScale(-1.f, 1.f);
         }
         walkingBuffer--;
     }
+    
 
     if (abs(horizontalVelocity) > friccao) {
         horizontalVelocity -= ((horizontalVelocity > 0) - (horizontalVelocity < 0)) * friccao;
@@ -174,6 +222,12 @@ void EnemyRanged::executePATROLLING()
 
     if (followingPlayer) {
         state = FOLLOWING;
+        if (spriteY != 0)
+        {
+            frameCont = 0;
+            spriteX = 0;
+            spriteY = 0;
+        }
     }
 }
 
@@ -242,6 +296,11 @@ void EnemyRanged::executeFOLLOWING()
         horizontalVelocity = 0;
 
     facingRight = (followingPlayer->xMid() > xMid());
+    
+    if (facingRight)
+        pShape->setScale(1.f, 1.f);
+    else
+        pShape->setScale(-1.f, 1.f);
 
 
     if (nearestCollidableCont > 0)
@@ -286,6 +345,10 @@ void EnemyRanged::executeFOLLOWING()
         {
             if (followingPlayer->left() - right() < attackTriggerRange)
             {
+                frameCont = 0;
+                spriteX = 0;
+                spriteY = 3;
+
                 state = ATTACK;
                 stun = attackStartup+ attackEndLag;
             }
@@ -294,6 +357,10 @@ void EnemyRanged::executeFOLLOWING()
         {
             if (followingPlayer->right() - left() > -attackTriggerRange)
             {
+                frameCont = 0;
+                spriteX = 0;
+                spriteY = 3;
+
                 state = ATTACK;
                 stun = attackStartup + attackEndLag;
             }
@@ -305,9 +372,6 @@ void EnemyRanged::executeATTACK()
 {
     if (stun > 0)
     {
-        setFillColor(sf::Color::Blue);
-        facingRight = (followingPlayer->xMid() > xMid());
-
         if (stun == attackEndLag)
         {
             Projectile* projectile = new Projectile;
@@ -338,6 +402,10 @@ void EnemyRanged::executeATTACK()
     else
     {
         cooldownCont = COOLDOWN;
+
+        frameCont = 0;
+        spriteX = 0;
+        spriteY = 0;
 
         followingPlayer = searchPlayer();
         if (!followingPlayer) {

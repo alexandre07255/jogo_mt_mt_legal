@@ -6,6 +6,7 @@
 #include "LevelSave.h"
 #include <list>
 #include "Platform.h"
+#include "SpriteManager.h"
 using namespace Managers;
 using namespace Scenes;
 using namespace Entities;
@@ -22,11 +23,20 @@ Support::Support(Obstacles::Platform* plat, const float sHeight):Hittable(false,
 		list<Collidable*>* collidables = active->getCollidables();
 
 		float positionY = boundedTo->bottom();
-		float positionX = boundedTo->xMid() - 5.f;
+		float positionX = boundedTo->xMid() - 16.f * 3 / 2;
 		setPosition(positionX, positionY);
 
 		
-		setSize(sf::Vector2f(10.0, sHeight));
+		setSize(sf::Vector2f(16.0 * 3, sHeight));
+
+		SpriteManager* spInstance = SpriteManager::getInstance();
+		spriteMatrixIndex = spInstance->getMatrixIndex("Support");
+
+		spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
+
+		pShape->setTextureRect(sf::IntRect(0, 0, 16, (int)(width / height) * 16));
+
+		pTexture->setRepeated(1);
 	}
 }
 
@@ -58,4 +68,4 @@ void Support::save(LevelSave* save)
 
 }
 
-int Support::MAXHEALTH(10);
+int Support::MAXHEALTH(3);

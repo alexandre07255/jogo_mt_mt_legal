@@ -6,16 +6,26 @@
 #include "LevelSave.h"
 #include "Level.h"
 #include "AttackHitbox.h"
+#include "SpriteManager.h"
 using namespace Managers;
 using namespace Entities::Characters;
 using namespace Scenes;
 using namespace Entities::Hitboxes;
 
 EnemyMelee::EnemyMelee():Enemy(),walkingBuffer(0),waitBuffer(0),direction(0), attacking(0),
-attackStartup(72), attackHitboxDuration(5), attackEndLag(20), attackTriggerRange(10.0f), attackTriggerYRange(10.0f){
+attackStartup(84), attackHitboxDuration(6), attackEndLag(6), attackTriggerRange(10.0f), attackTriggerYRange(10.0f){
     sightSize = 700.;
     setPoints(10);
     hp = 20;
+
+    setSize(sf::Vector2f(32.f * 3, 32.f * 3));
+
+    SpriteManager* spInstance = SpriteManager::getInstance();
+    spriteMatrixIndex = spInstance->getMatrixIndex("Bloberto");
+
+    spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
+
+    pShape->setOrigin(width / 2.f, 0);
 }
 
 EnemyMelee::~EnemyMelee()
@@ -43,6 +53,10 @@ void EnemyMelee::executePATROLLING() {
         else {
             waitBuffer--;
         }
+        frameCont = 0;
+        spriteX = 0;
+        spriteY = 0;
+ 
     }
     else {
         if (direction) {
@@ -53,7 +67,15 @@ void EnemyMelee::executePATROLLING() {
             else {
                 horizontalVelocity = WALK_MAX_HORIZONTAL_VELOCITY;
             }
+            pShape->setScale(1.f, 1.f);
             facingRight = 1;
+
+            if (spriteY != 0)
+            {
+                frameCont = 0;
+                spriteX = 0;
+                spriteY = 0;
+            }
         }
         else {
             //decidiu andar para a esquerda
@@ -63,7 +85,15 @@ void EnemyMelee::executePATROLLING() {
             else {
                 horizontalVelocity = -WALK_MAX_HORIZONTAL_VELOCITY;
             }
+            pShape->setScale(-1.f, 1.f);
             facingRight = 0;
+
+            if (spriteY != 0)
+            {
+                frameCont = 0;
+                spriteX = 0;
+                spriteY = 0;
+            }
         }
         walkingBuffer--;
     }
@@ -90,6 +120,11 @@ void EnemyMelee::executePATROLLING() {
 
     if (followingPlayer) {
         state = FOLLOWING;
+        
+        frameCont = 0;
+        spriteX = 0;
+        spriteY = 2;
+ 
     }
 }
 
@@ -99,30 +134,46 @@ void EnemyMelee::execute() {
     switch (state)
     {
     case PATROLLING:
-        setFillColor(sf::Color::White);
         executePATROLLING();
         break;
     case HITSTUN:
         executeHITSTUN();
         break;
     case FOLLOWING:
-        setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
         executeFOLLOWING();
         break;
     case ATKCANCEL:
-        setFillColor(sf::Color::Green);
         executeATKCANCEL();
+        break;
+    default:
+        executePATROLLING();
         break;
     }
 
 
+    SpriteManager* spInstance = SpriteManager::getInstance();
+    if (frameCont >= 6)
+    {
+        spInstance->next(this, spriteMatrixIndex, spriteX, spriteY);
+        frameCont = 0;
+    }
+    else
+    {
+        spInstance->getTexture(this, spriteMatrixIndex, spriteX, spriteY);
+        frameCont++;
+    }
+
     if (fireRemaining)
     {
+        setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
         if (fireCont > 4)
         {
             hp--;
             fireRemaining--;
             fireCont = 0;
+
+            if (!fireRemaining)
+                setFillColor(sf::Color::White);
         }
         else
             fireCont++;
@@ -163,6 +214,11 @@ void EnemyMelee::executeFOLLOWING() {
     }
     facingRight = (followingPlayer->getXPosition() + followingPlayer->getXSize() / 2 > getXPosition() + getXSize() / 2);
 
+    if (facingRight)
+        pShape->setScale(1.f, 1.f);
+    else
+        pShape->setScale(-1.f, 1.f);
+
 
     if (!attacking && (followingPlayer->getYPosition() + followingPlayer->getYSize()) < (getYPosition() + getYSize())) {
         if (!onAir)
@@ -189,7 +245,13 @@ void EnemyMelee::executeFOLLOWING() {
     move(horizontalVelocity - (attacking * 0.85f) * horizontalVelocity, verticalVelocity);
 
     if (attacking && stun <= 0)
+    {
         attacking = 0;
+
+        frameCont = 0;
+        spriteY = 2;
+        spriteX = 0;
+    }
 
     if (!attacking)
     {
@@ -208,18 +270,26 @@ void EnemyMelee::executeFOLLOWING() {
         {
             if (facingRight)
             {
-                if (followingPlayer->getXPosition() - (getXPosition() + getXSize()) < attackTriggerRange)
+                if (followingPlayer->left() - (right()) < attackTriggerRange)
                 {
                     attacking = 1;
                     stun = attackStartup + attackHitboxDuration + attackEndLag;
+
+                    frameCont = 0;
+                    spriteY = 4;
+                    spriteX = 0;
                 }
             }
             else
             {
-                if (followingPlayer->getXPosition() + followingPlayer->getXSize() - getXPosition() > -attackTriggerRange)
+                if (followingPlayer->right() - left() > -attackTriggerRange)
                 {
                     attacking = 1;
                     stun = attackStartup + attackHitboxDuration + attackEndLag;
+
+                    frameCont = 0;
+                    spriteY = 4;
+                    spriteX = 0;
                 }
             }
         }
@@ -227,7 +297,6 @@ void EnemyMelee::executeFOLLOWING() {
     }
     else
     {
-        setFillColor(sf::Color::Blue);
 
         if ((stun == (attackHitboxDuration + attackEndLag)))
         {
@@ -238,14 +307,14 @@ void EnemyMelee::executeFOLLOWING() {
             hitbox->setBoundedTo(this);
             hitbox->setDuration(attackHitboxDuration);
             float horKnock = 0.0;
-            hitbox->setSize(sf::Vector2f(110.0, 100.0));
+            hitbox->setSize(sf::Vector2f(130.0, 100.0));
             hitbox->setVerKnockback(-10.0);
             hitbox->setDamage(3);
             hitbox->setHitstun(25);
             horKnock = 30.0;
             if (facingRight)
             {
-                hitbox->setRelativePosition(sf::Vector2f(getXSize() - 10, 0.0));
+                hitbox->setRelativePosition(sf::Vector2f( 10.f, 0.0));
                 hitbox->setHorKnockback(horKnock);
             }
             else

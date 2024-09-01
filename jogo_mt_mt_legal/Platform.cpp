@@ -6,6 +6,7 @@
 #include "LevelSave.h"
 #include <math.h>
 #include"iostream"
+#include "SpriteManager.h"
 using namespace Managers;
 using namespace Entities::Obstacles;
 using namespace Entities::Characters;
@@ -16,14 +17,23 @@ using namespace Entities::Hitboxes;
 
 
 Platform::Platform(float xPosition, float yPosition, float xSize, float ySize) :Obstacle(), Collidable(), support(NULL),
-firstStep(true), minimalHeight(50.f), mass(10.f), time(0),deformation(0),onTop(false), hitboxRight(NULL) {
+firstStep(true), minimalHeight(50.f), hitboxRight(NULL) {
 	setPosition(xPosition, yPosition);
 	setSize(sf::Vector2f(xSize, ySize));
 
 	collidableId = getId();
 
-	defaultY = yPosition;
 	friction = 1.f;
+
+
+	SpriteManager* spInstance = SpriteManager::getInstance();
+	spriteMatrixIndex = spInstance->getMatrixIndex("Platform");
+
+	spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
+
+	pShape->setTextureRect(sf::IntRect(0, 0, (int) (width / height) * 16, 16));
+
+	pTexture->setRepeated(1);
 }
 
 Platform::~Platform()
@@ -60,8 +70,11 @@ void Platform::execute() {
 	}
 	if (onAir) {
 		support = NULL;
-		move(0, 1);
+
+		verticalVelocity += GRAVITY;
+		move(0, verticalVelocity);
 		instance->testCollison(this);
+
 		isActive = 1;
 		if (!spawnedHitbox)
 		{
@@ -70,17 +83,17 @@ void Platform::execute() {
 			hitbox = new ObstacleHitbox(this);
 			hitbox->setTarget(1);
 			hitbox->setCooldown(20);
-			hitbox->setSize(sf::Vector2f(getXSize() / 2, getYSize() / 2));
-			hitbox->setHorLaunchStrength(-25.0);
+			hitbox->setSize(sf::Vector2f(getXSize() / 2, getYSize()/2));
+			hitbox->setHorLaunchStrength(-30.0);
 			hitbox->setVerLaunchStrength(0.0);
 			hitbox->setDamage(3);
 			hitbox->setRelativePosition(sf::Vector2f(0.0, getYSize()));
 
 			hitboxRight = new ObstacleHitbox(this);
 			hitboxRight->setTarget(1);
-			hitboxRight->setCooldown(40);
-			hitboxRight->setSize(sf::Vector2f(getXSize() / 2, getYSize() / 2));
-			hitboxRight->setHorLaunchStrength(25.0);
+			hitboxRight->setCooldown(60);
+			hitboxRight->setSize(sf::Vector2f(getXSize() / 2, getYSize()/2));
+			hitboxRight->setHorLaunchStrength(40.0);
 			hitboxRight->setVerLaunchStrength(0.0);
 			hitboxRight->setDamage(3);
 			hitboxRight->setRelativePosition(sf::Vector2f(getXSize() / 2, getYSize()));
@@ -146,14 +159,6 @@ void Platform::toObstacle()
 
 Support* Platform::getSupport() {
 	return support;
-}
-
-float Platform::HarmonicMovement(float range, float mass, float elasticity, float damping, float time) {
-	float frequency = sqrt(elasticity / mass - ((damping * damping) / (4 * mass * mass)));
-	float amplitude = range * exp((-damping * time) / (2.f * mass));
-
-	return (amplitude * cos(frequency * time));
-
 }
 
 void Platform::collisionSolution(Entity* pE) {

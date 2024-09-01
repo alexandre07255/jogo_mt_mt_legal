@@ -110,27 +110,27 @@ const float Entity::right() const
 
 const float Entity::left() const
 {
-	return xPos;
+	return xPos - pShape->getOrigin().x;
 }
 
 const float Entity::top() const
 {
-	return yPos;
+	return yPos - pShape->getOrigin().y;
 }
 
 const float Entity::bottom() const
 {
-	return yPos + height;
+	return yPos - pShape->getOrigin().y + height;
 }
 
 const float Entity::xMid() const
 {
-	return xPos + width / 2;
+	return xPos - pShape->getOrigin().x + width / 2;
 }
 
 const float Entity::yMid() const
 {
-	return yPos + height / 2;
+	return yPos - pShape->getOrigin().y + height / 2;
 }
 
 

@@ -43,8 +43,8 @@ Player* Enemy::searchPlayer() const{
 
 	sf::Vector2f rayPos;
 
-	double xCenter = getXPosition() + getXSize() / 2;
-	double yCenter = getYPosition() + getYSize();
+	double xCenter = xMid();
+	double yCenter = bottom();
 	
 	double yFinal;
 	double xFinal;
@@ -92,11 +92,11 @@ Player* Enemy::searchPlayer() const{
 			}
 		}
 
-		/*Terrain* vertice = new Terrain();
+		/*Background* vertice = new Background;
 		vertice->setSize(sf::Vector2f(5, 5));
 		vertice->setPosition(sf::Vector2f(xFinal, yFinal));
-
-		nivel->addDrawable(vertice);*/
+		vertice->setTexture(pTexture);
+		SceneManager::getInstance()->top()->addEntity(vertice); */
 	}
 	return NULL;
 }

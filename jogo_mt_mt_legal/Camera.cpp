@@ -1,20 +1,28 @@
 #include "LevelSave.h"
 #include "Camera.h"
 #include <iostream>
+#include "SpriteManager.h"
+#include "SceneManager.h"
 using namespace Entities::Characters;
+using namespace Entities;
+using namespace Managers;
 
 
-Camera::Camera(sf::RenderWindow* renderer) :
+Camera::Camera(sf::RenderWindow* renderer, Background* pBackground) :
 	player1(NULL),
-	player2(NULL)
+	player2(NULL),
+	background(pBackground)
 {
 	setWindow(renderer);
-	view.setSize((sf::Vector2f)window->getSize());
+	//view.setSize((sf::Vector2f)window->getSize());
+	view.setSize((float)window->getSize().x / 1.5, (float)window->getSize().y / 1.5);
 }
 
 Camera::~Camera()
 {
-
+	player1 = NULL;
+	player2 = NULL;
+	background = NULL;
 }
 
 void Camera::setPlayer1(Player* p1)
@@ -46,11 +54,14 @@ void Camera::execute()
 			while (view.getSize().x > window->getSize().x && !(player1->right() + 250 > view.getCenter().x + view.getSize().x / 2 || player1->left() - 250 < view.getCenter().x - view.getSize().x / 2) != (player2->right() + 200 > view.getCenter().x + view.getSize().x / 2 || player2->left() - 200 < view.getCenter().x - view.getSize().x / 2))
 				view.zoom(0.999f);
 		}
+		background->setSize(view.getSize());
 	}
 
 	else if (player1) {
-		view.setCenter(player1->getXPosition(), player1->getYPosition());
+		view.setCenter(player1->getXPosition(), player1->bottom() - 45);
 	}
+
+	background->setPosition(view.getCenter().x - background->getXSize() / 2, view.getCenter().y - background->getYSize() / 2);
 
 	//setSize((sf::Vector2f)window->getSize());
 	window->setView(view);

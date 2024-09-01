@@ -35,15 +35,15 @@ SpriteManager::SpriteManager():
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("Support", 16, 16, "HizaSprites/Environment/s_beam.png");
-	spriteMatrices.push_back(spriteSheet);
-
-	spriteSheet = new SpriteMatrix;
 	spriteSheet->loadFromFile("Platform", 16, 16, "HizaSprites/Environment/s_lame_platform.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("Background", 16, 16, "HizaSprites/Environment/s_cool_background.png");
+	spriteSheet->loadFromFile("Background", 320, 180, "HizaSprites/Environment/s_cool_background.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("Tengu", 92, 109, "HizaSprites/Enemies/s_tengu.png");
 	spriteMatrices.push_back(spriteSheet);
 }
 

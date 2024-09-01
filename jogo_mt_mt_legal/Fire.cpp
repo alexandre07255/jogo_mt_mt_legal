@@ -2,6 +2,7 @@
 #include "CollisionManager.h"
 #include "LevelSave.h"
 #include "ObstacleHitbox.h"
+#include "SpriteManager.h"
 using namespace Entities::Hitboxes;
 using namespace Entities::Characters;
 using namespace Managers;
@@ -10,7 +11,7 @@ using namespace Entities::Obstacles;
 
 Fire::Fire() :
 	Obstacle(),
-	lingeringTime(12)
+	lingeringTime(5)
 {
 
 }
@@ -35,14 +36,37 @@ void Fire::execute()
 		float floor = cInstance->nearestCollidable(this, 900.f);
 		setPosition(left(), floor - getYSize());
 		activate();
+
+		SpriteManager* spInstance = SpriteManager::getInstance();
+		spriteMatrixIndex = spInstance->getMatrixIndex("Fire");
+
+		srand(time(NULL));
+		spriteX = rand() % 6;
+
+		spInstance->getTexture(this, spriteMatrixIndex, spriteX, 0);
+
+		pShape->setTextureRect(sf::IntRect(0, 0, (int)(width / height) * 16, 16));
+
+		pTexture->setRepeated(1);
+
 		spawnedHitbox = 1;
 	}
+
+	if (frameCont >= 6)
+	{
+		SpriteManager* spInstance = SpriteManager::getInstance();
+		spInstance->next(this, spriteMatrixIndex, spriteX, spriteY);
+		pTexture->setRepeated(1);
+		frameCont = 0;
+	}
+	else
+		frameCont++;
 }
 
 void Fire::activate()
 {
 	isActive = 1;
-	ObstacleHitbox* hitbox = new ObstacleHitbox(this);
+	hitbox = new ObstacleHitbox(this);
 	hitbox->setTarget(1);
 	hitbox->setCooldown(30);
 	hitbox->setSize(getXSize(), getYSize());

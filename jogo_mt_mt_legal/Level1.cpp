@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Background.h"
+#include "SpriteManager.h"
 using namespace Scenes;
 using namespace Managers;
 using namespace Entities::Obstacles;
@@ -28,9 +29,20 @@ Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRig
 
     srand(time(NULL));
 
+    SpriteManager* spInstance = SpriteManager::getInstance();
+
+    int index = spInstance->getMatrixIndex("Background");
+    Background* trueBackground = new Background;
+    trueBackground->setSize(320.f * SCALE/ 21, 180.f * SCALE/ 21);
+
+    spInstance->getTexture(trueBackground, index, 0, 0);
+
+    //trueBackground->setPosition(0.f, 0.f);
+    entityList->push_back(trueBackground);
+
+
     sf::Texture* background = new sf::Texture();
     background->loadFromFile("HizaSprites/Environment/fase1EBA.png");
-
 
     float x = background->getSize().x * SCALE/16;
     float y = background->getSize().y * SCALE/16;
@@ -41,6 +53,9 @@ Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRig
     backgroundAndLevel->setTexture(background);
     entityList->push_back(backgroundAndLevel);
 
+
+
+
     loadTerrains();
 
     if (!isBeingLoaded)
@@ -49,7 +64,7 @@ Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRig
 
 
     Camera* view;
-    view = new Camera(window);
+    view = new Camera(window, trueBackground);
     camera = view;
     view->setPlayer1(pPlayer1);
     if (isPlayer2)
@@ -66,7 +81,7 @@ Level1::Level1(bool isPlayer2, bool isBeingLoaded):Level(), endX(0), endingOnRig
     cInstance->setObstacleList(obstacleList);
 
     endingOnRight = 1;
-    endX = x - SCALE;
+    endX = 1440 * SCALE / 16 - SCALE;
 
     level2 = false;
 }
@@ -105,8 +120,8 @@ void Level1::createFromScratch(const bool isPlayer2)
 
 
     createPlatform(37 * SCALE, 23 * SCALE, 3 * SCALE, SCALE);
-    createPlatform(49 * SCALE, 20 * SCALE, 3 * SCALE, SCALE);
-    createPlatform(70 * SCALE, 19 * SCALE, 2 * SCALE, SCALE);
+    createPlatform(49 * SCALE, 19 * SCALE, 3 * SCALE, SCALE);
+    createPlatform(70 * SCALE, 18 * SCALE, 2 * SCALE, SCALE);
     if (rand() % 2)
         createPlatform(28 * SCALE, 23 * SCALE, 1 * SCALE, SCALE);
     if (rand() % 2)
@@ -123,10 +138,18 @@ void Level1::createFromScratch(const bool isPlayer2)
     createEnemyMelee(23 * SCALE, 25 * SCALE, 0);
     createEnemyMelee(47 * SCALE, 22 * SCALE, 0);
     createEnemyMelee(75 * SCALE, 22 * SCALE, 0);
+    if (rand() % 2)
+        createEnemyMelee(17 * SCALE, 23 * SCALE, 5);
+    if (rand() % 2)
+        createEnemyMelee(63 * SCALE, 20 * SCALE, 5);
 
     createEnemyRanged(31 * SCALE, 24 * SCALE, 0);
     createEnemyRanged(55 * SCALE, 20 * SCALE, 0);
     createEnemyRanged(75 * SCALE, 20 * SCALE, 0);
+    if (rand() % 2)
+        createEnemyRanged(86 * SCALE, 20 * SCALE, 20);
+    if (rand() % 2)
+        createEnemyRanged(28 * SCALE, 23 * SCALE, 20);
 }
 
 void Level1::levelCompleteHandler()

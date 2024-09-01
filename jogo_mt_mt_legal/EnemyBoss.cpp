@@ -3,6 +3,7 @@
 #include "AttackHitbox.h"
 #include "SceneManager.h"
 #include "Level2.h"
+#include "SpriteManager.h"
 using namespace Entities::Characters;
 using namespace Entities::Hitboxes;
 using namespace Managers;
@@ -21,13 +22,21 @@ EnemyBoss::EnemyBoss(Player* p1, Player* p2):
 	followingPlayer2(0),
 	attackPart(0),
 	attackTimer(0),
-	startup(30),
+	startup(48),
 	endLag(30),
 	attacking(0)
 {
-	setSize(240.f, 480.f);
-	setFillColor(sf::Color::White);
 	hp = 40;
+
+	setSize(92.f * 3, 109.f * 3);
+
+
+	SpriteManager* spInstance = SpriteManager::getInstance();
+	spriteMatrixIndex = spInstance->getMatrixIndex("Tengu");
+
+	spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
+
+	pShape->setOrigin(width / 2.f, 0);
 }
 
 EnemyBoss::~EnemyBoss()
@@ -61,13 +70,29 @@ void EnemyBoss::execute()
 		break;
 	}
 
+	SpriteManager* spInstance = SpriteManager::getInstance();
+	if (frameCont >= 6)
+	{
+		spInstance->next(this, spriteMatrixIndex, spriteX, spriteY);
+		frameCont = 0;
+	}
+	else
+	{
+		spInstance->getTexture(this, spriteMatrixIndex, spriteX, spriteY);
+		frameCont++;
+	}
+
 	if (fireRemaining)
 	{
+		setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
 		if (fireCont > 4)
 		{
 			hp--;
 			fireRemaining--;
 			fireCont = 0;
+
+			if (!fireRemaining)
+				setFillColor(sf::Color::White);
 		}
 		else
 			fireCont++;
@@ -87,6 +112,19 @@ void EnemyBoss::execute()
 
 void EnemyBoss::executeGROUNDED()
 {
+	if (spriteY == 2)
+	{
+		if (attackTimer)
+			attackTimer--;
+		else
+		{
+			frameCont = 0;
+			spriteY = 0;
+			spriteX = 0;
+		}
+		return;
+	}
+
 	if (tiredCont)
 	{
 		tiredCont--;
@@ -105,6 +143,10 @@ void EnemyBoss::executeGROUNDED()
 		{
 			attackPart = ASCENDING;
 			attackTimer = ASCENSION_DURATION;
+			
+			frameCont = 0;
+			spriteX = 8;
+
 			onAir = 1;
 			attacking = 0;
 		}
@@ -115,6 +157,10 @@ void EnemyBoss::executeGROUNDED()
 		{
 			attacking = 1;
 			attackTimer = startup;
+
+			frameCont = 0;
+			spriteY = 1;
+			spriteX = 0;
 		}
 		else
 		{
@@ -137,6 +183,8 @@ void EnemyBoss::executeASCENDING()
 {
 	if (attackTimer)
 	{
+		frameCont--;
+
 		if (xMid() < targetPlayer[followingPlayer2]->xMid())
 			horizontalVelocity = HORIZONTAL_VELOCITY;
 		else
@@ -147,9 +195,13 @@ void EnemyBoss::executeASCENDING()
 	else
 	{
 		attackPart = DESCENDING;
-		setPosition(targetPlayer[followingPlayer2]->xMid() - getXSize(), getYPosition());
+		setPosition(targetPlayer[followingPlayer2]->xMid() - getXSize() / 2.f, getYPosition());
 		horizontalVelocity = 0;
 		verticalVelocity = 0;
+
+		frameCont = 0;
+		spriteY = 2;
+		spriteX = 0;
 	}
 
 	move(horizontalVelocity, verticalVelocity);
@@ -159,6 +211,8 @@ void EnemyBoss::executeDESCENDING()
 {
 	if (onAir)
 	{
+		frameCont--;
+
 		verticalVelocity = DESCENDING_VELOCITY + GRAVITY;
 		if (!attacking)
 		{
@@ -168,9 +222,13 @@ void EnemyBoss::executeDESCENDING()
 	}
 	else
 	{
+		frameCont = 0;
+		spriteX = 1;
+
 		stopAttack();
 		attacking = 0;
 		attackPart = GROUNDED;
+		attackTimer = endLag;
 		stompCont++;
 		if (stompCont >= stompMax)
 		{
@@ -195,7 +253,7 @@ void EnemyBoss::attack()
 		hitboxes[i]->setTarget(1);
 		hitboxes[i]->setOwner(this);
 		hitboxes[i]->setBoundedTo(this);
-		hitboxes[i]->setSize(sf::Vector2f(getXSize() / 2, getYSize() / 10));
+		hitboxes[i]->setSize(sf::Vector2f(width / 2, height / 10));
 		hitboxes[i]->setVerKnockback(-10.0f);
 		hitboxes[i]->setDamage(5);
 		hitboxes[i]->setHitstun(15);
@@ -205,12 +263,12 @@ void EnemyBoss::attack()
 		if (!i)
 		{
 			horKnock = -40.f;
-			horRel = 0.f;
+			horRel = -width / 2;
 		}
 		else
 		{
 			horKnock = 40.f;
-			horRel = getXSize() / 2;
+			horRel = 0.f;
 		}
 		hitboxes[i]->setRelativePosition(sf::Vector2f(horRel, getYSize() * 9 / 10));
 		hitboxes[i]->setHorKnockback(horKnock);
@@ -223,6 +281,7 @@ void EnemyBoss::stopAttack()
 	{
 		if (hitboxes[i])
 		{
+			SceneManager::getInstance()->top()->removeEntity(hitboxes[i]);
 			delete hitboxes[i];
 			hitboxes[i] = NULL;
 		}

@@ -24,23 +24,32 @@ Player::Player(const bool isPlayer2, const int health) :
 	wasAttackPressed(0),
 	attackCounter(0),
 	hasAttacked(0),
-	attackStartup{20, 15, 15},
-	attackHitboxDuration{5, 5, 5},
-	attackEndLag{20, 15, 15}
+	attackStartup{24, 24, 24},
+	attackHitboxDuration{12, 18, 18},
+	attackEndLag{18, 18, 24}
 {
-	setSize(sf::Vector2f(108.f, 132.f));
+	//setSize(sf::Vector2f(108.f, 132.f));
+	//Base 36 / 44
+	setSize(sf::Vector2f(21.f * 3, 30.f * 3));
 
 	SpriteManager* spInstance = SpriteManager::getInstance();
 	if (!isPlayer2)
 		spriteMatrixIndex = spInstance->getMatrixIndex("Samurai1");
 	else
-		spriteMatrixIndex = spInstance->getMatrixIndex("Samurai1");
+		spriteMatrixIndex = spInstance->getMatrixIndex("Samurai2");
 
 	spInstance->getTexture(this, spriteMatrixIndex, 0, 0);
 
-	pShape->setTextureRect(sf::IntRect(0, -44, 36, 44));
-	pShape->setOutlineColor(sf::Color::Red);
-	pShape->setOutlineThickness(1.f);
+	//if (pTexture)
+		//pTexture->setRepeated(1);
+
+	pShape->setOrigin(width / 2.f, 0);
+
+	//setSize(sf::Vector2f(21.f * 3, 30.f * 3));
+	pShape->setTextureRect(sf::IntRect(0, 14, 21, 30));
+	//pShape->setScale(-1.f, 1.f);
+	//pShape->setScale(1.f, 1.f);
+	//pShape->setTextureRect(sf::IntRect(0, -44, 36, 44));
 }
 
 Player::~Player() {}
@@ -94,15 +103,34 @@ void Player::execute() {
 	case HITSTUN:
 		executeHITSTUN();
 		break;
+	default:
+		executeFREE();
+		break;
+	}
+
+	SpriteManager* spInstance = SpriteManager::getInstance();
+	if (frameCont >= 6)
+	{
+		spInstance->next(this, spriteMatrixIndex, spriteX, spriteY);
+		frameCont = 0;
+	}
+	else
+	{
+		spInstance->getTexture(this, spriteMatrixIndex, spriteX, spriteY);
+		frameCont++;
 	}
 
 	if (fireRemaining)
 	{
+		setFillColor(sf::Color::Color(sf::Uint32(4286578943)));
 		if (fireCont > 4)
 		{
 			hp--;
 			fireRemaining--;
 			fireCont = 0;
+
+			if (!fireRemaining)
+				setFillColor(sf::Color::White);
 		}
 		else
 			fireCont++;
@@ -112,11 +140,6 @@ void Player::execute() {
 void Player::executeFREE()
 {
 	//Só para mostrar os states
-	if (player2)
-		setFillColor(sf::Color::Magenta);
-	else
-		setFillColor(sf::Color::Cyan);
-
 	
 	InputManager* inputInstance = InputManager::getInstance();
 	//Movement input
@@ -127,7 +150,16 @@ void Player::executeFREE()
 		else {
 			horizontalVelocity = MAX_HORIZONTAL_VELOCITY;
 		}
+
+		if (spriteY != 2)
+		{
+			frameCont = 0;
+			spriteX = 0;
+			spriteY = 2;
+		}
+
 		facingRight = 1;
+		pShape->setScale(1.f, 1.f);
 	}
 	else if (inputInstance->isLeftPressed(player2)) {
 		if (horizontalVelocity > -MAX_HORIZONTAL_VELOCITY) {
@@ -136,7 +168,22 @@ void Player::executeFREE()
 		else {
 			horizontalVelocity = -MAX_HORIZONTAL_VELOCITY;
 		}
+
+		if (spriteY != 2)
+		{
+			frameCont = 0;
+			spriteX = 0;
+			spriteY = 2;
+		}
+
 		facingRight = 0;
+		pShape->setScale(-1.f, 1.f);
+	}
+	else if (spriteY != 0 && !onAir)
+	{
+		frameCont = 0;
+		spriteX = 0;
+		spriteY = 0;
 	}
 
 	//friction
@@ -164,11 +211,29 @@ void Player::executeFREE()
 		jumpLength = 0;
 	}
 
+	if (onAir)
+	{
+		frameCont = 0;
+		spriteY = 1;
+		if (verticalVelocity > 0)
+			spriteX = 2;
+		else
+			spriteX = 3;
+	}
+
 	if (attackBuffer)
 	{
 		hasAttacked = 0;
 		attackCounter = 0;
 		attackBuffer = 0;
+
+		frameCont = 0;
+		spriteX = 0;
+		spriteY = 3;
+
+		setSize(sf::Vector2f(36.f * 3, 44.f * 3));
+		pShape->setTextureRect(sf::IntRect(0, 0, 36, 44));
+		
 		state = ATTACK;
 		stun = attackStartup[attackCounter] + attackHitboxDuration[attackCounter] + attackEndLag[attackCounter];
 	}
@@ -183,11 +248,14 @@ void Player::executeATKCANCEL()
 	if (stun > 0)
 	{
 		horizontalVelocity = 0;
-		setFillColor(sf::Color::Green);
 		if (attackBuffer)
 		{
 			if (attackCounter < 3)
 			{
+				frameCont = 0;
+				spriteY = 3 + attackCounter;
+				spriteX = 0;
+
 				state = ATTACK;
 				stun = attackStartup[attackCounter] + attackHitboxDuration[attackCounter] + attackEndLag[attackCounter] + 1;
 				attackBuffer = 0;
@@ -197,15 +265,24 @@ void Player::executeATKCANCEL()
 		stun--;
 	}
 	else
+	{
 		state = FREE;
+
+		frameCont = 0;
+		spriteX = 0;
+		spriteY = 0;
+
+		float prevHeight = height;
+		setSize(sf::Vector2f(21.f * 3, 30.f * 3));
+		move(0, prevHeight - height);
+		pShape->setTextureRect(sf::IntRect(0, 14, 21, 30));
+	}
 }
 
 void Player::executeATTACK()
 {
 	if (stun > 0)
 	{
-		setFillColor(sf::Color::Blue);
-
 		if (!hasAttacked && (attackCounter < 3) && (stun == (attackHitboxDuration[attackCounter] + attackEndLag[attackCounter])))
 		{
 			attack();
@@ -214,7 +291,18 @@ void Player::executeATTACK()
 		stun--;
 	}
 	else
+	{
 		state = FREE;
+
+		frameCont = 0;
+		spriteX = 0;
+		spriteY = 0;
+
+		float prevHeight = height;
+		setSize(sf::Vector2f(21.f * 3, 30.f * 3));
+		move(0, prevHeight - height);
+		pShape->setTextureRect(sf::IntRect(0, 14, 21, 30));
+	}
 	move((float) horizontalVelocity * 0.15f, (float) (++verticalVelocity) * 0.85f);
 	//move(sf::Vector2f(horizontalVelocity*0.15, (++verticalVelocity)*0.85));
 }
@@ -224,9 +312,21 @@ void Player::executeHITSTUN()
 	if (stun <= 0)
 	{
 		state = FREE;
+
+		frameCont = 0;
+		spriteX = 0;
+		spriteY = 0;
+
+		float prevHeight = height;
+		setSize(sf::Vector2f(21.f * 3, 30.f * 3));
+		move(0, prevHeight - height);
+		pShape->setTextureRect(sf::IntRect(0, 14, 21, 30));
+
+		setFillColor(sf::Color::White);
 	}
 	else
 	{
+		frameCont--;
 		stun--;
 		setFillColor(sf::Color::Red);
 	}
@@ -245,56 +345,56 @@ void Player::attack()
 	switch (attackCounter)
 	{
 	case 0:
-		hitbox->setSize(sf::Vector2f(50.0, 100.0));
+		hitbox->setSize(sf::Vector2f(23.f * 5, height));
 		hitbox->setVerKnockback(-10.0);
 		hitbox->setDamage(3);
-		hitbox->setHitstun(15);
+		hitbox->setHitstun(24);
 		horKnock = 30.0;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getXSize() - 10, 0.0));
+			hitbox->setRelativePosition(sf::Vector2f(10.f, 0.0));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
 			float relX = hitbox->getXSize();
-			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, 0.0));
+			hitbox->setRelativePosition(sf::Vector2f((-relX) - 10, 0.0));
 			hitbox->setHorKnockback(-horKnock);
 		}
 		break;
 	case 1:
-		hitbox->setSize(sf::Vector2f(100.0, 50.0));
+		hitbox->setSize(sf::Vector2f(200.f, 50.0));
 		hitbox->setVerKnockback(-10.0);
 		hitbox->setDamage(3);
-		hitbox->setHitstun(35);
+		hitbox->setHitstun(24);
 		horKnock = 60.0;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getXSize() - 10, 25.0));
+			hitbox->setRelativePosition(sf::Vector2f(10.f, 25.0));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
 			float relX = hitbox->getXSize();
-			hitbox->setRelativePosition(sf::Vector2f(-relX + 10.0f, 25.0f));
+			hitbox->setRelativePosition(sf::Vector2f(-relX - 10, 25.0f));
 			hitbox->setHorKnockback(-horKnock);
 		}
 		break;
 	case 2:
-		hitbox->setSize(sf::Vector2f(100.0, 100.0));
+		hitbox->setSize(sf::Vector2f(200.0f, 200.0f));
 		hitbox->setVerKnockback(-30.0);
 		hitbox->setDamage(3);
-		hitbox->setHitstun(50);
+		hitbox->setHitstun(32);
 		horKnock = 10.0;
 		if (facingRight)
 		{
-			hitbox->setRelativePosition(sf::Vector2f(getXSize() - 10, -50));
+			hitbox->setRelativePosition(sf::Vector2f(10.f, -120));
 			hitbox->setHorKnockback(horKnock);
 		}
 		else
 		{
 			float relX = hitbox->getXSize();
-			hitbox->setRelativePosition(sf::Vector2f(-relX + 10, -50));
+			hitbox->setRelativePosition(sf::Vector2f(-relX - 10, -120));
 			hitbox->setHorKnockback(-horKnock);
 		}
 		break;
@@ -310,7 +410,7 @@ const float Player::MAX_HORIZONTAL_VELOCITY(10.0f);
 const float Player::MAX_VERTICAL_VELOCITY(15.0f);
 const float Player::ACCELARATION(2.0f);
 
-const int Player::MAX_HP(20);
+const int Player::MAX_HP(30);
 
 const int Player::MAX_ATTACK_BUFFER(20);
 

@@ -96,6 +96,9 @@ void ObstacleHitbox::hitSolution(Hittable* hit)
 
 	obstacle->statusEffect(hit);
 
+	if (hit->getState() == Hittable::ATKCANCEL)
+		hit->setState(Hittable::FREE);
+
 	cont = 0;
 	hit->dealDamage(damage);
 	if (horLaunchStrength)

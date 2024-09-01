@@ -12,6 +12,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include "SpriteManager.h"
 #include "Background.h"
 using namespace Scenes;
 using namespace Managers;
@@ -27,6 +28,20 @@ Level2::Level2(bool isPlayer2, bool isBeingLoaded) :Level(), isBossAlive(1) {
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
 
     srand(time(NULL));
+
+    SpriteManager* spInstance = SpriteManager::getInstance();
+
+    int index = spInstance->getMatrixIndex("Background");
+    Background* trueBackground = new Background;
+    trueBackground->setSize(320.f * SCALE / 21, 180.f * SCALE / 21);
+
+    spInstance->getTexture(trueBackground, index, 0, 0);
+
+    //trueBackground->setPosition(0.f, 0.f);
+    entityList->push_back(trueBackground);
+
+
+
 
     sf::Texture* background = new sf::Texture();
     background->loadFromFile("HizaSprites/Environment/fase2EBA.png");
@@ -52,7 +67,7 @@ Level2::Level2(bool isPlayer2, bool isBeingLoaded) :Level(), isBossAlive(1) {
 
 
     Camera* view;
-    view = new Camera(window);
+    view = new Camera(window, trueBackground);
     camera = view;
     view->setPlayer1(pPlayer1);
     if (isPlayer2)
@@ -76,7 +91,7 @@ Level2::~Level2() {
 
 void Level2::loadTerrains()
 {
-    createTerrain(0, 0, 7 * SCALE, 25 * SCALE, 1.f); //leftWall
+    createTerrain(0, 0, 7 * SCALE, 30 * SCALE, 1.f); //leftWall
     createTerrain(7 * SCALE, 26 * SCALE, 89 * SCALE, 2 * SCALE, 1.f);//floor
     createTerrain(35 * SCALE, 22 * SCALE, 2 * SCALE, 1 * SCALE, 1.f);
     createTerrain(18 * SCALE, 24 * SCALE, 1 * SCALE, 2 * SCALE, 1.f); //firstPillar
@@ -97,22 +112,22 @@ void Level2::createFromScratch(const bool isPlayer2)
     createFire(48 * SCALE, 22 * SCALE, 3 * SCALE, 1 * SCALE);
     createFire(57 * SCALE, 25 * SCALE, 3 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(29 * SCALE, 22 * SCALE, 1 * SCALE, 1 * SCALE);
+        createFire(29 * SCALE, 23 * SCALE, 1 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(19 * SCALE, 25 * SCALE, 2 * SCALE, 1 * SCALE);
+        createFire(19 * SCALE, 26 * SCALE, 2 * SCALE, 1 * SCALE);
     if (rand() % 2)
-        createFire(67 * SCALE, 21 * SCALE, 1 * SCALE, 1 * SCALE);
+        createFire(67 * SCALE, 22 * SCALE, 1 * SCALE, 1 * SCALE);
 
 
-    createPlatform(30 * SCALE, 20 * SCALE, 3 * SCALE, SCALE);
-    createPlatform(39 * SCALE, 21 * SCALE, 2 * SCALE, SCALE);
-    createPlatform(53 * SCALE, 24 * SCALE, 3 * SCALE, SCALE);
+    createPlatform(30 * SCALE, 19 * SCALE, 3 * SCALE, SCALE);
+    createPlatform(39 * SCALE, 20 * SCALE, 2 * SCALE, SCALE);
+    createPlatform(53 * SCALE, 23 * SCALE, 3 * SCALE, SCALE);
     if (rand() % 2)
-        createPlatform(13 * SCALE, 24 * SCALE, 2 * SCALE, SCALE);
+        createPlatform(13 * SCALE, 23 * SCALE, 2 * SCALE, SCALE);
     if (rand() % 2)
-        createPlatform(46 * SCALE, 19 * SCALE, SCALE, SCALE);
+        createPlatform(46 * SCALE, 18 * SCALE, SCALE, SCALE);
     if (rand() % 2)
-        createPlatform(51 * SCALE, 21 * SCALE, SCALE, SCALE);
+        createPlatform(51 * SCALE, 20 * SCALE, SCALE, SCALE);
 
 
     createPlayer1(8 * SCALE, 20 * SCALE, 0);
@@ -120,13 +135,21 @@ void Level2::createFromScratch(const bool isPlayer2)
     if (isPlayer2)
         createPlayer2(9 * SCALE, 20 * SCALE, 0);
 
-    createEnemyMelee(31 * SCALE, 22 * SCALE, 0);
-    createEnemyMelee(44 * SCALE, 20 * SCALE, 0);
-    createEnemyMelee(54 * SCALE, 23 * SCALE, 0);
+    createEnemyMelee(31 * SCALE, 22 * SCALE, 10);
+    createEnemyMelee(44 * SCALE, 20 * SCALE, 10);
+    createEnemyMelee(54 * SCALE, 23 * SCALE, 10);
+    if (rand() % 2)
+        createEnemyMelee(17 * SCALE, 25 * SCALE, 5);
+    if (rand() % 2)
+        createEnemyMelee(40 * SCALE, 20 * SCALE, 5);
 
-    createEnemyRanged(21 * SCALE, 22 * SCALE, 0);
-    createEnemyRanged(36 * SCALE, 21 * SCALE, 0);
-    createEnemyRanged(46 * SCALE, 20 * SCALE, 0);
+    createEnemyRanged(21 * SCALE, 22 * SCALE, 20);
+    createEnemyRanged(36 * SCALE, 21 * SCALE, 20);
+    createEnemyRanged(46 * SCALE, 20 * SCALE, 20);
+    if (rand() % 2)
+        createEnemyRanged(40 * SCALE, 19 * SCALE, 20);
+    if (rand() % 2)
+        createEnemyRanged(31 * SCALE, 18 * SCALE, 20);
 
     createEnemyBoss(75 * SCALE, 20 * SCALE, 0, pPlayer1, pPlayer2);
 }

@@ -168,7 +168,7 @@
     <ClCompile Include="GraphicManager.cpp" />
     <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="jogo_mt_mt_legal.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level1.cpp" />
