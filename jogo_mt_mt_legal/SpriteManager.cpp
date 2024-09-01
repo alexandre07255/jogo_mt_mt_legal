@@ -55,11 +55,15 @@ SpriteManager::SpriteManager():
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("ContinueButton", 62, 17, "HizaSprites/UI/s_continue.png");
+	spriteSheet->loadFromFile("CreditsButton", 54, 17, "HizaSprites/UI/s_credits.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("ContinueButton", 62, 17, "HizaSprites/UI/s_continue.png");
+	spriteSheet->loadFromFile("IsPlayer1", 50, 50, "HizaSprites/UI/s_players_one.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("IsPlayer2", 50, 50, "HizaSprites/UI/s_players_two.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
@@ -75,10 +79,12 @@ SpriteManager::SpriteManager():
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("Level1Button", 20, 20, "HizaSprites/UI/s_lvl1.png");
+	spriteSheet->loadFromFile("SamuraiRedIcon", 16, 16, "HizaSprites/UI/s_samurai_red_icon.png");
 	spriteMatrices.push_back(spriteSheet);
 
-
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("SamuraiBlueIcon", 16, 16, "HizaSprites/UI/s_samurai_Blue_icon.png");
+	spriteMatrices.push_back(spriteSheet);
 }
 
 SpriteManager* SpriteManager::getInstance()

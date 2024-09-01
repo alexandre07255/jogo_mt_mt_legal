@@ -22,31 +22,46 @@
 #include "TextContainer.h"
 #include "ScoreSave.h"
 #include "LevelSave.h"
+#include "SpriteManager.h"
 
 using namespace std;
 using namespace Managers;
 using namespace Scenes;
 using namespace Managers;
 using namespace Lists;
+using namespace Entities;
 
 MainMenu::MainMenu():version(0){
 
 	GraphicManager* instance = GraphicManager::getInstance();
+	SpriteManager* spInstance = SpriteManager::getInstance();
 
 	CommandStart* com1 = new CommandStart(this);
 	CommandRanking* com4 = new CommandRanking(this);
 	CommandLoad* com6 = new CommandLoad(this);
 	Button* startButton = new Button(sf::Color::Blue, com1, true);
-	startButton->setPosition(instance->getWindow()->getSize().x/2, instance->getWindow()->getSize().y / 3 - 25.f);
+	startButton->setSize(54.f * 6, 17.f * 6);
+	startButton->setPosition(instance->getWindow()->getSize().x/2 - startButton->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 25.f);
 	Button* buttonRanking = new Button(sf::Color::Blue, com4, true);
-	buttonRanking->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 + 100.f);
+	buttonRanking->setSize(62.f * 6, 17.f * 6);
+	buttonRanking->setPosition(instance->getWindow()->getSize().x / 2 - buttonRanking->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 100.f);
 	Button* buttonLoad = new Button(sf::Color::Blue, com6, true);
-	buttonLoad->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 + 225.f);
+	buttonLoad->setSize(54.f * 6, 17.f * 6);
+	buttonLoad->setPosition(instance->getWindow()->getSize().x / 2 - buttonLoad->getXSize() / 2, instance->getWindow()->getSize().y / 2 + 225.f);
 	CommandCredits* com9 = new CommandCredits(this);
+	buttonLoad->setSize(54.f * 6, 17.f * 6);
 	Button* changeCreditsButton = new Button(sf::Color::Blue, com9, true);
-	changeCreditsButton->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 3 + 350.f);
+	changeCreditsButton->setPosition(instance->getWindow()->getSize().x / 2 - changeCreditsButton->getXSize() / 2, instance->getWindow()->getSize().y / 3 + 350.f);
+
+	int matrixIndex = spInstance->getMatrixIndex("Menu");
+	Background* background = NULL;
+
+	background = new Background;
+	spInstance->getTexture(background, matrixIndex, 0, 0);
+	background->setSize(320.f * 6, 180.f * 6);
 
 	EntityList* startList = new EntityList;
+	startList->push_back(background);
 	startList->push_back(startButton);
 	startList->push_back(buttonRanking);
 	startList->push_back(buttonLoad);
@@ -61,7 +76,12 @@ MainMenu::MainMenu():version(0){
 	buttonLevel1->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
 	buttonLevel2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
 
+	background = new Background;
+	spInstance->getTexture(background, matrixIndex, 0, 0);
+	background->setSize(320.f * 6, 180.f * 6);
+
 	EntityList* levelsList = new EntityList;
+	levelsList->push_back(background);
 	levelsList->push_back(buttonLevel1);
 	levelsList->push_back(buttonLevel2);
 
@@ -99,7 +119,12 @@ MainMenu::MainMenu():version(0){
 	buttonLoad1->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 - 125.f);
 	buttonLoad2->setPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2 + 125.f);
 
+	background = new Background;
+	spInstance->getTexture(background, matrixIndex, 0, 0);
+	background->setSize(320.f * 6, 180.f * 6);
+
 	EntityList* loadList = new EntityList;
+	loadList->push_back(background);
 	loadList->push_back(buttonLoad1);
 	loadList->push_back(buttonLoad2);
 
@@ -108,7 +133,12 @@ MainMenu::MainMenu():version(0){
 	credits->setTextPosition(instance->getWindow()->getSize().x / 2, instance->getWindow()->getSize().y / 2);
 	credits->setFillColor(sf::Color::Transparent);
 
+	background = new Background;
+	spInstance->getTexture(background, matrixIndex, 0, 0);
+	background->setSize(320.f * 6, 180.f * 6);
+
 	EntityList* CreditList = new EntityList;
+	CreditList->push_back(background);
 	CreditList->push_back(credits);
 
 	versions.push_back(startList);
