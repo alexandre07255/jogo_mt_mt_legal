@@ -28,7 +28,7 @@ void TextContainer::save(LevelSave* save) {
 
 sf::Font TextContainer::getFont() {
 	sf::Font font;
-	font.loadFromFile("Minecraft.ttf");
+	font.loadFromFile("HizaSprites/Fonts/PixeloidSans-mLxMm.ttf");
 	return font;
 }
 
