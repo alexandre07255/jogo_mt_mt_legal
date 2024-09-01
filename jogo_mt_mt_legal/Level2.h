@@ -1,4 +1,5 @@
 #pragma once
+#include "TextContainer.h"
 #include "Level.h"
 
 namespace Scenes
@@ -10,7 +11,8 @@ namespace Scenes
 		void levelCompleteHandler();
 		void levelCompleteChecker();
 		void createFromScratch(const bool isPlayer2);
-		void loadTerrains();
+		void loadTerrains();Entities::TextContainer* player1Hp;
+		Entities::TextContainer* player2Hp;
 	public:
 		Level2(bool isPlayer2,bool isBeingLoaded, int p1Points = 0, int p2Points = 0);
 		~Level2();

@@ -8,10 +8,12 @@ using namespace Entities;
 using namespace Managers;
 
 
-Camera::Camera(sf::RenderWindow* renderer, Background* pBackground) :
+Camera::Camera(sf::RenderWindow* renderer, Background* pBackground,TextContainer* p1H, TextContainer* p2H) :
 	player1(NULL),
 	player2(NULL),
-	background(pBackground)
+	background(pBackground),
+	p1Health(p1H),
+	p2Health(p2H)
 {
 	setWindow(renderer);
 	//view.setSize((sf::Vector2f)window->getSize());
@@ -55,13 +57,21 @@ void Camera::execute()
 				view.zoom(0.999f);
 		}
 		background->setSize(view.getSize());
+		p2Health->write(std::to_string(player2->getHp()));
 	}
 
 	else if (player1) {
 		view.setCenter(player1->getXPosition(), player1->bottom() - 45);
 	}
+	p1Health->write(std::to_string(player1->getHp()));
 
 	background->setPosition(view.getCenter().x - background->getXSize() / 2, view.getCenter().y - background->getYSize() / 2);
+	p1Health->setTextPosition(view.getCenter().x - view.getSize().x / 2 + 5.3333*16, view.getCenter().y - view.getSize().y / 2);
+	p1Health->setPosition(view.getCenter().x - view.getSize().x / 2, view.getCenter().y - view.getSize().y / 2);
+	if (player2) {
+		p2Health->setTextPosition(view.getCenter().x - view.getSize().x / 2 + 5.3333 * 16, view.getCenter().y - view.getSize().y / 2 + 50.f);
+		p2Health->setPosition(view.getCenter().x - view.getSize().x / 2, view.getCenter().y - view.getSize().y / 2 + 50.f);
+	}
 
 	//setSize((sf::Vector2f)window->getSize());
 	window->setView(view);
