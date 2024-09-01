@@ -97,7 +97,7 @@ TextContainer* Level1::getTextContainer(bool isPlayer2) {
     if (isPlayer2) {
         return player2Hp;
     }
-    return
+    return player1Hp;
 }
 
 Level1::~Level1() {

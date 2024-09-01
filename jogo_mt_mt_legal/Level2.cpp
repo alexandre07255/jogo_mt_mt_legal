@@ -14,6 +14,7 @@
 #include <time.h>
 #include "SpriteManager.h"
 #include "Background.h"
+#include "FinalScreen.h"
 using namespace Scenes;
 using namespace Managers;
 using namespace Entities::Obstacles;
@@ -160,7 +161,13 @@ void Level2::createFromScratch(const bool isPlayer2)
 
 void Level2::levelCompleteHandler()
 {
-    cout << "Yupi" << endl;
+    int points = pPlayer1->getPoints();
+    if (pPlayer2)
+        points += pPlayer2->getPoints();
+    FinalScreen* save = new FinalScreen(points, false);
+    SceneManager* sceneInstance = SceneManager::getInstance();
+    pGG->getWindow()->setView(pGG->getWindow()->getDefaultView());
+    sceneInstance->push(save);
 }
 
 void Level2::setIsBossAlive(const bool ba)
