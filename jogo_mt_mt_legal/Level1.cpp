@@ -154,7 +154,10 @@ void Level1::createFromScratch(const bool isPlayer2)
 
 void Level1::levelCompleteHandler()
 {
-    Level2* level2 = new Level2(pPlayer2 != NULL,false);
+    int p2Points = 0;
+    if (pPlayer2)
+        p2Points = pPlayer2->getPoints();
+    Level2* level2 = new Level2(pPlayer2 != NULL,false, pPlayer1->getPoints(), p2Points);
     SceneManager* sceneManInstance = SceneManager::getInstance();
     sceneManInstance->pop();
     //Deletar level1

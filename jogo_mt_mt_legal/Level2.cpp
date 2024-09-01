@@ -22,7 +22,7 @@ using namespace Entities::Characters;
 
 
 
-Level2::Level2(bool isPlayer2, bool isBeingLoaded) :Level(), isBossAlive(1) {
+Level2::Level2(bool isPlayer2, bool isBeingLoaded, int p1Points, int p2Points) :Level(), isBossAlive(1) {
     GraphicManager* instance = GraphicManager::getInstance();
     sf::RenderWindow* window = instance->getWindow();
     CollisionManager* gerenciadorColisao = CollisionManager::getInstance();
@@ -61,7 +61,11 @@ Level2::Level2(bool isPlayer2, bool isBeingLoaded) :Level(), isBossAlive(1) {
     if (!isBeingLoaded)
     {
         createFromScratch(isPlayer2);
+        pPlayer1->setPoints(p1Points);
+        if (isPlayer2)
+            pPlayer2->setPoints(p2Points);
     }
+
     
 
 

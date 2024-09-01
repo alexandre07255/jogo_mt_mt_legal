@@ -45,6 +45,14 @@ SpriteManager::SpriteManager():
 	spriteSheet = new SpriteMatrix;
 	spriteSheet->loadFromFile("Tengu", 92, 109, "HizaSprites/Enemies/s_tengu.png");
 	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("StartButton", 92, 109, "HizaSprites/UI/s_start.png");
+	spriteMatrices.push_back(spriteSheet);
+
+	spriteSheet = new SpriteMatrix;
+	spriteSheet->loadFromFile("StartButton", 92, 109, "HizaSprites/UI/s_start.png");
+	spriteMatrices.push_back(spriteSheet);
 }
 
 SpriteManager* SpriteManager::getInstance()

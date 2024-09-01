@@ -195,7 +195,7 @@ void EnemyBoss::executeASCENDING()
 	else
 	{
 		attackPart = DESCENDING;
-		setPosition(targetPlayer[followingPlayer2]->xMid() - getXSize() / 2.f, getYPosition());
+		setPosition(targetPlayer[followingPlayer2]->xMid(), getYPosition());
 		horizontalVelocity = 0;
 		verticalVelocity = 0;
 

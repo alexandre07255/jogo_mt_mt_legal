@@ -12,7 +12,7 @@ namespace Scenes
 		void createFromScratch(const bool isPlayer2);
 		void loadTerrains();
 	public:
-		Level2(bool isPlayer2,bool isBeingLoaded);
+		Level2(bool isPlayer2,bool isBeingLoaded, int p1Points = 0, int p2Points = 0);
 		~Level2();
 		void setIsBossAlive(const bool ba);
 	};
