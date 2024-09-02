@@ -151,21 +151,13 @@ MainMenu::MainMenu():version(0){
 	loadList->push_back(buttonLoad1);
 	loadList->push_back(buttonLoad2);
 
-	Entities::TextContainer* credits = new Entities::TextContainer;
-	credits->write("PROGRAMAÇÃO:\n\nAlexandre Aires Amorim\nJohn William Souza Harrison\n\nARTE:\n\nNícolas Vinícius de Santa Gaio");
-	credits->setSize(16 * 5.333 * 4.65, 16 * 5.333 * 3.4f);
-	credits->setTextPosition(instance->getWindow()->getSize().x / 2 - credits->getXSize() / 2 + 10, instance->getWindow()->getSize().y / 2);
-	credits->setPosition(instance->getWindow()->getSize().x / 2 - credits->getXSize() / 2, instance->getWindow()->getSize().y / 2 - 5.f);
-	credits->setFillColor(sf::Color::Black);
-
-	backgroundMatrixIndex = spInstance->getMatrixIndex("Menu");
+	backgroundMatrixIndex = spInstance->getMatrixIndex("BackgroundCredits");
 	background = new Background;
 	spInstance->getTexture(background, backgroundMatrixIndex, 0, 0);
 	background->setSize(320.f * 6, 180.f * 6);
 
 	EntityList* CreditList = new EntityList;
 	CreditList->push_back(background);
-	CreditList->push_back(credits);
 
 	versions.push_back(startList);
 	versions.push_back(levelsList);

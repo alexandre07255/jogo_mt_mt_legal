@@ -107,11 +107,7 @@ SpriteManager::SpriteManager():
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("MenuBackground", 320, 180, "HizaSprites/UI/s_background_menu.png");
-	spriteMatrices.push_back(spriteSheet);
-
-	spriteSheet = new SpriteMatrix;
-	spriteSheet->loadFromFile("MenuBackground", 320, 180, "HizaSprites/UI/s_background_menu.png");
+	spriteSheet->loadFromFile("BackgroundCredits", 320, 180, "HizaSprites/UI/s_background_menu.png");
 	spriteMatrices.push_back(spriteSheet);
 
 	spriteSheet = new SpriteMatrix;

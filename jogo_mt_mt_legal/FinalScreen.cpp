@@ -32,7 +32,7 @@ FinalScreen::FinalScreen(int _score, bool death) {
 		matrixIndex = spInstance->getMatrixIndex("HappyEnding");
 		text->setTextFillColor(sf::Color::Black);
 		text->setPosition(pGG->getWindow()->getSize().x / 2, pGG->getWindow()->getSize().y / 2);
-		text->setTextPosition(pGG->getWindow()->getSize().x / 2 + 100.f, 2 * pGG->getWindow()->getSize().y / 3 + 125.f);
+		text->setTextPosition(pGG->getWindow()->getSize().x / 2 + 50.f, 2 * pGG->getWindow()->getSize().y / 3 + 50.f);
 	}
 
 	Background* background = new Background;
