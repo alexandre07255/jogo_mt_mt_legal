@@ -21,7 +21,7 @@ PauseMenu::PauseMenu(Level* lAct): levelActive(lAct){
 	float x = window->getSize().x;
 	float y = window->getSize().y;
 
-	matrixIndex = spInstance->getMatrixIndex("MenuBackground");
+	matrixIndex = spInstance->getMatrixIndex("Menu");
 	Background* background = new Background;
 	spInstance->getTexture(background, matrixIndex, 0, 0);
 	background->setSize(320.f * 6, 180.f * 6);
