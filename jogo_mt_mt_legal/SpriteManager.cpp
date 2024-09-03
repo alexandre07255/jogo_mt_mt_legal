@@ -1,3 +1,5 @@
+//SpriteSheets usados feitos por Nícolas Vinícius de Santa Gaio
+
 #include "SpriteManager.h"
 using namespace Managers;
 

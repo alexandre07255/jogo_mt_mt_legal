@@ -1,3 +1,4 @@
+//Código inspirado no código da dupla Gabriel de França Picinato e Gustavo Chemin Ribeiro
 #pragma once
 #include "Element.h"
 #include <iostream>
