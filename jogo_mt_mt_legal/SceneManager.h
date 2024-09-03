@@ -1,3 +1,4 @@
+//Ideia base da classe provinda na Oficina do Peteco
 #pragma once
 #include "Scene.h"
 #include <stack>
